@@ -1,12 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import GsapHero from '../components/GsapHero';
+import TitleHero from '../components/TitleHero';
 import './Home.css';
 
 function Home() {
   return (
     <div className="home">
       <GsapHero />
+      <TitleHero />
 
       <div className="home-content">
         <section className="synopsis">
@@ -26,25 +28,25 @@ function Home() {
         </section>
 
         <section className="teaser">
-          <h2>Teaser</h2>
+          <h2>Watch the Preview</h2>
           <div className="teaser-video">
             <Link to="/preview" className="teaser-link">
               <div className="play-button">
-                ▶ Play Teaser
+                ▶ Play Preview
               </div>
             </Link>
           </div>
           <p className="teaser-description">
-            Get a sneak peek of the production with our exclusive teaser trailer.
+            Get a sneak peek of the production with our exclusive preview trailer.
             Experience the drama, intensity, and artistry that defines Epic Economics.
           </p>
         </section>
 
         <nav className="home-navigation">
           <ul>
-            <li><Link to="/press">Press Kit</Link></li>
-            <li><Link to="/technical">Technical</Link></li>
-            <li><Link to="/contact">Contact Us</Link></li>
+            <li><Link to="/press">Press & Media</Link></li>
+            <li><Link to="/technical">Technical Information</Link></li>
+            <li><Link to="/contact">Contact</Link></li>
           </ul>
         </nav>
       </div>

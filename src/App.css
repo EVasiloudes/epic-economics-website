@@ -1,13 +1,52 @@
+/* Global root styles - no max-width to allow full-width hero */
 #root {
-  max-width: 1280px;
   margin: 0 auto;
-  padding: 1rem;
+  padding: 0;
   text-align: center;
 }
 
+/* Container for non-hero pages with consistent max-width */
+.page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: left;
+}
+
+/* Responsive adjustments for page container */
 @media (max-width: 768px) {
-  #root {
-    padding: 0.5rem;
-    max-width: 100%;
+  .page-container {
+    padding: 1rem 2.5%;
+    max-width: 95%;
   }
+}
+
+@media (max-width: 480px) {
+  .page-container {
+    padding: 0.5rem 2.5%;
+    max-width: 95%;
+  }
+}
+
+/* Utility class for centered content within pages */
+.content-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+/* Utility class for full-width sections when needed */
+.full-width {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+}
+
+/* Hero page specific - keeps existing behavior */
+.home {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  position: relative;
+  overflow-x: hidden;
 }

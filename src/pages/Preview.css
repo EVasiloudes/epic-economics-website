@@ -1,9 +1,4 @@
-.preview {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
-  font-family: var(--font-body);
-}
+/* Preview-specific styles - layout handled by page-container */
 
 .preview-header {
   text-align: center;
@@ -91,27 +86,12 @@
 }
 
 @media (max-width: 768px) {
-  .preview {
-    padding: 1rem 2.5%;
-    width: 95%;
-    margin: 0 auto;
-  }
-  
   .video-placeholder {
     height: 350px;
-  }
-  
-  .preview-info p {
-    width: 100%;
   }
 }
 
 @media (max-width: 480px) {
-  .preview {
-    padding: 0.5rem 2.5%;
-    width: 95%;
-  }
-  
   .preview-header h1 {
     font-size: 2rem;
   }

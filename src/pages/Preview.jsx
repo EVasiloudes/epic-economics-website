@@ -4,7 +4,7 @@ import './Preview.css';
 
 function Preview() {
   return (
-    <div className="preview">
+    <div className="page-container">
       <header className="preview-header">
         <h1>Epic Economics - Full Preview</h1>
         <p className="preview-description">Protected Link for the Complete Video</p>
