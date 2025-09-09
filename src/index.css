@@ -1,0 +1,248 @@
+/* Import web fonts */
+@import url('https://fonts.googleapis.com/css2?family=Proxima+Nova:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* Typography */
+  --font-heading: 'Futura', 'Futura PT', 'Century Gothic', 'Avenir Next', 'Helvetica Neue', Arial, sans-serif;
+  --font-body: 'Proxima Nova', 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
+  
+  /* Base font settings */
+  font-family: var(--font-body);
+  line-height: 1.6;
+  font-weight: 400;
+  font-size: 16px;
+
+  /* Color scheme */
+  color-scheme: light;
+  color: #213547;
+  background-color: #ffffff;
+
+  /* Font rendering */
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  font-family: var(--font-body);
+  line-height: 1.6;
+}
+
+/* Headings - Use Futura */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 0 0 1rem 0;
+  letter-spacing: 0.02em;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+h4 {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+h5 {
+  font-size: 1.125rem;
+  font-weight: 500;
+}
+
+h6 {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* Body text - Use Proxima Nova */
+p, span, div, li, td, th {
+  font-family: var(--font-body);
+}
+
+p {
+  margin: 0 0 1rem 0;
+  line-height: 1.6;
+}
+
+/* Links */
+a {
+  font-weight: 500;
+  color: #3498db;
+  text-decoration: inherit;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #2980b9;
+}
+
+/* Buttons */
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: var(--font-body);
+  background-color: #3498db;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: #2980b9;
+  transform: translateY(-1px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* Form elements */
+input, textarea, select {
+  border-radius: 4px;
+  border: 1px solid #bdc3c7;
+  padding: 0.75rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+/* Labels */
+label {
+  font-family: var(--font-body);
+  font-weight: 500;
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #2c3e50;
+}
+
+/* Lists */
+ul, ol {
+  font-family: var(--font-body);
+  line-height: 1.6;
+}
+
+/* Blockquotes */
+blockquote {
+  font-family: var(--font-body);
+  font-style: italic;
+  margin: 1.5rem 0;
+  padding-left: 1rem;
+  border-left: 3px solid #3498db;
+}
+
+/* Code */
+code, pre {
+  font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+  font-size: 0.9em;
+}
+
+/* Tables */
+table {
+  font-family: var(--font-body);
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th {
+  font-family: var(--font-heading);
+  font-weight: 600;
+}
+
+/* Utility classes */
+.heading-font {
+  font-family: var(--font-heading) !important;
+}
+
+.body-font {
+  font-family: var(--font-body) !important;
+}
+
+.font-light {
+  font-weight: 300;
+}
+
+.font-normal {
+  font-weight: 400;
+}
+
+.font-medium {
+  font-weight: 500;
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+/* Responsive typography */
+@media (max-width: 768px) {
+  :root {
+    font-size: 14px;
+  }
+  
+  h1 {
+    font-size: 2rem;
+  }
+  
+  h2 {
+    font-size: 1.75rem;
+  }
+  
+  h3 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    font-size: 13px;
+  }
+  
+  h1 {
+    font-size: 1.75rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+  
+  h3 {
+    font-size: 1.25rem;
+  }
+}

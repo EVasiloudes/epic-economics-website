@@ -1,0 +1,182 @@
+.press {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: var(--font-body);
+}
+
+.press-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.press-header h1 {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #2c3e50;
+}
+
+.press-description {
+  font-family: var(--font-body);
+  font-size: 1.2rem;
+  color: #7f8c8d;
+}
+
+.press-kit {
+  margin-bottom: 3rem;
+}
+
+.press-kit h2 {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #2c3e50;
+}
+
+.image-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.image-placeholder {
+  background-color: #bdc3c7;
+  border-radius: 8px;
+  height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-text {
+  font-family: var(--font-heading);
+  color: #2c3e50;
+  font-weight: bold;
+}
+
+.press-materials h3 {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #2c3e50;
+}
+
+.press-downloads {
+  list-style: none;
+  padding: 0;
+}
+
+.press-downloads li {
+  margin-bottom: 0.5rem;
+}
+
+.press-downloads a {
+  font-family: var(--font-body);
+  text-decoration: none;
+  color: #3498db;
+  font-size: 1.1rem;
+  padding: 0.5rem;
+  border: 1px solid #3498db;
+  border-radius: 4px;
+  display: inline-block;
+  transition: all 0.3s;
+}
+
+.press-downloads a:hover {
+  background-color: #3498db;
+  color: white;
+}
+
+.press-info {
+  margin-bottom: 3rem;
+}
+
+.press-info h2 {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #2c3e50;
+}
+
+.press-info p {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  color: #34495e;
+}
+
+.press-navigation {
+  text-align: center;
+}
+
+.back-link {
+  font-family: var(--font-heading);
+  text-decoration: none;
+  color: #3498db;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border: 2px solid #3498db;
+  border-radius: 4px;
+  transition: all 0.3s;
+}
+
+.back-link:hover {
+  background-color: #3498db;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .press {
+    padding: 1rem 2.5%;
+    width: 95%;
+    margin: 0 auto;
+  }
+  
+  .image-gallery {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+  
+  .press-info p {
+    width: 100%;
+  }
+  
+  .press-downloads a {
+    width: 100%;
+    max-width: 280px;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .press {
+    padding: 0.5rem 2.5%;
+    width: 95%;
+  }
+  
+  .press-header h1 {
+    font-size: 2rem;
+  }
+  
+  .press-kit h2,
+  .press-info h2 {
+    font-size: 1.75rem;
+  }
+  
+  .press-materials h3 {
+    font-size: 1.25rem;
+  }
+  
+  .image-gallery {
+    grid-template-columns: 1fr;
+  }
+  
+  .image-placeholder {
+    height: 200px;
+  }
+}

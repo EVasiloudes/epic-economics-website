@@ -1,0 +1,269 @@
+.technical {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: var(--font-body);
+  line-height: 1.6;
+  color: #333;
+}
+
+.technical-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 2px solid #2c3e50;
+}
+
+.technical-header h1 {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.technical-description {
+  font-family: var(--font-body);
+  font-size: 1.2rem;
+  color: #7f8c8d;
+  font-style: italic;
+}
+
+.stage-plan {
+  margin-bottom: 4rem;
+}
+
+.stage-plan h2 {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  color: #2c3e50;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.stage-plan-container {
+  text-align: center;
+  margin-bottom: 2rem;
+  background-color: #f8f9fa;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.stage-plan-image {
+  max-width: 100%;
+  height: auto;
+  border: 2px solid #34495e;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.stage-plan-info {
+  background-color: #ecf0f1;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-top: 2rem;
+}
+
+.stage-plan-info h3 {
+  font-family: var(--font-heading);
+  color: #2c3e50;
+  margin-bottom: 1rem;
+}
+
+.technical-requirements {
+  margin-bottom: 4rem;
+}
+
+.technical-requirements h2 {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  color: #2c3e50;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.tech-section {
+  background-color: #f8f9fa;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  border-radius: 8px;
+  border-left: 4px solid #e74c3c;
+}
+
+.tech-section h3 {
+  font-family: var(--font-heading);
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.tech-section ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.tech-section li {
+  margin-bottom: 0.8rem;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.tech-section li::before {
+  content: "▶";
+  color: #e74c3c;
+  position: absolute;
+  left: 0;
+}
+
+.tech-section strong {
+  color: #2c3e50;
+  font-weight: bold;
+}
+
+.venue-requirements {
+  margin-bottom: 4rem;
+}
+
+.venue-requirements h2 {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  color: #2c3e50;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.requirements-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.requirement-item {
+  background-color: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 8px;
+  text-align: center;
+  border: 2px solid #bdc3c7;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.requirement-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  border-color: #e74c3c;
+}
+
+.requirement-item h4 {
+  font-family: var(--font-heading);
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+}
+
+.requirement-item p {
+  font-family: var(--font-body);
+  color: #7f8c8d;
+  font-size: 1rem;
+}
+
+.technical-navigation {
+  text-align: center;
+  padding-top: 2rem;
+  border-top: 2px solid #ecf0f1;
+}
+
+.back-link {
+  display: inline-block;
+  font-family: var(--font-heading);
+  padding: 1rem 2rem;
+  background-color: #2c3e50;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.back-link:hover {
+  background-color: #34495e;
+  transform: translateY(-2px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .technical {
+    padding: 1rem 2.5%;
+    width: 95%;
+    margin: 0 auto;
+  }
+  
+  .technical-header h1 {
+    font-size: 2rem;
+  }
+  
+  .technical-description {
+    font-size: 1rem;
+    width: 100%;
+  }
+  
+  .stage-plan-container {
+    padding: 1rem;
+    width: 100%;
+  }
+  
+  .stage-plan-info {
+    width: 100%;
+  }
+  
+  .tech-section {
+    padding: 1.5rem;
+    width: 100%;
+  }
+  
+  .requirements-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    width: 100%;
+  }
+  
+  .requirement-item {
+    padding: 1rem;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .technical {
+    padding: 0.5rem 2.5%;
+    width: 95%;
+  }
+  
+  .technical-header h1 {
+    font-size: 1.8rem;
+  }
+  
+  .technical-description {
+    width: 100%;
+  }
+  
+  .tech-section h3 {
+    font-size: 1.3rem;
+  }
+  
+  .tech-section {
+    width: 100%;
+  }
+  
+  .stage-plan h2,
+  .technical-requirements h2,
+  .venue-requirements h2 {
+    font-size: 1.6rem;
+  }
+  
+  .stage-plan-info,
+  .requirements-grid {
+    width: 100%;
+  }
+}
