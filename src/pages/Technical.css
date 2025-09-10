@@ -1,3 +1,8 @@
+/* Smooth scrolling behavior */
+html {
+  scroll-behavior: smooth;
+}
+
 .technical {
   max-width: 1200px;
   margin: 0 auto;
@@ -27,6 +32,8 @@
   font-size: 1.2rem;
   color: #7f8c8d;
   font-style: italic;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .stage-plan {
@@ -48,6 +55,11 @@
   padding: 2rem;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.stage-plan-container:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .stage-plan-image {
@@ -56,6 +68,11 @@
   border: 2px solid #34495e;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.stage-plan-image:hover {
+  transform: scale(1.02);
 }
 
 .stage-plan-info {
@@ -84,29 +101,46 @@
 }
 
 .tech-section {
+  width: 50%;
+  max-width: 600px;
   background-color: #f8f9fa;
   padding: 2rem;
-  margin-bottom: 2rem;
+  margin: 0 auto 2rem auto;
   border-radius: 8px;
   border-left: 4px solid #e74c3c;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tech-section:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
 
 .tech-section h3 {
   font-family: var(--font-heading);
   color: #2c3e50;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   font-size: 1.5rem;
+  text-align: center;
 }
 
 .tech-section ul {
   list-style-type: none;
   padding-left: 0;
+  margin: 0;
 }
 
 .tech-section li {
   margin-bottom: 0.8rem;
   padding-left: 1.5rem;
   position: relative;
+  text-align: left;
+  line-height: 1.5;
+  transition: color 0.2s ease;
+}
+
+.tech-section li:hover {
+  color: #2c3e50;
 }
 
 .tech-section li::before {
@@ -114,6 +148,11 @@
   color: #e74c3c;
   position: absolute;
   left: 0;
+  transition: transform 0.2s ease;
+}
+
+.tech-section li:hover::before {
+  transform: translateX(2px);
 }
 
 .tech-section strong {
@@ -135,7 +174,7 @@
 
 .requirements-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
   margin-top: 2rem;
 }
@@ -146,7 +185,7 @@
   border-radius: 8px;
   text-align: center;
   border: 2px solid #bdc3c7;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .requirement-item:hover {
@@ -166,12 +205,14 @@
   font-family: var(--font-body);
   color: #7f8c8d;
   font-size: 1rem;
+  line-height: 1.5;
 }
 
 .technical-navigation {
   text-align: center;
-  padding-top: 2rem;
+  padding-top: 3rem;
   border-top: 2px solid #ecf0f1;
+  margin-top: 2rem;
 }
 
 .back-link {
@@ -191,79 +232,175 @@
   transform: translateY(-2px);
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
+/* Tablet Design */
+@media (max-width: 1024px) {
   .technical {
-    padding: 1rem 2.5%;
-    width: 95%;
-    margin: 0 auto;
-  }
-  
-  .technical-header h1 {
-    font-size: 2rem;
-  }
-  
-  .technical-description {
-    font-size: 1rem;
-    width: 100%;
-  }
-  
-  .stage-plan-container {
-    padding: 1rem;
-    width: 100%;
-  }
-  
-  .stage-plan-info {
-    width: 100%;
+    padding: 1.5rem;
   }
   
   .tech-section {
-    padding: 1.5rem;
-    width: 100%;
+    width: 70%;
   }
   
   .requirements-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-    width: 100%;
-  }
-  
-  .requirement-item {
-    padding: 1rem;
-    width: 100%;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
   }
 }
 
-@media (max-width: 480px) {
+/* Mobile Design */
+@media (max-width: 768px) {
   .technical {
-    padding: 0.5rem 2.5%;
-    width: 95%;
+    padding: 1rem;
+    margin: 0;
+    width: 100%;
   }
-  
+
+  .technical-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+  }
+
   .technical-header h1 {
-    font-size: 1.8rem;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
   }
-  
+
   .technical-description {
-    width: 100%;
+    font-size: 1rem;
+    padding: 0 1rem;
   }
-  
-  .tech-section h3 {
-    font-size: 1.3rem;
+
+  .stage-plan {
+    margin-bottom: 3rem;
   }
-  
-  .tech-section {
-    width: 100%;
-  }
-  
+
   .stage-plan h2,
   .technical-requirements h2,
   .venue-requirements h2 {
-    font-size: 1.6rem;
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .stage-plan-container {
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .stage-plan-info {
+    padding: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .tech-section {
+    width: 100%;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    max-width: none;
+  }
+
+  .tech-section h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+
+  .tech-section li {
+    margin-bottom: 0.6rem;
+    font-size: 0.95rem;
+  }
+
+  .requirements-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .requirement-item {
+    padding: 1rem;
+  }
+
+  .requirement-item h4 {
+    font-size: 1.2rem;
+  }
+
+  .technical-navigation {
+    padding-top: 2rem;
+  }
+
+  .back-link {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+  }
+}
+
+/* Small Mobile Design */
+@media (max-width: 480px) {
+  .technical {
+    padding: 0.5rem;
+  }
+
+  .technical-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .technical-description {
+    font-size: 0.95rem;
+    padding: 0 0.5rem;
+  }
+
+  .stage-plan h2,
+  .technical-requirements h2,
+  .venue-requirements h2 {
+    font-size: 1.5rem;
+  }
+
+  .stage-plan-container {
+    padding: 1rem;
+  }
+
+  .stage-plan-info {
+    padding: 0.8rem;
+  }
+
+  .tech-section {
+    padding: 1rem;
+  }
+
+  .tech-section h3 {
+    font-size: 1.2rem;
+  }
+
+  .tech-section li {
+    font-size: 0.9rem;
+    padding-left: 1.2rem;
+  }
+
+  .requirement-item {
+    padding: 0.8rem;
+  }
+
+  .back-link {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.95rem;
+  }
+}
+
+/* Smooth focus states for accessibility */
+*:focus {
+  outline: 2px solid #e74c3c;
+  outline-offset: 2px;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
   
-  .stage-plan-info,
-  .requirements-grid {
-    width: 100%;
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

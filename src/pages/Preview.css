@@ -20,6 +20,8 @@
 
 .video-container {
   margin-bottom: 3rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .video-placeholder {
@@ -95,15 +97,15 @@
   .preview-header h1 {
     font-size: 2rem;
   }
-  
+
   .preview-info h2 {
     font-size: 1.75rem;
   }
-  
+
   .video-placeholder {
     height: 300px;
   }
-  
+
   .lock-icon {
     font-size: 3rem;
   }

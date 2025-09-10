@@ -7,7 +7,7 @@ function Preview() {
     <div className="page-container">
       <header className="preview-header">
         <h1>Epic Economics - Full Preview</h1>
-        <p className="preview-description">Protected Link for the Complete Video</p>
+        {/* <p className="preview-description">Protected Link for the Complete Video</p>*/}
       </header>
 
       <section className="video-container">
@@ -16,7 +16,7 @@ function Preview() {
       </section>
 
       <section className="preview-info">
-        <h2>About This Preview</h2>
+        {/* <h2>About This Preview</h2>
         <p>
           The full Epic Economics production video is available exclusively through this protected link.
           This preview contains the complete theatrical experience, including all scenes, performances,
@@ -24,7 +24,7 @@ function Preview() {
         </p>
         <p>
           For access to this content, please contact our team with your credentials and purpose for viewing.
-        </p>
+        </p>*/}
       </section>
 
       <nav className="preview-navigation">
