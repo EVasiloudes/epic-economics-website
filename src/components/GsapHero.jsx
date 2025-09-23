@@ -1,69 +1,176 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useCallback } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { PerformanceMonitor, detectBrowserCapabilities } from '../utils/performanceUtils';
 import './GsapHero.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
 function GsapHero() {
   const foldEffectRef = useRef(null);
+  const animationFrameRef = useRef(null);
+  const scrollTriggerRefs = useRef([]);
+  const performanceMonitorRef = useRef(null);
 
-  useEffect(() => {
+  const setupScrollAnimation = useCallback(() => {
     const foldEffect = foldEffectRef.current;
     if (!foldEffect) return;
 
-    // Animate marquee elements
+    // Kill existing ScrollTriggers
+    scrollTriggerRefs.current.forEach(trigger => trigger.kill());
+    scrollTriggerRefs.current = [];
+
+    // Optimize marquee animations with better performance settings
     gsap.utils.toArray('.marquee', foldEffect).forEach((el, index) => {
-      const w = el.querySelector('.track');
-      if (!w) return;
+      const track = el.querySelector('.track');
+      if (!track) return;
 
+      // Use transform3d for hardware acceleration
       const [x, xEnd] = (index % 2 === 0) ? [-500, -1500] : [-500, 0];
-      gsap.fromTo(w, { x }, {
-        x: xEnd,
-        scrollTrigger: {
-          trigger: foldEffect,
-          scrub: 1
+      
+      const scrollTrigger = gsap.fromTo(track, 
+        { 
+          x,
+          force3D: true // Force hardware acceleration
+        }, 
+        {
+          x: xEnd,
+          ease: "none",
+          force3D: true,
+          scrollTrigger: {
+            trigger: foldEffect,
+            scrub: true, // Use boolean for better performance than number
+            invalidateOnRefresh: true,
+            fastScrollEnd: true
+          }
         }
-      });
+      );
+      
+      scrollTriggerRefs.current.push(scrollTrigger.scrollTrigger);
     });
+  }, []);
 
+  const setupSmoothScroll = useCallback(() => {
     const centerContent = document.getElementById('center-content');
     const centerFold = document.getElementById('center-fold');
     const foldsContent = Array.from(document.querySelectorAll('.fold-content'));
 
-    let targetScroll = -(
-      document.documentElement.scrollTop || document.body.scrollTop
-    );
-    let currentScroll = targetScroll;
+    if (!centerContent || !centerFold || foldsContent.length === 0) return;
+
+    let targetScroll = 0;
+    let currentScroll = 0;
+    let ticking = false;
+
+    // Optimized animation function with requestAnimationFrame throttling
+    const updateTransforms = () => {
+      foldsContent.forEach(content => {
+        if (content && content.style) {
+          // Use transform3d for better performance
+          content.style.transform = `translate3d(0, ${currentScroll}px, 0)`;
+        }
+      });
+      ticking = false;
+    };
 
     const tick = () => {
-      if (!centerContent || !centerFold) return;
-      
-      const overflowHeight = centerContent.clientHeight - centerFold.clientHeight;
-
-      document.body.style.height = `${overflowHeight + window.innerHeight}px`;
-
+      // Calculate target scroll position
       targetScroll = -(
         document.documentElement.scrollTop || document.body.scrollTop
       );
-      currentScroll += (targetScroll - currentScroll) * 0.1;
-      foldsContent.forEach(content => {
-        if (content && content.style) {
-          content.style.transform = `translateY(${currentScroll}px)`;
-        }
-      });
-      requestAnimationFrame(tick);
+
+      // Smooth interpolation with optimized easing
+      const diff = targetScroll - currentScroll;
+      if (Math.abs(diff) < 0.1) {
+        currentScroll = targetScroll;
+      } else {
+        currentScroll += diff * 0.1;
+      }
+
+      // Throttle DOM updates using requestAnimationFrame
+      if (!ticking) {
+        requestAnimationFrame(updateTransforms);
+        ticking = true;
+      }
+
+      animationFrameRef.current = requestAnimationFrame(tick);
     };
+
+    // Set initial body height
+    const overflowHeight = centerContent.clientHeight - centerFold.clientHeight;
+    document.body.style.height = `${overflowHeight + window.innerHeight}px`;
+
+    // Start animation loop
     tick();
 
-    // Cleanup function
+    // Return cleanup function
     return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    // Initialize performance monitoring
+    const capabilities = detectBrowserCapabilities();
+    
+    // Log browser capabilities in development
+    if (process.env.NODE_ENV === 'development') {
+      console.group('🔍 Browser Capabilities');
+      console.table(capabilities);
+      console.groupEnd();
+    }
+    
+    // Initialize performance monitor
+    performanceMonitorRef.current = new PerformanceMonitor();
+    if (process.env.NODE_ENV === 'development') {
+      performanceMonitorRef.current.startMonitoring();
+    }
+
+    // Debounce setup to avoid multiple rapid calls
+    const timeoutId = setTimeout(() => {
+      setupScrollAnimation();
+      const cleanupScroll = setupSmoothScroll();
+
+      // Handle resize events with better debouncing for different browsers
+      const resizeDelay = capabilities.isMobile ? 250 : 150;
+      const handleResize = gsap.utils.debounce(() => {
+        ScrollTrigger.refresh();
+        setupSmoothScroll();
+      }, resizeDelay);
+
+      window.addEventListener('resize', handleResize);
+
+      // Return cleanup function
+      return () => {
+        window.removeEventListener('resize', handleResize);
+        if (cleanupScroll) cleanupScroll();
+      };
+    }, 16); // Single frame delay
+
+    return () => {
+      clearTimeout(timeoutId);
+      
+      // Stop performance monitoring
+      if (performanceMonitorRef.current && process.env.NODE_ENV === 'development') {
+        performanceMonitorRef.current.stopMonitoring();
+      }
+      
+      // Cleanup ScrollTriggers
+      scrollTriggerRefs.current.forEach(trigger => trigger.kill());
+      scrollTriggerRefs.current = [];
+      
+      // Cancel animation frame
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+      
+      // Reset body height
       if (document.body.style.height) {
         document.body.style.height = '';
       }
     };
-  }, []);
+  }, [setupScrollAnimation, setupSmoothScroll]);
 
   return (
     <div className="screen" id="fold-effect" ref={foldEffectRef}>
