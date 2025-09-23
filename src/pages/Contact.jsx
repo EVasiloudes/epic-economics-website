@@ -20,7 +20,14 @@ function Contact() {
 
           <div className="contact-details">
             <h3>Contact Information</h3>
-            <p><strong>Email:</strong> elias (at) densetheory.cc</p>
+            <div className="contact-person">
+              <p><strong>Dimis Michaelides</strong></p>
+              <p>Email: dimis (at) dimis.org</p>
+            </div>
+            <div className="contact-person">
+              <p><strong>Elias Vasnic - PRODUCER</strong></p>
+              <p>Email: elias (at) densetheory.cc</p>
+            </div>
           </div>
         </div>
       </section>

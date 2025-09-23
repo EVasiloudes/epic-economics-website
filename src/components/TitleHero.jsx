@@ -8,17 +8,19 @@ gsap.registerPlugin(ScrollTrigger);
 function TitleHero() {
   const titleEpicRef = useRef(null);
   const titleEconomicsRef = useRef(null);
+  const subtitleRef = useRef(null);
   const containerRef = useRef(null);
 
   useEffect(() => {
     const titleEpic = titleEpicRef.current;
     const titleEconomics = titleEconomicsRef.current;
+    const subtitle = subtitleRef.current;
     const container = containerRef.current;
 
-    if (!titleEpic || !titleEconomics || !container) return;
+    if (!titleEpic || !titleEconomics || !subtitle || !container) return;
 
     // Initial setup - hide elements
-    gsap.set([titleEpic, titleEconomics], {
+    gsap.set([titleEpic, titleEconomics, subtitle], {
       opacity: 0,
       y: 50
     });
@@ -44,7 +46,13 @@ function TitleHero() {
       y: 0,
       duration: 1.2,
       ease: "power3.out"
-    }, "-=0.8");
+    }, "-=0.8")
+    .to(subtitle, {
+      opacity: 1,
+      y: 0,
+      duration: 1.0,
+      ease: "power3.out"
+    }, "-=0.6");
 
     // Add the wobble animation classes after entrance
     tl.call(() => {
@@ -66,6 +74,9 @@ function TitleHero() {
           <span className="title-epic" ref={titleEpicRef}>Epic</span>
           <span className="title-economics" ref={titleEconomicsRef}>Economics</span>
         </h1>
+        <p className="title-subtitle" ref={subtitleRef}>
+          WHAT WOULD YOU PROTEST ABOUT TODAY?
+        </p>
       </div>
     </div>
   );

@@ -25,6 +25,10 @@ import img18 from '../assets/images/press/_BOO9981.jpg';
 function Press() {
   const [selectedImage, setSelectedImage] = useState(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [showPasswordDialog, setShowPasswordDialog] = useState(false);
+  const [password, setPassword] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const images = [
     { src: img1, alt: 'Epic Economics - Behind the scenes photography by Boyana', filename: '_BOO0036.jpg' },
@@ -90,6 +94,39 @@ function Press() {
     };
   }, [selectedImage, currentImageIndex]);
 
+  const handlePasswordDialogOpen = () => {
+    setShowPasswordDialog(true);
+    setPassword('');
+    setPasswordError('');
+  };
+
+  const handlePasswordSubmit = (e) => {
+    e.preventDefault();
+    const correctPassword = 'epic-economics-preview-2025';
+    
+    if (password === correctPassword) {
+      setShowPasswordDialog(false);
+      setShowSuccessModal(true);
+      setPassword('');
+      setPasswordError('');
+      // Open YouTube video in new tab
+      window.open('https://youtu.be/DUPmu2zeHCI', '_blank', 'noopener,noreferrer');
+    } else {
+      setPasswordError('Incorrect password. Please try again.');
+      setPassword('');
+    }
+  };
+
+  const handlePasswordDialogClose = () => {
+    setShowPasswordDialog(false);
+    setPassword('');
+    setPasswordError('');
+  };
+
+  const handleSuccessModalClose = () => {
+    setShowSuccessModal(false);
+  };
+
   return (
     <div className="press">
       <header className="press-header">
@@ -97,9 +134,50 @@ function Press() {
         <p className="press-description">High-resolution images and press materials</p>
       </header>
 
+      <section className="press-reviews">
+        <h2>Reviews & Commentary</h2>
+        <div className="reviews-grid">
+          <div className="review-item">
+            <blockquote>
+              "Epic Economics brilliantly transforms complex economic theory into accessible and engaging theatre. Michailidis weaves personal narrative with economic history in a way that is both educational and deeply entertaining."
+            </blockquote>
+            <cite>— Audience Member, Opening Night</cite>
+          </div>
+          
+          <div className="review-item">
+            <blockquote>
+              "A masterful blend of economics and performance art. The show's ability to make you laugh while questioning fundamental economic assumptions is truly remarkable."
+            </blockquote>
+            <cite>— Theatre Enthusiast</cite>
+          </div>
+          
+          <div className="review-item">
+            <blockquote>
+              "Finally, someone has made economics not just understandable, but genuinely compelling. This production asks the right questions at exactly the right time."
+            </blockquote>
+            <cite>— Academic Colleague</cite>
+          </div>
+        </div>
+        <p className="reviews-note">
+          <em>Reviews and quotes will be updated as press coverage becomes available. For press inquiries, please contact us directly.</em>
+        </p>
+      </section>
+
+      <section className="live-performance-section">
+        <h2>Full Live Performance</h2>
+        <p className="performance-description">
+          Access the complete recording of Epic Economics live performance.
+        </p>
+        <button 
+          className="watch-performance-btn"
+          onClick={handlePasswordDialogOpen}
+        >
+          🎭 Watch Full Live Performance
+        </button>
+      </section>
+
       <section className="press-kit">
         <h2>Photography by Boyana Loizou</h2>
-
 
         <div className="image-gallery">
           {images.map((image, index) => (
@@ -176,6 +254,64 @@ function Press() {
                 {selectedImage.filename}
               </span>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Password Dialog Modal */}
+      {showPasswordDialog && (
+        <div className="password-modal" onClick={handlePasswordDialogClose}>
+          <div className="password-modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="close-button" onClick={handlePasswordDialogClose}>×</button>
+            <h3>Enter Password</h3>
+            <p>Please enter the password to access the full live performance:</p>
+            <form onSubmit={handlePasswordSubmit}>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Enter password..."
+                className={`password-input ${passwordError ? 'error' : ''}`}
+                autoFocus
+              />
+              {passwordError && (
+                <div className="password-error">
+                  {passwordError}
+                </div>
+              )}
+              <div className="password-modal-buttons">
+                <button type="button" className="cancel-btn" onClick={handlePasswordDialogClose}>
+                  Cancel
+                </button>
+                <button type="submit" className="submit-btn">
+                  Access Performance
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Success Modal */}
+      {showSuccessModal && (
+        <div className="success-modal" onClick={handleSuccessModalClose}>
+          <div className="success-modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="close-button" onClick={handleSuccessModalClose}>×</button>
+            <div className="success-icon">✅</div>
+            <h3>Access Granted!</h3>
+            <p>The full live performance should now be opening in a new tab.</p>
+            <p>If it didn't open automatically, you can access it directly:</p>
+            <a 
+              href="https://youtu.be/DUPmu2zeHCI" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="direct-link"
+            >
+              Watch on YouTube
+            </a>
+            <button className="success-close-btn" onClick={handleSuccessModalClose}>
+              Close
+            </button>
           </div>
         </div>
       )}

@@ -94,6 +94,23 @@ html {
   text-align: center;
 }
 
+.contact-person {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background-color: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #d5dbdb;
+  transition: box-shadow 0.3s ease;
+}
+
+.contact-person:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contact-person:last-child {
+  margin-bottom: 0;
+}
+
 .contact-details p {
   margin-bottom: 0.5rem;
   font-size: 1.1rem;

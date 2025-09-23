@@ -148,6 +148,62 @@ function Technical() {
         </div>
       </section>
 
+      <section className="credits">
+        <h2>Credits</h2>
+        <div className="credits-grid">
+          <div className="credit-category">
+            <h3>Performance & Creation</h3>
+            <ul>
+              <li><strong>Performer & Creator:</strong> Dimis Michailidis</li>
+              <li><strong>Producer:</strong> Elias Vasnic</li>
+              <li><strong>Director:</strong> Lia Haraki</li>
+            </ul>
+          </div>
+
+          <div className="credit-category">
+            <h3>Technical Team</h3>
+            <ul>
+              <li><strong>Sound Design:</strong> Elias Vasnic</li>
+              <li><strong>Lighting Design:</strong> Lia Haraki</li>
+              <li><strong>Technical Supervisor:</strong> Elias Vasnic</li>
+            </ul>
+          </div>
+
+          <div className="credit-category">
+            <h3>Photography & Documentation</h3>
+            <ul>
+              <li><strong>Photography:</strong> Boyana Loizou</li>
+              <li><strong>Instagram:</strong> <a href="https://www.instagram.com/blessthismess_photography/" target="_blank" rel="noopener noreferrer">@blessthismess_photography</a></li>
+            </ul>
+          </div>
+
+          <div className="credit-category">
+            <h3>Digital Presence</h3>
+            <ul>
+              <li><strong>Website Development:</strong> Elias Vasnic</li>
+              <li><strong>Digital Strategy:</strong> Dense Theory Creative</li>
+            </ul>
+          </div>
+
+          <div className="credit-category">
+            <h3>Special Thanks</h3>
+            <ul>
+              <li>All economists quoted and referenced in the performance</li>
+              <li>Venues and audiences who have supported the development</li>
+              <li>The academic and theatre communities who provided feedback</li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="credits-note">
+          <p>
+            <em>Epic Economics is a solo theatrical work that brings together centuries of economic thought
+            with personal narrative and performance. For additional credits or acknowledgments,
+            please contact the production team.</em>
+          </p>
+        </div>
+      </section>
+
       <nav className="technical-navigation">
         <Link to="/" className="back-link">← Back to Home</Link>
       </nav>

@@ -4,6 +4,10 @@ import GsapHero from '../components/GsapHero';
 import TitleHero from '../components/TitleHero';
 import './Home.css';
 
+// Import selected images for homepage
+import audienceImg from '../assets/images/press/_BOO9866.jpg';
+import performanceImg from '../assets/images/press/_BOO9941.jpg';
+
 function Home() {
   return (
     <div className="home">
@@ -12,35 +16,51 @@ function Home() {
 
       <div className="home-content">
         <section className="synopsis">
-          {/* <h2>About the Show</h2>*/}
           <p>
-              Epic Economics is a theatrical work based on the words of distinguished economists from the 18th century to today, highlighting their contributions and contradictions. The theories are interwoven with stories from the performer's own personal and professional journey, and peppered with wicked humor and some songs. The show is accompanied by an original soundscape.
-            </p>
-            <p>
-              How does your breakfast make its way to your table? <br />
-              Why do you have an imported car? <br />
-              Who creates value? Why do we have recessions? <br />
-              What's more important: growth of the economy or equality?
-            </p>
-            <p>
-              Economics is sometimes revered as a nebulous subject best left to "experts" and sometimes simplified to populist pseudo-science. This play promises to explore the nebulae and expose the pretenders.
-            </p>
-          {/* <blockquote>
-            <p>"The purpose of studying economics is not to acquire a set of ready-made answers to economic questions, but to learn how to avoid being deceived by economists." — Joan Robinson</p>
-          </blockquote>
-          <blockquote>
-            <p>"The only function of economic forecasting is to make astrology look respectable." — JK Galbraith</p>
-          </blockquote>*/}
+            Epic Economics is a theatrical work based on the words of distinguished economists from the 18th century to today, highlighting their contributions and contradictions. The theories are interwoven with stories from the performer's own personal and professional journey, and peppered with wicked humor and some songs. The show is accompanied by an original soundscape.
+          </p>
+          <p>
+            How does your breakfast make its way to your table? Why might you own an imported car? Who creates value? Why do we have recessions? What's more important, growth or equality?
+          </p>
+          <p>
+            Markets. Value. Capital. Labour. Competition. Co-operation. Wealth. Trade. Innovation. Growth. Inequality. Crises.
+          </p>
+          <p>
+            What would you protest about today?
+          </p>
+          <p>
+            Economics is sometimes revered as a nebulous subject best left to "experts" and sometimes simplified to populist pseudo-science. This play promises to explore the nebulae and expose the pretenders.
+          </p>
+        </section>
+
+        <section className="home-images">
+          <div className="image-gallery-home">
+            <div className="home-image-item">
+              <img
+                src={audienceImg}
+                alt="Epic Economics - Audience participation during performance"
+                loading="lazy"
+              />
+              <p className="image-caption">Engaging audiences in economic discourse</p>
+            </div>
+            <div className="home-image-item">
+              <img
+                src={performanceImg}
+                alt="Epic Economics - Performance highlighting theatrical elements"
+                loading="lazy"
+              />
+              <p className="image-caption">Where economics meets theatrical performance</p>
+            </div>
+          </div>
+          <div className="photo-credit-home">
+            Photography by <a href="https://www.instagram.com/blessthismess_photography/" target="_blank" rel="noopener noreferrer">Boyana Loizou</a>
+          </div>
         </section>
 
         <section className="teaser">
-          <h2>Watch the Preview</h2>
+          <h2>Watch the Teaser</h2>
           <div className="teaser-video">
-            <Link to="/preview" className="teaser-link">
-              <div className="play-button">
-                ▶ Play Preview
-              </div>
-            </Link>
+              <iframe width="1195" height="795" src="https://www.youtube.com/embed/h49nwJzQtXk" title="Epic Economics Teaser" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
           </div>
           {/* <p className="teaser-description">
             Get a sneak peek of the production with our exclusive preview trailer.
