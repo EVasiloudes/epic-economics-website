@@ -23,10 +23,8 @@ function Home() {
             How does your breakfast make its way to your table? Why might you own an imported car? Who creates value? Why do we have recessions? What's more important, growth or equality?
           </p>
           <p>
-            Markets. Value. Capital. Labour. Competition. Co-operation. Wealth. Trade. Innovation. Growth. Inequality. Crises.
-          </p>
-          <p>
-            What would you protest about today?
+            Markets. Value. Capital. Labour. Competition. Co-operation. Wealth. Trade. Innovation. Growth. Inequality. Crises.<br></br><br></br>
+            <strong>What would you protest about today?</strong>
           </p>
           <p>
             Economics is sometimes revered as a nebulous subject best left to "experts" and sometimes simplified to populist pseudo-science. This play promises to explore the nebulae and expose the pretenders.
@@ -58,9 +56,9 @@ function Home() {
         </section>
 
         <section className="teaser">
-          <h2>Watch the Teaser</h2>
+          <h2>Watch the Trailer</h2>
           <div className="teaser-video">
-              <iframe width="1195" height="795" src="https://www.youtube.com/embed/h49nwJzQtXk" title="Epic Economics Teaser" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+              <iframe width="800" height="400" src="https://www.youtube.com/embed/HaY26deh7nE?si=pv4RXJ4hGmY7GD99" title="Epic Economics Teaser" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
           </div>
           {/* <p className="teaser-description">
             Get a sneak peek of the production with our exclusive preview trailer.

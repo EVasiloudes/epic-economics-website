@@ -102,15 +102,15 @@ function Press() {
 
   const handlePasswordSubmit = (e) => {
     e.preventDefault();
-    const correctPassword = 'epic-economics-preview-2025';
-    
+    const correctPassword = 'epiceconomics-performance2025';
+
     if (password === correctPassword) {
       setShowPasswordDialog(false);
       setShowSuccessModal(true);
       setPassword('');
       setPasswordError('');
       // Open YouTube video in new tab
-      window.open('https://youtu.be/DUPmu2zeHCI', '_blank', 'noopener,noreferrer');
+      window.open('https://youtu.be/lsncXEr3iUE', '_blank', 'noopener,noreferrer');
     } else {
       setPasswordError('Incorrect password. Please try again.');
       setPassword('');
@@ -143,14 +143,14 @@ function Press() {
             </blockquote>
             <cite>— Audience Member, Opening Night</cite>
           </div>
-          
+
           <div className="review-item">
             <blockquote>
               "A masterful blend of economics and performance art. The show's ability to make you laugh while questioning fundamental economic assumptions is truly remarkable."
             </blockquote>
             <cite>— Theatre Enthusiast</cite>
           </div>
-          
+
           <div className="review-item">
             <blockquote>
               "Finally, someone has made economics not just understandable, but genuinely compelling. This production asks the right questions at exactly the right time."
@@ -168,7 +168,7 @@ function Press() {
         <p className="performance-description">
           Access the complete recording of Epic Economics live performance.
         </p>
-        <button 
+        <button
           className="watch-performance-btn"
           onClick={handlePasswordDialogOpen}
         >
@@ -301,9 +301,9 @@ function Press() {
             <h3>Access Granted!</h3>
             <p>The full live performance should now be opening in a new tab.</p>
             <p>If it didn't open automatically, you can access it directly:</p>
-            <a 
-              href="https://youtu.be/DUPmu2zeHCI" 
-              target="_blank" 
+            <a
+              href="https://youtu.be/DUPmu2zeHCI"
+              target="_blank"
               rel="noopener noreferrer"
               className="direct-link"
             >

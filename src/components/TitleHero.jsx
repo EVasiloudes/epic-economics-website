@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './TitleHero.css';
+import backdropImage from '../assets/images/press/_BOO0058.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -69,6 +70,9 @@ function TitleHero() {
 
   return (
     <div className="title-hero" ref={containerRef}>
+      <div className="title-hero-backdrop">
+        <img src={backdropImage} alt="" className="title-hero-backdrop-image" />
+      </div>
       <div className="title-hero-content">
         <h1>
           <span className="title-epic" ref={titleEpicRef}>Epic</span>
