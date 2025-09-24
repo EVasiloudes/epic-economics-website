@@ -139,7 +139,7 @@ function Press() {
         <div className="reviews-grid">
           <div className="review-item">
             <blockquote>
-              "Epic Economics brilliantly transforms complex economic theory into accessible and engaging theatre. Michailidis weaves personal narrative with economic history in a way that is both educational and deeply entertaining."
+              "Epic Economics brilliantly transforms complex economic theory into accessible and engaging theatre. Michaelides weaves personal narrative with economic history in a way that is both educational and deeply entertaining."
             </blockquote>
             <cite>— Audience Member, Opening Night</cite>
           </div>
@@ -148,7 +148,7 @@ function Press() {
             <blockquote>
               "A masterful blend of economics and performance art. The show's ability to make you laugh while questioning fundamental economic assumptions is truly remarkable."
             </blockquote>
-            <cite>— Theatre Enthusiast</cite>
+            <cite>— Takis Taoushanis, Economist - Banker</cite>
           </div>
 
           <div className="review-item">
@@ -166,7 +166,7 @@ function Press() {
       <section className="live-performance-section">
         <h2>Full Live Performance</h2>
         <p className="performance-description">
-          Access the complete recording of Epic Economics live performance.
+          Access the complete recording of Epic Economics live performance, Premiere July 2025 (Password required).
         </p>
         <button
           className="watch-performance-btn"
@@ -174,6 +174,37 @@ function Press() {
         >
           🎭 Watch Full Live Performance
         </button>
+      </section>
+
+      <section className="video-section">
+        <h2>Video Content</h2>
+        <div className="video-cards">
+          <div className="video-card">
+            <div className="video-thumbnail">
+              <iframe
+                src="https://www.youtube.com/embed/h49nwJzQtXk"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            </div>
+            <div className="video-info">
+              <h3>Stills from our July 2025</h3>
+              <p>This captivating performance brings economics to life.</p>
+            </div>
+          </div>
+
+          <div className="video-card coming-soon">
+            <div className="video-placeholder">
+              <div className="placeholder-icon">🎬</div>
+              <p>Coming Soon</p>
+            </div>
+            <div className="video-info">
+              <h3>What our Audience Wrote</h3>
+              <p>More video content will be available soon. Stay tuned for behind-the-scenes footage and interviews.</p>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section className="press-kit">

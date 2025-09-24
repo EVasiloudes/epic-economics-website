@@ -154,17 +154,17 @@ function Technical() {
           <div className="credit-category">
             <h3>Performance & Creation</h3>
             <ul>
-              <li><strong>Performer & Creator:</strong> Dimis Michailidis</li>
-              <li><strong>Producer:</strong> Elias Vasnic</li>
+              <li><strong>Written & Performed:</strong> Dimis Michaelides</li>
               <li><strong>Director:</strong> Lia Haraki</li>
+              <li><strong>Producer and Composer:</strong> Elias Vasnic</li>
             </ul>
           </div>
 
           <div className="credit-category">
             <h3>Technical Team</h3>
             <ul>
-              <li><strong>Sound Design:</strong> Elias Vasnic</li>
-              <li><strong>Lighting Design:</strong> Lia Haraki</li>
+              <li><strong>Sound:</strong> Elias Vasnic</li>
+              <li><strong>Lighting Design:</strong> <a href="https://www.liaharaki.com/"> Lia Haraki </a></li>
               <li><strong>Technical Supervisor:</strong> Elias Vasnic</li>
             </ul>
           </div>
@@ -173,6 +173,7 @@ function Technical() {
             <h3>Photography & Documentation</h3>
             <ul>
               <li><strong>Photography:</strong> Boyana Loizou</li>
+              <li><strong>Video:</strong> <a href="https://cy.linkedin.com/in/coula-karasava-b488a418b">Coula Karasava</a></li>
               <li><strong>Instagram:</strong> <a href="https://www.instagram.com/blessthismess_photography/" target="_blank" rel="noopener noreferrer">@blessthismess_photography</a></li>
             </ul>
           </div>
@@ -181,7 +182,7 @@ function Technical() {
             <h3>Digital Presence</h3>
             <ul>
               <li><strong>Website Development:</strong> Elias Vasnic</li>
-              <li><strong>Digital Strategy:</strong> Dense Theory Creative</li>
+              <li><strong>Digital Strategy:</strong> <a href="https://elias.densetheory.cc">Dense Theory Creative</a></li>
             </ul>
           </div>
 
