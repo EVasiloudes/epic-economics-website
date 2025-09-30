@@ -798,89 +798,122 @@ html {
   .press {
     padding: 1.5rem;
   }
-  
+
   .image-gallery {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 1.25rem;
   }
-  
+
   .press-info {
     padding: 2rem;
   }
-  
+
   .nav-button {
     width: 45px;
     height: 45px;
     font-size: 1.8rem;
   }
-  
+
   .prev-button {
     left: -60px;
   }
-  
+
   .next-button {
     right: -60px;
   }
-  
+
   .live-performance-section {
     padding: 2.5rem;
     margin: 3rem 0;
   }
-  
+
   .live-performance-section h2 {
     font-size: 2.2rem;
   }
-  
+
   .watch-performance-btn {
     padding: 1rem 2rem;
     font-size: 1.1rem;
   }
-  
+
   .password-modal-content,
-  .success-modal-content {
+  .success-modal-content,
+  .review-modal-content {
     padding: 2rem;
     max-width: 400px;
   }
-  
+
+  .magic-link-section {
+    padding: 2.5rem;
+    margin: 3rem 0;
+  }
+
+  .magic-link-section h2 {
+    font-size: 2.2rem;
+  }
+
+  .magic-description {
+    font-size: 1.1rem;
+  }
+
+  .magic-link-btn {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+  }
+
+  .magic-reviews {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .magic-review-item {
+    padding: 1.75rem;
+  }
+
+  .magic-review-text {
+    font-size: 1rem;
+  }
+
   .video-section {
     padding: 2.5rem;
     margin: 3rem 0;
   }
-  
+
   .video-section h2 {
     font-size: 2.2rem;
   }
-  
+
   .video-cards {
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 1.5rem;
   }
-  
+
   .video-info {
     padding: 1.25rem;
   }
-  
+
   .video-info h3 {
     font-size: 1.2rem;
   }
-  
+
   .audience-participation-section {
     padding: 2.5rem;
     margin: 5rem 0 3rem 0;
   }
-  
+
   .audience-participation-section h2 {
     font-size: 2.2rem;
   }
-  
+
   .video-placeholder {
     height: 180px;
   }
-  
+
   .placeholder-icon {
     font-size: 2.5rem;
   }
-  
+
   .video-placeholder p {
     font-size: 1.1rem;
   }
@@ -930,73 +963,119 @@ html {
   }
   
   .password-modal-content,
-  .success-modal-content {
+  .success-modal-content,
+  .review-modal-content {
     padding: 1.5rem;
     max-width: 350px;
     width: 95%;
   }
-  
+
+  .magic-link-section {
+    padding: 2rem;
+    margin: 2rem 0;
+  }
+
+  .magic-link-section h2 {
+    font-size: 2rem;
+  }
+
+  .magic-description {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .magic-link-btn {
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+  }
+
+  .magic-reviews {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .magic-review-item {
+    padding: 1.5rem;
+  }
+
+  .magic-review-text {
+    font-size: 0.95rem;
+  }
+
+  .magic-review-author {
+    font-size: 0.9rem;
+  }
+
   .video-section {
     padding: 2rem;
     margin: 2rem 0;
   }
-  
+
   .video-section h2 {
     font-size: 2rem;
   }
-  
+
   .video-cards {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
-  
+
   .video-info {
     padding: 1rem;
   }
-  
+
   .video-info h3 {
     font-size: 1.1rem;
   }
-  
+
   .video-info p {
     font-size: 0.9rem;
   }
-  
+
   .audience-participation-section {
     padding: 2rem;
     margin: 4rem 0 2rem 0;
   }
-  
+
   .audience-participation-section h2 {
     font-size: 2rem;
   }
-  
+
   .video-placeholder {
     height: 180px;
   }
-  
+
   .placeholder-icon {
     font-size: 2rem;
   }
-  
+
   .video-placeholder p {
     font-size: 1rem;
   }
-  
+
   .password-modal-content h3,
   .success-modal-content h3 {
     font-size: 1.5rem;
   }
-  
+
   .password-modal-buttons {
     flex-direction: column;
     gap: 0.5rem;
   }
-  
+
   .cancel-btn,
   .submit-btn,
   .success-close-btn {
     width: 100%;
+  }
+
+  .review-modal-text {
+    font-size: 1rem;
+  }
+
+  .review-modal-author {
+    font-size: 0.9rem;
   }
 
   .press {
@@ -1154,70 +1233,124 @@ html {
   }
   
   .password-modal-content,
-  .success-modal-content {
+  .success-modal-content,
+  .review-modal-content {
     padding: 1.25rem;
     max-width: 320px;
     width: 95%;
   }
-  
+
   .password-modal-content h3,
   .success-modal-content h3 {
     font-size: 1.3rem;
   }
-  
+
   .password-modal-content p,
   .success-modal-content p {
     font-size: 0.9rem;
   }
-  
+
   .password-input {
     padding: 0.8rem;
     font-size: 1rem;
   }
-  
+
+  .review-modal-text {
+    font-size: 0.95rem;
+  }
+
+  .review-modal-author {
+    font-size: 0.85rem;
+  }
+
+  .magic-link-section {
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+  }
+
+  .magic-link-section h2 {
+    font-size: 1.8rem;
+  }
+
+  .magic-description {
+    font-size: 1rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .magic-link-btn {
+    padding: 0.8rem 1.2rem;
+    font-size: 0.9rem;
+  }
+
+  .magic-reviews {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .magic-review-item {
+    padding: 1.25rem;
+  }
+
+  .magic-review-stars {
+    font-size: 1.2rem;
+  }
+
+  .magic-review-text {
+    font-size: 0.9rem;
+  }
+
+  .magic-review-author {
+    font-size: 0.85rem;
+  }
+
+  .magic-review-link {
+    font-size: 0.85rem;
+  }
+
   .video-section {
     padding: 1.5rem;
     margin: 1.5rem 0;
   }
-  
+
   .video-section h2 {
     font-size: 1.8rem;
   }
-  
+
   .video-cards {
     gap: 1rem;
   }
-  
+
   .video-info {
     padding: 0.8rem;
   }
-  
+
   .video-info h3 {
     font-size: 1rem;
   }
-  
+
   .video-info p {
     font-size: 0.9rem;
   }
-  
+
   .audience-participation-section {
     padding: 1.5rem;
     margin: 3rem 0 1.5rem 0;
   }
-  
+
   .audience-participation-section h2 {
     font-size: 1.8rem;
   }
-  
+
   .video-placeholder {
     height: 150px;
   }
-  
+
   .placeholder-icon {
     font-size: 1.8rem;
     margin-bottom: 0.5rem;
   }
-  
+
   .video-placeholder p {
     font-size: 0.9rem;
   }
@@ -1298,6 +1431,193 @@ html {
     padding: 0.7rem 1.2rem;
     font-size: 0.95rem;
   }
+}
+
+/* Review Modal Styles */
+.review-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1100;
+  opacity: 0;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.review-modal-content {
+  background-color: #ffffff;
+  padding: 2.5rem;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  max-width: 700px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.review-modal-text {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #34495e;
+  font-style: italic;
+  margin-bottom: 1.5rem;
+  white-space: pre-line;
+}
+
+.review-modal-author {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  color: #7f8c8d;
+  font-weight: bold;
+  text-align: right;
+}
+
+.read-more-link {
+  background: none;
+  border: none;
+  color: #3498db;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  margin-left: 0.25rem;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+.read-more-link:hover {
+  color: #2980b9;
+}
+
+.review-text {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #34495e;
+  font-style: italic;
+}
+
+/* Magic Link Section Styles */
+.magic-link-section {
+  margin: 4rem 0;
+  padding: 3rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.magic-link-section h2 {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  color: #ffffff;
+}
+
+.magic-description {
+  font-family: var(--font-body);
+  font-size: 1.2rem;
+  color: #f0f0f0;
+  margin-bottom: 2.5rem;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.7;
+}
+
+.magic-reviews {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.magic-review-item {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  text-align: left;
+  transition: all 0.3s ease;
+}
+
+.magic-review-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+}
+
+.magic-review-stars {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.magic-review-text {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #34495e;
+  font-style: italic;
+  margin-bottom: 1rem;
+}
+
+.magic-review-author {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  color: #7f8c8d;
+  font-weight: bold;
+  margin-bottom: 0.75rem;
+}
+
+.magic-review-link {
+  display: inline-block;
+  color: #667eea;
+  text-decoration: none;
+  font-family: var(--font-heading);
+  font-weight: bold;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.magic-review-link:hover {
+  color: #764ba2;
+  text-decoration: underline;
+}
+
+.magic-link-btn {
+  display: inline-block;
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+  text-decoration: none;
+  padding: 1.25rem 2.5rem;
+  font-size: 1.2rem;
+  font-family: var(--font-heading);
+  font-weight: bold;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(245, 87, 108, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 1rem;
+}
+
+.magic-link-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(245, 87, 108, 0.4);
+}
+
+.magic-link-btn:active {
+  transform: translateY(-1px);
 }
 
 /* Smooth focus states for accessibility */

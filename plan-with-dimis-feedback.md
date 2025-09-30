@@ -9,35 +9,35 @@ This document outlines the implementation plan for updating the Press.jsx compon
 
 #### 1.1 Add Ioannis Tirkides Review
 - **Location**: `press-reviews` section, reviews-grid
-- **Content**: 
+- **Content**:
   ```
   Economics is a deeply controversial subject, blending a multiplicity of skills and perspectives. It's a field rife with conflicting narratives of cause and effect, where morality and positivity, the concrete and the abstract, and the technical and the intuitive constantly clash. Society itself consists of overlapping spheres—the economic, cultural, security, and the political—with all major decisions ultimately being shaped at the political level, where conflicts are compromised. In 'Epic Economics' Dimis captures this essence, and expertly guides us through a century of intellectual evolution. The performance masterfully illustrates how economic thought was born from the realities and conflicts of its time, and how its subsequent failures repeatedly spurred new cycles of ideas. Dimis's ability to weave together this complex narrative with a masterful blend of insight and entertainment makes for a truly compelling and memorable experience.
   ```
 - **Attribution**: Ioannis Tirkides, Economics Research Manager at Bank of Cyprus and President, the Cyprus Economic Society
 
 #### 1.2 Add George Lambrianou Review
-- **Content**: 
+- **Content**:
   ```
   A very original performance that views basic principles of economics through personal experiences with plenty of humor and music. Michaelides' spicy humour, his artful narrative, his inexhaustible creativity and the musical embellishment with his guitar make the performance unique and really enjoyable. A truly worthwhile experience.
   ```
 - **Attribution**: George Lambrianou, Former Administrative Director, University of Cyprus
 
 #### 1.3 Add Aleen Andreou Review
-- **Content**: 
+- **Content**:
   ```
   Hugely entertaining with its wit, music, and performance. It magically opens up the audience to take a fresh look at the profoundly disturbing issues of our times, inequality, loss of freedom and power. A top quality show that deserves to travel to many many audiences.
   ```
 - **Attribution**: Aleen Andreou, Corporate Trainer and Coach, PeopleAchieve
 
 #### 1.4 Add Thadd Correia Review
-- **Content**: 
+- **Content**:
   ```
   Epic Economics, an insightful piece written and created by Dimis Michaelides, in collaboration with Lia Haraki and Elias Vasnic, aptly and deftly combines slight of hand and other chicanery with a lesson in economics. Peppered with nuanced insight into the connections between cold hard numbers and our, warmer, slightly less ordered, humanity, the show takes the audience on a journey from our dismal, somewhat ignorant past towards a more enlightened, hopeful, future. In order to really understand how a show about economics can do this, you will just have to get tickets the next time it's in town. Congratulations to the creators for giving us a show that encourages us to question and dares us to rebel.
   ```
 - **Attribution**: Thadd Correia, Director, Writer, Educator
 
 #### 1.5 Add Unnamed Review (Bertolt Brecht Quote)
-- **Content**: 
+- **Content**:
   ```
   Epic Economics is not just a performance about money or markets. It is a voyage through the heart of society. The play brings the voices of Smith, Marx, Keynes and many more to the present in a quirkily intelligent style. It reminds us that economics is not just about figures or growth, it is about each one of us, about our daily ambitions, fears and dreams.
 
@@ -48,11 +48,13 @@ This document outlines the implementation plan for updating the Press.jsx compon
   "Art is not a mirror held up to reality but a hammer with which to shape it" -Bertolt Brecht-
   ```
 
+  **Atrribution**: Lisa Tsangaridou, Dance Teacher/Choreographer
+
 ### 2. Implement "Read More" Modal Functionality
 
 #### 2.1 Character Limit Logic
 - **Requirement**: Reviews longer than 150 characters should show truncated version with "read more" link
-- **Implementation**: 
+- **Implementation**:
   - Add utility function to truncate text at 150 characters
   - Add state management for expanded reviews
   - Create modal component for full review display

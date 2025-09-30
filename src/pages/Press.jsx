@@ -29,6 +29,8 @@ function Press() {
   const [password, setPassword] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [selectedReview, setSelectedReview] = useState(null);
+  const [showReviewModal, setShowReviewModal] = useState(false);
 
   const images = [
     { src: img1, alt: 'Epic Economics - Photography by Boyana', filename: '_BOO0036.jpg' },
@@ -80,19 +82,32 @@ function Press() {
   };
 
   React.useEffect(() => {
-    if (selectedImage) {
+    const handleEscape = (e) => {
+      if (e.key === 'Escape') {
+        if (showReviewModal) {
+          closeReviewModal();
+        } else if (selectedImage) {
+          closeModal();
+        }
+      }
+    };
+
+    if (selectedImage || showReviewModal) {
       document.addEventListener('keydown', handleKeyDown);
+      document.addEventListener('keydown', handleEscape);
       document.body.style.overflow = 'hidden';
     } else {
       document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('keydown', handleEscape);
       document.body.style.overflow = 'unset';
     }
 
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('keydown', handleEscape);
       document.body.style.overflow = 'unset';
     };
-  }, [selectedImage, currentImageIndex]);
+  }, [selectedImage, currentImageIndex, showReviewModal]);
 
   const handlePasswordDialogOpen = () => {
     setShowPasswordDialog(true);
@@ -127,6 +142,60 @@ function Press() {
     setShowSuccessModal(false);
   };
 
+  const reviews = [
+    {
+      text: "A masterful blend of economics and performance art. The show's ability to make you laugh while questioning fundamental economic assumptions is truly remarkable.",
+      author: "Takis Taoushanis, Economist - Banker"
+    },
+    {
+      text: "An enlightening play presenting controversial economic theories, delivered in a theatrical and very entertaining style and an elegant touch of audience involvement. A must-watch.",
+      author: "Dinos Hadjivassiliou, Former IBM executive"
+    },
+    {
+      text: "An original exploration of economic history, tracing its evolution from Adam Smith and Karl Marx in the 19th century, through Keynes and Friedman's influential ideas in the mid-20th century, to today's most pressing economic theories and debates. The show vividly captures the longstanding intellectual struggle that continues to shape contemporary discussions — the clash between advocates of free markets and supporters of government intervention and regulation. Highly recommended for both economists and general audiences alike.",
+      author: "Andreas Charalambous, Economist, Former Director for Economic Research and EU Affairs - Ministry of Finance of Cyprus"
+    },
+    {
+      text: "Through humor, stories, and music, \"Epic Economics\" makes big ideas feel alive and enjoyable, keeping the audience engaged while making them think.",
+      author: "Mohammed G. Awwad, Drama Educator & Clown Teacher"
+    },
+    {
+      text: "Economics is a deeply controversial subject, blending a multiplicity of skills and perspectives. It's a field rife with conflicting narratives of cause and effect, where morality and positivity, the concrete and the abstract, and the technical and the intuitive constantly clash. Society itself consists of overlapping spheres—the economic, cultural, security, and the political—with all major decisions ultimately being shaped at the political level, where conflicts are compromised. In 'Epic Economics' Dimis captures this essence, and expertly guides us through a century of intellectual evolution. The performance masterfully illustrates how economic thought was born from the realities and conflicts of its time, and how its subsequent failures repeatedly spurred new cycles of ideas. Dimis's ability to weave together this complex narrative with a masterful blend of insight and entertainment makes for a truly compelling and memorable experience.",
+      author: "Ioannis Tirkides, Economics Research Manager at Bank of Cyprus and President, the Cyprus Economic Society"
+    },
+    {
+      text: "A very original performance that views basic principles of economics through personal experiences with plenty of humor and music. Michaelides' spicy humour, his artful narrative, his inexhaustible creativity and the musical embellishment with his guitar make the performance unique and really enjoyable. A truly worthwhile experience.",
+      author: "George Lambrianou, Former Administrative Director, University of Cyprus"
+    },
+    {
+      text: "Hugely entertaining with its wit, music, and performance. It magically opens up the audience to take a fresh look at the profoundly disturbing issues of our times, inequality, loss of freedom and power. A top quality show that deserves to travel to many many audiences.",
+      author: "Aleen Andreou, Corporate Trainer and Coach, PeopleAchieve"
+    },
+    {
+      text: "Epic Economics, an insightful piece written and created by Dimis Michaelides, in collaboration with Lia Haraki and Elias Vasnic, aptly and deftly combines slight of hand and other chicanery with a lesson in economics. Peppered with nuanced insight into the connections between cold hard numbers and our, warmer, slightly less ordered, humanity, the show takes the audience on a journey from our dismal, somewhat ignorant past towards a more enlightened, hopeful, future. In order to really understand how a show about economics can do this, you will just have to get tickets the next time it's in town. Congratulations to the creators for giving us a show that encourages us to question and dares us to rebel.",
+      author: "Thadd Correia, Director, Writer, Educator"
+    },
+    {
+      text: "Epic Economics is not just a performance about money or markets. It is a voyage through the heart of society. The play brings the voices of Smith, Marx, Keynes and many more to the present in a quirkily intelligent style. It reminds us that economics is not just about figures or growth, it is about each one of us, about our daily ambitions, fears and dreams.\n\nWhen Dimis says \"It's wonderful to have your breakfast oats anytime of the day\", it's more than a playful observation. It is the idea of freedom and choice for small human joys beyond big schedules and systems.\n\nThe play owes as much to the collaboration with Lia Haraki with her insightful direction and dramaturgy and with the vivid and imaginative sound design of Elias Vasiloudes. Together with Dimis' vision they shaped the result which is cohesive and visually vibrant. They encourage us to look at the forces that shape our world and the values that guide them. In a humorous and profoundly human way they invite us to imagine how the world might become more alive and generous.\n\n\"Art is not a mirror held up to reality but a hammer with which to shape it\" -Bertolt Brecht-",
+      author: "Lisa Tsangaridou, Dance Teacher/Choreographer"
+    }
+  ];
+
+  const truncateText = (text, maxLength) => {
+    if (text.length <= maxLength) return text;
+    return text.slice(0, maxLength) + '...';
+  };
+
+  const openReviewModal = (review) => {
+    setSelectedReview(review);
+    setShowReviewModal(true);
+  };
+
+  const closeReviewModal = () => {
+    setSelectedReview(null);
+    setShowReviewModal(false);
+  };
+
   return (
     <div className="press">
       <header className="press-header">
@@ -137,33 +206,24 @@ function Press() {
       <section className="press-reviews">
         <h2>Reviews & Commentary</h2>
         <div className="reviews-grid">
-          <div className="review-item">
-
-              "A masterful blend of economics and performance art. The show's ability to make you laugh while questioning fundamental economic assumptions is truly remarkable."
-            <br></br>
-            <cite>— Takis Taoushanis, Economist - Banker</cite>
-          </div>
-
-          <div className="review-item">
-
-              "An enlightening play presenting controversial economic theories, delivered in a theatrical and very entertaining style and an elegant touch of audience involvement. A must-watch."
-            <br></br>
-            <cite>— Dinos Hadjivassiliou, Former IBM executive</cite>
-          </div>
-
-          <div className="review-item">
-
-              "An original exploration of economic history, tracing its evolution from Adam Smith and Karl Marx in the 19th century, through Keynes and Friedman's influential ideas in the mid-20th century, to today's most pressing economic theories and debates. The show vividly captures the longstanding intellectual struggle that continues to shape contemporary discussions — the clash between advocates of free markets and supporters of government intervention and regulation. Highly recommended for both economists and general audiences alike."
-            <br></br>
-            <cite>— Andreas Charalambous, Economist, Former Director for Economic Research and EU Affairs - Ministry of Finance of Cyprus</cite>
-          </div>
-
-          <div className="review-item">
-
-              "Through humor, stories, and music, "Epic Economics" makes big ideas feel alive and enjoyable, keeping the audience engaged while making them think."
-            <br></br>
-            <cite>— Mohammed G. Awwad, Drama Educator & Clown Teacher</cite>
-          </div>
+          {reviews.map((review, index) => (
+            <div key={index} className="review-item">
+              <div className="review-text">
+                "{truncateText(review.text, 150)}"
+                {review.text.length > 150 && (
+                  <button
+                    className="read-more-link"
+                    onClick={() => openReviewModal(review)}
+                    aria-label="Read full review"
+                  >
+                    read more
+                  </button>
+                )}
+              </div>
+              <br />
+              <cite>— {review.author}</cite>
+            </div>
+          ))}
         </div>
         <p className="reviews-note">
           <em>Reviews and quotes will be updated as press coverage becomes available. For press inquiries, please contact us directly.</em>
@@ -224,6 +284,59 @@ function Press() {
             </div>
           </div>
         </section>
+
+      <section className="magic-link-section">
+        <h2>What People Said About Our Last Show</h2>
+        <p className="magic-description">
+          Before Epic Economics, Dimis brought audiences another thought-provoking performance exploring the intersection of magic, perception, and reality.
+        </p>
+
+        <div className="magic-reviews">
+          <div className="magic-review-item">
+            <div className="magic-review-stars">⭐⭐⭐⭐</div>
+            <p className="magic-review-text">
+              "What makes this performance so special is that the incredible magic and the visual art are so interwoven that we learn as well as being entertained. It's such a clever concept that surprises and educates us."
+            </p>
+            <p className="magic-review-author">
+              - British Theatre Guide
+            </p>
+            <a
+              href="https://www.britishtheatreguide.info/reviews/it-s-magic-but-paradise-in-the-22278"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="magic-review-link"
+            >
+              Read Full Review →
+            </a>
+          </div>
+
+          <div className="magic-review-item">
+            <p className="magic-review-text">
+              "… what made his show most special was its ability to make you feel as though you were part of the performance – the exhibit – itself. An elaborate storyteller, Michaelides called upon audience members to be volunteers, each one gleeful that he or she had been selected … But Michaelides' show further diverged from typical magic shows in that it also offered acts that were not traditional magic."
+            </p>
+            <p className="magic-review-author">
+              - Maia Chung, Cyprus Mail
+            </p>
+            <a
+              href="https://cyprus-mail.com/2023/06/24/can-magic-be-art-yes-sometimes-it-can"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="magic-review-link"
+            >
+              Read Full Review →
+            </a>
+          </div>
+        </div>
+
+        <a
+          href="https://magic.dimis.org"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="magic-link-btn"
+        >
+          Explore Our Previous Show
+        </a>
+      </section>
 
       <section className="press-kit">
         <h2>Photography by Boyana Loizou</h2>
@@ -373,6 +486,21 @@ function Press() {
             <button className="success-close-btn" onClick={handleSuccessModalClose}>
               Close
             </button>
+          </div>
+        </div>
+      )}
+
+      {/* Review Modal */}
+      {showReviewModal && selectedReview && (
+        <div className="review-modal" onClick={closeReviewModal}>
+          <div className="review-modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="close-button" onClick={closeReviewModal}>×</button>
+            <div className="review-modal-text">
+              "{selectedReview.text}"
+            </div>
+            <div className="review-modal-author">
+              — {selectedReview.author}
+            </div>
           </div>
         </div>
       )}
