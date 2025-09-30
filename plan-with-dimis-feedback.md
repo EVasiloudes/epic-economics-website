@@ -1,208 +1,197 @@
-# Epic Economics Website Implementation Plan
+# Epic Economics Website - Implementation Plan with Dimis Feedback
 
-Based on feedback received, this document outlines the required changes and additions to enhance the Epic Economics website.
+## Overview
+This document outlines the implementation plan for updating the Press.jsx component with new reviews, a "read more" modal functionality, and a link to magic.dimis.org.
 
-## 1. Homepage Hero Section Updates
+## Press.jsx Updates
 
-### 1.1 Add Missing Keywords to Animation
-**Priority: High**
-**Status: Pending**
+### 1. Add New Reviews to Reviews Section
 
-The GSAP hero animation currently includes some keywords but is missing the red-highlighted ones from the feedback:
-- **Currently included:** Economics, Markets, Value, Capital, Labor, Power, Crisis
-- **Missing keywords to add:** WEALTH, TRADE, INNOVATION, GROWTH, INEQUALITY
+#### 1.1 Add Ioannis Tirkides Review
+- **Location**: `press-reviews` section, reviews-grid
+- **Content**: 
+  ```
+  Economics is a deeply controversial subject, blending a multiplicity of skills and perspectives. It's a field rife with conflicting narratives of cause and effect, where morality and positivity, the concrete and the abstract, and the technical and the intuitive constantly clash. Society itself consists of overlapping spheres—the economic, cultural, security, and the political—with all major decisions ultimately being shaped at the political level, where conflicts are compromised. In 'Epic Economics' Dimis captures this essence, and expertly guides us through a century of intellectual evolution. The performance masterfully illustrates how economic thought was born from the realities and conflicts of its time, and how its subsequent failures repeatedly spurred new cycles of ideas. Dimis's ability to weave together this complex narrative with a masterful blend of insight and entertainment makes for a truly compelling and memorable experience.
+  ```
+- **Attribution**: Ioannis Tirkides, Economics Research Manager at Bank of Cyprus and President, the Cyprus Economic Society
 
-**Implementation:**
-- Update `GsapHero.jsx` to include the missing keywords in the marquee animations
-- Ensure consistent styling with existing keywords
-- Maintain the visual hierarchy with `-focus` and `em` styling
+#### 1.2 Add George Lambrianou Review
+- **Content**: 
+  ```
+  A very original performance that views basic principles of economics through personal experiences with plenty of humor and music. Michaelides' spicy humour, his artful narrative, his inexhaustible creativity and the musical embellishment with his guitar make the performance unique and really enjoyable. A truly worthwhile experience.
+  ```
+- **Attribution**: George Lambrianou, Former Administrative Director, University of Cyprus
 
-### 1.2 Add Permanent Subtitle
-**Priority: High**
-**Status: Pending**
+#### 1.3 Add Aleen Andreou Review
+- **Content**: 
+  ```
+  Hugely entertaining with its wit, music, and performance. It magically opens up the audience to take a fresh look at the profoundly disturbing issues of our times, inequality, loss of freedom and power. A top quality show that deserves to travel to many many audiences.
+  ```
+- **Attribution**: Aleen Andreou, Corporate Trainer and Coach, PeopleAchieve
 
-Add "WHAT WOULD YOU PROTEST ABOUT TODAY?" as a permanent subtitle under "Epic Economics" title.
+#### 1.4 Add Thadd Correia Review
+- **Content**: 
+  ```
+  Epic Economics, an insightful piece written and created by Dimis Michaelides, in collaboration with Lia Haraki and Elias Vasnic, aptly and deftly combines slight of hand and other chicanery with a lesson in economics. Peppered with nuanced insight into the connections between cold hard numbers and our, warmer, slightly less ordered, humanity, the show takes the audience on a journey from our dismal, somewhat ignorant past towards a more enlightened, hopeful, future. In order to really understand how a show about economics can do this, you will just have to get tickets the next time it's in town. Congratulations to the creators for giving us a show that encourages us to question and dares us to rebel.
+  ```
+- **Attribution**: Thadd Correia, Director, Writer, Educator
 
-**Implementation:**
-- Update `TitleHero.jsx` to include the subtitle
-- Style it appropriately to complement the main title
-- Ensure it's always visible and integral to the theatrical theme
-- Consider animation timing to appear after main title
+#### 1.5 Add Unnamed Review (Bertolt Brecht Quote)
+- **Content**: 
+  ```
+  Epic Economics is not just a performance about money or markets. It is a voyage through the heart of society. The play brings the voices of Smith, Marx, Keynes and many more to the present in a quirkily intelligent style. It reminds us that economics is not just about figures or growth, it is about each one of us, about our daily ambitions, fears and dreams.
 
-## 2. Homepage Content Updates
+  When Dimis says "It's wonderful to have your breakfast oats anytime of the day", it's more than a playful observation. It is the idea of freedom and choice for small human joys beyond big schedules and systems.
 
-### 2.1 Update Main Description Text
-**Priority: High**
-**Status: Pending**
+  The play owes as much to the collaboration with Lia Haraki with her insightful direction and dramaturgy and with the vivid and imaginative sound design of Elias Vasiloudes. Together with Dimis' vision they shaped the result which is cohesive and visually vibrant. They encourage us to look at the forces that shape our world and the values that guide them. In a humorous and profoundly human way they invite us to imagine how the world might become more alive and generous.
 
-Replace the current synopsis text in `Home.jsx` with the refined version:
+  "Art is not a mirror held up to reality but a hammer with which to shape it" -Bertolt Brecht-
+  ```
 
+### 2. Implement "Read More" Modal Functionality
+
+#### 2.1 Character Limit Logic
+- **Requirement**: Reviews longer than 150 characters should show truncated version with "read more" link
+- **Implementation**: 
+  - Add utility function to truncate text at 150 characters
+  - Add state management for expanded reviews
+  - Create modal component for full review display
+
+#### 2.2 Modal Component Structure
+- **Features**:
+  - Overlay background
+  - Close button (X)
+  - Full review text display
+  - Reviewer attribution
+  - Responsive design
+  - Keyboard navigation (ESC to close)
+
+#### 2.3 State Management
+- Add React useState hooks:
+  - `selectedReview` - tracks which review is expanded in modal
+  - `showReviewModal` - boolean for modal visibility
+
+#### 2.4 Styling Requirements
+- Modal overlay with semi-transparent background
+- Centered modal content
+- Responsive design for mobile devices
+- Consistent with existing modal styles in the component
+
+### 3. Add Magic.Dimis.org Link Section
+
+#### 3.1 New Section Creation
+- **Location**: After reviews section, before video section
+- **Title**: "What People Said About Our Last Show"
+- **Button**: Link to magic.dimis.org
+- **Placeholder Text**: Add descriptive content about the previous show
+
+#### 3.2 Button Implementation
+- **Text**: "What People Said About Our Last Show"
+- **URL**: https://magic.dimis.org
+- **Styling**: Consistent with existing button styles
+- **Behavior**: Open in new tab/window
+
+#### 3.3 Placeholder Content Structure
 ```
-Epic Economics is a theatrical work based on the words of distinguished economists from the 18th century to today, highlighting their contributions and contradictions. The theories are interwoven with stories from the performer's own personal and professional journey, and peppered with wicked humor and some songs. The show is accompanied by an original soundscape.
-
-How does your breakfast make its way to your table? Why might you own an imported car? Who creates value? Why do we have recessions? What's more important, growth or equality?
-
-Markets. Value. Capital. Labour. Competition. Co-operation. Wealth. Trade. Innovation. Growth. Inequality. Crises.
-
-What would you protest about today?
-
-Economics is sometimes revered as a nebulous subject best left to "experts" and sometimes simplified to populist pseudo-science. This play promises to explore the nebulae and expose the pretenders.
+### What People Said About Our Last Show
+[Placeholder text about the previous magic show performance]
+[Button linking to magic.dimis.org]
 ```
 
-### 2.2 Improve Text Readability
-**Priority: Medium**
-**Status: Pending**
+### 4. Technical Implementation Details
 
-The background text needs to be clearly readable, not just background to keywords:
-- Review and improve typography and contrast
-- Ensure text stands out from background animations
-- Consider background overlays or text shadows if needed
+#### 4.1 Component Structure Updates
+- Import additional React hooks if needed
+- Add new state variables for modal functionality
+- Update reviews data structure to include character count logic
 
-### 2.3 Add Images to Homepage
-**Priority: High**
-**Status: Pending**
+#### 4.2 CSS Updates Required
+- `.review-modal` - main modal container
+- `.review-modal-content` - modal content styling
+- `.review-truncated` - styling for truncated text
+- `.read-more-link` - styling for "read more" button
+- `.magic-link-section` - styling for new magic.dimis.org section
 
-Add strategic images to the homepage:
-- **Poster image:** Add the main poster image
-- **Gallery images:** Select 1-2 images from the press gallery
-  - One showing audience participation
-  - One additional compelling image
-- Position these images to complement the content flow
+#### 4.3 Accessibility Considerations
+- ARIA labels for modal elements
+- Keyboard navigation support
+- Focus management when modal opens/closes
+- Screen reader compatibility
 
-## 3. Press & Media Section Enhancements
+### 5. Testing Requirements
 
-### 3.1 Add Reviews and Commentary
-**Priority: High**
-**Status: Pending**
+#### 5.1 Functionality Testing
+- Verify all new reviews display correctly
+- Test "read more" modal for reviews > 150 characters
+- Confirm magic.dimis.org link opens correctly
+- Test modal close functionality (button and ESC key)
 
-**Current state:** Press page only has image gallery
-**Required:** Add raves and commentary section
+#### 5.2 Responsive Testing
+- Mobile device compatibility
+- Tablet view optimization
+- Desktop display verification
 
-**Implementation:**
-- Create a new section for press reviews and commentary
-- Add placeholder structure for quotes and reviews
-- Style consistently with existing press page design
-- Include proper attribution for reviews
+#### 5.3 Cross-browser Testing
+- Chrome, Firefox, Safari compatibility
+- Edge browser testing
 
-### 3.2 Organize Press Content
-**Priority: Medium**
-**Status: Pending**
+### 6. Implementation Timeline
 
-Structure the press page to include:
-- Reviews and commentary section (new)
-- Image gallery (existing)
-- Press kit downloads (if needed)
+#### Phase 1: Reviews Addition (Day 1)
+- Add all 5 new reviews to the reviews-grid
+- Update review item structure
+- Test basic display functionality
 
-## 4. Contact Page Updates
+#### Phase 2: Read More Modal (Day 2)
+- Implement character limit logic
+- Create modal component
+- Add state management
+- Style modal elements
 
-### 4.1 Add Contact Information
-**Priority: High**
-**Status: Pending**
+#### Phase 3: Magic.Dimis.org Link (Day 3)
+- Create new section
+- Add button and placeholder content
+- Style new section
 
-**Current:** Only has general email
-**Required:** Add both contacts with roles
+#### Phase 4: Testing & Refinement (Day 4)
+- Comprehensive testing
+- Bug fixes and refinements
+- Final styling adjustments
 
-**Implementation:**
-- Add Dimis's name and email
-- Add Elias's contact with "PRODUCER" designation
-- Update contact page layout to accommodate both contacts
-- Maintain professional formatting
+### 7. Code Quality Standards
 
-## 5. Video Content Integration
+#### 7.1 React Best Practices
+- Use functional components with hooks
+- Proper state management
+- Clean component structure
+- Effective use of useEffect for event listeners
 
-### 5.1 Full Video Access
-**Priority: Medium**
-**Status: Pending**
+#### 7.2 Performance Considerations
+- Lazy loading for modal content
+- Efficient re-rendering
+- Minimal state updates
 
-**Requirement:** Provide access to full video somewhere on the site
+#### 7.3 Maintainability
+- Clear variable naming
+- Commented complex logic
+- Modular component structure
+- Consistent code formatting
 
-**Implementation options:**
-- Add full video section to Preview page
-- Create dedicated video gallery
-- Add full video link to homepage or navigation
-- Consider video hosting platform integration
+### 8. Deliverables
 
-## 6. Credits and Attribution
+1. Updated Press.jsx component with all new reviews
+2. Functional "read more" modal system
+3. Magic.dimis.org link section
+4. Updated CSS styles
+5. Testing documentation
+6. Performance verification
 
-### 6.1 Full Credits Page
-**Priority: Medium**
-**Status: Pending**
+### 9. Success Criteria
 
-**Requirement:** Add comprehensive credits and names
-
-**Implementation:**
-- Create new credits section or page
-- Include all production team members
-- Add photographer credits (Boyana Loizou already included in press)
-- Consider placement in footer or dedicated page
-
-## 7. Technical Improvements
-
-### 7.1 Image Optimization
-**Priority: Low**
-**Status: Ongoing**
-
-- Ensure all new images are properly optimized
-- Implement lazy loading for new content
-- Maintain performance standards
-
-### 7.2 Responsive Design
-**Priority: Medium**
-**Status: Ongoing**
-
-- Ensure all new content is mobile-responsive
-- Test new layouts across different screen sizes
-- Maintain consistent user experience
-
-## Implementation Priority Order
-
-### Phase 1 (Immediate - High Priority)
-1. Add missing keywords to GSAP hero animation
-2. Add "WHAT WOULD YOU PROTEST ABOUT TODAY?" subtitle
-3. Update homepage main description text
-4. Add contact information updates
-5. Add poster image to homepage
-
-### Phase 2 (Next - Medium Priority)
-1. Add selected gallery images to homepage
-2. Improve text readability and contrast
-3. Add reviews and commentary to Press page
-4. Implement full video access
-
-### Phase 3 (Future - Lower Priority)
-1. Create comprehensive credits section
-2. Final responsive design improvements
-3. Performance optimizations
-
-## Notes and Considerations
-
-- The theatrical theme should remain central to all design decisions
-- Maintain the dramatic visual impact of the current GSAP animations
-- Ensure new content doesn't compromise page load performance
-- Keep the professional presentation while adding the requested "wicked humor" elements
-- All text updates should maintain the engaging, accessible tone while being informative
-
-## File Structure Impact
-
-### Files to Modify:
-- `src/components/GsapHero.jsx` - Add missing keywords
-- `src/components/TitleHero.jsx` - Add subtitle
-- `src/pages/Home.jsx` - Update text, add images
-- `src/pages/Press.jsx` - Add reviews section
-- `src/pages/Contact.jsx` - Update contact info
-
-### New Files Needed:
-- Potentially new credits component/page
-- Additional image assets for homepage
-
-## Testing Requirements
-
-- Visual regression testing for GSAP animations
-- Cross-browser compatibility for new content
-- Mobile responsiveness verification
-- Performance impact assessment
-- Accessibility compliance check
-
----
-
-*This plan serves as a roadmap for implementing the feedback received. Each item should be reviewed and approved before implementation begins.*
+- All 5 new reviews are properly displayed
+- Reviews longer than 150 characters show "read more" functionality
+- Modal opens and closes correctly with proper content
+- Magic.dimis.org link works and opens in new tab
+- Responsive design maintains usability across devices
+- No performance degradation from existing functionality
+- Accessibility standards maintained

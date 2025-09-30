@@ -31,24 +31,24 @@ function Press() {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const images = [
-    { src: img1, alt: 'Epic Economics - Behind the scenes photography by Boyana', filename: '_BOO0036.jpg' },
-    { src: img2, alt: 'Epic Economics - Behind the scenes photography by Boyana', filename: '_BOO0058.jpg' },
-    { src: img3, alt: 'Epic Economics - Behind the scenes photography by Boyana', filename: '_BOO0073.jpg' },
-    { src: img4, alt: 'Epic Economics - Behind the scenes photography by Boyana', filename: '_BOO0089.jpg' },
-    { src: img5, alt: 'Epic Economics - Behind the scenes photography by Boyana', filename: '_BOO0091.jpg' },
-    { src: img6, alt: 'Epic Economics - Behind the scenes photography by Boyana', filename: '_BOO9804.jpg' },
-    { src: img7, alt: 'Epic Economics - Behind the scenes photography by Boyana', filename: '_BOO9809.jpg' },
-    { src: img8, alt: 'Epic Economics - Behind the scenes photography by Boyana', filename: '_BOO9842.jpg' },
-    { src: img9, alt: 'Epic Economics - Behind the scenes photography by Boyana', filename: '_BOO9852.jpg' },
-    { src: img10, alt: 'Epic Economics - Behind the scenes photography by Boyana', filename: '_BOO9866.jpg' },
-    { src: img11, alt: 'Epic Economics - Behind the scenes photography by Boyana', filename: '_BOO9900.jpg' },
-    { src: img12, alt: 'Epic Economics - Behind the scenes photography by Boyana', filename: '_BOO9929.jpg' },
-    { src: img13, alt: 'Epic Economics - Behind the scenes photography by Boyana', filename: '_BOO9941.jpg' },
-    { src: img14, alt: 'Epic Economics - Behind the scenes photography by Boyana', filename: '_BOO9945.jpg' },
-    { src: img15, alt: 'Epic Economics - Behind the scenes photography by Boyana', filename: '_BOO9951.jpg' },
-    { src: img16, alt: 'Epic Economics - Behind the scenes photography by Boyana', filename: '_BOO9955.jpg' },
-    { src: img17, alt: 'Epic Economics - Behind the scenes photography by Boyana', filename: '_BOO9962.jpg' },
-    { src: img18, alt: 'Epic Economics - Behind the scenes photography by Boyana', filename: '_BOO9981.jpg' }
+    { src: img1, alt: 'Epic Economics - Photography by Boyana', filename: '_BOO0036.jpg' },
+    { src: img2, alt: 'Epic Economics - Photography by Boyana', filename: '_BOO0058.jpg' },
+    { src: img3, alt: 'Epic Economics - Photography by Boyana', filename: '_BOO0073.jpg' },
+    { src: img4, alt: 'Epic Economics - Photography by Boyana', filename: '_BOO0089.jpg' },
+    { src: img5, alt: 'Epic Economics - Photography by Boyana', filename: '_BOO0091.jpg' },
+    { src: img6, alt: 'Epic Economics - Photography by Boyana', filename: '_BOO9804.jpg' },
+    { src: img7, alt: 'Epic Economics - Photography by Boyana', filename: '_BOO9809.jpg' },
+    { src: img8, alt: 'Epic Economics - Photography by Boyana', filename: '_BOO9842.jpg' },
+    { src: img9, alt: 'Epic Economics - Photography by Boyana', filename: '_BOO9852.jpg' },
+    { src: img10, alt: 'Epic Economics - Photography by Boyana', filename: '_BOO9866.jpg' },
+    { src: img11, alt: 'Epic Economics - Photography by Boyana', filename: '_BOO9900.jpg' },
+    { src: img12, alt: 'Epic Economics - Photography by Boyana', filename: '_BOO9929.jpg' },
+    { src: img13, alt: 'Epic Economics - Photography by Boyana', filename: '_BOO9941.jpg' },
+    { src: img14, alt: 'Epic Economics - Photography by Boyana', filename: '_BOO9945.jpg' },
+    { src: img15, alt: 'Epic Economics - Photography by Boyana', filename: '_BOO9951.jpg' },
+    { src: img16, alt: 'Epic Economics - Photography by Boyana', filename: '_BOO9955.jpg' },
+    { src: img17, alt: 'Epic Economics - Photography by Boyana', filename: '_BOO9962.jpg' },
+    { src: img18, alt: 'Epic Economics - Photography by Boyana', filename: '_BOO9981.jpg' }
   ];
 
   const openModal = (image, index) => {
@@ -138,24 +138,31 @@ function Press() {
         <h2>Reviews & Commentary</h2>
         <div className="reviews-grid">
           <div className="review-item">
-            <blockquote>
-              "Epic Economics brilliantly transforms complex economic theory into accessible and engaging theatre. Michaelides weaves personal narrative with economic history in a way that is both educational and deeply entertaining."
-            </blockquote>
-            <cite>— Audience Member, Opening Night</cite>
-          </div>
 
-          <div className="review-item">
-            <blockquote>
               "A masterful blend of economics and performance art. The show's ability to make you laugh while questioning fundamental economic assumptions is truly remarkable."
-            </blockquote>
+            <br></br>
             <cite>— Takis Taoushanis, Economist - Banker</cite>
           </div>
 
           <div className="review-item">
-            <blockquote>
-              "Finally, someone has made economics not just understandable, but genuinely compelling. This production asks the right questions at exactly the right time."
-            </blockquote>
-            <cite>— Academic Colleague</cite>
+
+              "An enlightening play presenting controversial economic theories, delivered in a theatrical and very entertaining style and an elegant touch of audience involvement. A must-watch."
+            <br></br>
+            <cite>— Dinos Hadjivassiliou, Former IBM executive</cite>
+          </div>
+
+          <div className="review-item">
+
+              "An original exploration of economic history, tracing its evolution from Adam Smith and Karl Marx in the 19th century, through Keynes and Friedman's influential ideas in the mid-20th century, to today's most pressing economic theories and debates. The show vividly captures the longstanding intellectual struggle that continues to shape contemporary discussions — the clash between advocates of free markets and supporters of government intervention and regulation. Highly recommended for both economists and general audiences alike."
+            <br></br>
+            <cite>— Andreas Charalambous, Economist, Former Director for Economic Research and EU Affairs - Ministry of Finance of Cyprus</cite>
+          </div>
+
+          <div className="review-item">
+
+              "Through humor, stories, and music, "Epic Economics" makes big ideas feel alive and enjoyable, keeping the audience engaged while making them think."
+            <br></br>
+            <cite>— Mohammed G. Awwad, Drama Educator & Clown Teacher</cite>
           </div>
         </div>
         <p className="reviews-note">
@@ -163,49 +170,60 @@ function Press() {
         </p>
       </section>
 
-      <section className="live-performance-section">
-        <h2>Full Live Performance</h2>
-        <p className="performance-description">
-          Access the complete recording of Epic Economics live performance, Premiere July 2025 (Password required).
-        </p>
-        <button
-          className="watch-performance-btn"
-          onClick={handlePasswordDialogOpen}
-        >
-          🎭 Watch Full Live Performance
-        </button>
-      </section>
-
       <section className="video-section">
-        <h2>Video Content</h2>
+        <h2>Stills from our July '25 Show</h2>
         <div className="video-cards">
           <div className="video-card">
             <div className="video-thumbnail">
               <iframe
-                src="https://www.youtube.com/embed/h49nwJzQtXk"
+                src="https://www.youtube-nocookie.com/embed/h49nwJzQtXk?modestbranding=1&showinfo=0&rel=0&controls=1&iv_load_policy=3&cc_load_policy=0&fs=1&autohide=1"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
               ></iframe>
             </div>
             <div className="video-info">
-              <h3>Stills from our July 2025</h3>
-              <p>This captivating performance brings economics to life.</p>
+
+              {/* <p>at Artos Foundations in Nicosia, Cyprus.</p>*/}
             </div>
           </div>
 
-          <div className="video-card coming-soon">
-            <div className="video-placeholder">
-              <div className="placeholder-icon">🎬</div>
-              <p>Coming Soon</p>
+          </div>
+        </section>
+
+        <section className="audience-participation-section">
+          <h2>Audience Participation</h2>
+          <p>At the end of the show members of the public are given the opportunity to write their own slogans on carboard. <br></br> Here's some of what they wrote in response to the show's question: "what would you protest about today?"</p>
+          <div className="video-cards">
+            <div className="video-card">
+              <div className="video-thumbnail">
+                <iframe
+                  src="https://www.youtube-nocookie.com/embed/KH1FK64ES0U?autoplay=0&modestbranding=1&rel=0&showinfo=0&controls=1&iv_load_policy=3&fs=1&cc_load_policy=0&loop=0&color=white&theme=light"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              </div>
+              <div className="video-info">
+
+              </div>
             </div>
-            <div className="video-info">
-              <h3>What our Audience Wrote</h3>
-              <p>More video content will be available soon. Stay tuned for behind-the-scenes footage and interviews.</p>
+
+            <div className="video-card">
+              <div className="video-thumbnail">
+                <iframe
+                  src="https://www.youtube-nocookie.com/embed/BA7L7jJzWhw?autoplay=0&modestbranding=1&rel=0&showinfo=0&controls=1&iv_load_policy=3&fs=1&cc_load_policy=0&loop=0&color=white&theme=light"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              </div>
+              <div className="video-info">
+
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
       <section className="press-kit">
         <h2>Photography by Boyana Loizou</h2>
@@ -228,6 +246,18 @@ function Press() {
             </div>
           ))}
         </div>
+      </section>
+      <section className="live-performance-section">
+        <h2>Full Live Performance</h2>
+        <p className="performance-description">
+          Access the complete recording of Epic Economics live performance, Premiere July 2025 (Password required).
+        </p>
+        <button
+          className="watch-performance-btn"
+          onClick={handlePasswordDialogOpen}
+        >
+          🎭 Watch Full Live Performance
+        </button>
       </section>
 
       <section className="press-info">

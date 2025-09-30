@@ -322,6 +322,22 @@ html {
   opacity: 0.8;
 }
 
+/* Audience Participation Section */
+.audience-participation-section {
+  margin: 6rem 0 4rem 0;
+  padding: 3rem;
+  background-color: #f8f9fa;
+  border-radius: 15px;
+}
+
+.audience-participation-section h2 {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: #2c3e50;
+  text-align: center;
+}
+
 /* Live Performance Section */
 .live-performance-section {
   margin: 4rem 0;
@@ -848,6 +864,15 @@ html {
     font-size: 1.2rem;
   }
   
+  .audience-participation-section {
+    padding: 2.5rem;
+    margin: 5rem 0 3rem 0;
+  }
+  
+  .audience-participation-section h2 {
+    font-size: 2.2rem;
+  }
+  
   .video-placeholder {
     height: 180px;
   }
@@ -937,8 +962,17 @@ html {
     font-size: 0.9rem;
   }
   
+  .audience-participation-section {
+    padding: 2rem;
+    margin: 4rem 0 2rem 0;
+  }
+  
+  .audience-participation-section h2 {
+    font-size: 2rem;
+  }
+  
   .video-placeholder {
-    height: 160px;
+    height: 180px;
   }
   
   .placeholder-icon {
@@ -1163,11 +1197,20 @@ html {
   }
   
   .video-info p {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
+  }
+  
+  .audience-participation-section {
+    padding: 1.5rem;
+    margin: 3rem 0 1.5rem 0;
+  }
+  
+  .audience-participation-section h2 {
+    font-size: 1.8rem;
   }
   
   .video-placeholder {
-    height: 140px;
+    height: 150px;
   }
   
   .placeholder-icon {
@@ -1281,3 +1324,4 @@ html {
     animation: none;
   }
 }
+
