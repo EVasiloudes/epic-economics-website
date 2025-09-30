@@ -20,10 +20,12 @@ function TitleHero() {
 
     if (!titleEpic || !titleEconomics || !subtitle || !container) return;
 
-    // Initial setup - hide elements
+    // Initial setup - hide elements and ensure font rendering
     gsap.set([titleEpic, titleEconomics, subtitle], {
       opacity: 0,
-      y: 50
+      y: 50,
+      force3D: false,
+      willChange: "transform, opacity"
     });
 
     // Create timeline for entrance animation
@@ -40,19 +42,31 @@ function TitleHero() {
       opacity: 1,
       y: 0,
       duration: 1.2,
-      ease: "power3.out"
+      ease: "power3.out",
+      force3D: false,
+      onComplete: () => {
+        gsap.set(titleEpic, { clearProps: "transform" });
+      }
     })
     .to(titleEconomics, {
       opacity: 1,
       y: 0,
       duration: 1.2,
-      ease: "power3.out"
+      ease: "power3.out",
+      force3D: false,
+      onComplete: () => {
+        gsap.set(titleEconomics, { clearProps: "transform" });
+      }
     }, "-=0.8")
     .to(subtitle, {
       opacity: 1,
       y: 0,
       duration: 1.0,
-      ease: "power3.out"
+      ease: "power3.out",
+      force3D: false,
+      onComplete: () => {
+        gsap.set(subtitle, { clearProps: "transform" });
+      }
     }, "-=0.6");
 
     // Add the wobble animation classes after entrance
@@ -74,7 +88,7 @@ function TitleHero() {
         <img src={backdropImage} alt="" className="title-hero-backdrop-image" />
       </div>
       <div className="title-hero-content">
-        <h1>
+        <h1 style={{ fontFamily: '"Avenir Next", "Century Gothic", "Helvetica Neue", Arial, sans-serif', fontStyle: 'italic', fontWeight: 700 }}>
           <span className="title-epic" ref={titleEpicRef}>Epic</span>
           <span className="title-economics" ref={titleEconomicsRef}>Economics</span>
         </h1>

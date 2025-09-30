@@ -3,9 +3,9 @@
 
 :root {
   /* Typography */
-  --font-heading: 'Futura', 'Futura PT', 'Century Gothic', 'Avenir Next', 'Helvetica Neue', Arial, sans-serif;
-  --font-body: 'Proxima Nova', 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
-  
+  --font-heading: 'Avenir Next', 'Century Gothic', 'Helvetica Neue', Arial, sans-serif;
+  --font-body: 'Nunito Sans', 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
+
   /* Base font settings */
   font-family: var(--font-body);
   line-height: 1.6;
@@ -215,15 +215,15 @@ th {
   :root {
     font-size: 14px;
   }
-  
+
   h1 {
     font-size: 2rem;
   }
-  
+
   h2 {
     font-size: 1.75rem;
   }
-  
+
   h3 {
     font-size: 1.5rem;
   }
@@ -233,15 +233,15 @@ th {
   :root {
     font-size: 13px;
   }
-  
+
   h1 {
     font-size: 1.75rem;
   }
-  
+
   h2 {
     font-size: 1.5rem;
   }
-  
+
   h3 {
     font-size: 1.25rem;
   }
