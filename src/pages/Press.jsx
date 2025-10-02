@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import './Press.css';
 
@@ -31,6 +31,9 @@ function Press() {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [selectedReview, setSelectedReview] = useState(null);
   const [showReviewModal, setShowReviewModal] = useState(false);
+  const [currentReviewIndex, setCurrentReviewIndex] = useState(0);
+  const [containerHeight, setContainerHeight] = useState('auto');
+  const reviewsTrackRef = useRef(null);
 
   const images = [
     { src: img1, alt: 'Epic Economics - Photography by Boyana', filename: '_BOO0036.jpg' },
@@ -72,12 +75,22 @@ function Press() {
   };
 
   const handleKeyDown = (e) => {
-    if (e.key === 'Escape') {
-      closeModal();
-    } else if (e.key === 'ArrowRight') {
-      navigateImage('next');
-    } else if (e.key === 'ArrowLeft') {
-      navigateImage('prev');
+    if (selectedImage) {
+      // Image modal navigation
+      if (e.key === 'Escape') {
+        closeModal();
+      } else if (e.key === 'ArrowRight') {
+        navigateImage('next');
+      } else if (e.key === 'ArrowLeft') {
+        navigateImage('prev');
+      }
+    } else if (!showReviewModal) {
+      // Carousel navigation when not in modal
+      if (e.key === 'ArrowRight') {
+        nextReview();
+      } else if (e.key === 'ArrowLeft') {
+        prevReview();
+      }
     }
   };
 
@@ -92,13 +105,13 @@ function Press() {
       }
     };
 
+    // Always listen for keyboard events
+    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('keydown', handleEscape);
+    
     if (selectedImage || showReviewModal) {
-      document.addEventListener('keydown', handleKeyDown);
-      document.addEventListener('keydown', handleEscape);
       document.body.style.overflow = 'hidden';
     } else {
-      document.removeEventListener('keydown', handleKeyDown);
-      document.removeEventListener('keydown', handleEscape);
       document.body.style.overflow = 'unset';
     }
 
@@ -200,6 +213,100 @@ function Press() {
     setShowReviewModal(false);
   };
 
+  const nextReview = () => {
+    setCurrentReviewIndex((prevIndex) => 
+      prevIndex === reviews.length - 1 ? 0 : prevIndex + 1
+    );
+  };
+
+  const prevReview = () => {
+    setCurrentReviewIndex((prevIndex) => 
+      prevIndex === 0 ? reviews.length - 1 : prevIndex - 1
+    );
+  };
+
+  const goToReview = (index) => {
+    setCurrentReviewIndex(index);
+  };
+
+  // Initial height calculation on mount
+  React.useEffect(() => {
+    const estimateInitialHeight = () => {
+      const currentReview = reviews[0]; // First review
+      if (currentReview) {
+        const textLength = currentReview.text.length;
+        const isMobile = window.innerWidth <= 768;
+        const isSmallMobile = window.innerWidth <= 480;
+        
+        let charsPerLine = 50;
+        if (isSmallMobile) {
+          charsPerLine = 25;
+        } else if (isMobile) {
+          charsPerLine = 35;
+        }
+        
+        const estimatedLines = Math.ceil(textLength / charsPerLine);
+        const baseHeight = isSmallMobile ? 150 : isMobile ? 180 : 200;
+        const lineHeight = isSmallMobile ? 20 : isMobile ? 22 : 24;
+        const textHeight = estimatedLines * lineHeight;
+        setContainerHeight(`${baseHeight + textHeight}px`);
+      }
+    };
+    
+    estimateInitialHeight();
+  }, []);
+
+  React.useEffect(() => {
+    const updateContainerHeight = () => {
+      if (reviewsTrackRef.current) {
+        const slides = reviewsTrackRef.current.querySelectorAll('.review-slide');
+        const activeSlide = slides[currentReviewIndex];
+        if (activeSlide) {
+          const reviewContent = activeSlide.querySelector('.review-content');
+          if (reviewContent) {
+            // Use setTimeout to ensure DOM has updated
+            setTimeout(() => {
+              const height = reviewContent.offsetHeight;
+              setContainerHeight(`${height}px`);
+            }, 50);
+          }
+        }
+      } else {
+        // Fallback: estimate height based on text length and screen size
+        const currentReview = reviews[currentReviewIndex];
+        if (currentReview) {
+          const textLength = currentReview.text.length;
+          const isMobile = window.innerWidth <= 768;
+          const isSmallMobile = window.innerWidth <= 480;
+          
+          // Adjust characters per line based on screen size
+          let charsPerLine = 50; // Desktop
+          if (isSmallMobile) {
+            charsPerLine = 25; // Small mobile
+          } else if (isMobile) {
+            charsPerLine = 35; // Tablet/large mobile
+          }
+          
+          const estimatedLines = Math.ceil(textLength / charsPerLine);
+          const baseHeight = isSmallMobile ? 150 : isMobile ? 180 : 200;
+          const lineHeight = isSmallMobile ? 20 : isMobile ? 22 : 24;
+          const textHeight = estimatedLines * lineHeight;
+          setContainerHeight(`${baseHeight + textHeight}px`);
+        }
+      }
+    };
+
+    // Update height when review changes
+    updateContainerHeight();
+    
+    // Update height on window resize
+    window.addEventListener('resize', updateContainerHeight);
+    
+    return () => {
+      window.removeEventListener('resize', updateContainerHeight);
+    };
+  }, [currentReviewIndex]);
+
   return (
     <div className="press">
       <header className="press-header">
@@ -209,26 +316,60 @@ function Press() {
 
       <section className="press-reviews">
         <h2>Reviews & Commentary</h2>
-        <div className="reviews-grid">
-          {reviews.map((review, index) => (
-            <div key={index} className="review-item">
-              <div className="review-text">
-                "{truncateText(review.text, 150)}"
-                {review.text.length > 150 && (
-                  <button
-                    className="read-more-link"
-                    onClick={() => openReviewModal(review)}
-                    aria-label="Read full review"
-                  >
-                    read more
-                  </button>
-                )}
-              </div>
-              <br />
-              <cite>— {review.author}</cite>
+        <div className="reviews-carousel">
+          <button 
+            className="carousel-nav prev" 
+            onClick={prevReview}
+            aria-label="Previous review"
+          >
+            &#8249;
+          </button>
+          
+          <div 
+            className="reviews-container"
+            style={{ height: containerHeight }}
+          >
+            <div 
+              ref={reviewsTrackRef}
+              className="reviews-track" 
+              style={{ transform: `translateX(-${currentReviewIndex * 100}%)` }}
+            >
+              {reviews.map((review, index) => (
+                <div 
+                  key={index} 
+                  className={`review-slide ${index === currentReviewIndex ? 'active' : ''}`}
+                >
+                  <div className="review-content">
+                    <div className="review-text">
+                      "{review.text}"
+                    </div>
+                    <cite className="review-author">— {review.author}</cite>
+                  </div>
+                </div>
+              ))}
             </div>
+          </div>
+
+          <button 
+            className="carousel-nav next" 
+            onClick={nextReview}
+            aria-label="Next review"
+          >
+            &#8250;
+          </button>
+        </div>
+
+        <div className="carousel-indicators">
+          {reviews.map((_, index) => (
+            <button
+              key={index}
+              className={`indicator ${index === currentReviewIndex ? 'active' : ''}`}
+              onClick={() => goToReview(index)}
+              aria-label={`Go to review ${index + 1}`}
+            />
           ))}
         </div>
+
         <p className="reviews-note">
           <em>Reviews and quotes will be updated as press coverage becomes available. For press inquiries, please contact us directly.</em>
         </p>
