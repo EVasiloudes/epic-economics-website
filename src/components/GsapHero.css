@@ -16,7 +16,8 @@ body {
 
 .marquee {
   border-bottom: 1px solid var(--glass-border);
-  color: var(--text-muted);
+  color: transparent;
+  -webkit-text-stroke: 1px #000000;
   font-size: var(--step-0);
   font-weight: 700;
   height: calc(170px + 4rem);
@@ -54,6 +55,7 @@ body {
 }
 
 .track .text {
+  /*color: #FFFFFF;*/
   animation: marquee 50000ms linear infinite;
   align-items: center;
   display: inline-flex;

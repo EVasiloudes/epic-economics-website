@@ -27,12 +27,12 @@ function GsapHero() {
 
       // Use transform3d for hardware acceleration
       const [x, xEnd] = (index % 2 === 0) ? [-500, -1500] : [-500, 0];
-      
-      const scrollTrigger = gsap.fromTo(track, 
-        { 
+
+      const scrollTrigger = gsap.fromTo(track,
+        {
           x,
           force3D: true // Force hardware acceleration
-        }, 
+        },
         {
           x: xEnd,
           ease: "none",
@@ -45,7 +45,7 @@ function GsapHero() {
           }
         }
       );
-      
+
       scrollTriggerRefs.current.push(scrollTrigger.scrollTrigger);
     });
   }, []);
@@ -113,14 +113,14 @@ function GsapHero() {
   useEffect(() => {
     // Initialize performance monitoring
     const capabilities = detectBrowserCapabilities();
-    
+
     // Log browser capabilities in development
     if (process.env.NODE_ENV === 'development') {
       console.group('🔍 Browser Capabilities');
       console.table(capabilities);
       console.groupEnd();
     }
-    
+
     // Initialize performance monitor
     performanceMonitorRef.current = new PerformanceMonitor();
     if (process.env.NODE_ENV === 'development') {
@@ -150,21 +150,21 @@ function GsapHero() {
 
     return () => {
       clearTimeout(timeoutId);
-      
+
       // Stop performance monitoring
       if (performanceMonitorRef.current && process.env.NODE_ENV === 'development') {
         performanceMonitorRef.current.stopMonitoring();
       }
-      
+
       // Cleanup ScrollTriggers
       scrollTriggerRefs.current.forEach(trigger => trigger.kill());
       scrollTriggerRefs.current = [];
-      
+
       // Cancel animation frame
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
       }
-      
+
       // Reset body height
       if (document.body.style.height) {
         document.body.style.height = '';
@@ -198,13 +198,13 @@ function GsapHero() {
 
               <div className="marquee">
                 <div className="track">
-                  Capital.Capital.<span className="-focus">Capital.</span>Capital.Capital.Capital.Capital.Capital.
+                  Capital.Capital.Capital.Capital.Capital.<span className="-focus">Capital.</span>Capital.Capital.
                 </div>
               </div>
 
               <div className="marquee">
                 <div className="track">
-                  Labor.Labor.<span className="-focus">Labor.</span>Labor.Labor.Labor.Labor.Labor.
+                  Labour.Labour.Labour.<span className="-focus">Labour.</span>Labour.Labour.Labour.Labour.
                 </div>
               </div>
 
@@ -216,7 +216,7 @@ function GsapHero() {
 
               <div className="marquee">
                 <div className="track">
-                  Crisis.Crisis.<span className="-focus">Crisis.</span>Crisis.Crisis.Crisis.Crisis.Crisis.
+                  Crisis.Crisis.Crisis.Crisis.<span className="-focus">Crisis.</span>Crisis.Crisis.Crisis.
                 </div>
               </div>
             </div>
@@ -251,7 +251,7 @@ function GsapHero() {
 
               <div className="marquee">
                 <div className="track">
-                  Labor.Labor.<span className="-focus">Labor.</span>Labor.Labor.Labor.Labor.Labor.
+                  Labour.Labour.<span className="-focus">Labour.</span>Labour.Labour.Labour.Labour.Labour.
                 </div>
               </div>
 
@@ -298,7 +298,7 @@ function GsapHero() {
 
               <div className="marquee">
                 <div className="track">
-                  Labor.Labor.<span className="-focus">Labor.</span>Labor.Labor.Labor.Labor.Labor.
+                  Labour.Labour.<span className="-focus">Labour.</span>Labour.Labour.Labour.Labour.Labour.
                 </div>
               </div>
 

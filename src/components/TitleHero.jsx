@@ -11,14 +11,16 @@ function TitleHero() {
   const titleEconomicsRef = useRef(null);
   const subtitleRef = useRef(null);
   const containerRef = useRef(null);
+  const backdropImageRef = useRef(null);
 
   useEffect(() => {
     const titleEpic = titleEpicRef.current;
     const titleEconomics = titleEconomicsRef.current;
     const subtitle = subtitleRef.current;
     const container = containerRef.current;
+    const backdropImage = backdropImageRef.current;
 
-    if (!titleEpic || !titleEconomics || !subtitle || !container) return;
+    if (!titleEpic || !titleEconomics || !subtitle || !container || !backdropImage) return;
 
     // Initial setup - hide elements and ensure font rendering
     gsap.set([titleEpic, titleEconomics, subtitle], {
@@ -75,6 +77,26 @@ function TitleHero() {
       titleEconomics.classList.add('animate');
     }, null, "+=0.5");
 
+    // Parallax scroll animation for backdrop image
+    const isMobile = window.innerWidth <= 768;
+    const scale = isMobile ? 1.2 : 1;
+
+    gsap.to(backdropImage, {
+      y: -100,
+      ease: "none",
+      scrollTrigger: {
+        trigger: container,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 1,
+        onUpdate: (self) => {
+          const progress = self.progress;
+          const yMovement = progress * -100;
+          backdropImage.style.transform = `scale(${scale}) translateY(${yMovement}px)`;
+        }
+      }
+    });
+
     // Cleanup function
     return () => {
       tl.kill();
@@ -85,7 +107,7 @@ function TitleHero() {
   return (
     <div className="title-hero" ref={containerRef}>
       <div className="title-hero-backdrop">
-        <img src={backdropImage} alt="" className="title-hero-backdrop-image" />
+        <img src={backdropImage} alt="" className="title-hero-backdrop-image" ref={backdropImageRef} />
       </div>
       <div className="title-hero-content">
         <h1 style={{ fontFamily: '"Avenir Next", "Century Gothic", "Helvetica Neue", Arial, sans-serif', fontStyle: 'italic', fontWeight: 700 }}>

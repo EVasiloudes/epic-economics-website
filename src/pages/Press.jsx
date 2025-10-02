@@ -34,6 +34,8 @@ function Press() {
   const [currentReviewIndex, setCurrentReviewIndex] = useState(0);
   const [containerHeight, setContainerHeight] = useState('auto');
   const reviewsTrackRef = useRef(null);
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
 
   const images = [
     { src: img1, alt: 'Epic Economics - Photography by Boyana', filename: '_BOO0036.jpg' },
@@ -229,6 +231,30 @@ function Press() {
     setCurrentReviewIndex(index);
   };
 
+  // Swipe gesture handlers
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchMove = (e) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    const swipeThreshold = 50; // minimum distance for a swipe
+    const diff = touchStartX.current - touchEndX.current;
+
+    if (Math.abs(diff) > swipeThreshold) {
+      if (diff > 0) {
+        // Swiped left - go to next
+        nextReview();
+      } else {
+        // Swiped right - go to prev
+        prevReview();
+      }
+    }
+  };
+
   // Initial height calculation on mount
   React.useEffect(() => {
     const estimateInitialHeight = () => {
@@ -317,26 +343,29 @@ function Press() {
       <section className="press-reviews">
         <h2>Reviews & Commentary</h2>
         <div className="reviews-carousel">
-          <button 
-            className="carousel-nav prev" 
-            onClick={prevReview}
-            aria-label="Previous review"
-          >
-            &#8249;
-          </button>
-          
-          <div 
+          <div
             className="reviews-container"
             style={{ height: containerHeight }}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
           >
-            <div 
+            <button
+              className="carousel-nav carousel-nav-overlay prev"
+              onClick={prevReview}
+              aria-label="Previous review"
+            >
+              &#8249;
+            </button>
+
+            <div
               ref={reviewsTrackRef}
-              className="reviews-track" 
+              className="reviews-track"
               style={{ transform: `translateX(-${currentReviewIndex * 100}%)` }}
             >
               {reviews.map((review, index) => (
-                <div 
-                  key={index} 
+                <div
+                  key={index}
                   className={`review-slide ${index === currentReviewIndex ? 'active' : ''}`}
                 >
                   <div className="review-content">
@@ -348,15 +377,15 @@ function Press() {
                 </div>
               ))}
             </div>
-          </div>
 
-          <button 
-            className="carousel-nav next" 
-            onClick={nextReview}
-            aria-label="Next review"
-          >
-            &#8250;
-          </button>
+            <button
+              className="carousel-nav carousel-nav-overlay next"
+              onClick={nextReview}
+              aria-label="Next review"
+            >
+              &#8250;
+            </button>
+          </div>
         </div>
 
         <div className="carousel-indicators">

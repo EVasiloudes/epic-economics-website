@@ -36,7 +36,7 @@ html {
   position: relative;
   display: flex;
   align-items: center;
-  gap: 2rem;
+  justify-content: center;
   margin-top: 2rem;
 }
 
@@ -70,12 +70,42 @@ html {
   cursor: not-allowed;
 }
 
+/* Overlay navigation buttons */
+.carousel-nav-overlay {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  font-size: 1.5rem;
+  background: var(--glass-bg-primary);
+  opacity: 0.7;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.carousel-nav-overlay:hover {
+  opacity: 1;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-nav-overlay.prev {
+  left: 10px;
+}
+
+.carousel-nav-overlay.next {
+  right: 10px;
+}
+
 .reviews-container {
   flex: 1;
   overflow: hidden;
   border-radius: 15px;
   transition: height 0.5s ease;
   position: relative;
+  width: 100%;
+  max-width: 800px;
+  touch-action: pan-y;
+  user-select: none;
 }
 
 .reviews-track {
@@ -1050,28 +1080,43 @@ html {
     margin: 3rem 0;
     padding: 2rem;
   }
-  
+
   .press-reviews h2 {
     font-size: 2rem;
   }
-  
+
   .reviews-carousel {
     flex-direction: column;
     gap: 1.5rem;
   }
 
-  .carousel-nav {
-    width: 40px;
-    height: 40px;
-    font-size: 1.2rem;
+  .carousel-nav-overlay {
+    width: 35px;
+    height: 35px;
+    font-size: 1.3rem;
+    opacity: 0.5;
+  }
+
+  .carousel-nav-overlay:hover,
+  .carousel-nav-overlay:active {
+    opacity: 0.9;
+  }
+
+  .carousel-nav-overlay.prev {
+    left: 5px;
+  }
+
+  .carousel-nav-overlay.next {
+    right: 5px;
   }
 
   .reviews-container {
     min-height: 200px;
+    width: 100%;
   }
 
   .review-content {
-    padding: 2rem;
+    padding: 2rem 3rem;
     min-height: auto;
   }
 
@@ -1331,65 +1376,52 @@ html {
 @media (max-width: 480px) {
   .press-reviews {
     margin: 2rem 0;
-    padding: 1.5rem;
+    padding: 1.5rem 1rem;
   }
-  
+
   .press-reviews h2 {
     font-size: 1.8rem;
   }
-  
+
   .reviews-carousel {
     flex-direction: column;
     gap: 1rem;
   }
 
-  .carousel-nav {
-    order: 2;
-    position: static;
-    width: 35px;
-    height: 35px;
-    font-size: 1rem;
+  .carousel-nav-overlay {
+    width: 30px;
+    height: 30px;
+    font-size: 1.2rem;
+    opacity: 0.4;
+  }
+
+  .carousel-nav-overlay:active {
+    opacity: 0.8;
+  }
+
+  .carousel-nav-overlay.prev {
+    left: 3px;
+  }
+
+  .carousel-nav-overlay.next {
+    right: 3px;
   }
 
   .reviews-container {
-    order: 1;
-  }
-
-  .review-content {
-    padding: 1.5rem;
-  }
-
-  .review-text {
-    font-size: 1rem;
-  }
-
-  .carousel-indicators {
-    order: 3;
-  }
-
-  .reviews-carousel {
-    gap: 1rem;
-  }
-
-  .carousel-nav {
-    width: 35px;
-    height: 35px;
-    font-size: 1rem;
-  }
-
-  .reviews-container {
+    width: 100%;
     min-height: 150px;
     transition: height 0.3s ease;
   }
 
   .review-content {
-    padding: 1.5rem;
+    padding: 1.5rem 2.5rem;
     min-height: auto;
+    width: 100%;
   }
-  
+
   .review-text {
-    font-size: 0.9rem;
-    line-height: 1.4;
+    font-size: 0.95rem;
+    line-height: 1.5;
     margin-bottom: 1.5rem;
   }
 
