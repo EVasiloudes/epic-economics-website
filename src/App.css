@@ -3,6 +3,8 @@
   margin: 0 auto;
   padding: 0;
   text-align: center;
+  position: relative;
+  z-index: 1;
 }
 
 /* Container for non-hero pages with consistent max-width */
@@ -11,6 +13,8 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: left;
+  position: relative;
+  z-index: 1;
 }
 
 /* Responsive adjustments for page container */
@@ -49,4 +53,5 @@
   width: 100%;
   position: relative;
   overflow-x: hidden;
+  z-index: 1;
 }

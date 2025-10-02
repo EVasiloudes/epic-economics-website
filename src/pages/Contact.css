@@ -16,7 +16,7 @@ html {
   text-align: center;
   margin-bottom: 3rem;
   padding-bottom: 2rem;
-  border-bottom: 2px solid #2c3e50;
+  border-bottom: 2px solid var(--glass-border);
 }
 
 .contact-header h1 {
@@ -45,17 +45,20 @@ html {
 .contact-info {
   max-width: 600px;
   width: 100%;
-  background-color: #f8f9fa;
+  background: var(--glass-bg-secondary);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   padding: 2.5rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 32px var(--glass-shadow);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   text-align: center;
 }
 
 .contact-info:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 12px 40px var(--glass-shadow-hover);
 }
 
 .contact-info h2 {
@@ -76,16 +79,21 @@ html {
 }
 
 .contact-details {
-  background-color: #ecf0f1;
+  background: var(--glass-bg-primary);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   padding: 2rem;
-  border-radius: 8px;
-  border-left: 4px solid #3498db;
-  transition: border-color 0.3s ease;
+  border-radius: 16px;
+  border: 1px solid var(--glass-border);
+  border-left: 4px solid var(--accent-blue);
+  box-shadow: 0 4px 16px var(--glass-shadow);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
   text-align: center;
 }
 
 .contact-details:hover {
-  border-color: #2980b9;
+  border-left-color: var(--accent-purple);
+  box-shadow: 0 6px 20px var(--glass-shadow-hover);
 }
 
 .contact-details h3 {
@@ -99,15 +107,19 @@ html {
 .contact-person {
   margin-bottom: 2rem;
   padding: 1.5rem;
-  background-color: #ffffff;
-  border-radius: 8px;
-  border: 1px solid #d5dbdb;
-  transition: box-shadow 0.3s ease;
+  background: var(--glass-bg-tertiary);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 16px;
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 4px 16px var(--glass-shadow);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
   text-align: center;
 }
 
 .contact-person:hover {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 24px var(--glass-shadow-hover);
+  transform: translateY(-3px);
 }
 
 .contact-person:last-child {
@@ -133,7 +145,7 @@ html {
 .social-links {
   margin-top: 2rem;
   padding-top: 2rem;
-  border-top: 1px solid #bdc3c7;
+  border-top: 1px solid var(--glass-border);
 }
 
 .social-links h3 {
@@ -165,18 +177,22 @@ html {
 .social-links a {
   font-family: var(--font-body);
   text-decoration: none;
-  color: #3498db;
+  color: var(--accent-blue);
   font-size: 1.1rem;
   padding: 0.5rem 1rem;
-  border-radius: 5px;
-  transition: all 0.3s ease;
+  border-radius: 12px;
+  background: transparent;
   border: 1px solid transparent;
+  transition: all 0.3s ease;
 }
 
 .social-links a:hover {
-  background-color: #3498db;
-  color: white;
-  border-color: #3498db;
+  background: var(--glass-bg-tertiary);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  color: var(--accent-purple);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 4px 16px var(--glass-shadow);
   transform: translateY(-2px);
 }
 
@@ -223,28 +239,31 @@ html {
 
 .submit-button {
   font-family: var(--font-heading);
-  background-color: #3498db;
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
   color: white;
-  border: none;
+  border: 1px solid var(--glass-border);
   padding: 1rem 2rem;
   font-size: 1.1rem;
   font-weight: bold;
-  border-radius: 6px;
+  border-radius: 16px;
   cursor: pointer;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 4px 16px var(--glass-shadow);
   transition: all 0.3s ease;
   width: 100%;
 }
 
 .submit-button:hover {
-  background-color: #2980b9;
+  background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 24px var(--glass-shadow-hover);
 }
 
 .contact-navigation {
   text-align: center;
   padding-top: 3rem;
-  border-top: 2px solid #ecf0f1;
+  border-top: 2px solid var(--glass-border);
   margin-top: 2rem;
 }
 
@@ -252,20 +271,25 @@ html {
   display: inline-block;
   font-family: var(--font-heading);
   text-decoration: none;
-  color: #3498db;
+  color: var(--accent-blue);
   font-size: 1.2rem;
   font-weight: bold;
   padding: 1rem 2rem;
-  border: 2px solid #3498db;
-  border-radius: 6px;
+  background: var(--glass-bg-primary);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 2px solid var(--glass-border);
+  border-radius: 16px;
+  box-shadow: 0 4px 16px var(--glass-shadow);
   transition: all 0.3s ease;
 }
 
 .back-link:hover {
-  background-color: #3498db;
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
   color: white;
+  border-color: var(--accent-purple);
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 24px var(--glass-shadow-hover);
 }
 
 /* Tablet Design */
@@ -411,7 +435,7 @@ html {
 
 /* Smooth focus states for accessibility */
 *:focus {
-  outline: 2px solid #3498db;
+  outline: 2px solid var(--accent-blue);
   outline-offset: 2px;
 }
 

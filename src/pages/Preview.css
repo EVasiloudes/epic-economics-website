@@ -25,8 +25,12 @@
 }
 
 .video-placeholder {
-  background-color: #2c3e50;
-  border-radius: 8px;
+  background: linear-gradient(135deg, var(--glass-bg-secondary), var(--glass-bg-tertiary));
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px var(--glass-shadow);
   height: 500px;
   display: flex;
   flex-direction: column;
@@ -49,6 +53,13 @@
 
 .preview-info {
   margin-bottom: 3rem;
+  background: var(--glass-bg-primary);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 8px 32px var(--glass-shadow);
 }
 
 .preview-info h2 {
@@ -73,18 +84,26 @@
 .back-link {
   font-family: var(--font-heading);
   text-decoration: none;
-  color: #3498db;
+  color: var(--accent-blue);
   font-size: 1.2rem;
   font-weight: bold;
   padding: 0.5rem 1rem;
-  border: 2px solid #3498db;
-  border-radius: 4px;
+  background: var(--glass-bg-primary);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 2px solid var(--glass-border);
+  border-radius: 16px;
+  box-shadow: 0 4px 16px var(--glass-shadow);
   transition: all 0.3s;
+  display: inline-block;
 }
 
 .back-link:hover {
-  background-color: #3498db;
-  color: white;
+  background: var(--glass-bg-secondary);
+  border-color: var(--accent-blue);
+  box-shadow: 0 8px 24px var(--glass-shadow-hover);
+  transform: translateY(-2px);
+  color: var(--accent-blue);
 }
 
 @media (max-width: 768px) {
