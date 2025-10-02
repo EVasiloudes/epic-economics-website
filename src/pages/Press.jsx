@@ -144,6 +144,10 @@ function Press() {
 
   const reviews = [
     {
+      text: "A powerful play with a soulful performance that engaged all the senses — shifting from the cold, calculated logic of a humanoid to the raw emotions and fragility of a human being.",
+      author: "Argyro Christodoulides, Composer"
+    },
+    {
       text: "A masterful blend of economics and performance art. The show's ability to make you laugh while questioning fundamental economic assumptions is truly remarkable.",
       author: "Takis Taoushanis, Economist - Banker"
     },

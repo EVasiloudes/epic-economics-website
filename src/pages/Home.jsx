@@ -66,6 +66,36 @@ function Home() {
           </p>*/}
         </section>
 
+        <section className="team-bios">
+          <h2>Meet the Creative Team</h2>
+
+          <div className="bio-container">
+            <div className="bio-card">
+              <h3><a href="https://dimis.org" target="_blank" rel="noopener noreferrer">Dimis Michaelides</a></h3>
+              <h4>Writer & Performer</h4>
+              <p>
+                Keynote speaker and author on innovation, creativity and leadership. He has extensive international experience as a business executive and as a speaker in corporate and public events. He also offers workshops and change management consulting for private businesses, NGOs and public organizations.
+              </p>
+            </div>
+
+            <div className="bio-card">
+              <h3><a href="https://liaharaki.com" target="_blank" rel="noopener noreferrer">Lia Haraki</a></h3>
+              <h4>Director & Lighting Designer</h4>
+              <p>
+                Interdisciplinary artist with over 20 years of experience in performance, devised theatre, voice, and movement. Her work explores transformation and creation through the body as a medium, with performances presented locally and internationally. She mentors creatives and artists in developing their unique creative practice.
+              </p>
+            </div>
+
+            <div className="bio-card">
+              <h3><a href="https://elias.densetheory.cc" target="_blank" rel="noopener noreferrer">Elias Vasnic</a></h3>
+              <h4>Producer, Composer & Technical Supervisor</h4>
+              <p>
+                Creative technologist and composer building soundscapes and interactive systems for live performance. For Epic Economics, he blended original music with historical audio, industrial noise, and ai-generated voices to bring the economists to life.
+              </p>
+            </div>
+          </div>
+        </section>
+
         <nav className="home-navigation">
           <ul>
             <li><Link to="/press">Press & Media</Link></li>

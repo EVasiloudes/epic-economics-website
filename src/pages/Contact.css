@@ -50,6 +50,7 @@ html {
   border-radius: 12px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
 }
 
 .contact-info:hover {
@@ -65,7 +66,7 @@ html {
   text-align: center;
 }
 
-.contact-info p {
+.contact-info > p {
   font-family: var(--font-body);
   font-size: 1.1rem;
   line-height: 1.7;
@@ -80,6 +81,7 @@ html {
   border-radius: 8px;
   border-left: 4px solid #3498db;
   transition: border-color 0.3s ease;
+  text-align: center;
 }
 
 .contact-details:hover {
@@ -101,6 +103,7 @@ html {
   border-radius: 8px;
   border: 1px solid #d5dbdb;
   transition: box-shadow 0.3s ease;
+  text-align: center;
 }
 
 .contact-person:hover {

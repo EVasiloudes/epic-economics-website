@@ -5,6 +5,6 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   define: {
-    __NO_INDEX__: JSON.stringify(true),
+    __NO_INDEX__: JSON.stringify(false),
   },
 })
