@@ -32,6 +32,12 @@ body {
   transform: translateZ(0);
 }
 
+@media (max-width: 768px) {
+  .marquee {
+    height: calc(100px + 1rem);
+  }
+}
+
 .marquee img {
   object-fit: cover;
   max-height: 150px;
@@ -52,6 +58,13 @@ body {
   /* Improve text rendering during animations */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+@media (max-width: 768px) {
+  .track {
+    padding: 0.5rem 0;
+    transform: translate3d(40%, 0, 0);
+  }
 }
 
 .track .text {
@@ -107,6 +120,12 @@ body {
   backface-visibility: hidden;
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
+}
+
+@media (max-width: 768px) {
+  .fold {
+    height: 70vh;
+  }
 }
 
 .fold-top {

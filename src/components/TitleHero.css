@@ -133,6 +133,10 @@
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
+  .title-hero {
+    margin-top: 150vh;
+  }
+
   .title-economics {
     transform: translateX(4rem);
   }
