@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Press.css';
 
@@ -31,11 +31,7 @@ function Press() {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [selectedReview, setSelectedReview] = useState(null);
   const [showReviewModal, setShowReviewModal] = useState(false);
-  const [currentReviewIndex, setCurrentReviewIndex] = useState(0);
-  const [containerHeight, setContainerHeight] = useState('auto');
-  const reviewsTrackRef = useRef(null);
-  const touchStartX = useRef(0);
-  const touchEndX = useRef(0);
+  const [showAllReviews, setShowAllReviews] = useState(false);
 
   const images = [
     { src: img1, alt: 'Epic Economics - Photography by Boyana', filename: '_BOO0036.jpg' },
@@ -86,31 +82,11 @@ function Press() {
       } else if (e.key === 'ArrowLeft') {
         navigateImage('prev');
       }
-    } else if (!showReviewModal) {
-      // Carousel navigation when not in modal
-      if (e.key === 'ArrowRight') {
-        nextReview();
-      } else if (e.key === 'ArrowLeft') {
-        prevReview();
-      }
     }
   };
 
+  // Handle body overflow when modals are open
   React.useEffect(() => {
-    const handleEscape = (e) => {
-      if (e.key === 'Escape') {
-        if (showReviewModal) {
-          closeReviewModal();
-        } else if (selectedImage) {
-          closeModal();
-        }
-      }
-    };
-
-    // Always listen for keyboard events
-    document.addEventListener('keydown', handleKeyDown);
-    document.addEventListener('keydown', handleEscape);
-    
     if (selectedImage || showReviewModal) {
       document.body.style.overflow = 'hidden';
     } else {
@@ -118,9 +94,42 @@ function Press() {
     }
 
     return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [selectedImage, showReviewModal]);
+
+  // Handle keyboard navigation
+  React.useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (selectedImage) {
+        // Image modal navigation
+        if (e.key === 'Escape') {
+          setSelectedImage(null);
+        } else if (e.key === 'ArrowRight') {
+          setCurrentImageIndex(prev => (prev + 1) % images.length);
+        } else if (e.key === 'ArrowLeft') {
+          setCurrentImageIndex(prev => (prev - 1 + images.length) % images.length);
+        }
+      }
+    };
+
+    const handleEscape = (e) => {
+      if (e.key === 'Escape') {
+        if (showReviewModal) {
+          setSelectedReview(null);
+          setShowReviewModal(false);
+        } else if (selectedImage) {
+          setSelectedImage(null);
+        }
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('keydown', handleEscape);
+
+    return () => {
       document.removeEventListener('keydown', handleKeyDown);
       document.removeEventListener('keydown', handleEscape);
-      document.body.style.overflow = 'unset';
     };
   }, [selectedImage, currentImageIndex, showReviewModal]);
 
@@ -200,9 +209,14 @@ function Press() {
     }
   ];
 
-  const truncateText = (text, maxLength) => {
-    if (text.length <= maxLength) return text;
-    return text.slice(0, maxLength) + '...';
+  const countWords = (text) => {
+    return text.trim().split(/\s+/).length;
+  };
+
+  const truncateToWords = (text, maxWords) => {
+    const words = text.trim().split(/\s+/);
+    if (words.length <= maxWords) return text;
+    return words.slice(0, maxWords).join(' ') + '...';
   };
 
   const openReviewModal = (review) => {
@@ -215,124 +229,6 @@ function Press() {
     setShowReviewModal(false);
   };
 
-  const nextReview = () => {
-    setCurrentReviewIndex((prevIndex) => 
-      prevIndex === reviews.length - 1 ? 0 : prevIndex + 1
-    );
-  };
-
-  const prevReview = () => {
-    setCurrentReviewIndex((prevIndex) => 
-      prevIndex === 0 ? reviews.length - 1 : prevIndex - 1
-    );
-  };
-
-  const goToReview = (index) => {
-    setCurrentReviewIndex(index);
-  };
-
-  // Swipe gesture handlers
-  const handleTouchStart = (e) => {
-    touchStartX.current = e.touches[0].clientX;
-  };
-
-  const handleTouchMove = (e) => {
-    touchEndX.current = e.touches[0].clientX;
-  };
-
-  const handleTouchEnd = () => {
-    const swipeThreshold = 50; // minimum distance for a swipe
-    const diff = touchStartX.current - touchEndX.current;
-
-    if (Math.abs(diff) > swipeThreshold) {
-      if (diff > 0) {
-        // Swiped left - go to next
-        nextReview();
-      } else {
-        // Swiped right - go to prev
-        prevReview();
-      }
-    }
-  };
-
-  // Initial height calculation on mount
-  React.useEffect(() => {
-    const estimateInitialHeight = () => {
-      const currentReview = reviews[0]; // First review
-      if (currentReview) {
-        const textLength = currentReview.text.length;
-        const isMobile = window.innerWidth <= 768;
-        const isSmallMobile = window.innerWidth <= 480;
-        
-        let charsPerLine = 50;
-        if (isSmallMobile) {
-          charsPerLine = 25;
-        } else if (isMobile) {
-          charsPerLine = 35;
-        }
-        
-        const estimatedLines = Math.ceil(textLength / charsPerLine);
-        const baseHeight = isSmallMobile ? 150 : isMobile ? 180 : 200;
-        const lineHeight = isSmallMobile ? 20 : isMobile ? 22 : 24;
-        const textHeight = estimatedLines * lineHeight;
-        setContainerHeight(`${baseHeight + textHeight}px`);
-      }
-    };
-    
-    estimateInitialHeight();
-  }, []);
-
-  React.useEffect(() => {
-    const updateContainerHeight = () => {
-      if (reviewsTrackRef.current) {
-        const slides = reviewsTrackRef.current.querySelectorAll('.review-slide');
-        const activeSlide = slides[currentReviewIndex];
-        if (activeSlide) {
-          const reviewContent = activeSlide.querySelector('.review-content');
-          if (reviewContent) {
-            // Use setTimeout to ensure DOM has updated
-            setTimeout(() => {
-              const height = reviewContent.offsetHeight;
-              setContainerHeight(`${height}px`);
-            }, 50);
-          }
-        }
-      } else {
-        // Fallback: estimate height based on text length and screen size
-        const currentReview = reviews[currentReviewIndex];
-        if (currentReview) {
-          const textLength = currentReview.text.length;
-          const isMobile = window.innerWidth <= 768;
-          const isSmallMobile = window.innerWidth <= 480;
-          
-          // Adjust characters per line based on screen size
-          let charsPerLine = 50; // Desktop
-          if (isSmallMobile) {
-            charsPerLine = 25; // Small mobile
-          } else if (isMobile) {
-            charsPerLine = 35; // Tablet/large mobile
-          }
-          
-          const estimatedLines = Math.ceil(textLength / charsPerLine);
-          const baseHeight = isSmallMobile ? 150 : isMobile ? 180 : 200;
-          const lineHeight = isSmallMobile ? 20 : isMobile ? 22 : 24;
-          const textHeight = estimatedLines * lineHeight;
-          setContainerHeight(`${baseHeight + textHeight}px`);
-        }
-      }
-    };
-
-    // Update height when review changes
-    updateContainerHeight();
-    
-    // Update height on window resize
-    window.addEventListener('resize', updateContainerHeight);
-    
-    return () => {
-      window.removeEventListener('resize', updateContainerHeight);
-    };
-  }, [currentReviewIndex]);
-
   return (
     <div className="press">
       <header className="press-header">
@@ -342,62 +238,48 @@ function Press() {
 
       <section className="press-reviews">
         <h2>Reviews & Commentary</h2>
-        <div className="reviews-carousel">
-          <div
-            className="reviews-container"
-            style={{ height: containerHeight }}
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-            onTouchEnd={handleTouchEnd}
-          >
-            <button
-              className="carousel-nav carousel-nav-overlay prev"
-              onClick={prevReview}
-              aria-label="Previous review"
-            >
-              &#8249;
-            </button>
+        <div className="reviews-list">
+          {(showAllReviews ? reviews : reviews.slice(0, 3)).map((review, index) => {
+            const wordCount = countWords(review.text);
+            const isLongReview = wordCount > 200;
+            const displayText = isLongReview ? truncateToWords(review.text, 200) : review.text;
 
-            <div
-              ref={reviewsTrackRef}
-              className="reviews-track"
-              style={{ transform: `translateX(-${currentReviewIndex * 100}%)` }}
-            >
-              {reviews.map((review, index) => (
-                <div
-                  key={index}
-                  className={`review-slide ${index === currentReviewIndex ? 'active' : ''}`}
-                >
-                  <div className="review-content">
-                    <div className="review-text">
-                      "{review.text}"
-                    </div>
-                    <cite className="review-author">— {review.author}</cite>
-                  </div>
+            return (
+              <div key={index} className="review-item">
+                <div className="review-text">
+                  "{displayText}"
+                  {isLongReview && (
+                    <button
+                      className="read-more-link"
+                      onClick={() => openReviewModal(review)}
+                    >
+                      Read More
+                    </button>
+                  )}
                 </div>
-              ))}
-            </div>
-
-            <button
-              className="carousel-nav carousel-nav-overlay next"
-              onClick={nextReview}
-              aria-label="Next review"
-            >
-              &#8250;
-            </button>
-          </div>
+                <cite className="review-author">— {review.author}</cite>
+              </div>
+            );
+          })}
         </div>
 
-        <div className="carousel-indicators">
-          {reviews.map((_, index) => (
-            <button
-              key={index}
-              className={`indicator ${index === currentReviewIndex ? 'active' : ''}`}
-              onClick={() => goToReview(index)}
-              aria-label={`Go to review ${index + 1}`}
-            />
-          ))}
-        </div>
+        {!showAllReviews && reviews.length > 3 && (
+          <button
+            className="show-all-btn"
+            onClick={() => setShowAllReviews(true)}
+          >
+            Show All Reviews ({reviews.length})
+          </button>
+        )}
+
+        {showAllReviews && (
+          <button
+            className="show-all-btn"
+            onClick={() => setShowAllReviews(false)}
+          >
+            Show Less
+          </button>
+        )}
 
         <p className="reviews-note">
           <em>Reviews and quotes will be updated as press coverage becomes available. For press inquiries, please contact us directly.</em>

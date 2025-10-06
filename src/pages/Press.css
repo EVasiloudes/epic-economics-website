@@ -32,123 +32,41 @@ html {
   text-align: center;
 }
 
-.reviews-carousel {
-  position: relative;
+.reviews-list {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  gap: 2rem;
   margin-top: 2rem;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.carousel-nav {
+.review-item {
   background: var(--glass-bg-secondary);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  color: white;
-  border: 1px solid var(--glass-border);
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  font-size: 1.5rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 16px var(--glass-shadow);
-}
-
-.carousel-nav:hover {
-  background: var(--glass-bg-tertiary);
-  transform: scale(1.1);
-  box-shadow: 0 6px 20px var(--glass-shadow-hover);
-}
-
-.carousel-nav:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-/* Overlay navigation buttons */
-.carousel-nav-overlay {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 40px;
-  height: 40px;
-  font-size: 1.5rem;
-  background: var(--glass-bg-primary);
-  opacity: 0.7;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.carousel-nav-overlay:hover {
-  opacity: 1;
-  transform: translateY(-50%) scale(1.1);
-}
-
-.carousel-nav-overlay.prev {
-  left: 10px;
-}
-
-.carousel-nav-overlay.next {
-  right: 10px;
-}
-
-.reviews-container {
-  flex: 1;
-  overflow: hidden;
-  border-radius: 15px;
-  transition: height 0.5s ease;
-  position: relative;
-  width: 100%;
-  max-width: 800px;
-  touch-action: pan-y;
-  user-select: none;
-}
-
-.reviews-track {
-  display: flex;
-  transition: transform 0.5s ease;
-  touch-action: pan-x;
-  min-height: 100%;
-  align-items: flex-start;
-}
-
-.review-slide {
-  min-width: 100%;
-  display: flex;
-  justify-content: center;
-  user-select: none;
-  align-items: flex-start;
-}
-
-.review-content {
-  background: var(--glass-bg-secondary);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  padding: 3rem;
+  padding: 2.5rem;
   border-radius: 20px;
   box-shadow: 0 8px 32px var(--glass-shadow);
   border: 1px solid var(--glass-border);
   border-left: 4px solid var(--accent-blue);
-  max-width: 800px;
-  text-align: center;
-  width: 100%;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.review-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px var(--glass-shadow-hover);
 }
 
 .review-text {
   font-family: var(--font-body);
-  font-size: 1.2rem;
-  line-height: 1.6;
+  font-size: 1.1rem;
+  line-height: 1.7;
   color: #34495e;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   font-style: italic;
+  text-align: justify;
 }
 
 .review-author {
@@ -160,35 +78,29 @@ html {
   display: block;
 }
 
-.carousel-indicators {
-  display: flex;
-  justify-content: center;
-  gap: 0.5rem;
-  margin-top: 2rem;
-}
-
-.indicator {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  border: none;
-  background: #bdc3c7;
+.show-all-btn {
+  display: block;
+  margin: 2rem auto 0;
+  padding: 1rem 2rem;
+  background: var(--glass-bg-secondary);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 2px solid var(--accent-blue);
+  border-radius: 12px;
+  color: var(--accent-blue);
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: bold;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px var(--glass-shadow);
 }
 
-.indicator.active {
+.show-all-btn:hover {
   background: var(--accent-blue);
-}
-
-.indicator:hover {
-  background: #34495e;
-}
-
-.indicator:focus {
-  background: #34495e;
-  outline: 2px solid var(--accent-blue);
-  outline-offset: 2px;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px var(--glass-shadow-hover);
 }
 
 .reviews-note {
@@ -1085,65 +997,43 @@ html {
     font-size: 2rem;
   }
 
-  .reviews-carousel {
-    flex-direction: column;
+  .reviews-list {
     gap: 1.5rem;
   }
 
-  .carousel-nav-overlay {
-    width: 35px;
-    height: 35px;
-    font-size: 1.3rem;
-    opacity: 0.5;
-  }
-
-  .carousel-nav-overlay:hover,
-  .carousel-nav-overlay:active {
-    opacity: 0.9;
-  }
-
-  .carousel-nav-overlay.prev {
-    left: 5px;
-  }
-
-  .carousel-nav-overlay.next {
-    right: 5px;
-  }
-
-  .reviews-container {
-    min-height: 200px;
-    width: 100%;
-  }
-
-  .review-content {
-    padding: 2rem 3rem;
-    min-height: auto;
+  .review-item {
+    padding: 2rem;
   }
 
   .review-text {
     font-size: 1rem;
-    line-height: 1.5;
+    line-height: 1.6;
   }
-  
+
+  .show-all-btn {
+    padding: 0.9rem 1.75rem;
+    font-size: 1rem;
+  }
+
   .live-performance-section {
     padding: 2rem;
     margin: 2rem 0;
   }
-  
+
   .live-performance-section h2 {
     font-size: 2rem;
   }
-  
+
   .performance-description {
     font-size: 1.1rem;
     margin-bottom: 1.5rem;
   }
-  
+
   .watch-performance-btn {
     padding: 1rem 1.5rem;
     font-size: 1rem;
   }
-  
+
   .password-modal-content,
   .success-modal-content,
   .review-modal-content {
@@ -1153,28 +1043,33 @@ html {
   }
 
   .magic-link-section {
-    padding: 2rem;
+    padding: 1.5rem 1rem;
     margin: 2rem 0;
   }
 
   .magic-link-section h2 {
-    font-size: 2rem;
+    font-size: 1.8rem;
+    padding: 0 0.5rem;
   }
 
   .magic-description {
-    font-size: 1.1rem;
+    font-size: 1rem;
     margin-bottom: 1.5rem;
+    padding: 0 0.5rem;
   }
 
   .magic-link-btn {
     padding: 1rem 1.5rem;
     font-size: 1rem;
+    width: 90%;
+    max-width: 300px;
   }
 
   .magic-reviews {
     grid-template-columns: 1fr;
     gap: 1.5rem;
     margin-bottom: 2rem;
+    padding: 0 0.5rem;
   }
 
   .magic-review-item {
@@ -1254,6 +1149,8 @@ html {
 
   .review-modal-text {
     font-size: 1rem;
+    line-height: 1.75;
+    letter-spacing: 0.01em;
   }
 
   .review-modal-author {
@@ -1265,107 +1162,107 @@ html {
     margin: 0;
     width: 100%;
   }
-  
+
   .press-header {
     margin-bottom: 2rem;
     padding-bottom: 1.5rem;
   }
-  
+
   .press-header h1 {
     font-size: 2rem;
     margin-bottom: 0.5rem;
   }
-  
+
   .press-description {
     font-size: 1rem;
     padding: 0 1rem;
   }
-  
+
   .press-kit {
     margin-bottom: 3rem;
   }
-  
+
   .press-kit h2 {
     font-size: 1.75rem;
     margin-bottom: 0.75rem;
   }
-  
+
   .gallery-description {
     padding: 0 1rem;
     margin-bottom: 1.5rem;
   }
-  
+
   .image-gallery {
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 1rem;
     margin-bottom: 2rem;
   }
-  
+
   .image-item img {
     height: 200px;
   }
-  
+
   .press-materials {
     padding: 1.5rem;
   }
-  
+
   .press-materials h3 {
     font-size: 1.3rem;
   }
-  
+
   .press-info {
     padding: 1.5rem;
     margin-bottom: 3rem;
   }
-  
+
   .press-info h2 {
     font-size: 1.75rem;
     margin-bottom: 1rem;
   }
-  
+
   .press-info p {
     font-size: 1rem;
     margin-bottom: 1.25rem;
   }
-  
+
   .modal-content {
     max-width: 95vw;
     max-height: 85vh;
   }
-  
+
   .modal-image {
     max-height: 70vh;
   }
-  
+
   .close-button {
     top: -40px;
     font-size: 2rem;
     width: 35px;
     height: 35px;
   }
-  
+
   .nav-button {
     width: 40px;
     height: 40px;
     font-size: 1.5rem;
   }
-  
+
   .prev-button {
     left: -50px;
   }
-  
+
   .next-button {
     right: -50px;
   }
-  
+
   .image-info {
     bottom: -40px;
   }
-  
+
   .press-navigation {
     padding-top: 2rem;
   }
-  
+
   .back-link {
     padding: 0.8rem 1.5rem;
     font-size: 1rem;
@@ -1383,71 +1280,48 @@ html {
     font-size: 1.8rem;
   }
 
-  .reviews-carousel {
-    flex-direction: column;
+  .reviews-list {
     gap: 1rem;
   }
 
-  .carousel-nav-overlay {
-    width: 30px;
-    height: 30px;
-    font-size: 1.2rem;
-    opacity: 0.4;
-  }
-
-  .carousel-nav-overlay:active {
-    opacity: 0.8;
-  }
-
-  .carousel-nav-overlay.prev {
-    left: 3px;
-  }
-
-  .carousel-nav-overlay.next {
-    right: 3px;
-  }
-
-  .reviews-container {
-    width: 100%;
-    min-height: 150px;
-    transition: height 0.3s ease;
-  }
-
-  .review-content {
-    padding: 1.5rem 2.5rem;
-    min-height: auto;
-    width: 100%;
+  .review-item {
+    padding: 1.5rem;
   }
 
   .review-text {
     font-size: 0.95rem;
-    line-height: 1.5;
+    line-height: 1.6;
     margin-bottom: 1.5rem;
   }
 
   .review-author {
     font-size: 0.9rem;
   }
-  
+
+  .show-all-btn {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.95rem;
+  }
+
   .live-performance-section {
     padding: 1.5rem;
     margin: 1.5rem 0;
   }
-  
+
   .live-performance-section h2 {
     font-size: 1.8rem;
   }
-  
+
   .performance-description {
     font-size: 1rem;
     margin-bottom: 1.25rem;
   }
-  
+
   .watch-performance-btn {
     padding: 0.8rem 1.2rem;
     font-size: 0.9rem;
   }
-  
+
   .password-modal-content,
   .success-modal-content,
   .review-modal-content {
@@ -1480,28 +1354,33 @@ html {
   }
 
   .magic-link-section {
-    padding: 1.5rem;
+    padding: 1.25rem 0.75rem;
     margin: 1.5rem 0;
   }
 
   .magic-link-section h2 {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
+    padding: 0 0.25rem;
   }
 
   .magic-description {
-    font-size: 1rem;
+    font-size: 0.95rem;
     margin-bottom: 1.25rem;
+    padding: 0 0.25rem;
   }
 
   .magic-link-btn {
     padding: 0.8rem 1.2rem;
     font-size: 0.9rem;
+    width: 90%;
+    max-width: 280px;
   }
 
   .magic-reviews {
     grid-template-columns: 1fr;
     gap: 1rem;
     margin-bottom: 1.5rem;
+    padding: 0 0.25rem;
   }
 
   .magic-review-item {
@@ -1574,75 +1453,75 @@ html {
   .press {
     padding: 0.5rem;
   }
-  
+
   .press-header h1 {
     font-size: 1.8rem;
   }
-  
+
   .press-description {
     font-size: 0.95rem;
     padding: 0 0.5rem;
   }
-  
+
   .press-kit h2,
   .press-info h2 {
     font-size: 1.5rem;
   }
-  
+
   .press-materials h3 {
     font-size: 1.2rem;
   }
-  
+
   .image-gallery {
     grid-template-columns: 1fr;
     gap: 0.75rem;
   }
-  
+
   .image-item img {
     height: 180px;
   }
-  
+
   .press-materials {
     padding: 1rem;
   }
-  
+
   .press-info {
     padding: 1rem;
   }
-  
+
   .press-info p {
     font-size: 0.95rem;
   }
-  
+
   .modal-content {
     max-width: 100vw;
     max-height: 90vh;
   }
-  
+
   .nav-button {
     width: 35px;
     height: 35px;
     font-size: 1.2rem;
   }
-  
+
   .prev-button {
     left: 10px;
   }
-  
+
   .next-button {
     right: 10px;
   }
-  
+
   .close-button {
     top: 10px;
     right: 10px;
   }
-  
+
   .image-info {
     bottom: 10px;
     font-size: 0.9rem;
   }
-  
+
   .back-link {
     padding: 0.7rem 1.2rem;
     font-size: 0.95rem;
@@ -1683,17 +1562,24 @@ html {
 .review-modal-text {
   font-family: var(--font-body);
   font-size: 1.1rem;
-  line-height: 1.7;
-  color: #34495e;
-  font-style: italic;
+  line-height: 1.8;
+  color: #ffffff;
+  font-style: normal;
   margin-bottom: 1.5rem;
   white-space: pre-line;
+  text-align: left;
+  letter-spacing: 0.02em;
+  word-spacing: 0.05em;
+  max-width: 100%;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
 }
 
 .review-modal-author {
   font-family: var(--font-heading);
   font-size: 1rem;
-  color: #7f8c8d;
+  color: #e8f4fd;
   font-weight: bold;
   text-align: right;
 }
@@ -1714,14 +1600,6 @@ html {
 
 .read-more-link:hover {
   color: var(--accent-purple);
-}
-
-.review-text {
-  font-family: var(--font-body);
-  font-size: 1.1rem;
-  line-height: 1.6;
-  color: #34495e;
-  font-style: italic;
 }
 
 /* Magic Link Section Styles */
@@ -1757,7 +1635,7 @@ html {
 
 .magic-reviews {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
   margin-bottom: 2.5rem;
   max-width: 1000px;
@@ -1853,7 +1731,7 @@ html {
   html {
     scroll-behavior: auto;
   }
-  
+
   *,
   *::before,
   *::after {
@@ -1861,9 +1739,8 @@ html {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-  
+
   .image-modal {
     animation: none;
   }
 }
-
