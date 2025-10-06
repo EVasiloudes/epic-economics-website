@@ -56,6 +56,31 @@
   text-align: center;
 }
 
+/* Individual paragraph styling */
+.synopsis-paragraph {
+    margin: 2rem 0;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.synopsis-paragraph p {
+    font-family: var(--font-body, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-bottom: 0;
+    color: var(--text-dark);
+    text-align: left;
+    background: var(--glass-bg-secondary);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    padding: 1.5rem;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px var(--glass-shadow);
+}
+
+/* Legacy support for any remaining synopsis p elements */
 .synopsis p {
     font-family: var(--font-body, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
     font-size: 1.2rem;
@@ -103,18 +128,25 @@
 }
 
 .teaser-video {
-  background: var(--gradient-tertiary);
-  border-radius: 24px;
-  height: 400px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 2rem auto;
   position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  height: 0;
+  margin: 2rem auto;
+  max-width: 800px;
+  border-radius: 24px;
   overflow: hidden;
-  max-width: 600px;
   box-shadow: 0 12px 40px var(--glass-shadow-hover);
   border: 1px solid var(--glass-border);
+}
+
+.teaser-video iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 24px;
 }
 
 .teaser-link {
@@ -210,7 +242,29 @@
   text-shadow: none;
 }
 
-/* Home Images Section */
+/* Individual Image Items */
+.home-image-item {
+  text-align: center;
+  margin: 3rem auto;
+  max-width: 600px;
+  background: var(--glass-bg-primary);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px var(--glass-shadow);
+  padding: 2rem;
+}
+
+.first-image {
+  margin: 3rem auto 2rem auto;
+}
+
+.second-image {
+  margin: 2rem auto 3rem auto;
+}
+
+/* Legacy Home Images Section - keeping for backwards compatibility */
 .home-images {
   margin: 4rem 0;
   padding: 3rem 0;
@@ -231,12 +285,18 @@
   padding: 0 2rem;
 }
 
-.home-image-item {
+.image-gallery-home .home-image-item {
   text-align: center;
+  background: none;
+  backdrop-filter: none;
+  border: none;
+  box-shadow: none;
+  padding: 0;
 }
 
 .home-image-item img {
   width: 100%;
+  max-width: 500px;
   height: 300px;
   object-fit: cover;
   border-radius: 20px;
@@ -256,16 +316,18 @@
   font-size: 1.1rem;
   color: #34495e;
   margin-top: 1rem;
+  margin-bottom: 0;
   font-style: italic;
   line-height: 1.4;
 }
 
 .photo-credit-home {
   text-align: center;
-  margin-top: 2rem;
+  margin: 3rem auto 2rem auto;
   font-family: var(--font-body, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
   font-size: 0.9rem;
   color: #7f8c8d;
+  max-width: 600px;
 }
 
 .photo-credit-home a {
@@ -292,8 +354,21 @@
     padding: 0 1.5rem;
   }
 
+  .home-image-item {
+    margin: 2rem auto;
+    padding: 1.5rem;
+  }
+
   .home-image-item img {
     height: 250px;
+  }
+
+  .synopsis-paragraph {
+    margin: 1.5rem 0;
+  }
+
+  .synopsis-paragraph p {
+    font-size: 1.1rem;
   }
 
   .synopsis h2, .teaser h2 {
@@ -307,10 +382,6 @@
   .synopsis blockquote {
     margin: 2rem 1rem;
     padding: 1rem 1.5rem;
-  }
-
-  .teaser-video {
-    height: 300px;
   }
 
   .home-navigation ul {
@@ -335,12 +406,26 @@
     padding: 0 1rem;
   }
 
+  .home-image-item {
+    margin: 1.5rem auto;
+    padding: 1rem;
+  }
+
   .home-image-item img {
     height: 200px;
   }
 
   .image-caption {
     font-size: 1rem;
+  }
+
+  .synopsis-paragraph {
+    margin: 1rem 0;
+  }
+
+  .synopsis-paragraph p {
+    font-size: 1rem;
+    padding: 1rem;
   }
 
   .synopsis h2, .teaser h2 {
@@ -358,10 +443,6 @@
 
   .synopsis blockquote p {
     font-size: 1rem;
-  }
-
-  .teaser-video {
-    height: 250px;
   }
 
   .play-button {
