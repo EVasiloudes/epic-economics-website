@@ -8,10 +8,6 @@ import Technical from './pages/Technical';
 import { setRobotsMeta } from './utils/seo';
 import './App.css';
 
-// Handle __NO_INDEX__ variable that may not be defined
-// eslint-disable-next-line no-undef
-const NO_INDEX = typeof __NO_INDEX__ !== 'undefined' ? __NO_INDEX__ : false;
-
 // Component to scroll to top on route change
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -23,12 +19,10 @@ function ScrollToTop() {
   return null;
 }
 
-
-
 function App() {
   useEffect(() => {
-    // Set robots meta tag to prevent indexing during development
-    setRobotsMeta(NO_INDEX);
+    // Ensure the site is indexable by search engines
+    setRobotsMeta(false);
   }, []);
 
   return (
