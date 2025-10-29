@@ -206,6 +206,18 @@ function Press() {
     {
       text: "Epic Economics is not just a performance about money or markets. It is a voyage through the heart of society. The play brings the voices of Smith, Marx, Keynes and many more to the present in a quirkily intelligent style. It reminds us that economics is not just about figures or growth, it is about each one of us, about our daily ambitions, fears and dreams.\n\nWhen Dimis says \"It's wonderful to have your breakfast oats anytime of the day\", it's more than a playful observation. It is the idea of freedom and choice for small human joys beyond big schedules and systems.\n\nThe play owes as much to the collaboration with Lia Haraki with her insightful direction and dramaturgy and with the vivid and imaginative sound design of Elias Vasiloudes. Together with Dimis' vision they shaped the result which is cohesive and visually vibrant. They encourage us to look at the forces that shape our world and the values that guide them. In a humorous and profoundly human way they invite us to imagine how the world might become more alive and generous.\n\n\"Art is not a mirror held up to reality but a hammer with which to shape it\" -Bertolt Brecht-",
       author: "Lisa Tsangaridou, Dance Teacher/Choreographer"
+    },
+    {
+      text: "An engaging and, at times, provocative performance that offers a spirited critique of economics, bringing an abstract subject into life making it relatable, and relevant to everyday life.",
+      author: "Evgenios Evgeniou - Chairman of Nicosia for Art Home to Nicosia Municipal Theatre and International Festival"
+    },
+    {
+      text: "It was a great pleasure to watch this unique, inspiring and engaging show on economics presented with a definite twist! The script is humorously woven into a story-telling of major economists, life experience by the author. The collaboration between Dimis Michaelides, Lia Haraki and Elias Vasnic could not have been a better match. Spot on directing and staging by Lia, brilliant sound and lighting by Elias, and Dimis being the one man showman we always love to see over and over. I laughed a lot too! Would watch this show over and over again.",
+      author: "Monica Gavrielides - Director of W.E.T. - Women's Empowerment Theater Group"
+    },
+    {
+      text: "Only Dimis can turn Economics into a masterful comedy and make you see Economics in a completely different light. An epic performance on every level!",
+      author: "Natasha Tavoukjian – Playwright, Actor"
     }
   ];
 
@@ -291,12 +303,10 @@ function Press() {
         <div className="video-cards">
           <div className="video-card">
             <div className="video-thumbnail">
-              <iframe
-                src="https://www.youtube-nocookie.com/embed/h49nwJzQtXk?modestbranding=1&showinfo=0&rel=0&controls=1&iv_load_policy=3&cc_load_policy=0&fs=1&autohide=1"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
+              <video controls>
+                <source src="https://epic-economics-videos.s3.eu-north-1.amazonaws.com/Epic%20Economics%20Teaser%20%5Bh49nwJzQtXk%5D.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
             </div>
             <div className="video-info">
 
@@ -313,12 +323,10 @@ function Press() {
           <div className="video-cards">
             <div className="video-card">
               <div className="video-thumbnail">
-                <iframe
-                  src="https://www.youtube-nocookie.com/embed/KH1FK64ES0U?autoplay=0&modestbranding=1&rel=0&showinfo=0&controls=1&iv_load_policy=3&fs=1&cc_load_policy=0&loop=0&color=white&theme=light"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></iframe>
+                <video controls>
+                  <source src="https://epic-economics-videos.s3.eu-north-1.amazonaws.com/EE%20slogans%20photomix%201%20%5BKH1FK64ES0U%5D.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
               </div>
               <div className="video-info">
 
@@ -327,12 +335,10 @@ function Press() {
 
             <div className="video-card">
               <div className="video-thumbnail">
-                <iframe
-                  src="https://www.youtube-nocookie.com/embed/BA7L7jJzWhw?autoplay=0&modestbranding=1&rel=0&showinfo=0&controls=1&iv_load_policy=3&fs=1&cc_load_policy=0&loop=0&color=white&theme=light"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></iframe>
+                <video controls>
+                  <source src="https://epic-economics-videos.s3.eu-north-1.amazonaws.com/EE%20slogans%20photomix%202%20%5BBA7L7jJzWhw%5D.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
               </div>
               <div className="video-info">
 

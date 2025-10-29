@@ -5,6 +5,7 @@ import Preview from './pages/Preview';
 import Press from './pages/Press';
 import Contact from './pages/Contact';
 import Technical from './pages/Technical';
+import LiquidGlassNavbar from './components/LiquidGlassNavbar';
 import { setRobotsMeta } from './utils/seo';
 import './App.css';
 
@@ -28,6 +29,7 @@ function App() {
   return (
     <Router>
       <ScrollToTop />
+      <LiquidGlassNavbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/preview" element={<Preview />} />
