@@ -33,13 +33,20 @@
   margin: 0 auto;
   padding: 0 2rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   position: relative;
   overflow: hidden;
 }
 
+.navbar-content {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
 .navbar-brand {
+  flex-shrink: 0;
   display: flex;
   align-items: center;
 }
@@ -364,6 +371,12 @@
     padding: 0 1rem;
   }
   
+  .navbar-content {
+    gap: 1.5rem;
+    width: 100%;
+    justify-content: space-between;
+  }
+  
   .navbar-menu {
     gap: 1rem;
   }
@@ -390,13 +403,11 @@
 
 @media (max-width: 480px) {
   .navbar-container {
-    flex-direction: column;
-    gap: 0.5rem;
     padding: 0.5rem 1rem;
   }
   
-  .navbar-brand {
-    justify-content: center;
+  .navbar-content {
+    gap: 1rem;
   }
   
   .navbar-menu {

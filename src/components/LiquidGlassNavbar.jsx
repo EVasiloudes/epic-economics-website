@@ -84,14 +84,14 @@ function LiquidGlassNavbar() {
   return (
     <nav ref={navRef} className="liquid-glass-navbar" role="navigation" aria-label="Main navigation">
       <div className="navbar-container">
-        <div className="navbar-brand">
-          <Link to="/" aria-label="Epic Economics - Home">
-            <img src="/favicon-32x32.png" alt="Epic Economics" className="navbar-logo" />
-            <span className="navbar-title">Epic Economics</span>
-          </Link>
-        </div>
-        
-        <div className="navbar-menu" role="menubar">
+        <div className="navbar-content">
+          <div className="navbar-brand">
+            <Link to="/" aria-label="Epic Economics - Home">
+              <img src="/favicon-32x32.png" alt="Epic Economics" className="navbar-logo" />
+            </Link>
+          </div>
+          
+          <div className="navbar-menu" role="menubar">
           <Link 
             to="/" 
             className={location.pathname === '/' ? 'active' : ''}
@@ -124,6 +124,7 @@ function LiquidGlassNavbar() {
           >
             Contact
           </Link>
+          </div>
         </div>
 
         {/* Liquid effect background elements */}
