@@ -85,7 +85,9 @@ function LiquidGlassNavbar() {
     <nav ref={navRef} className="liquid-glass-navbar" role="navigation" aria-label="Main navigation">
       <div className="navbar-container">
         <div className="navbar-brand">
-          <Link to="/" aria-label="Epic Economics - Home">Epic Economics</Link>
+          <Link to="/" aria-label="Epic Economics - Home">
+            <img src="/favicon-32x32.png" alt="Epic Economics" className="navbar-logo" />
+          </Link>
         </div>
         
         <div className="navbar-menu" role="menubar">
