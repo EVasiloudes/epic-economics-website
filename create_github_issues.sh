@@ -36,7 +36,7 @@ Implement simplified typography hierarchy based on brand audit findings. Current
 **Estimate:** 8 story points  
 **Dependencies:** Design approval on font selection" \
   --label "epic:brand-system,priority:high,frontend" \
-  --assignee "eliasvasnic"
+  --assignee "EVasiloudes"
 
 echo "✅ Issue #001 created: Brand Typography System Refactoring"
 
@@ -68,7 +68,7 @@ Reduce color complexity and establish one signature brand color as per brand dir
 **Estimate:** 5 story points  
 **Dependencies:** Issue #001 (typography affects color contrast)" \
   --label "epic:brand-system,priority:high,ui" \
-  --assignee "eliasvasnic"
+  --assignee "EVasiloudes"
 
 echo "✅ Issue #002 created: Color Palette Consolidation"
 
@@ -100,7 +100,7 @@ Optimize glassmorphism effects for mobile performance and cognitive load. Curren
 **Estimate:** 13 story points  
 **Dependencies:** Performance baseline measurement required" \
   --label "epic:performance,priority:medium,mobile" \
-  --assignee "eliasvasnic"
+  --assignee "EVasiloudes"
 
 echo "✅ Issue #003 created: Mobile-First Glassmorphism Optimization"
 
@@ -132,7 +132,7 @@ Audit current GSAP implementation for performance bottlenecks and implement opti
 **Estimate:** 8 story points  
 **Dependencies:** Performance monitoring setup" \
   --label "epic:performance,priority:medium,animation" \
-  --assignee "eliasvasnic"
+  --assignee "EVasiloudes"
 
 echo "✅ Issue #004 created: GSAP Animation Performance Audit"
 
@@ -165,7 +165,7 @@ Implement comprehensive user journey tracking to validate brand effectiveness an
 **Estimate:** 13 story points  
 **Dependencies:** Privacy policy updates required" \
   --label "epic:analytics,priority:high,data" \
-  --assignee "eliasvasnic"
+  --assignee "EVasiloudes"
 
 echo "✅ Issue #005 created: User Journey Analytics Implementation"
 
@@ -198,7 +198,7 @@ Implement clear content hierarchy ensuring primary brand message hits within 3 s
 **Estimate:** 8 story points  
 **Dependencies:** Content strategy finalization" \
   --label "epic:brand-message,priority:high,content" \
-  --assignee "eliasvasnic"
+  --assignee "EVasiloudes"
 
 echo "✅ Issue #006 created: Content Hierarchy & Message Clarity Optimization"
 
@@ -231,7 +231,7 @@ Create comprehensive component documentation that matches Apple-level standards 
 **Estimate:** 13 story points  
 **Dependencies:** All previous issues for complete documentation" \
   --label "epic:developer-experience,priority:medium,documentation" \
-  --assignee "eliasvasnic"
+  --assignee "EVasiloudes"
 
 echo "✅ Issue #007 created: Component Library Documentation & Storybook Enhancement"
 
@@ -264,7 +264,7 @@ Implement automated systems to prevent brand inconsistencies from reaching produ
 **Estimate:** 21 story points  
 **Dependencies:** All component work completed" \
   --label "epic:quality-assurance,priority:low,devops" \
-  --assignee "eliasvasnic"
+  --assignee "EVasiloudes"
 
 echo "✅ Issue #008 created: Brand Consistency Enforcement System"
 
