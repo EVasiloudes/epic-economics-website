@@ -1,8 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
+import { GoogleReCaptchaProvider, useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import './Contact.css';
 
-function Contact() {
+function ContactForm() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -15,6 +16,8 @@ function Contact() {
   const headerRef = useRef(null);
   const formRef = useRef(null);
   const contactInfoRef = useRef(null);
+  
+  const { executeRecaptcha } = useGoogleReCaptcha();
 
   useEffect(() => {
     // Animate elements on mount
@@ -49,11 +52,30 @@ function Contact() {
     setIsSubmitting(true);
     setSubmitStatus(null);
 
-    // Simulate form submission (replace with actual API call)
     try {
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      setSubmitStatus('success');
-      setFormData({ name: '', email: '', subject: '', message: '' });
+      let recaptchaToken = null;
+      
+      // Execute reCAPTCHA if available
+      if (executeRecaptcha) {
+        recaptchaToken = await executeRecaptcha('contact_form');
+      }
+      
+      // Send form data to Vercel serverless function
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...formData, recaptchaToken })
+      });
+      
+      const result = await response.json();
+      
+      if (result.success) {
+        setSubmitStatus('success');
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      } else {
+        setSubmitStatus('error');
+        console.error('Form submission error:', result.error);
+      }
     } catch (error) {
       setSubmitStatus('error');
     } finally {
@@ -251,10 +273,41 @@ function Contact() {
                 </div>
               )}
             </form>
+            
+            {process.env.REACT_APP_RECAPTCHA_SITE_KEY && (
+              <div className="recaptcha-notice">
+                This site is protected by reCAPTCHA and the Google{' '}
+                <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">
+                  Privacy Policy
+                </a>{' '}
+                and{' '}
+                <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer">
+                  Terms of Service
+                </a>{' '}
+                apply.
+              </div>
+            )}
           </div>
         </section>
       </div>
     </div>
+  );
+}
+
+function Contact() {
+  // You'll need to get this from Google reCAPTCHA admin console
+  const RECAPTCHA_SITE_KEY = process.env.REACT_APP_RECAPTCHA_SITE_KEY;
+
+  // If no reCAPTCHA key is provided, render form without reCAPTCHA
+  if (!RECAPTCHA_SITE_KEY) {
+    console.warn('reCAPTCHA site key not found. Form will work without CAPTCHA protection.');
+    return <ContactForm />;
+  }
+
+  return (
+    <GoogleReCaptchaProvider reCaptchaKey={RECAPTCHA_SITE_KEY}>
+      <ContactForm />
+    </GoogleReCaptchaProvider>
   );
 }
 

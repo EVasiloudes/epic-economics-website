@@ -87,6 +87,7 @@ function LiquidGlassNavbar() {
         <div className="navbar-brand">
           <Link to="/" aria-label="Epic Economics - Home">
             <img src="/favicon-32x32.png" alt="Epic Economics" className="navbar-logo" />
+            <span className="navbar-title">Epic Economics</span>
           </Link>
         </div>
         

@@ -39,6 +39,11 @@
   overflow: hidden;
 }
 
+.navbar-brand {
+  display: flex;
+  align-items: center;
+}
+
 .navbar-brand a {
   text-decoration: none;
   position: relative;
@@ -53,11 +58,29 @@
   height: 32px;
   transition: all 0.3s ease;
   filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+  margin-right: 0.75rem;
 }
 
 .navbar-brand a:hover .navbar-logo {
   filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.5)) drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
   transform: scale(1.1);
+}
+
+.navbar-title {
+  color: rgba(255, 255, 255, 0.95);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.2rem;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  white-space: nowrap;
+  transition: all 0.3s ease;
+}
+
+.navbar-brand a:hover .navbar-title {
+  color: #ffffff;
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+  transform: translateX(2px);
 }
 
 .navbar-menu {
@@ -372,6 +395,10 @@
     padding: 0.5rem 1rem;
   }
   
+  .navbar-brand {
+    justify-content: center;
+  }
+  
   .navbar-menu {
     gap: 0.8rem;
   }
@@ -384,6 +411,11 @@
   .navbar-logo {
     width: 24px;
     height: 24px;
+  }
+  
+  .navbar-title {
+    font-size: 1rem;
+    display: none; /* Hide text title on very small screens to save space */
   }
   
   .liquid-glass-navbar {
