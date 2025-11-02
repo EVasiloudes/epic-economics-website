@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import LazyVideo from '../components/LazyVideo';
 import './Press.css';
 
 // Import all the existing images
@@ -72,18 +73,7 @@ function Press() {
     setSelectedImage(images[newIndex]);
   };
 
-  const handleKeyDown = (e) => {
-    if (selectedImage) {
-      // Image modal navigation
-      if (e.key === 'Escape') {
-        closeModal();
-      } else if (e.key === 'ArrowRight') {
-        navigateImage('next');
-      } else if (e.key === 'ArrowLeft') {
-        navigateImage('prev');
-      }
-    }
-  };
+
 
   // Handle body overflow when modals are open
   React.useEffect(() => {
@@ -131,7 +121,7 @@ function Press() {
       document.removeEventListener('keydown', handleKeyDown);
       document.removeEventListener('keydown', handleEscape);
     };
-  }, [selectedImage, currentImageIndex, showReviewModal]);
+  }, [selectedImage, currentImageIndex, showReviewModal, images.length]);
 
   const handlePasswordDialogOpen = () => {
     setShowPasswordDialog(true);
@@ -246,6 +236,7 @@ function Press() {
       <header className="press-header">
         <h1>Epic Economics - Press Kit</h1>
         <p className="press-description">High-resolution images and press materials</p>
+        <p className="team-location">Our team in Glasgow (GMT) and Nicosia (EET)</p>
       </header>
 
       <section className="press-reviews">
@@ -303,10 +294,14 @@ function Press() {
         <div className="video-cards">
           <div className="video-card">
             <div className="video-thumbnail">
-              <video controls>
-                <source src="https://epic-economics-videos.s3.eu-north-1.amazonaws.com/Epic%20Economics%20Teaser%20%5Bh49nwJzQtXk%5D.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
+              <LazyVideo
+                src="/videos/epic-economics-teaser.mp4"
+                poster="/videos/epic-economics-teaser-poster.jpg"
+                title="Epic Economics Teaser"
+                controls={true}
+                muted={false}
+                preload="metadata"
+              />
             </div>
             <div className="video-info">
 
@@ -323,10 +318,14 @@ function Press() {
           <div className="video-cards">
             <div className="video-card">
               <div className="video-thumbnail">
-                <video controls>
-                  <source src="https://epic-economics-videos.s3.eu-north-1.amazonaws.com/EE%20slogans%20photomix%201%20%5BKH1FK64ES0U%5D.mp4" type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
+                <LazyVideo
+                  src="/videos/ee-slogans-photomix-1.mp4"
+                  poster="/videos/ee-slogans-photomix-1-poster.jpg"
+                  title="EE Slogans Photomix 1"
+                  controls={true}
+                  muted={false}
+                  preload="metadata"
+                />
               </div>
               <div className="video-info">
 
@@ -335,10 +334,14 @@ function Press() {
 
             <div className="video-card">
               <div className="video-thumbnail">
-                <video controls>
-                  <source src="https://epic-economics-videos.s3.eu-north-1.amazonaws.com/EE%20slogans%20photomix%202%20%5BBA7L7jJzWhw%5D.mp4" type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
+                <LazyVideo
+                  src="/videos/ee-slogans-photomix-2.mp4"
+                  poster="/videos/ee-slogans-photomix-2-poster.jpg"
+                  title="EE Slogans Photomix 2"
+                  controls={true}
+                  muted={false}
+                  preload="metadata"
+                />
               </div>
               <div className="video-info">
 
