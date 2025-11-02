@@ -7,11 +7,15 @@ import Contact from './pages/Contact';
 import Technical from './pages/Technical';
 import LiquidGlassNavbar from './components/LiquidGlassNavbar';
 import { setRobotsMeta } from './utils/seo';
+import { useAutoSEO } from './hooks/useSEO';
 import './App.css';
 
-// Component to scroll to top on route change
+// Component to scroll to top on route change and handle auto SEO
 function ScrollToTop() {
   const { pathname } = useLocation();
+  
+  // Automatically apply SEO based on current route
+  useAutoSEO();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -24,10 +28,20 @@ function App() {
   useEffect(() => {
     // Ensure the site is indexable by search engines
     setRobotsMeta(false);
+    
+    // React DevTools notice for development
+    if (import.meta.env.DEV) {
+      console.info('💡 For better development experience, install React DevTools: https://react.dev/link/react-devtools');
+    }
   }, []);
 
   return (
-    <Router>
+    <Router
+      future={{
+        v7_startTransition: true,
+        v7_relativeSplatPath: true
+      }}
+    >
       <ScrollToTop />
       <LiquidGlassNavbar />
       <Routes>

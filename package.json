@@ -4,9 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "title": "Epic Economics",
-  "description": "Official website for the Epic Economics theatrical production",
+  "description": "What would you protest about today? A play by Dimis Michaelides",
   "scripts": {
     "dev": "vite",
+    "dev:vercel": "vercel dev",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
@@ -17,7 +18,8 @@
     "react-dom": "^19.1.1",
     "react-google-recaptcha-v3": "^1.11.0",
     "react-router-dom": "^6.26.1",
-    "resend": "^6.3.0"
+    "resend": "^6.3.0",
+    "web-vitals": "^5.1.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.33.0",

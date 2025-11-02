@@ -123,7 +123,7 @@ function Technical() {
         <div className="requirements-grid">
           <div className="requirement-item">
             <h4>Stage Size</h4>
-            <p>Minimum 4m x 4m performance area</p>
+            <p>Minimum 6m x 6m performance area</p>
           </div>
           <div className="requirement-item">
             <h4>Power</h4>

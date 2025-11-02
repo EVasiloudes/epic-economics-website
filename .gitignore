@@ -27,5 +27,6 @@ dist-ssr
 # Videos directory
 videos_EE/
 
-# .env
+# .envs
 .env.local
+.env

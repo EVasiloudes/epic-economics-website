@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import LazyVideo from '../components/LazyVideo';
 import './Press.css';
 
-// Import all the existing images
+// Import press images
 import img1 from '../assets/images/press/_BOO0036.jpg';
 import img2 from '../assets/images/press/_BOO0058.jpg';
 import img3 from '../assets/images/press/_BOO0073.jpg';
@@ -34,6 +34,7 @@ function Press() {
   const [showReviewModal, setShowReviewModal] = useState(false);
   const [showAllReviews, setShowAllReviews] = useState(false);
 
+  // Define images array with imported assets
   const images = [
     { src: img1, alt: 'Epic Economics - Photography by Boyana', filename: '_BOO0036.jpg' },
     { src: img2, alt: 'Epic Economics - Photography by Boyana', filename: '_BOO0058.jpg' },
@@ -236,7 +237,6 @@ function Press() {
       <header className="press-header">
         <h1>Epic Economics - Press Kit</h1>
         <p className="press-description">High-resolution images and press materials</p>
-        <p className="team-location">Our team in Glasgow (GMT) and Nicosia (EET)</p>
       </header>
 
       <section className="press-reviews">
@@ -308,9 +308,8 @@ function Press() {
               {/* <p>at Artos Foundations in Nicosia, Cyprus.</p>*/}
             </div>
           </div>
-
-          </div>
-        </section>
+        </div>
+      </section>
 
         <section className="audience-participation-section">
           <h2>Audience Participation</h2>
@@ -319,7 +318,7 @@ function Press() {
             <div className="video-card">
               <div className="video-thumbnail">
                 <LazyVideo
-                  src="/videos/ee-slogans-photomix-1.mp4"
+                  src="/videos/ee-slogans-photomix-1-compressed.mp4"
                   poster="/videos/ee-slogans-photomix-1-poster.jpg"
                   title="EE Slogans Photomix 1"
                   controls={true}
@@ -335,7 +334,7 @@ function Press() {
             <div className="video-card">
               <div className="video-thumbnail">
                 <LazyVideo
-                  src="/videos/ee-slogans-photomix-2.mp4"
+                  src="/videos/ee-slogans-photomix-2-compressed.mp4"
                   poster="/videos/ee-slogans-photomix-2-poster.jpg"
                   title="EE Slogans Photomix 2"
                   controls={true}

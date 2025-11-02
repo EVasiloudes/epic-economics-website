@@ -1,7 +1,8 @@
 import { useEffect, useRef, useCallback } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { PerformanceMonitor, detectBrowserCapabilities } from '../utils/performanceUtils';
+import { EnhancedPerformanceMonitor, detectBrowserCapabilities } from '../utils/performanceUtils';
+import { initWebVitals } from '../utils/webVitals';
 import './GsapHero.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -115,45 +116,56 @@ function GsapHero() {
     const capabilities = detectBrowserCapabilities();
 
     // Log browser capabilities in development
-    if (process.env.NODE_ENV === 'development') {
+    if (import.meta.env.DEV) {
       console.group('🔍 Browser Capabilities');
       console.table(capabilities);
       console.groupEnd();
     }
 
-    // Initialize performance monitor
-    performanceMonitorRef.current = new PerformanceMonitor();
-    if (process.env.NODE_ENV === 'development') {
+    // Initialize enhanced performance monitor with Core Web Vitals
+    performanceMonitorRef.current = new EnhancedPerformanceMonitor();
+    if (import.meta.env.DEV) {
       performanceMonitorRef.current.startMonitoring();
+      // Initialize lightweight Core Web Vitals measurement
+      initWebVitals();
     }
 
-    // Debounce setup to avoid multiple rapid calls
+    // Debounce setup to avoid multiple rapid calls - longer delay to reduce frame drops
     const timeoutId = setTimeout(() => {
       setupScrollAnimation();
       const cleanupScroll = setupSmoothScroll();
 
-      // Handle resize events with better debouncing for different browsers
-      const resizeDelay = capabilities.isMobile ? 250 : 150;
-      const handleResize = gsap.utils.debounce(() => {
-        ScrollTrigger.refresh();
-        setupSmoothScroll();
-      }, resizeDelay);
+      // Handle resize events with longer debounce to prevent frame drops
+      const resizeDelay = capabilities.isMobile ? 500 : 300;
+      // Custom debounce function since gsap.utils.debounce may not be available
+      let resizeTimeout;
+      const handleResize = () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+          if (document.visibilityState === 'visible') {
+            ScrollTrigger.refresh();
+            setupSmoothScroll();
+          }
+        }, resizeDelay);
+      };
 
       window.addEventListener('resize', handleResize);
 
       // Return cleanup function
       return () => {
         window.removeEventListener('resize', handleResize);
+        clearTimeout(resizeTimeout);
         if (cleanupScroll) cleanupScroll();
       };
-    }, 16); // Single frame delay
+    }, 100); // Longer delay to prevent frame drops
 
     return () => {
       clearTimeout(timeoutId);
 
-      // Stop performance monitoring
-      if (performanceMonitorRef.current && process.env.NODE_ENV === 'development') {
+      // Stop enhanced performance monitoring and generate report
+      if (performanceMonitorRef.current && import.meta.env.DEV) {
         performanceMonitorRef.current.stopMonitoring();
+        performanceMonitorRef.current.generateEnhancedReport();
       }
 
       // Cleanup ScrollTriggers

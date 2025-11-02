@@ -319,7 +319,8 @@ html {
 }
 
 .video-thumbnail iframe,
-.video-thumbnail video {
+.video-thumbnail video,
+.video-thumbnail .lazy-video-container {
   position: absolute;
   top: 0;
   left: 0;
@@ -337,7 +338,11 @@ html {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 150px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background: linear-gradient(135deg, #bdc3c7, #95a5a6);
   color: #ffffff;
 }
@@ -354,6 +359,20 @@ html {
   text-transform: uppercase;
   letter-spacing: 1px;
   margin: 0;
+}
+
+.video-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #bdc3c7, #95a5a6);
+  color: #ffffff;
 }
 
 .video-info {

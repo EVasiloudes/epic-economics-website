@@ -18,7 +18,7 @@ function isRateLimited(ip) {
   }
 
   const userLimit = rateLimitMap.get(ip);
-  
+
   if (now > userLimit.resetTime) {
     // Reset the window
     rateLimitMap.set(ip, { count: 1, resetTime: now + windowMs });
@@ -45,7 +45,7 @@ async function sendContactEmail(formData) {
 
   try {
     const { name, email, subject, message } = formData;
-    
+
     const emailContent = `
       <h2>New Contact Form Submission</h2>
       <p><strong>Name:</strong> ${name}</p>
@@ -58,7 +58,7 @@ async function sendContactEmail(formData) {
     `;
 
     const result = await resend.emails.send({
-      from: 'Epic Economics <onboarding@resend.dev>', // Using Resend's free domain
+      from: 'Epic Economics <contact@epic-economics.dimis.org>', // Using Resend's free domain
       to: ['elias@densetheory.cc'], // Your email address
       subject: `Contact Form: ${subject}`,
       html: emailContent,
@@ -76,7 +76,7 @@ async function sendContactEmail(formData) {
 // Verify reCAPTCHA token
 async function verifyRecaptcha(token) {
   const secretKey = process.env.RECAPTCHA_SECRET_KEY;
-  
+
   if (!secretKey) {
     console.warn('RECAPTCHA_SECRET_KEY not configured, skipping verification');
     return { success: true, score: 1.0, isValid: true };
@@ -96,7 +96,7 @@ async function verifyRecaptcha(token) {
 
     const data = await response.json();
     const { success, score, action } = data;
-    
+
     // For reCAPTCHA v3, check the score (0.0 - 1.0, higher is better)
     // Typical threshold is 0.5, but you can adjust based on your needs
     return {
@@ -149,7 +149,7 @@ export default async function handler(req, res) {
 
   try {
     const userIP = req.headers['x-forwarded-for'] || req.connection?.remoteAddress || 'unknown';
-    
+
     // Check rate limiting
     if (isRateLimited(userIP)) {
       return res.status(429).json({
@@ -187,14 +187,14 @@ export default async function handler(req, res) {
     // Verify reCAPTCHA if token is provided
     if (recaptchaToken) {
       const recaptchaResult = await verifyRecaptcha(recaptchaToken);
-      
+
       if (!recaptchaResult.isValid) {
         console.log('reCAPTCHA verification failed:', {
           success: recaptchaResult.success,
           score: recaptchaResult.score,
           action: recaptchaResult.action
         });
-        
+
         return res.status(400).json({
           success: false,
           error: 'Security verification failed. Please try again.'
@@ -214,7 +214,7 @@ export default async function handler(req, res) {
     });
 
     const emailResult = await sendContactEmail(sanitizedData);
-    
+
     if (!emailResult.success) {
       console.error('Failed to send email:', emailResult.error);
       return res.status(500).json({
