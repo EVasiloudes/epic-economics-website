@@ -1,14 +1,51 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import GsapHero from '../components/GsapHero';
 import TitleHero from '../components/TitleHero';
 import './Home.css';
 
-// Import selected images for homepage
+// Import selected images for homepage with lazy loading hints
 import audienceImg from '../assets/images/press/_BOO9866.jpg';
 import performanceImg from '../assets/images/press/_BOO9941.jpg';
 
 function Home() {
+  const [imagesLoaded, setImagesLoaded] = useState(false);
+
+
+  useEffect(() => {
+    // Add class to body to scope GSAP hero effects only to home page
+    document.body.classList.add('home-with-gsap');
+    
+    // Preload critical images after initial paint
+    const preloadImages = () => {
+      const imagePromises = [audienceImg, performanceImg].map(src => {
+        return new Promise((resolve) => {
+          const img = new Image();
+          img.onload = resolve;
+          img.onerror = resolve;
+          img.src = src;
+        });
+      });
+      
+      Promise.all(imagePromises).then(() => {
+        setImagesLoaded(true);
+      });
+    };
+
+    // Use requestIdleCallback to defer image preloading
+    if (window.requestIdleCallback) {
+      window.requestIdleCallback(preloadImages, { timeout: 2000 });
+    } else {
+      setTimeout(preloadImages, 100);
+    }
+    
+    return () => {
+      // Clean up: remove class and reset body height when leaving home page
+      document.body.classList.remove('home-with-gsap');
+      document.body.style.height = '';
+    };
+  }, []);
+
   return (
     <div className="home">
       <GsapHero />
@@ -24,6 +61,11 @@ function Home() {
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               referrerPolicy="strict-origin-when-cross-origin"
               allowFullScreen
+              loading="lazy"
+              style={{ 
+                contentVisibility: 'auto',
+                contain: 'layout style'
+              }}
             ></iframe>
         </div>
         {/* <p className="teaser-description">
@@ -44,6 +86,15 @@ function Home() {
               src={audienceImg}
               alt="Epic Economics - Audience participation during performance"
               loading="lazy"
+              decoding="async"
+              style={{ 
+                opacity: imagesLoaded ? 1 : 0, 
+                transition: 'opacity 0.3s ease-in-out',
+                contentVisibility: 'auto',
+                contain: 'layout style'
+              }}
+              width="800"
+              height="600"
             />
             <p className="image-caption">Engaging audiences in economic discourse</p>
           </div>
@@ -72,6 +123,15 @@ function Home() {
               src={performanceImg}
               alt="Epic Economics - Performance highlighting theatrical elements"
               loading="lazy"
+              decoding="async"
+              style={{ 
+                opacity: imagesLoaded ? 1 : 0, 
+                transition: 'opacity 0.3s ease-in-out',
+                contentVisibility: 'auto',
+                contain: 'layout style'
+              }}
+              width="800"
+              height="600"
             />
             <p className="image-caption">Where economics meets theatrical performance</p>
           </div>

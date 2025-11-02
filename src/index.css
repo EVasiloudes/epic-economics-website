@@ -1,5 +1,5 @@
-/* Import web fonts */
-@import url('https://fonts.googleapis.com/css2?family=Proxima+Nova:wght@300;400;500;600;700&display=swap');
+/* Import web fonts with performance optimization */
+@import url('https://fonts.googleapis.com/css2?family=Proxima+Nova:wght@300;400;500;600;700&display=swap') layer(fonts);
 
 :root {
   /* Typography */
@@ -11,6 +11,9 @@
   line-height: 1.6;
   font-weight: 400;
   font-size: 16px;
+
+  /* Critical performance optimizations */
+  font-display: swap;
 
   /* Liquid Glass Color Palette */
   --glass-bg-primary: rgba(255, 255, 255, 0.15);
@@ -65,6 +68,9 @@ body {
   background-attachment: fixed;
   position: relative;
   overflow-x: hidden;
+  /* Critical performance optimizations */
+  contain: layout style;
+  content-visibility: auto;
 }
 
 body::before {
@@ -80,6 +86,9 @@ body::before {
     radial-gradient(circle at 50% 50%, rgba(79, 172, 254, 0.1) 0%, transparent 50%);
   pointer-events: none;
   z-index: 0;
+  /* Performance optimizations */
+  will-change: transform;
+  contain: layout style paint;
 }
 
 /* Headings - Use Futura */
@@ -161,6 +170,9 @@ button {
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px var(--glass-shadow);
+  /* Performance optimizations */
+  will-change: transform, background-color;
+  contain: layout style;
 }
 
 button:hover {
@@ -289,6 +301,9 @@ th {
   padding: 2rem;
   box-shadow: 0 8px 32px var(--glass-shadow);
   transition: all 0.3s ease;
+  /* Performance optimizations */
+  will-change: transform, box-shadow;
+  contain: layout style;
 }
 
 .glass-card:hover {

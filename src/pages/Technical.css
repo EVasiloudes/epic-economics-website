@@ -1,7 +1,4 @@
-/* Smooth scrolling behavior */
-html {
-  scroll-behavior: smooth;
-}
+/* Removed smooth scrolling behavior to prevent autoscroll issues */
 
 .technical {
   max-width: 1200px;
@@ -700,9 +697,7 @@ html {
 
 /* Reduce motion for users who prefer it */
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
+  /* Removed scroll-behavior property */
 
   *,
   *::before,

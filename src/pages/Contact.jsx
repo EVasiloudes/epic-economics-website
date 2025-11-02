@@ -9,7 +9,7 @@ class RecaptchaErrorBoundary extends React.Component {
     this.state = { hasError: false };
   }
 
-  static getDerivedStateFromError(error) {
+  static getDerivedStateFromError() {
     return { hasError: true };
   }
 
@@ -482,9 +482,9 @@ function ContactFormWithoutRecaptcha() {
                   </svg>
                 </div>
                 <div className="method-details">
-                  <h3>Location</h3>
-                  <p>Global Remote</p>
-                  <span className="method-label">Available Worldwide</span>
+                  <h3>Timezones</h3>
+                  <p>Based in Glasgow and Cyprus</p>
+                  <span className="method-label">GMT: {new Date().toLocaleTimeString('en-GB', { timeZone: 'GMT', hour: '2-digit', minute: '2-digit' })} / EEST: {new Date().toLocaleTimeString('en-GB', { timeZone: 'EET', hour: '2-digit', minute: '2-digit' })}</span>
                 </div>
               </div>
             </div>
