@@ -1,8 +1,8 @@
 .title-hero {
   position: relative;
-  height: 100vh;
+  height: 80vh;
   width: 100vw;
-  margin-top: 200vh;
+  margin-top: 140vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -134,7 +134,7 @@
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .title-hero {
-    margin-top: 150vh;
+    margin-top: 60vh;
   }
 
   .title-economics {

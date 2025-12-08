@@ -165,7 +165,7 @@ export const setPageSEO = ({
  */
 export const generateWebsiteStructuredData = ({
   name = 'Epic Economics',
-  description = 'Epic Economics - Your gateway to economic insights and analysis',
+  description = 'Epic Economics - What would you protest about today?',
   url = 'https://epic-economics.dimis.org/',
   author = 'Epic Economics',
   type = 'TheaterGroup'

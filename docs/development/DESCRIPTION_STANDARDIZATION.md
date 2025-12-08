@@ -18,7 +18,7 @@ This description was chosen because:
 
 ### 1. Main HTML Entry Point
 **File:** `index.html`
-- `<meta name="description" content="...">` 
+- `<meta name="description" content="...">`
 - `<meta property="og:description" content="...">`
 - `<meta property="twitter:description" content="...">`
 
@@ -47,7 +47,6 @@ This description was chosen because:
 
 The following inconsistent descriptions were found and replaced:
 
-1. "Epic Economics - Your gateway to economic insights and analysis"
 2. "Epic Economics - What would you protest about today?"
 3. "Epic Economics - what would you protest about today?" (lowercase)
 4. "Your gateway to understanding economics"

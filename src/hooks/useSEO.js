@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { setPageSEO, addStructuredData } from '../utils/seo';
+import { setPageSEO, addStructuredData, setRobotsMeta } from '../utils/seo';
 
 /**
  * Custom hook for managing page-level SEO
@@ -64,10 +64,17 @@ export const useSEO = (seoConfig = {}) => {
 
     // Handle robots meta
     if (noIndex) {
-      import('../utils/seo').then(({ setRobotsMeta }) => {
-        setRobotsMeta(true);
-      });
+      setRobotsMeta(true);
     }
+
+    // Signal to prerenderer that page is ready
+    // Use a small delay to ensure all DOM updates are complete
+    setTimeout(() => {
+      if (typeof window !== 'undefined') {
+        const event = new Event('prerender-ready');
+        document.dispatchEvent(event);
+      }
+    }, 100);
 
   }, [location.pathname, seoConfig]);
 };
@@ -77,8 +84,8 @@ export const useSEO = (seoConfig = {}) => {
  */
 export const SEO_PRESETS = {
   HOME: {
-    title: 'Epic Economics - Your Gateway to Economic Insights',
-    description: 'What would you protest about today? A play by Dimis Michaelides',
+    title: 'Epic Economics',
+    description: 'What would you protest about today?, A Play by Dimis Michaelides',
     keywords: ['epic economics', 'theatrical production', 'economics', 'democracy', 'protest', 'social change', 'theater'],
     openGraph: {
       title: 'Epic Economics',

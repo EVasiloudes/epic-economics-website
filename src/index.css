@@ -145,14 +145,15 @@ p {
 /* Links */
 a {
   font-weight: 500;
-  color: var(--accent-purple);
+  color: #1e3a8a !important;
   text-decoration: inherit;
   transition: all 0.3s ease;
 }
 
 a:hover {
-  color: var(--accent-pink);
-  text-shadow: 0 0 10px rgba(240, 147, 251, 0.3);
+  color: #5b21b6 !important;
+  text-shadow: none;
+  text-decoration: underline;
 }
 
 /* Buttons */

@@ -92,33 +92,33 @@ function LiquidGlassNavbar() {
           </div>
           
           <div className="navbar-menu" role="menubar">
-          <Link 
-            to="/" 
-            className={location.pathname === '/' ? 'active' : ''}
+          <Link
+            to="/"
+            className={`menu-link ${location.pathname === '/' ? 'menu-link-active' : ''}`}
             role="menuitem"
             aria-current={location.pathname === '/' ? 'page' : undefined}
           >
             Home
           </Link>
-          <Link 
-            to="/press" 
-            className={location.pathname === '/press' ? 'active' : ''}
+          <Link
+            to="/press"
+            className={`menu-link ${location.pathname === '/press' ? 'menu-link-active' : ''}`}
             role="menuitem"
             aria-current={location.pathname === '/press' ? 'page' : undefined}
           >
             Press
           </Link>
-          <Link 
-            to="/technical" 
-            className={location.pathname === '/technical' ? 'active' : ''}
+          <Link
+            to="/technical"
+            className={`menu-link ${location.pathname === '/technical' ? 'menu-link-active' : ''}`}
             role="menuitem"
             aria-current={location.pathname === '/technical' ? 'page' : undefined}
           >
             Technical
           </Link>
-          <Link 
-            to="/contact" 
-            className={location.pathname === '/contact' ? 'active' : ''}
+          <Link
+            to="/contact"
+            className={`menu-link ${location.pathname === '/contact' ? 'menu-link-active' : ''}`}
             role="menuitem"
             aria-current={location.pathname === '/contact' ? 'page' : undefined}
           >

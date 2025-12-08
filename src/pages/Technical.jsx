@@ -20,15 +20,6 @@ function Technical() {
             className="stage-plan-image"
           />
         </div>
-        <div className="stage-plan-info">
-          <h3>Stage Setup Details</h3>
-          <p>
-            The stage plan shows the optimal layout for Epic Economics, including performer positioning,
-            instrument placement, and technical equipment setup. The central performer position allows
-            for maximum audience engagement while maintaining clear sightlines to all instruments and
-            technical elements.
-          </p>
-        </div>
       </section>
 
       <section className="technical-requirements">
@@ -41,7 +32,7 @@ function Technical() {
             <li><strong>Audio Interface:</strong> Multi-channel audio interface for live sound processing</li>
             <li><strong>Speakers:</strong> Full-range PA system with subwoofer support</li>
             <li><strong>Microphones:</strong> Wireless headset mic for performer</li>
-            <li><strong>Instruments:</strong> Guitar with amplification, various percussion elements</li>
+            <li><strong>Instruments:</strong> Guitar with amplification</li>
           </ul>
         </div>
 
@@ -133,17 +124,21 @@ function Technical() {
             <h4>Lighting</h4>
             <p>Multi-zone controllable lighting system with specials, house lights controllable, projector capability</p>
           </div>
-          <div className="requirement-item">
+          {/* <div className="requirement-item">
             <h4>Load-in</h4>
             <p>4-5 hours setup time recommended (including lighting focus)</p>
-          </div>
+          </div>*/}
           <div className="requirement-item">
             <h4>Control</h4>
             <p>Lighting board capable of 41 cues with timed fades and instant changes</p>
           </div>
           <div className="requirement-item">
             <h4>Special Equipment</h4>
-            <p>Floor-mounted lights, red gel/LED capability, projector for finale</p>
+            <p>Floor-mounted lights, red gel/LED capability, projector for finale and sur/subtitles</p>
+          </div>
+          <div className="requirement-item">
+            <h4>Special Equipment</h4>
+            <p>guitar Amp, we'll source it</p>
           </div>
         </div>
       </section>

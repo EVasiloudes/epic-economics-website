@@ -15,7 +15,7 @@ function Home() {
   useEffect(() => {
     // Add class to body to scope GSAP hero effects only to home page
     document.body.classList.add('home-with-gsap');
-    
+
     // Preload critical images after initial paint
     const preloadImages = () => {
       const imagePromises = [audienceImg, performanceImg].map(src => {
@@ -26,7 +26,7 @@ function Home() {
           img.src = src;
         });
       });
-      
+
       Promise.all(imagePromises).then(() => {
         setImagesLoaded(true);
       });
@@ -38,7 +38,7 @@ function Home() {
     } else {
       setTimeout(preloadImages, 100);
     }
-    
+
     return () => {
       // Clean up: remove class and reset body height when leaving home page
       document.body.classList.remove('home-with-gsap');
@@ -62,7 +62,7 @@ function Home() {
               referrerPolicy="strict-origin-when-cross-origin"
               allowFullScreen
               loading="lazy"
-              style={{ 
+              style={{
                 contentVisibility: 'auto',
                 contain: 'layout style'
               }}
@@ -87,8 +87,8 @@ function Home() {
               alt="Epic Economics - Audience participation during performance"
               loading="lazy"
               decoding="async"
-              style={{ 
-                opacity: imagesLoaded ? 1 : 0, 
+              style={{
+                opacity: imagesLoaded ? 1 : 0,
                 transition: 'opacity 0.3s ease-in-out',
                 contentVisibility: 'auto',
                 contain: 'layout style'
@@ -96,7 +96,7 @@ function Home() {
               width="800"
               height="600"
             />
-            <p className="image-caption">Engaging audiences in economic discourse</p>
+            <p className="image-caption"></p>
           </div>
 
           <div className="synopsis-paragraph second-paragraph">
@@ -124,8 +124,8 @@ function Home() {
               alt="Epic Economics - Performance highlighting theatrical elements"
               loading="lazy"
               decoding="async"
-              style={{ 
-                opacity: imagesLoaded ? 1 : 0, 
+              style={{
+                opacity: imagesLoaded ? 1 : 0,
                 transition: 'opacity 0.3s ease-in-out',
                 contentVisibility: 'auto',
                 contain: 'layout style'
