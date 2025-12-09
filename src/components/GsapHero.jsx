@@ -1,4 +1,4 @@
-import { useEffect, useRef, useCallback, useState } from 'react';
+import { useEffect, useRef, useCallback } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { EnhancedPerformanceMonitor, detectBrowserCapabilities } from '../utils/performanceUtils';
@@ -12,32 +12,15 @@ function GsapHero() {
   const animationFrameRef = useRef(null);
   const scrollTriggerRefs = useRef([]);
   const performanceMonitorRef = useRef(null);
-  const [isInView, setIsInView] = useState(false);
-  const [shouldStartAnimation, setShouldStartAnimation] = useState(false);
 
   const setupScrollAnimation = useCallback(() => {
     const foldEffect = foldEffectRef.current;
-    if (!foldEffect || !shouldStartAnimation) return;
+    if (!foldEffect) return;
 
     // Kill existing ScrollTriggers
     scrollTriggerRefs.current.forEach(trigger => trigger.kill());
     scrollTriggerRefs.current = [];
 
-    // Use requestIdleCallback for non-critical animations
-    const scheduleAnimation = () => {
-      if (window.requestIdleCallback) {
-        window.requestIdleCallback(() => {
-          setupMarqueeAnimations(foldEffect);
-        }, { timeout: 100 });
-      } else {
-        setTimeout(() => setupMarqueeAnimations(foldEffect), 0);
-      }
-    };
-
-    scheduleAnimation();
-  }, [shouldStartAnimation]);
-
-  const setupMarqueeAnimations = useCallback((foldEffect) => {
     // Optimize marquee animations with better performance settings
     gsap.utils.toArray('.marquee', foldEffect).forEach((el, index) => {
       const track = el.querySelector('.track');
@@ -49,7 +32,7 @@ function GsapHero() {
       const scrollTrigger = gsap.fromTo(track,
         {
           x,
-          force3D: true
+          force3D: true // Force hardware acceleration
         },
         {
           x: xEnd,
@@ -57,10 +40,9 @@ function GsapHero() {
           force3D: true,
           scrollTrigger: {
             trigger: foldEffect,
-            scrub: 0.5,
+            scrub: true, // Use boolean for better performance than number
             invalidateOnRefresh: true,
-            fastScrollEnd: true,
-            refreshPriority: -1
+            fastScrollEnd: true
           }
         }
       );
@@ -79,116 +61,57 @@ function GsapHero() {
     let targetScroll = 0;
     let currentScroll = 0;
     let ticking = false;
-    let isHomePage = window.location.pathname === '/';
-
-    // Only run smooth scroll on home page
-    if (!isHomePage) return;
 
     // Optimized animation function with requestAnimationFrame throttling
     const updateTransforms = () => {
       foldsContent.forEach(content => {
-        if (content && content.style && content.parentElement) {
-          const transformValue = Math.round(currentScroll * 100) / 100;
-          content.style.transform = `translate3d(0, ${transformValue}px, 0)`;
+        if (content && content.style) {
+          // Use transform3d for better performance
+          content.style.transform = `translate3d(0, ${currentScroll}px, 0)`;
         }
       });
       ticking = false;
     };
 
     const tick = () => {
-      // Early exit if not on home page
-      if (window.location.pathname !== '/') {
-        if (animationFrameRef.current) {
-          cancelAnimationFrame(animationFrameRef.current);
-        }
-        return;
-      }
+      // Calculate target scroll position
+      targetScroll = -(
+        document.documentElement.scrollTop || document.body.scrollTop
+      );
 
-      const currentScrollPos = document.documentElement.scrollTop || document.body.scrollTop;
-      
-      if (!centerContent || !centerFold || foldsContent.length === 0) {
-        animationFrameRef.current = requestAnimationFrame(tick);
-        return;
-      }
-
-      targetScroll = -currentScrollPos;
-
+      // Smooth interpolation with optimized easing
       const diff = targetScroll - currentScroll;
       if (Math.abs(diff) < 0.1) {
         currentScroll = targetScroll;
       } else {
-        currentScroll += diff * 0.08;
+        currentScroll += diff * 0.1;
       }
 
-      if (Math.abs(diff) > 0.5) {
-        if (!ticking) {
-          requestAnimationFrame(updateTransforms);
-          ticking = true;
-        }
+      // Throttle DOM updates using requestAnimationFrame
+      if (!ticking) {
+        requestAnimationFrame(updateTransforms);
+        ticking = true;
       }
 
       animationFrameRef.current = requestAnimationFrame(tick);
     };
 
-    // Only modify body height on home page and store original height
-    const originalBodyHeight = document.body.style.height;
-    const centerContentHeight = centerContent.clientHeight;
-    const centerFoldHeight = centerFold.clientHeight;
-    
-    if (isHomePage && centerContentHeight > 0 && centerFoldHeight > 0) {
-      const overflowHeight = centerContentHeight - centerFoldHeight;
-      if (overflowHeight > 0) {
-        document.body.style.height = `${overflowHeight + window.innerHeight}px`;
-      }
-    }
+    // Set initial body height
+    const overflowHeight = centerContent.clientHeight - centerFold.clientHeight;
+    document.body.style.height = `${overflowHeight + window.innerHeight}px`;
 
-    if (isHomePage && centerContent && centerFold && foldsContent.length > 0) {
-      tick();
-    }
+    // Start animation loop
+    tick();
 
-    // Return cleanup function that restores original state
+    // Return cleanup function
     return () => {
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
       }
-      // Restore original body height
-      document.body.style.height = originalBodyHeight;
     };
   }, []);
 
-  // Intersection Observer for lazy initialization
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const [entry] = entries;
-        if (entry.isIntersecting) {
-          setIsInView(true);
-          // Delay animation start to prioritize critical content
-          setTimeout(() => setShouldStartAnimation(true), 500);
-          observer.disconnect();
-        }
-      },
-      { 
-        threshold: 0.1,
-        rootMargin: '50px'
-      }
-    );
-
-    if (foldEffectRef.current) {
-      observer.observe(foldEffectRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    // Only initialize on home page
-    const isHomePage = window.location.pathname === '/';
-    
-    if (!isHomePage || !shouldStartAnimation) {
-      return;
-    }
-
     // Initialize performance monitoring
     const capabilities = detectBrowserCapabilities();
 
@@ -203,46 +126,41 @@ function GsapHero() {
     performanceMonitorRef.current = new EnhancedPerformanceMonitor();
     if (import.meta.env.DEV) {
       performanceMonitorRef.current.startMonitoring();
+      // Initialize lightweight Core Web Vitals measurement
       initWebVitals();
     }
 
-    // Use requestIdleCallback to defer non-critical setup
-    const initializeHero = () => {
-      if (window.requestIdleCallback) {
-        window.requestIdleCallback(() => {
-          setupScrollAnimation();
-          const cleanupScroll = setupSmoothScroll();
-          
-          // Store cleanup function
-          return cleanupScroll;
-        }, { timeout: 2000 });
-      } else {
-        setTimeout(() => {
-          setupScrollAnimation();
-          setupSmoothScroll();
-        }, 100);
-      }
-    };
+    // Debounce setup to avoid multiple rapid calls - longer delay to reduce frame drops
+    const timeoutId = setTimeout(() => {
+      setupScrollAnimation();
+      const cleanupScroll = setupSmoothScroll();
 
-    const cleanupScroll = initializeHero();
+      // Handle resize events with longer debounce to prevent frame drops
+      const resizeDelay = capabilities.isMobile ? 500 : 300;
+      // Custom debounce function since gsap.utils.debounce may not be available
+      let resizeTimeout;
+      const handleResize = () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+          if (document.visibilityState === 'visible') {
+            ScrollTrigger.refresh();
+            setupSmoothScroll();
+          }
+        }, resizeDelay);
+      };
 
-    // Handle resize events with debounce
-    const resizeDelay = capabilities.isMobile ? 500 : 300;
-    let resizeTimeout;
-    const handleResize = () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(() => {
-        if (document.visibilityState === 'visible' && window.location.pathname === '/') {
-          ScrollTrigger.refresh();
-        }
-      }, resizeDelay);
-    };
+      window.addEventListener('resize', handleResize);
 
-    window.addEventListener('resize', handleResize, { passive: true });
+      // Return cleanup function
+      return () => {
+        window.removeEventListener('resize', handleResize);
+        clearTimeout(resizeTimeout);
+        if (cleanupScroll) cleanupScroll();
+      };
+    }, 100); // Longer delay to prevent frame drops
 
     return () => {
-      window.removeEventListener('resize', handleResize);
-      clearTimeout(resizeTimeout);
+      clearTimeout(timeoutId);
 
       // Stop enhanced performance monitoring and generate report
       if (performanceMonitorRef.current && import.meta.env.DEV) {
@@ -259,25 +177,15 @@ function GsapHero() {
         cancelAnimationFrame(animationFrameRef.current);
       }
 
-      // Reset body height only if we're leaving the home page
-      if (window.location.pathname !== '/' && document.body.style.height) {
+      // Reset body height
+      if (document.body.style.height) {
         document.body.style.height = '';
       }
-
-      if (cleanupScroll) cleanupScroll();
     };
-  }, [setupScrollAnimation, setupSmoothScroll, shouldStartAnimation]);
+  }, [setupScrollAnimation, setupSmoothScroll]);
 
   return (
-    <div 
-      className={`screen ${isInView ? 'in-view' : ''}`} 
-      id="fold-effect" 
-      ref={foldEffectRef}
-      style={{ 
-        opacity: isInView ? 1 : 0,
-        transition: 'opacity 0.3s ease-in-out'
-      }}
-    >
+    <div className="screen" id="fold-effect" ref={foldEffectRef}>
       <div className="wrapper-3d">
         <div className="fold fold-top">
           <div className="fold-align">
