@@ -206,11 +206,7 @@
   pointer-events: none;
 }
 
-/* Critical loading state */
-.screen:not(.in-view) {
-  opacity: 0;
-  transform: translateY(20px);
-}
+/* Critical loading state - removed opacity: 0 to ensure hero is always visible */
 
 /* Performance hint for animations */
 @media (prefers-reduced-motion: no-preference) {

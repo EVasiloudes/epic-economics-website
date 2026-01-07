@@ -1,9 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { setRobotsMeta } from '../utils/seo';
 import './Technical.css';
 import stagePlan from '../assets/images/Epic-Economics-StagePlan.png';
 
 function Technical() {
+  useEffect(() => {
+    // Set noindex, nofollow for technical page
+    setRobotsMeta(true);
+
+    // Cleanup function to restore default indexing when leaving the page
+    return () => {
+      setRobotsMeta(false);
+    };
+  }, []);
+
   return (
     <div className="technical">
       <header className="technical-header">

@@ -109,14 +109,6 @@ function LiquidGlassNavbar() {
             Press
           </Link>
           <Link
-            to="/technical"
-            className={`menu-link ${location.pathname === '/technical' ? 'menu-link-active' : ''}`}
-            role="menuitem"
-            aria-current={location.pathname === '/technical' ? 'page' : undefined}
-          >
-            Technical
-          </Link>
-          <Link
             to="/contact"
             className={`menu-link ${location.pathname === '/contact' ? 'menu-link-active' : ''}`}
             role="menuitem"

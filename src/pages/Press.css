@@ -317,7 +317,8 @@
 
 .video-thumbnail iframe,
 .video-thumbnail video,
-.video-thumbnail .lazy-video-container {
+.video-thumbnail .lazy-video-container,
+.video-thumbnail .simple-video-container {
   position: absolute;
   top: 0;
   left: 0;
@@ -488,13 +489,11 @@
 }
 
 .password-modal-content {
-  background: var(--glass-bg-tertiary);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: #ffffff;
   padding: 2.5rem;
   border-radius: 20px;
-  border: 1px solid var(--glass-border);
-  box-shadow: 0 16px 48px var(--glass-shadow);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.2);
   max-width: 450px;
   width: 90%;
   position: relative;
@@ -506,13 +505,15 @@
   font-size: 1.8rem;
   color: #2c3e50;
   margin-bottom: 1rem;
+  font-weight: bold;
 }
 
 .password-modal-content p {
   font-family: var(--font-body);
-  color: #7f8c8d;
+  color: #34495e;
   margin-bottom: 1.5rem;
   line-height: 1.6;
+  font-size: 1rem;
 }
 
 .password-input {
@@ -520,15 +521,18 @@
   padding: 1rem;
   font-size: 1.1rem;
   font-family: var(--font-body);
-  border: 2px solid #ecf0f1;
+  border: 2px solid #bdc3c7;
   border-radius: 8px;
   margin-bottom: 1rem;
   outline: none;
   transition: border-color 0.3s ease;
+  background: #ffffff;
+  color: #2c3e50;
 }
 
 .password-input:focus {
-  border-color: var(--accent-blue);
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
 }
 
 .password-input.error {
@@ -589,12 +593,12 @@
 }
 
 .submit-btn {
-  background: var(--accent-blue);
+  background: #3498db;
   color: white;
 }
 
 .submit-btn:hover {
-  background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+  background: #2980b9;
   transform: translateY(-2px);
 }
 
@@ -615,13 +619,11 @@
 }
 
 .success-modal-content {
-  background: var(--glass-bg-tertiary);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: #ffffff;
   padding: 2.5rem;
   border-radius: 20px;
-  border: 1px solid var(--glass-border);
-  box-shadow: 0 16px 48px var(--glass-shadow);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.2);
   max-width: 500px;
   width: 90%;
   position: relative;
@@ -629,7 +631,7 @@
 }
 
 .success-icon {
-  font-size: 3rem;
+  font-size: 3.5rem;
   margin-bottom: 1rem;
 }
 
@@ -638,30 +640,33 @@
   font-size: 1.8rem;
   color: #27ae60;
   margin-bottom: 1rem;
+  font-weight: bold;
 }
 
 .success-modal-content p {
   font-family: var(--font-body);
-  color: #7f8c8d;
+  color: #34495e;
   margin-bottom: 1rem;
   line-height: 1.6;
+  font-size: 1rem;
 }
 
 .direct-link {
   display: inline-block;
-  color: var(--accent-blue);
+  color: #3498db;
   text-decoration: none;
   font-weight: bold;
   font-family: var(--font-heading);
   padding: 0.5rem 1rem;
-  border: 2px solid var(--accent-blue);
+  border: 2px solid #3498db;
   border-radius: 12px;
   margin: 1rem 0;
   transition: all 0.3s ease;
+  font-size: 1rem;
 }
 
 .direct-link:hover {
-  background: var(--accent-blue);
+  background: #3498db;
   color: white;
   transform: translateY(-2px);
 }

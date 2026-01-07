@@ -50,29 +50,6 @@ function Home() {
     <div className="home">
       <GsapHero />
       <TitleHero />
-
-      <section className="teaser">
-        <h2>Watch the Trailer</h2>
-        <div className="teaser-video">
-            <iframe
-              src="https://www.youtube.com/embed/HaY26deh7nE?si=pv4RXJ4hGmY7GD99"
-              title="Epic Economics Teaser"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-              loading="lazy"
-              style={{
-                contentVisibility: 'auto',
-                contain: 'layout style'
-              }}
-            ></iframe>
-        </div>
-        {/* <p className="teaser-description">
-          Get a sneak peek of the production with our exclusive preview trailer.
-          Experience the drama, intensity, and artistry that defines Epic Economics.
-        </p>*/}
-      </section>
       <div className="home-content">
         <section className="synopsis">
           <div className="synopsis-paragraph first-paragraph">
@@ -96,7 +73,6 @@ function Home() {
               width="800"
               height="600"
             />
-            <p className="image-caption"></p>
           </div>
 
           <div className="synopsis-paragraph second-paragraph">
@@ -133,14 +109,30 @@ function Home() {
               width="800"
               height="600"
             />
-            <p className="image-caption">Where economics meets theatrical performance</p>
-          </div>
-
-          <div className="photo-credit-home">
-            Photography by <a href="https://www.instagram.com/blessthismess_photography/" target="_blank" rel="noopener noreferrer">Boyana Loizou</a>
           </div>
         </section>
-
+        <section className="teaser">
+          <h2>Watch the Trailer</h2>
+          <div className="teaser-video">
+              <iframe
+                src="https://www.youtube.com/embed/HaY26deh7nE?si=pv4RXJ4hGmY7GD99"
+                title="Epic Economics Teaser"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+                loading="lazy"
+                style={{
+                  contentVisibility: 'auto',
+                  contain: 'layout style'
+                }}
+              ></iframe>
+          </div>
+          {/* <p className="teaser-description">
+            Get a sneak peek of the production with our exclusive preview trailer.
+            Experience the drama, intensity, and artistry that defines Epic Economics.
+          </p>*/}
+        </section>
         <section className="team-bios">
           <h2>Meet the Creative Team</h2>
 
@@ -174,7 +166,6 @@ function Home() {
         <nav className="home-navigation">
           <ul>
             <li><Link to="/press">Press & Media</Link></li>
-            <li><Link to="/technical">Technical Information</Link></li>
             <li><Link to="/contact">Contact</Link></li>
           </ul>
         </nav>
