@@ -7,6 +7,11 @@
   z-index: 1;
 }
 
+/* Hide prerendered content once React loads */
+.prerendered-content {
+  display: none;
+}
+
 /* Container for non-hero pages with consistent max-width */
 .page-container {
   max-width: 1200px;

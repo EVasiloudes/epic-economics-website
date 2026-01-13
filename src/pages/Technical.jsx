@@ -47,7 +47,7 @@ function Technical() {
           </ul>
         </div>
 
-        <div className="tech-section">
+        {/* <div className="tech-section">
           <h3>Lighting Design</h3>
           <h4>Basic Wash System</h4>
           <ul>
@@ -117,7 +117,8 @@ function Technical() {
               <li><strong>Projector Elements:</strong> Combined lighting and projection for climactic moments</li>
             </ul>
           </div>
-        </div>
+        </div> */}
+
       </section>
 
       <section className="venue-requirements">

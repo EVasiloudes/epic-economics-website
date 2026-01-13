@@ -36,12 +36,6 @@
     <priority>0.6</priority>
   </url>
 
-  <!-- Technical Page -->
-  <url>
-    <loc>https://epic-economics.dimis.org/technical</loc>
-    <lastmod>2024-12-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
+  <!-- Technical Page excluded - noindex,nofollow applied -->
 
 </urlset>
