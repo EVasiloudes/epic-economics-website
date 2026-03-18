@@ -9,7 +9,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 function GsapHero() {
   const foldEffectRef = useRef(null);
-  const animationFrameRef = useRef(null);
   const scrollTriggerRefs = useRef([]);
   const performanceMonitorRef = useRef(null);
 
@@ -54,61 +53,25 @@ function GsapHero() {
   const setupSmoothScroll = useCallback(() => {
     const centerContent = document.getElementById('center-content');
     const centerFold = document.getElementById('center-fold');
-    const foldsContent = Array.from(document.querySelectorAll('.fold-content'));
+    const foldsContent = gsap.utils.toArray('.fold-content');
 
     if (!centerContent || !centerFold || foldsContent.length === 0) return;
 
-    let targetScroll = 0;
-    let currentScroll = 0;
-    let ticking = false;
-
-    // Optimized animation function with requestAnimationFrame throttling
-    const updateTransforms = () => {
-      foldsContent.forEach(content => {
-        if (content && content.style) {
-          // Use transform3d for better performance
-          content.style.transform = `translate3d(0, ${currentScroll}px, 0)`;
-        }
-      });
-      ticking = false;
-    };
-
-    const tick = () => {
-      // Calculate target scroll position
-      targetScroll = -(
-        document.documentElement.scrollTop || document.body.scrollTop
-      );
-
-      // Smooth interpolation with optimized easing
-      const diff = targetScroll - currentScroll;
-      if (Math.abs(diff) < 0.1) {
-        currentScroll = targetScroll;
-      } else {
-        currentScroll += diff * 0.1;
+    // Use GSAP native ScrollTrigger for smooth scrolling instead of manual requestAnimationFrame
+    const scrollTrigger = gsap.to(foldsContent, {
+      y: () => -(centerContent.clientHeight - centerFold.clientHeight),
+      ease: "none",
+      force3D: true,
+      scrollTrigger: {
+        trigger: document.body,
+        start: "top top",
+        end: () => `+=${centerContent.clientHeight - centerFold.clientHeight}`,
+        scrub: 1, // Smooth scrub
+        invalidateOnRefresh: true,
       }
+    });
 
-      // Throttle DOM updates using requestAnimationFrame
-      if (!ticking) {
-        requestAnimationFrame(updateTransforms);
-        ticking = true;
-      }
-
-      animationFrameRef.current = requestAnimationFrame(tick);
-    };
-
-    // Set initial body height
-    const overflowHeight = centerContent.clientHeight - centerFold.clientHeight;
-    document.body.style.height = `${overflowHeight + window.innerHeight}px`;
-
-    // Start animation loop
-    tick();
-
-    // Return cleanup function
-    return () => {
-      if (animationFrameRef.current) {
-        cancelAnimationFrame(animationFrameRef.current);
-      }
-    };
+    scrollTriggerRefs.current.push(scrollTrigger.scrollTrigger);
   }, []);
 
   useEffect(() => {
@@ -133,32 +96,10 @@ function GsapHero() {
     // Debounce setup to avoid multiple rapid calls - longer delay to reduce frame drops
     const timeoutId = setTimeout(() => {
       setupScrollAnimation();
-      const cleanupScroll = setupSmoothScroll();
+      setupSmoothScroll();
+    }, 100);
 
-      // Handle resize events with longer debounce to prevent frame drops
-      const resizeDelay = capabilities.isMobile ? 500 : 300;
-      // Custom debounce function since gsap.utils.debounce may not be available
-      let resizeTimeout;
-      const handleResize = () => {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => {
-          if (document.visibilityState === 'visible') {
-            ScrollTrigger.refresh();
-            setupSmoothScroll();
-          }
-        }, resizeDelay);
-      };
-
-      window.addEventListener('resize', handleResize);
-
-      // Return cleanup function
-      return () => {
-        window.removeEventListener('resize', handleResize);
-        clearTimeout(resizeTimeout);
-        if (cleanupScroll) cleanupScroll();
-      };
-    }, 100); // Longer delay to prevent frame drops
-
+    // Let GSAP's invalidateOnRefresh handle resizes automatically
     return () => {
       clearTimeout(timeoutId);
 
@@ -171,16 +112,6 @@ function GsapHero() {
       // Cleanup ScrollTriggers
       scrollTriggerRefs.current.forEach(trigger => trigger.kill());
       scrollTriggerRefs.current = [];
-
-      // Cancel animation frame
-      if (animationFrameRef.current) {
-        cancelAnimationFrame(animationFrameRef.current);
-      }
-
-      // Reset body height
-      if (document.body.style.height) {
-        document.body.style.height = '';
-      }
     };
   }, [setupScrollAnimation, setupSmoothScroll]);
 

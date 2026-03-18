@@ -13,9 +13,6 @@
   /* Optimize for smooth scrolling */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* Add critical performance optimizations */
-  content-visibility: auto;
-  contain: layout style paint;
 }
 
 .marquee {

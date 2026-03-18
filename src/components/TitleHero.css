@@ -74,22 +74,11 @@
   font-style: italic;
   color: var(--text-dark);
   margin: 0;
-  line-height: 0.9;
+  line-height: 1;
   letter-spacing: -0.02em;
   text-shadow: 0 2px 20px rgba(255, 255, 255, 0.5);
-}
-
-.title-epic {
-  font-size: clamp(4.50rem, 3.64rem + 4.29vw, 9.00rem);
-  display: block;
-  margin-bottom: -0.2em;
-  transform: translateX(0);
-}
-
-.title-economics {
-  font-size: clamp(4.50rem, 3.64rem + 4.29vw, 9.00rem);
-  display: block;
-  transform: translateX(6rem);
+  font-size: clamp(3.5rem, 3.64rem + 4.29vw, 9.00rem);
+  text-align: center;
 }
 
 /* Subtle wobble animation */
@@ -108,72 +97,13 @@
   }
 }
 
-@keyframes subtleWobbleOffset {
-  0%, 100% {
-    transform: translateX(6rem) rotate(0deg);
-  }
-  25% {
-    transform: translateX(calc(6rem + 2px)) rotate(-0.5deg);
-  }
-  50% {
-    transform: translateX(6rem) rotate(0deg);
-  }
-  75% {
-    transform: translateX(calc(6rem - 2px)) rotate(0.5deg);
-  }
-}
-
-.title-epic.animate {
+.title-hero h1.animate {
   animation: subtleWobble 6s ease-in-out infinite;
-}
-
-.title-economics.animate {
-  animation: subtleWobbleOffset 6s ease-in-out infinite 0.5s;
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .title-hero {
-    margin-top: 60vh;
-  }
-
-  .title-economics {
-    transform: translateX(4rem);
-  }
-
-  @keyframes subtleWobbleOffset {
-    0%, 100% {
-      transform: translateX(4rem) rotate(0deg);
-    }
-    25% {
-      transform: translateX(calc(4rem + 2px)) rotate(-0.5deg);
-    }
-    50% {
-      transform: translateX(4rem) rotate(0deg);
-    }
-    75% {
-      transform: translateX(calc(4rem - 2px)) rotate(0.5deg);
-    }
-  }
-}
-
-@media (max-width: 480px) {
-  .title-economics {
-    transform: translateX(3rem);
-  }
-
-  @keyframes subtleWobbleOffset {
-    0%, 100% {
-      transform: translateX(3rem) rotate(0deg);
-    }
-    25% {
-      transform: translateX(calc(3rem + 2px)) rotate(-0.5deg);
-    }
-    50% {
-      transform: translateX(3rem) rotate(0deg);
-    }
-    75% {
-      transform: translateX(calc(3rem - 2px)) rotate(0.5deg);
-    }
+    margin-top: 100vh;
   }
 }

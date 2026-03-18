@@ -172,16 +172,16 @@ The brand's signature visual language uses glassmorphism effects:
   /* Typography */
   --font-heading: 'Avenir Next', 'Century Gothic', 'Helvetica Neue', Arial, sans-serif;
   --font-body: 'Nunito Sans', 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
-  
+
   /* Glass Effects */
   --glass-bg-primary: rgba(255, 255, 255, 0.15);
   --glass-bg-secondary: rgba(255, 255, 255, 0.25);
   --glass-border: rgba(255, 255, 255, 0.3);
   --glass-shadow: rgba(0, 0, 0, 0.1);
-  
+
   /* Gradients */
   --gradient-ambient: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-  
+
   /* Accents */
   --accent-purple: #667eea;
   --accent-blue: #4facfe;
@@ -259,7 +259,7 @@ The brand's signature visual language uses glassmorphism effects:
 - Theatrical production
 
 ### Social Media
-- **Title:** "Epic Economics - What would you protest about today?"
+- **Title:** "Epic Economics: What would you protest about today?"
 - **Description:** "What would you protest about today? A play by Dimis Michaelides"
 - **Image:** 1200x630px OpenGraph image
 - **Site:** epic-economics.dimis.org
@@ -270,7 +270,7 @@ The brand's signature visual language uses glassmorphism effects:
 
 ### Creative Team
 - **Dimis Michaelides:** Writer & Performer
-- **Lia Haraki:** Director & Lighting Designer  
+- **Lia Haraki:** Director & Lighting Designer
 - **Elias Vasnic:** Producer, Composer & Technical Supervisor
 
 ### Photography

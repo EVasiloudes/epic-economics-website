@@ -1,7 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import GsapHero from '../components/GsapHero';
 import TitleHero from '../components/TitleHero';
+
+gsap.registerPlugin(ScrollTrigger);
 import './Home.css';
 
 // Import selected images for homepage with lazy loading hints
@@ -10,9 +14,10 @@ import performanceImg from '../assets/images/press/_BOO9941.jpg';
 
 function Home() {
   const [imagesLoaded, setImagesLoaded] = useState(false);
-
+  const heroWrapperRef = useRef(null);
 
   useEffect(() => {
+    let isMounted = true;
     // Add class to body to scope GSAP hero effects only to home page
     document.body.classList.add('home-with-gsap');
 
@@ -28,7 +33,9 @@ function Home() {
       });
 
       Promise.all(imagePromises).then(() => {
-        setImagesLoaded(true);
+        if (isMounted) {
+          setImagesLoaded(true);
+        }
       });
     };
 
@@ -39,7 +46,27 @@ function Home() {
       setTimeout(preloadImages, 100);
     }
 
+    const heroWrapper = heroWrapperRef.current;
+    let scrollTrigger;
+    
+    if (heroWrapper) {
+      scrollTrigger = gsap.to(heroWrapper, {
+        opacity: 0,
+        ease: "none",
+        scrollTrigger: {
+          trigger: '.title-hero',
+          start: "top 100%",
+          end: "top 20%",
+          scrub: true,
+        }
+      });
+    }
+
     return () => {
+      isMounted = false;
+      if (scrollTrigger && scrollTrigger.scrollTrigger) {
+        scrollTrigger.scrollTrigger.kill();
+      }
       // Clean up: remove class and reset body height when leaving home page
       document.body.classList.remove('home-with-gsap');
       document.body.style.height = '';
@@ -48,9 +75,15 @@ function Home() {
 
   return (
     <div className="home">
-      <GsapHero />
-      <TitleHero />
-      <div className="home-content">
+      <div ref={heroWrapperRef}>
+        <GsapHero />
+      </div>
+      <div className="home-blur-wrapper" style={{
+        position: 'relative',
+        zIndex: 2
+      }}>
+        <TitleHero />
+        <div className="home-content">
         <section className="synopsis">
           <div className="synopsis-paragraph first-paragraph">
             <p>
@@ -169,6 +202,7 @@ function Home() {
             <li><Link to="/contact">Contact</Link></li>
           </ul>
         </nav>
+      </div>
       </div>
     </div>
   );

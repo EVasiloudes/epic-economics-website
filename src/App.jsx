@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useEffect, useRef } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Home from './pages/Home';
 import Preview from './pages/Preview';
 import Press from './pages/Press';
@@ -9,7 +9,12 @@ import LiquidGlassNavbar from './components/LiquidGlassNavbar';
 import Footer from './components/Footer';
 import { setRobotsMeta } from './utils/seo';
 import { useAutoSEO } from './hooks/useSEO';
+import { ReactLenis, useLenis } from 'lenis/react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './App.css';
+
+gsap.registerPlugin(ScrollTrigger);
 
 // Component to handle auto SEO without scrolling
 function AutoSEO() {
@@ -18,7 +23,45 @@ function AutoSEO() {
   return null;
 }
 
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  const lenis = useLenis();
+
+  useEffect(() => {
+    if (lenis) {
+      lenis.scrollTo(0, { immediate: true });
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [pathname, lenis]);
+
+  return null;
+}
+
 function App() {
+  const lenisRef = useRef();
+
+  useEffect(() => {
+    function update(time) {
+      lenisRef.current?.lenis?.raf(time * 1000);
+    }
+
+    gsap.ticker.add(update);
+    gsap.ticker.lagSmoothing(0);
+
+    const lenis = lenisRef.current?.lenis;
+    if (lenis) {
+      lenis.on('scroll', ScrollTrigger.update);
+    }
+
+    return () => {
+      gsap.ticker.remove(update);
+      if (lenis) {
+        lenis.off('scroll', ScrollTrigger.update);
+      }
+    };
+  }, []);
+
   useEffect(() => {
     // Ensure the site is indexable by search engines
     setRobotsMeta(false);
@@ -30,23 +73,26 @@ function App() {
   }, []);
 
   return (
-    <Router
-      future={{
-        v7_startTransition: true,
-        v7_relativeSplatPath: true
-      }}
-    >
-      <AutoSEO />
-      <LiquidGlassNavbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/preview" element={<Preview />} />
-        <Route path="/press" element={<Press />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/technical" element={<Technical />} />
-      </Routes>
-      <Footer />
-    </Router>
+    <ReactLenis root ref={lenisRef} autoRaf={false}>
+      <Router
+        future={{
+          v7_startTransition: true,
+          v7_relativeSplatPath: true
+        }}
+      >
+        <ScrollToTop />
+        <AutoSEO />
+        <LiquidGlassNavbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/preview" element={<Preview />} />
+          <Route path="/press" element={<Press />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/technical" element={<Technical />} />
+        </Routes>
+        <Footer />
+      </Router>
+    </ReactLenis>
   );
 }
 

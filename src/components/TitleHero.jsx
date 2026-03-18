@@ -8,22 +8,20 @@ gsap.registerPlugin(ScrollTrigger);
 
 function TitleHero() {
   const titleEpicRef = useRef(null);
-  const titleEconomicsRef = useRef(null);
   const subtitleRef = useRef(null);
   const containerRef = useRef(null);
   const backdropImageRef = useRef(null);
 
   useEffect(() => {
     const titleEpic = titleEpicRef.current;
-    const titleEconomics = titleEconomicsRef.current;
     const subtitle = subtitleRef.current;
     const container = containerRef.current;
     const backdropImage = backdropImageRef.current;
 
-    if (!titleEpic || !titleEconomics || !subtitle || !container || !backdropImage) return;
+    if (!titleEpic || !subtitle || !container || !backdropImage) return;
 
     // Initial setup - hide elements and ensure font rendering
-    gsap.set([titleEpic, titleEconomics, subtitle], {
+    gsap.set([titleEpic, subtitle], {
       opacity: 0,
       y: 50,
       force3D: false,
@@ -50,16 +48,6 @@ function TitleHero() {
         gsap.set(titleEpic, { clearProps: "transform" });
       }
     })
-    .to(titleEconomics, {
-      opacity: 1,
-      y: 0,
-      duration: 1.2,
-      ease: "power3.out",
-      force3D: false,
-      onComplete: () => {
-        gsap.set(titleEconomics, { clearProps: "transform" });
-      }
-    }, "-=0.8")
     .to(subtitle, {
       opacity: 1,
       y: 0,
@@ -74,7 +62,6 @@ function TitleHero() {
     // Add the wobble animation classes after entrance
     tl.call(() => {
       titleEpic.classList.add('animate');
-      titleEconomics.classList.add('animate');
     }, null, "+=0.5");
 
     // Parallax scroll animation for backdrop image
@@ -110,13 +97,11 @@ function TitleHero() {
         <img src={backdropImage} alt="" className="title-hero-backdrop-image" ref={backdropImageRef} />
       </div>
       <div className="title-hero-content">
-        <h1 style={{ fontFamily: '"Avenir Next", "Century Gothic", "Helvetica Neue", Arial, sans-serif', fontStyle: 'italic', fontWeight: 700 }}>
-          <span className="title-epic" ref={titleEpicRef}>Epic</span>
-          <span className="title-economics" ref={titleEconomicsRef}>Economics</span>
-        </h1>
-        <p className="title-subtitle" ref={subtitleRef}>
-          WHAT WOULD YOU PROTEST ABOUT TODAY?
-        </p>
+        <h1 ref={titleEpicRef}>Epic Economics</h1>
+        <br />
+        <h2 className="title-subtitle" ref={subtitleRef}>
+          What would you protest about today?
+        </h2>
       </div>
     </div>
   );

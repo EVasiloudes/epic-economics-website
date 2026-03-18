@@ -47,8 +47,8 @@ This description was chosen because:
 
 The following inconsistent descriptions were found and replaced:
 
-2. "Epic Economics - What would you protest about today?"
-3. "Epic Economics - what would you protest about today?" (lowercase)
+2. "Epic Economics: What would you protest about today?"
+3. "Epic Economics: what would you protest about today?" (lowercase)
 4. "Your gateway to understanding economics"
 5. "Official website for the Epic Economics theatrical production"
 6. "Theatrical work based on the words of distinguished economists, highlighting their contributions and contradictions"
