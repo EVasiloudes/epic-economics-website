@@ -1,98 +1,112 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import Home from './pages/Home';
-import Preview from './pages/Preview';
-import Press from './pages/Press';
-import Contact from './pages/Contact';
-import Technical from './pages/Technical';
-import LiquidGlassNavbar from './components/LiquidGlassNavbar';
-import Footer from './components/Footer';
-import { setRobotsMeta } from './utils/seo';
-import { useAutoSEO } from './hooks/useSEO';
-import { ReactLenis, useLenis } from 'lenis/react';
+import { HelmetProvider } from 'react-helmet-async';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+// Eager load critical components
+import LiquidGlassNavbar from './components/LiquidGlassNavbar';
+import Footer from './components/Footer';
+import LoadingSpinner from './components/LoadingSpinner';
+
+// Lazy load page components for code splitting
+const Home = lazy(() => import('./pages/Home'));
+const Preview = lazy(() => import('./pages/Preview'));
+const Press = lazy(() => import('./pages/Press'));
+const Contact = lazy(() => import('./pages/Contact'));
+const Technical = lazy(() => import('./pages/Technical'));
+
+// Import utilities
+import { setRobotsMeta } from './utils/seo';
 import './App.css';
 
+// Register GSAP plugins once
 gsap.registerPlugin(ScrollTrigger);
 
-// Component to handle auto SEO without scrolling
-function AutoSEO() {
-  // Automatically apply SEO based on current route
-  useAutoSEO();
+// Configure GSAP defaults for better performance
+gsap.defaults({
+  ease: 'power2.out',
+  duration: 0.3
+});
+
+// Configure ScrollTrigger defaults
+ScrollTrigger.defaults({
+  toggleActions: 'play none none reverse',
+  markers: false
+});
+
+// Scroll restoration component
+function ScrollRestoration() {
+  const { pathname } = useLocation();
+  
+  useEffect(() => {
+    // Simple scroll to top on route change
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }, [pathname]);
+  
   return null;
 }
 
-function ScrollToTop() {
+// Route change handler for analytics/SEO
+function RouteHandler() {
   const { pathname } = useLocation();
-  const lenis = useLenis();
-
+  
   useEffect(() => {
-    if (lenis) {
-      lenis.scrollTo(0, { immediate: true });
-    } else {
-      window.scrollTo(0, 0);
-    }
-  }, [pathname, lenis]);
-
+    // Update page title based on route
+    const titles = {
+      '/': 'Epic Economics',
+      '/preview': 'Preview - Epic Economics',
+      '/press': 'Press & Media - Epic Economics',
+      '/contact': 'Contact Us - Epic Economics',
+      '/technical': 'Technical - Epic Economics'
+    };
+    document.title = titles[pathname] || 'Epic Economics';
+    
+    // Refresh ScrollTrigger on route change
+    ScrollTrigger.refresh();
+  }, [pathname]);
+  
   return null;
 }
 
 function App() {
-  const lenisRef = useRef();
-
   useEffect(() => {
-    function update(time) {
-      lenisRef.current?.lenis?.raf(time * 1000);
-    }
-
-    gsap.ticker.add(update);
-    gsap.ticker.lagSmoothing(0);
-
-    const lenis = lenisRef.current?.lenis;
-    if (lenis) {
-      lenis.on('scroll', ScrollTrigger.update);
-    }
-
+    // Ensure site is indexable
+    setRobotsMeta(false);
+    
+    // Cleanup all ScrollTriggers on unmount
     return () => {
-      gsap.ticker.remove(update);
-      if (lenis) {
-        lenis.off('scroll', ScrollTrigger.update);
-      }
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
   }, []);
 
-  useEffect(() => {
-    // Ensure the site is indexable by search engines
-    setRobotsMeta(false);
-
-    // React DevTools notice for development
-    if (import.meta.env.DEV) {
-      console.info('💡 For better development experience, install React DevTools: https://react.dev/link/react-devtools');
-    }
-  }, []);
-
   return (
-    <ReactLenis root ref={lenisRef} autoRaf={false}>
+    <HelmetProvider>
       <Router
         future={{
           v7_startTransition: true,
           v7_relativeSplatPath: true
         }}
       >
-        <ScrollToTop />
-        <AutoSEO />
+        <ScrollRestoration />
+        <RouteHandler />
         <LiquidGlassNavbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/preview" element={<Preview />} />
-          <Route path="/press" element={<Press />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/technical" element={<Technical />} />
-        </Routes>
+        
+        <main id="main-content">
+          <Suspense fallback={<LoadingSpinner />}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/preview" element={<Preview />} />
+              <Route path="/press" element={<Press />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/technical" element={<Technical />} />
+            </Routes>
+          </Suspense>
+        </main>
+        
         <Footer />
       </Router>
-    </ReactLenis>
+    </HelmetProvider>
   );
 }
 

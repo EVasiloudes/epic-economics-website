@@ -1,210 +1,191 @@
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, lazy, Suspense } from 'react';
 import { Link } from 'react-router-dom';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import GsapHero from '../components/GsapHero';
-import TitleHero from '../components/TitleHero';
-
-gsap.registerPlugin(ScrollTrigger);
+import { Helmet } from 'react-helmet-async';
 import './Home.css';
 
-// Import selected images for homepage with lazy loading hints
+// Lazy load heavy components
+const GsapHero = lazy(() => import('../components/GsapHero'));
+
+// Import images with explicit dimensions for CLS prevention
 import audienceImg from '../assets/images/press/_BOO9866.jpg';
 import performanceImg from '../assets/images/press/_BOO9941.jpg';
 
+// Bio data - extracted for maintainability
+const TEAM_BIOS = [
+  {
+    name: 'Dimis Michaelides',
+    role: 'Writer & Performer',
+    url: 'https://dimis.org',
+    description: 'Keynote speaker and author on innovation, creativity and leadership. He has extensive international experience as a business executive and as a speaker in corporate and public events. He also offers workshops and change management consulting for private businesses, NGOs and public organizations.'
+  },
+  {
+    name: 'Lia Haraki',
+    role: 'Director & Lighting Designer',
+    url: 'https://liaharaki.com',
+    description: 'Interdisciplinary artist with over 20 years of experience in performance, devised theatre, voice, and movement. Her work explores transformation and creation through the body as a medium, with performances presented locally and internationally. She mentors creatives and artists in developing their unique creative practice.'
+  },
+  {
+    name: 'Elias Vasnic',
+    role: 'Producer, Composer & Technical Supervisor',
+    url: 'https://elias.densetheory.cc',
+    description: 'Creative technologist and composer building soundscapes and interactive systems for live performance. For Epic Economics, he blended original music with historical audio, industrial noise, and ai-generated voices to bring the economists to life.'
+  }
+];
+
 function Home() {
   const [imagesLoaded, setImagesLoaded] = useState(false);
-  const heroWrapperRef = useRef(null);
+  const [heroLoaded, setHeroLoaded] = useState(false);
+  const imageContainerRef = useRef(null);
 
+  // Preload critical images
   useEffect(() => {
     let isMounted = true;
-    // Add class to body to scope GSAP hero effects only to home page
-    document.body.classList.add('home-with-gsap');
-
-    // Preload critical images after initial paint
+    
     const preloadImages = () => {
-      const imagePromises = [audienceImg, performanceImg].map(src => {
+      const images = [audienceImg, performanceImg];
+      const promises = images.map(src => {
         return new Promise((resolve) => {
           const img = new Image();
-          img.onload = resolve;
-          img.onerror = resolve;
+          img.onload = () => resolve(true);
+          img.onerror = () => resolve(false);
           img.src = src;
         });
       });
 
-      Promise.all(imagePromises).then(() => {
-        if (isMounted) {
-          setImagesLoaded(true);
-        }
+      Promise.all(promises).then(() => {
+        if (isMounted) setImagesLoaded(true);
       });
     };
 
-    // Use requestIdleCallback to defer image preloading
-    if (window.requestIdleCallback) {
-      window.requestIdleCallback(preloadImages, { timeout: 2000 });
+    // Use requestIdleCallback for non-critical image loading
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(preloadImages, { timeout: 2000 });
     } else {
       setTimeout(preloadImages, 100);
     }
 
-    const heroWrapper = heroWrapperRef.current;
-    let scrollTrigger;
-    
-    if (heroWrapper) {
-      scrollTrigger = gsap.to(heroWrapper, {
-        opacity: 0,
-        ease: "none",
-        scrollTrigger: {
-          trigger: '.title-hero',
-          start: "top 100%",
-          end: "top 20%",
-          scrub: true,
-        }
-      });
-    }
-
-    return () => {
-      isMounted = false;
-      if (scrollTrigger && scrollTrigger.scrollTrigger) {
-        scrollTrigger.scrollTrigger.kill();
-      }
-      // Clean up: remove class and reset body height when leaving home page
-      document.body.classList.remove('home-with-gsap');
-      document.body.style.height = '';
-    };
+    return () => { isMounted = false; };
   }, []);
 
   return (
-    <div className="home">
-      <div ref={heroWrapperRef}>
-        <GsapHero />
-      </div>
-      <div className="home-blur-wrapper" style={{
-        position: 'relative',
-        zIndex: 2
-      }}>
-        <TitleHero />
-        <div className="home-content">
-        <section className="synopsis">
-          <div className="synopsis-paragraph first-paragraph">
-            <p>
-              Epic Economics is a theatrical work based on the words of distinguished economists from the 18th century to today, highlighting their contributions and contradictions. The theories are interwoven with stories from the performer's own personal and professional journey, and peppered with wicked humor and some songs. The show is accompanied by an original soundscape.
-            </p>
-          </div>
+    <>
+      <Helmet>
+        <title>Epic Economics</title>
+        <meta name="description" content="What would you protest about today? A theatrical work by Dimis Michaelides exploring economics through performance art." />
+        <link rel="canonical" href="https://epic-economics.dimis.org/" />
+      </Helmet>
 
-          <div className="home-image-item first-image">
-            <img
-              src={audienceImg}
-              alt="Epic Economics - Audience participation during performance"
-              loading="lazy"
-              decoding="async"
-              style={{
-                opacity: imagesLoaded ? 1 : 0,
-                transition: 'opacity 0.3s ease-in-out',
-                contentVisibility: 'auto',
-                contain: 'layout style'
-              }}
-              width="800"
-              height="600"
-            />
-          </div>
+      <div className="home">
+        {/* Hero Section - Lazy loaded */}
+        <Suspense fallback={<div className="hero-placeholder" />}>
+          <GsapHero onLoad={() => setHeroLoaded(true)} />
+        </Suspense>
 
-          <div className="synopsis-paragraph second-paragraph">
-            <p>
-              How does your breakfast make its way to your table? Why might you own an imported car? Who creates value? Why do we have recessions? What's more important, growth or equality?
-            </p>
-          </div>
+        <div className="home-content" ref={imageContainerRef}>
+          {/* Synopsis Section */}
+          <section className="synopsis" aria-labelledby="synopsis-heading">
+            <h1 id="synopsis-heading" className="visually-hidden">About Epic Economics</h1>
+            
+            <div className="synopsis-grid">
+              <div className="synopsis-text">
+                <p className="lead">
+                  Epic Economics is a theatrical work based on the words of distinguished economists 
+                  from the 18th century to today, highlighting their contributions and contradictions. 
+                  The theories are interwoven with stories from the performer's own personal and 
+                  professional journey, and peppered with wicked humor and some songs. The show is 
+                  accompanied by an original soundscape.
+                </p>
+                
+                <blockquote>
+                  <p>How does your breakfast make its way to your table? Why might you own an imported car? 
+                  Who creates value? Why do we have recessions? What's more important, growth or equality?</p>
+                </blockquote>
 
-          <div className="synopsis-paragraph third-paragraph">
-            <p>
-              Markets. Value. Capital. Labour. Competition. Co-operation. Wealth. Trade. Innovation. Growth. Inequality. Crises.<br></br><br></br>
-              <strong>What would you protest about today?</strong>
-            </p>
-          </div>
+                <p className="keywords">
+                  Markets. Value. Capital. Labour. Competition. Co-operation. Wealth. Trade. 
+                  Innovation. Growth. Inequality. Crises.
+                </p>
 
-          <div className="synopsis-paragraph fourth-paragraph">
-            <p>
-              Economics is sometimes revered as a nebulous subject best left to "experts" and sometimes simplified to populist pseudo-science. This play promises to explore the nebulae and expose the pretenders.
-            </p>
-          </div>
+                <p className="tagline">
+                  <strong>What would you protest about today?</strong>
+                </p>
 
-          <div className="home-image-item second-image">
-            <img
-              src={performanceImg}
-              alt="Epic Economics - Performance highlighting theatrical elements"
-              loading="lazy"
-              decoding="async"
-              style={{
-                opacity: imagesLoaded ? 1 : 0,
-                transition: 'opacity 0.3s ease-in-out',
-                contentVisibility: 'auto',
-                contain: 'layout style'
-              }}
-              width="800"
-              height="600"
-            />
-          </div>
-        </section>
-        <section className="teaser">
-          <h2>Watch the Trailer</h2>
-          <div className="teaser-video">
+                <p className="closing">
+                  Economics is sometimes revered as a nebulous subject best left to "experts" 
+                  and sometimes simplified to populist pseudo-science. This play promises to 
+                  explore the nebulae and expose the pretenders.
+                </p>
+              </div>
+
+              <aside className="synopsis-images">
+                <figure className={`image-wrapper ${imagesLoaded ? 'loaded' : ''}`}>
+                  <img
+                    src={audienceImg}
+                    alt="Audience participation during Epic Economics performance"
+                    width="800"
+                    height="600"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </figure>
+                <figure className={`image-wrapper ${imagesLoaded ? 'loaded' : ''}`}>
+                  <img
+                    src={performanceImg}
+                    alt="Epic Economics theatrical performance"
+                    width="800"
+                    height="600"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </figure>
+              </aside>
+            </div>
+          </section>
+
+          {/* Trailer Section */}
+          <section className="teaser" aria-labelledby="trailer-heading">
+            <h2 id="trailer-heading">Watch the Trailer</h2>
+            <div className="video-container">
               <iframe
                 src="https://www.youtube.com/embed/HaY26deh7nE?si=pv4RXJ4hGmY7GD99"
-                title="Epic Economics Teaser"
+                title="Epic Economics Trailer"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 referrerPolicy="strict-origin-when-cross-origin"
                 allowFullScreen
                 loading="lazy"
-                style={{
-                  contentVisibility: 'auto',
-                  contain: 'layout style'
-                }}
-              ></iframe>
-          </div>
-          {/* <p className="teaser-description">
-            Get a sneak peek of the production with our exclusive preview trailer.
-            Experience the drama, intensity, and artistry that defines Epic Economics.
-          </p>*/}
-        </section>
-        <section className="team-bios">
-          <h2>Meet the Creative Team</h2>
-
-          <div className="bio-container">
-            <div className="bio-card">
-              <h3><a href="https://dimis.org" target="_blank" rel="noopener noreferrer">Dimis Michaelides</a></h3>
-              <h4>Writer & Performer</h4>
-              <p>
-                Keynote speaker and author on innovation, creativity and leadership. He has extensive international experience as a business executive and as a speaker in corporate and public events. He also offers workshops and change management consulting for private businesses, NGOs and public organizations.
-              </p>
+              />
             </div>
+          </section>
 
-            <div className="bio-card">
-              <h3><a href="https://liaharaki.com" target="_blank" rel="noopener noreferrer">Lia Haraki</a></h3>
-              <h4>Director & Lighting Designer</h4>
-              <p>
-                Interdisciplinary artist with over 20 years of experience in performance, devised theatre, voice, and movement. Her work explores transformation and creation through the body as a medium, with performances presented locally and internationally. She mentors creatives and artists in developing their unique creative practice.
-              </p>
+          {/* Team Section */}
+          <section className="team-bios" aria-labelledby="team-heading">
+            <h2 id="team-heading">Meet the Creative Team</h2>
+            <div className="bio-grid">
+              {TEAM_BIOS.map((bio) => (
+                <article key={bio.name} className="bio-card">
+                  <h3>
+                    <a href={bio.url} target="_blank" rel="noopener noreferrer">
+                      {bio.name}
+                    </a>
+                  </h3>
+                  <p className="bio-role">{bio.role}</p>
+                  <p>{bio.description}</p>
+                </article>
+              ))}
             </div>
+          </section>
 
-            <div className="bio-card">
-              <h3><a href="https://elias.densetheory.cc" target="_blank" rel="noopener noreferrer">Elias Vasnic</a></h3>
-              <h4>Producer, Composer & Technical Supervisor</h4>
-              <p>
-                Creative technologist and composer building soundscapes and interactive systems for live performance. For Epic Economics, he blended original music with historical audio, industrial noise, and ai-generated voices to bring the economists to life.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        <nav className="home-navigation">
-          <ul>
-            <li><Link to="/press">Press & Media</Link></li>
-            <li><Link to="/contact">Contact</Link></li>
-          </ul>
-        </nav>
+          {/* Navigation */}
+          <nav className="home-navigation" aria-label="Page navigation">
+            <ul>
+              <li><Link to="/press">Press & Media</Link></li>
+              <li><Link to="/contact">Contact</Link></li>
+            </ul>
+          </nav>
+        </div>
       </div>
-      </div>
-    </div>
+    </>
   );
 }
 
