@@ -84,28 +84,26 @@ export const useSEO = (seoConfig = {}) => {
  */
 export const SEO_PRESETS = {
   HOME: {
-    title: 'Epic Economics',
-    description: 'What would you protest about today?, A Play by Dimis Michaelides',
+    title: 'Epic Economics: What would you protest about today?',
+    description: "Confused by the economy? Blending great economists' ideas with wicked humour, an LSE/World Bank veteran exposes the system. Discover why you're broke, how we got here and what we should fight for.",
     keywords: ['epic economics', 'theatrical production', 'economics', 'democracy', 'protest', 'social change', 'theater'],
     openGraph: {
-      title: 'Epic Economics',
-      description: 'What would you protest about today? A play by Dimis Michaelides',
-      image: 'https://epic-economics.dimis.org/android-chrome-512x512.png',
-      image_width: '512',
-      image_height: '512',
-      image_alt: 'Epic Economics Logo'
+      title: 'Epic Economics: What would you protest about today?',
+      description: "Confused by the economy? Blending great economists' ideas with wicked humour, an LSE/World Bank veteran exposes the system. Discover why you're broke, how we got here and what we should fight for.",
+      image: 'https://epic-economics.dimis.org/og-image.png',
+      image_alt: 'Epic Economics promotional image'
     },
     twitter: {
-      title: 'Epic Economics',
-      description: 'What would you protest about today? A play by Dimis Michaelides',
-      image: 'https://epic-economics.dimis.org/android-chrome-512x512.png',
-      image_alt: 'Epic Economics Logo'
+      title: 'Epic Economics: What would you protest about today?',
+      description: "Confused by the economy? Blending great economists' ideas with wicked humour, an LSE/World Bank veteran exposes the system. Discover why you're broke, how we got here and what we should fight for.",
+      image: 'https://epic-economics.dimis.org/og-image.png',
+      image_alt: 'Epic Economics promotional image'
     },
     structuredData: {
       '@context': 'https://schema.org',
       '@type': 'TheaterGroup',
-      'name': 'Epic Economics',
-      'description': 'What would you protest about today? A play by Dimis Michaelides',
+      'name': 'Epic Economics: What would you protest about today?',
+      'description': "Confused by the economy? Blending great economists' ideas with wicked humour, an LSE/World Bank veteran exposes the system. Discover why you're broke, how we got here and what we should fight for.",
       'url': 'https://epic-economics.dimis.org/',
       'sameAs': [],
       'founder': {

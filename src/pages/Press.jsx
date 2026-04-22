@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import SimpleVideo from '../components/SimpleVideo';
+import LazyVideo from '../components/LazyVideo';
 import './Press.css';
 
 // Import press images
@@ -294,7 +294,7 @@ function Press() {
         <div className="video-cards">
           <div className="video-card">
             <div className="video-thumbnail">
-              <SimpleVideo
+              <LazyVideo
                 src="https://pz3w5exosjyrfo44.public.blob.vercel-storage.com/epic-economics-teaser-optimized.mp4"
                 poster="/videos/epic-economics-teaser-poster.jpg"
                 title="Epic Economics Teaser"
@@ -316,7 +316,7 @@ function Press() {
           <div className="video-cards">
             <div className="video-card">
               <div className="video-thumbnail">
-                <SimpleVideo
+                <LazyVideo
                   src="https://pz3w5exosjyrfo44.public.blob.vercel-storage.com/ee-slogans-photomix-1-optimized.mp4"
                   poster="/videos/ee-slogans-photomix-1-poster.jpg"
                   title="EE Slogans Photomix 1"
@@ -331,7 +331,7 @@ function Press() {
 
             <div className="video-card">
               <div className="video-thumbnail">
-                <SimpleVideo
+                <LazyVideo
                   src="https://pz3w5exosjyrfo44.public.blob.vercel-storage.com/ee-slogans-photomix-2-optimized.mp4"
                   poster="/videos/ee-slogans-photomix-2-poster.jpg"
                   title="EE Slogans Photomix 2"

@@ -37,10 +37,18 @@ function Home() {
   const [heroLoaded, setHeroLoaded] = useState(false);
   const imageContainerRef = useRef(null);
 
+  // Apply home-with-gsap class for GSAP hero scroll animation
+  useEffect(() => {
+    document.body.classList.add('home-with-gsap');
+    return () => {
+      document.body.classList.remove('home-with-gsap');
+    };
+  }, []);
+
   // Preload critical images
   useEffect(() => {
     let isMounted = true;
-    
+
     const preloadImages = () => {
       const images = [audienceImg, performanceImg];
       const promises = images.map(src => {
@@ -70,8 +78,8 @@ function Home() {
   return (
     <>
       <Helmet>
-        <title>Epic Economics</title>
-        <meta name="description" content="What would you protest about today? A theatrical work by Dimis Michaelides exploring economics through performance art." />
+        <title>Epic Economics: What would you protest about today?</title>
+        <meta name="description" content="Confused by the economy? Blending great economists' ideas with wicked humour, an LSE/World Bank veteran exposes the system. Discover why you're broke, how we got here and what we should fight for." />
         <link rel="canonical" href="https://epic-economics.dimis.org/" />
       </Helmet>
 
@@ -85,24 +93,24 @@ function Home() {
           {/* Synopsis Section */}
           <section className="synopsis" aria-labelledby="synopsis-heading">
             <h1 id="synopsis-heading" className="visually-hidden">About Epic Economics</h1>
-            
+
             <div className="synopsis-grid">
               <div className="synopsis-text">
                 <p className="lead">
-                  Epic Economics is a theatrical work based on the words of distinguished economists 
-                  from the 18th century to today, highlighting their contributions and contradictions. 
-                  The theories are interwoven with stories from the performer's own personal and 
-                  professional journey, and peppered with wicked humor and some songs. The show is 
+                  Epic Economics is a theatrical work based on the words of distinguished economists
+                  from the 18th century to today, highlighting their contributions and contradictions.
+                  The theories are interwoven with stories from the performer's own personal and
+                  professional journey, and peppered with wicked humor and some songs. The show is
                   accompanied by an original soundscape.
                 </p>
-                
+
                 <blockquote>
-                  <p>How does your breakfast make its way to your table? Why might you own an imported car? 
+                  <p>How does your breakfast make its way to your table? Why might you own an imported car?
                   Who creates value? Why do we have recessions? What's more important, growth or equality?</p>
                 </blockquote>
 
                 <p className="keywords">
-                  Markets. Value. Capital. Labour. Competition. Co-operation. Wealth. Trade. 
+                  Markets. Value. Capital. Labour. Competition. Co-operation. Wealth. Trade.
                   Innovation. Growth. Inequality. Crises.
                 </p>
 
@@ -111,8 +119,8 @@ function Home() {
                 </p>
 
                 <p className="closing">
-                  Economics is sometimes revered as a nebulous subject best left to "experts" 
-                  and sometimes simplified to populist pseudo-science. This play promises to 
+                  Economics is sometimes revered as a nebulous subject best left to "experts"
+                  and sometimes simplified to populist pseudo-science. This play promises to
                   explore the nebulae and expose the pretenders.
                 </p>
               </div>

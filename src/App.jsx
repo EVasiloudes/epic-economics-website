@@ -23,6 +23,11 @@ import './App.css';
 // Register GSAP plugins once
 gsap.registerPlugin(ScrollTrigger);
 
+// Prevent mobile browsers from recalculating ScrollTrigger on URL-bar show/hide
+ScrollTrigger.config({
+  ignoreMobileResize: true
+});
+
 // Configure GSAP defaults for better performance
 gsap.defaults({
   ease: 'power2.out',
@@ -38,34 +43,34 @@ ScrollTrigger.defaults({
 // Scroll restoration component
 function ScrollRestoration() {
   const { pathname } = useLocation();
-  
+
   useEffect(() => {
     // Simple scroll to top on route change
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
   }, [pathname]);
-  
+
   return null;
 }
 
 // Route change handler for analytics/SEO
 function RouteHandler() {
   const { pathname } = useLocation();
-  
+
   useEffect(() => {
     // Update page title based on route
     const titles = {
-      '/': 'Epic Economics',
+      '/': 'Epic Economics: What would you protest about today?',
       '/preview': 'Preview - Epic Economics',
       '/press': 'Press & Media - Epic Economics',
       '/contact': 'Contact Us - Epic Economics',
       '/technical': 'Technical - Epic Economics'
     };
     document.title = titles[pathname] || 'Epic Economics';
-    
+
     // Refresh ScrollTrigger on route change
     ScrollTrigger.refresh();
   }, [pathname]);
-  
+
   return null;
 }
 
@@ -73,7 +78,7 @@ function App() {
   useEffect(() => {
     // Ensure site is indexable
     setRobotsMeta(false);
-    
+
     // Cleanup all ScrollTriggers on unmount
     return () => {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
@@ -91,7 +96,7 @@ function App() {
         <ScrollRestoration />
         <RouteHandler />
         <LiquidGlassNavbar />
-        
+
         <main id="main-content">
           <Suspense fallback={<LoadingSpinner />}>
             <Routes>
@@ -103,7 +108,7 @@ function App() {
             </Routes>
           </Suspense>
         </main>
-        
+
         <Footer />
       </Router>
     </HelmetProvider>

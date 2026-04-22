@@ -7,7 +7,7 @@ const __dirname = path.dirname(__filename);
 
 // Routes to prerender
 const routes = [
-  { path: '/', title: 'Epic Economics', description: 'What would you protest about today?, A Play by Dimis Michaelides' },
+  { path: '/', title: 'Epic Economics: What would you protest about today?', description: "Confused by the economy? Blending great economists' ideas with wicked humour, an LSE/World Bank veteran exposes the system. Discover why you're broke, how we got here and what we should fight for." },
   { path: '/preview', title: 'Preview - Epic Economics', description: 'Get a preview of Epic Economics - experience excerpts from our theatrical production exploring economic themes and social change.' },
   { path: '/press', title: 'Press & Media - Epic Economics', description: 'Press coverage, media kit, and news about Epic Economics theatrical production. Download high-resolution images and press materials.' },
   { path: '/contact', title: 'Contact Us - Epic Economics', description: 'Get in touch with the Epic Economics team. Contact us for bookings, press inquiries, or general questions about our theatrical production.' }
@@ -27,7 +27,7 @@ function generateStaticHTML(route) {
     <div id="root">
       <div class="prerendered-content">
         <header>
-          <h1>Epic Economics</h1>
+          <h1>Epic Economics: What would you protest about today?</h1>
           <nav>
             <a href="/">Home</a>
             <a href="/preview">Preview</a>
@@ -38,8 +38,8 @@ function generateStaticHTML(route) {
         <main>
           ${route.path === '/' ? `
             <section>
-              <h1>Epic Economics</h1>
-              <p>What would you protest about today? A play by Dimis Michaelides</p>
+              <h1>Epic Economics: What would you protest about today?</h1>
+              <p>A play by Dimis Michaelides</p>
               <h2>About the Production</h2>
               <p>Epic Economics is a theatrical work based on the words of distinguished economists from the 18th century to today, highlighting their contributions and contradictions. The theories are interwoven with stories from the performer's own personal and professional journey, and peppered with wicked humor and some songs. The show is accompanied by an original soundscape.</p>
               <p>How does your breakfast make its way to your table? Why might you own an imported car? Who creates value? Why do we have recessions? What's more important, growth or equality?</p>

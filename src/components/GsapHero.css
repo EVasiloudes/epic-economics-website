@@ -6,11 +6,9 @@
 
 /* Only apply body height changes when GsapHero is active on home page */
 .home-with-gsap body {
-  /* Background handled by global body styles in index.css */
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-weight: 600;
   min-height: 200vh;
-  /* Optimize for smooth scrolling */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -25,14 +23,6 @@
   overflow: hidden;
   position: relative;
   width: 100vw;
-  /* Enhanced performance optimizations */
-  will-change: transform;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  contain: layout style;
-  content-visibility: auto;
 }
 
 @media (max-width: 768px) {
@@ -52,16 +42,9 @@
   padding: 2rem 0;
   position: absolute;
   white-space: nowrap;
-  /* Enhanced hardware acceleration */
   will-change: transform;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  -webkit-transform: translate3d(0, 0, 0);
-  transform: translate3d(0, 0, 0);
-  /* Improve text rendering and performance */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  contain: layout style;
   pointer-events: none;
 }
 
@@ -73,16 +56,9 @@
 }
 
 .track .text {
-  /*color: #FFFFFF;*/
   animation: marquee 50000ms linear infinite;
   align-items: center;
   display: inline-flex;
-  will-change: transform;
-  /* Optimize animation performance */
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
 }
 
 .-focus {
@@ -97,40 +73,19 @@
   align-items: flex-start;
   justify-content: center;
   pointer-events: none;
-  /* Enhanced performance optimizations */
-  will-change: opacity, transform;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  contain: layout style;
-  content-visibility: auto;
-}
-
-.screen.in-view {
-  will-change: transform;
+  z-index: 1;
 }
 
 .wrapper-3d {
   position: relative;
   perspective: 20vw;
   transform-style: preserve-3d;
-  /* Optimize 3D rendering */
-  will-change: transform;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
 }
 
 .fold {
   overflow: hidden;
   width: 100vw;
   height: 140vh;
-  /* Hardware acceleration for 3D transforms */
-  will-change: transform;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
 }
 
 @media (max-width: 768px) {
@@ -146,18 +101,10 @@
   right: 0;
   bottom: 100%;
   transform: rotateX(-120deg);
-  /* Optimize 3D transforms */
-  will-change: transform;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
 }
 
 .fold-center {
   width: 100vw;
-  /* Ensure smooth transforms */
-  will-change: transform;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
 }
 
 .fold-bottom {
@@ -167,21 +114,11 @@
   left: 0;
   top: 100%;
   transform: rotateX(120deg);
-  /* Optimize 3D transforms */
-  will-change: transform;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
 }
 
 .fold-align {
   width: 100%;
   height: 100%;
-  /* Hardware acceleration */
-  will-change: transform;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
 }
 
 .fold-bottom .fold-align {
@@ -192,24 +129,9 @@
   transform: translate3d(0, 100%, 0);
 }
 
-/* Enhanced performance optimization for fold-content */
 .fold-content {
   will-change: transform;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  contain: layout style;
   pointer-events: none;
-}
-
-/* Critical loading state - removed opacity: 0 to ensure hero is always visible */
-
-/* Performance hint for animations */
-@media (prefers-reduced-motion: no-preference) {
-  .marquee, .track, .fold-content {
-    animation-fill-mode: both;
-  }
 }
 
 /* Optimize for different browsers */

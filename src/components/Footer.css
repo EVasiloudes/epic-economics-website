@@ -1,5 +1,6 @@
 .liquid-glass-footer {
   position: relative;
+  z-index: 5;
   margin-top: 4rem;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);

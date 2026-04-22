@@ -39,7 +39,7 @@ function GsapHero() {
           force3D: true,
           scrollTrigger: {
             trigger: foldEffect,
-            scrub: true, // Use boolean for better performance than number
+            scrub: 0.5, // Slight smoothing lag for buttery motion
             invalidateOnRefresh: true,
             fastScrollEnd: true
           }
@@ -66,7 +66,7 @@ function GsapHero() {
         trigger: document.body,
         start: "top top",
         end: () => `+=${centerContent.clientHeight - centerFold.clientHeight}`,
-        scrub: 1, // Smooth scrub
+        scrub: 0.5,
         invalidateOnRefresh: true,
       }
     });

@@ -97,7 +97,7 @@ function TitleHero() {
         <img src={backdropImage} alt="" className="title-hero-backdrop-image" ref={backdropImageRef} />
       </div>
       <div className="title-hero-content">
-        <h1 ref={titleEpicRef}>Epic Economics</h1>
+        <h1 ref={titleEpicRef}>Epic Economics: What would you protest about today?</h1>
         <br />
         <h2 className="title-subtitle" ref={subtitleRef}>
           What would you protest about today?
