@@ -97,7 +97,9 @@ function Home() {
             <div className="synopsis-grid">
               <div className="synopsis-text">
                 <p className="lead">
-                  Epic Economics is a theatrical work based on the words of distinguished economists
+                    Confused by the economy? Blending great economists' ideas with wicked humour, an LSE/World Bank veteran exposes the system. Discover why you're broke, how we got here and what we should fight for.</p>
+              <p>
+                              Epic Economics is a theatrical work based on the words of distinguished economists
                   from the 18th century to today, highlighting their contributions and contradictions.
                   The theories are interwoven with stories from the performer's own personal and
                   professional journey, and peppered with wicked humor and some songs. The show is
