@@ -176,7 +176,7 @@ function ContactForm() {
                 <div className="method-details">
                   <h3>Email</h3>
                   <p>dimis@dimis.org</p>
-                  <span className="method-label">Collaborator</span>
+                  <span className="method-label">Writer \& Performer</span>
                 </div>
               </div>
 
@@ -469,7 +469,7 @@ function ContactFormWithoutRecaptcha() {
                 <div className="method-details">
                   <h3>Email</h3>
                   <p>dimis@dimis.org</p>
-                  <span className="method-label">Collaborator</span>
+                  <span className="method-label">Writer \& Performer</span>
                 </div>
               </div>
 
