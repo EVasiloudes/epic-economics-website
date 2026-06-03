@@ -1,3 +1,11 @@
+/* ==========================================================================
+   TitleHero — v2.0 (No glass, solid background)
+   Brand Guardian → Frontend Developer | June 2026
+   
+   Replaces: glass/blur content card, gradient background.
+   New: solid surface card, parchment background, clean.
+   ========================================================================== */
+
 .title-hero {
   position: relative;
   height: 80vh;
@@ -6,11 +14,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--gradient-ambient);
-  background-attachment: fixed;
+  background-color: var(--color-bg);
   overflow: hidden;
   z-index: 10;
-  font-family: "Avenir Next", "Century Gothic", "Helvetica Neue", Arial, sans-serif;
+  font-family: var(--font-heading);
   font-style: italic;
 }
 
@@ -43,22 +50,20 @@
 
 .title-hero-content {
   position: relative;
-  text-align: left;
+  text-align: center;
   z-index: 2;
   padding: 3rem;
-  background: var(--glass-bg-primary);
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
-  border: 2px solid var(--glass-border);
-  border-radius: 32px;
-  box-shadow: 0 16px 64px rgba(0, 0, 0, 0.15);
+  background-color: var(--color-surface);
+  border: var(--border-light);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
 }
 
 .title-subtitle {
-  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: var(--font-heading);
   font-weight: 600;
   font-style: normal;
-  color: var(--text-dark);
+  color: var(--color-ink);
   margin: 2rem 0 0 0;
   font-size: clamp(1.2rem, 1.0rem + 1.0vw, 2.0rem);
   letter-spacing: 0.1em;
@@ -69,14 +74,13 @@
 }
 
 .title-hero h1 {
-  font-family: "Avenir Next", "Century Gothic", "Helvetica Neue", Arial, sans-serif;
+  font-family: var(--font-heading);
   font-weight: 700;
   font-style: italic;
-  color: var(--text-dark);
+  color: var(--color-ink);
   margin: 0;
   line-height: 1;
   letter-spacing: -0.02em;
-  text-shadow: 0 2px 20px rgba(255, 255, 255, 0.5);
   font-size: clamp(3.5rem, 3.64rem + 4.29vw, 9.00rem);
   text-align: center;
 }

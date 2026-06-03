@@ -1,3 +1,8 @@
+/* ==========================================================================
+   App-level layout styles — v2.0
+   Brand Guardian → Frontend Developer | June 2026
+   ========================================================================== */
+
 /* Global root styles - no max-width to allow full-width hero */
 #root {
   margin: 0 auto;
@@ -16,23 +21,24 @@
 .page-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 6rem 2rem 2rem 2rem; /* Added top padding for fixed navbar */
+  padding: 6rem 2rem 2rem 2rem;
   text-align: left;
   position: relative;
   z-index: 1;
+  background-color: var(--color-bg);
 }
 
 /* Responsive adjustments for page container */
 @media (max-width: 768px) {
   .page-container {
-    padding: 5rem 2.5% 1rem 2.5%; /* Added top padding for fixed navbar */
+    padding: 5rem 2.5% 1rem 2.5%;
     max-width: 95%;
   }
 }
 
 @media (max-width: 480px) {
   .page-container {
-    padding: 7rem 2.5% 0.5rem 2.5%; /* Added more top padding for mobile navbar */
+    padding: 7rem 2.5% 0.5rem 2.5%;
     max-width: 95%;
   }
 }
@@ -59,6 +65,7 @@
   position: relative;
   overflow-x: hidden;
   z-index: 1;
+  background-color: var(--color-bg);
 }
 
 /* Ensure navbar doesn't interfere with home page content */

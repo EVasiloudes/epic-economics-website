@@ -1,9 +1,33 @@
 /* ==========================================================================
    Epic Economics — Design Tokens v2.0
-   Brand Guardian 🎨 → Frontend Developer 🛠 | June 2026
-
-   Full visual overhaul: kills purple gradients, glassmorphism, floating blobs.
-   Replaced with Protest Red / Ink Black / Parchment high-contrast system.
+   Brand Guardian 🎨 | June 2026
+   ==========================================================================
+   
+   HOW TO APPLY:
+   1. Replace the entire :root {} block in src/index.css with this file's :root block.
+   2. Replace ALL hardcoded color values (#667eea, #764ba2, etc.) in component CSS
+      files with the corresponding --color-* variables (see migration notes below).
+   3. Replace ALL --glass-* variable references with --color-surface / --border-* /
+      --shadow-* equivalents.
+   4. Remove all ::before / ::after glass/blur pseudo-elements from components
+      that exist purely for decorative glassmorphism effects.
+   5. Remove floating blob animations (liquid-bg, liquid-blob, footer-liquid-bg, etc.)
+      from LiquidGlassNavbar.css and Footer.css.
+   6. Add Crimson Pro Google Font link to index.html <head>.
+   
+   MIGRATION QUICK REFERENCE:
+     Old Variable             →  New Variable
+     ─────────────────────────────────────────────
+     --gradient-primary       →  --color-primary (#C41E3A)
+     --accent-purple          →  --color-primary (#C41E3A)
+     --gradient-ambient       →  --color-bg (#F5F0E8)
+     --text-dark              →  --color-ink (#1A1A24)
+     --text-muted             →  --color-ink-muted (#6E6878)
+     --glass-bg               →  --color-surface (#FFFFFF)
+     --glass-border           →  --border-light
+     --glass-shadow           →  --shadow-md
+     #667eea (hardcoded)      →  var(--color-primary)
+     #764ba2 (hardcoded)      →  var(--color-primary-hover) or var(--color-primary)
    ========================================================================== */
 
 /* ==========================================================================
@@ -46,9 +70,9 @@
      -------------------------------------------------------------------- */
   --color-success: #2D6A4F;
   --color-success-light: rgba(45, 106, 79, 0.08);
-  --color-warning: #C9A84C;
+  --color-warning: #C9A84C;       /* Same as accent — use as bg with dark text */
   --color-warning-light: rgba(201, 168, 76, 0.15);
-  --color-error: #C41E3A;
+  --color-error: #C41E3A;         /* Same as primary */
   --color-error-light: rgba(196, 30, 58, 0.08);
   --color-info: #2C5282;
   --color-info-light: rgba(44, 82, 130, 0.08);
@@ -64,9 +88,9 @@
   --text-h1: clamp(2.25rem, 1.75rem + 2.5vw, 4rem);
   --text-h2: clamp(1.75rem, 1.5rem + 1.5vw, 2.5rem);
   --text-h3: clamp(1.25rem, 1.1rem + 0.75vw, 1.75rem);
-  --text-lead: 1.3125rem;
-  --text-body: 1.125rem;
-  --text-small: 0.9375rem;
+  --text-lead: 1.25rem;
+  --text-body: 1.0625rem;
+  --text-small: 0.875rem;
   --text-xs: 0.75rem;
 
   /* Line Heights */
@@ -82,14 +106,14 @@
   /* --------------------------------------------------------------------
      Spacing Scale (4px base)
      -------------------------------------------------------------------- */
-  --space-xs: 0.25rem;
-  --space-sm: 0.5rem;
-  --space-md: 1rem;
-  --space-lg: 1.5rem;
-  --space-xl: 2rem;
-  --space-2xl: 3rem;
-  --space-3xl: 4rem;
-  --space-4xl: 6rem;
+  --space-xs: 0.25rem   /* 4px  */;
+  --space-sm: 0.5rem    /* 8px  */;
+  --space-md: 1rem      /* 16px */;
+  --space-lg: 1.5rem    /* 24px */;
+  --space-xl: 2rem      /* 32px */;
+  --space-2xl: 3rem     /* 48px */;
+  --space-3xl: 4rem     /* 64px */;
+  --space-4xl: 6rem     /* 96px */;
 
   /* --------------------------------------------------------------------
      Borders & Radius
@@ -124,7 +148,7 @@
      Base Defaults
      -------------------------------------------------------------------- */
   font-family: var(--font-body);
-  font-size: 20px;
+  font-size: 16px;
   line-height: var(--leading-normal);
   color: var(--color-ink);
   background-color: var(--color-bg);
@@ -225,6 +249,8 @@ button,
   transition: background-color var(--transition-fast),
               transform var(--transition-fast),
               box-shadow var(--transition-fast);
+
+  /* Default: Primary button */
   background-color: var(--color-primary);
   color: #FFFFFF;
 }
@@ -336,25 +362,6 @@ label {
   border: 0;
 }
 
-/* Skip to main content link */
-.skip-link {
-  position: absolute;
-  top: -100%;
-  left: var(--space-md);
-  padding: var(--space-sm) var(--space-md);
-  background-color: var(--color-primary);
-  color: #FFFFFF;
-  font-family: var(--font-heading);
-  font-weight: 700;
-  z-index: 10000;
-  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
-  text-decoration: none;
-}
-
-.skip-link:focus {
-  top: 0;
-}
-
 /* Card (replaces .glass-card) */
 .card {
   background-color: var(--color-surface);
@@ -412,3 +419,48 @@ label {
     --border-medium: 2px solid var(--color-ink);
   }
 }
+
+/* ==========================================================================
+   6. COMPONENT MIGRATION NOTES (for Frontend Developer)
+   ==========================================================================
+   
+   LIQUID GLASS NAVBAR (LiquidGlassNavbar.css):
+   - Replace background with solid --color-surface + --border-light bottom border
+   - Remove all ::before/::after pseudo-element shimmer effects
+   - Remove .liquid-bg, .liquid-blob, @keyframes liquidFloat*
+   - .menu-link: solid --color-bg-alt background, --color-ink text
+   - .menu-link-active: --color-ink background, --color-bg text
+   - .menu-link:hover: --color-primary-light background, no transform
+   
+   FOOTER (Footer.css):
+   - Replace glass background with --color-ink (dark footer)
+   - All text becomes --color-bg / --color-ink-muted on dark bg
+   - Remove .footer-liquid-bg, .footer-liquid-blob, @keyframes footerLiquidFloat*
+   - Remove refractive shimmer ::before/::after pseudo-elements
+   - Social links: --color-primary-hover on hover
+   
+   HOME PAGE (Home.css):
+   - .hero-placeholder: --color-ink background (was purple gradient)
+   - blockquote: border-left color from #667eea to var(--color-primary)
+   - .tagline strong: color from #667eea to var(--color-primary)
+   - .bio-card h3 a: color from #667eea to var(--color-primary)
+   - .home-navigation a: background from #667eea to var(--color-primary)
+   - .home-navigation a:hover: background from #764ba2 to var(--color-primary-hover)
+   
+   CONTACT PAGE (Contact.css):
+   - All linear-gradient() headings → solid var(--color-ink)
+   - .submit-btn: background from gradient to var(--color-primary)
+   - .method-icon: background from gradient to var(--color-primary)
+   - .social-link:hover: background from gradient to var(--color-primary)
+   - All --glass-* variables → --color-surface / --border-light
+   - All --accent-blue / --accent-purple → --color-primary
+   
+   TITLE HERO (TitleHero.css):
+   - .title-hero background: from var(--gradient-ambient) to var(--color-bg)
+   - .title-hero-content background: from var(--glass-bg-primary) to var(--color-surface)
+   - .title-hero-content border: from var(--glass-border) to var(--border-light)
+   
+   GSAP HERO (GsapHero.css):
+   - .marquee border-bottom: from var(--glass-border) to var(--border-light)
+   - -webkit-text-stroke: 1px #000000 → 2px var(--color-ink)
+   ========================================================================== */

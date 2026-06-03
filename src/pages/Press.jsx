@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import LazyVideo from '../components/LazyVideo';
+import { generateBreadcrumbSchema } from '../utils/structuredData';
 import './Press.css';
 
 // Import press images
@@ -33,6 +35,15 @@ function Press() {
   const [selectedReview, setSelectedReview] = useState(null);
   const [showReviewModal, setShowReviewModal] = useState(false);
   const [showAllReviews, setShowAllReviews] = useState(false);
+
+  // Refs for fade-in animations
+  const headerRef = useRef(null);
+  const reviewsRef = useRef(null);
+  const videoRef = useRef(null);
+  const audienceRef = useRef(null);
+  const magicRef = useRef(null);
+  const galleryRef = useRef(null);
+  const infoRef = useRef(null);
 
   // Define images array with imported assets
   const images = [
@@ -88,6 +99,29 @@ function Press() {
       document.body.style.overflow = 'unset';
     };
   }, [selectedImage, showReviewModal]);
+
+  // Staggered fade-in animations on mount (matches Contact page pattern)
+  useEffect(() => {
+    const fadeIn = (el, delay, direction = 'up') => {
+      if (!el) return;
+      const y = direction === 'up' ? -20 : direction === 'left' ? -20 : 20;
+      el.style.opacity = '0';
+      el.style.transform = `translateY(${y}px)`;
+      setTimeout(() => {
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+      }, delay);
+    };
+
+    fadeIn(headerRef.current, 100, 'up');
+    fadeIn(reviewsRef.current, 200, 'up');
+    fadeIn(videoRef.current, 300, 'up');
+    fadeIn(audienceRef.current, 350, 'up');
+    fadeIn(magicRef.current, 400, 'up');
+    fadeIn(galleryRef.current, 500, 'up');
+    fadeIn(infoRef.current, 600, 'up');
+  }, []);
 
   // Handle keyboard navigation
   React.useEffect(() => {
@@ -233,13 +267,47 @@ function Press() {
   };
 
   return (
+    <>
+      <Helmet>
+        <title>Press &amp; Media - Epic Economics</title>
+        <meta name="description" content="Press coverage, media kit, and news about Epic Economics theatrical production. Download high-resolution images and press materials." />
+        <link rel="canonical" href="https://epic-economics.dimis.org/press" />
+        <meta property="og:title" content="Press &amp; Media - Epic Economics" />
+        <meta property="og:description" content="Press coverage and media materials for Epic Economics theatrical production." />
+        <meta property="og:image" content="https://epic-economics.dimis.org/og-image.png" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://epic-economics.dimis.org/press" />
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:title" content="Press &amp; Media - Epic Economics" />
+        <meta property="twitter:description" content="Press coverage and media materials for Epic Economics theatrical production." />
+        <meta property="twitter:image" content="https://epic-economics.dimis.org/og-image.png" />
+        <script type="application/ld+json">
+          {JSON.stringify(generateBreadcrumbSchema([
+            { name: 'Home', url: 'https://epic-economics.dimis.org/' },
+            { name: 'Press & Media', url: 'https://epic-economics.dimis.org/press' },
+          ]))}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'MediaObject',
+            name: 'Epic Economics Press Kit',
+            description: 'Press materials and media kit for Epic Economics. What would you protest about today? A play by Dimis Michaelides.',
+            publisher: {
+              '@type': 'Organization',
+              name: 'Epic Economics',
+            },
+          })}
+        </script>
+      </Helmet>
+
     <div className="press">
-      <header className="press-header">
+      <header className="press-header" ref={headerRef}>
         <h1>Epic Economics - Press Kit</h1>
         <p className="press-description">High-resolution images and press materials</p>
       </header>
 
-      <section className="press-reviews">
+      <section className="press-reviews" ref={reviewsRef}>
         <h2>Reviews & Commentary</h2>
         <div className="reviews-list">
           {(showAllReviews ? reviews : reviews.slice(0, 3)).map((review, index) => {
@@ -289,7 +357,7 @@ function Press() {
         </p>
       </section>
 
-      <section className="video-section">
+      <section className="video-section" ref={videoRef}>
         <h2>Stills from our July '25 Show</h2>
         <div className="video-cards">
           <div className="video-card">
@@ -310,7 +378,7 @@ function Press() {
         </div>
       </section>
 
-        <section className="audience-participation-section">
+        <section className="audience-participation-section" ref={audienceRef}>
           <h2>Audience Participation</h2>
           <p>At the end of the show members of the public are given the opportunity to write their own slogans on carboard. <br></br> Here's some of what they wrote in response to the show's question: "what would you protest about today?"</p>
           <div className="video-cards">
@@ -346,7 +414,7 @@ function Press() {
           </div>
         </section>
 
-      <section className="magic-link-section">
+      <section className="magic-link-section" ref={magicRef}>
         <h2>What People Said About Our Last Show</h2>
         <p className="magic-description">
           Before Epic Economics, Dimis brought audiences another thought-provoking performance exploring the intersection of magic, perception, and reality.
@@ -354,7 +422,7 @@ function Press() {
 
         <div className="magic-reviews">
           <div className="magic-review-item">
-            <div className="magic-review-stars">⭐⭐⭐⭐</div>
+            <div className="magic-review-stars">★★★★</div>
             <p className="magic-review-text">
               "What makes this performance so special is that the incredible magic and the visual art are so interwoven that we learn as well as being entertained. It's such a clever concept that surprises and educates us."
             </p>
@@ -399,7 +467,7 @@ function Press() {
         </a>
       </section>
 
-      <section className="press-kit">
+      <section className="press-kit" ref={galleryRef}>
         <h2>Photography by Boyana Loizou</h2>
 
         <div className="image-gallery">
@@ -421,7 +489,7 @@ function Press() {
           ))}
         </div>
       </section>
-      <section className="live-performance-section">
+      {/* <section className="live-performance-section">
         <h2>Full Live Performance</h2>
         <p className="performance-description">
           Access the complete recording of Epic Economics live performance, Premiere July 2025 (Password required).
@@ -432,9 +500,9 @@ function Press() {
         >
           🎭 Watch Full Live Performance
         </button>
-      </section>
+      </section>*/}
 
-      <section className="press-info">
+      <section className="press-info" ref={infoRef}>
         {/* <h2>About the Photography</h2>
         <p>
           These exclusive behind-the-scenes photographs were taken by renowned photographer Boyana,
@@ -570,6 +638,7 @@ function Press() {
         <Link to="/" className="back-link">← Back to Home</Link>
       </nav>
     </div>
+    </>
   );
 }
 

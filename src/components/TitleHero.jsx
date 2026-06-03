@@ -94,7 +94,7 @@ function TitleHero() {
   return (
     <div className="title-hero" ref={containerRef}>
       <div className="title-hero-backdrop">
-        <img src={backdropImage} alt="" className="title-hero-backdrop-image" ref={backdropImageRef} />
+        <img src={backdropImage} alt="Epic Economics theatrical performance with Dimis Michaelides" className="title-hero-backdrop-image" ref={backdropImageRef} />
       </div>
       <div className="title-hero-content">
         <h1 ref={titleEpicRef}>Epic Economics: What would you protest about today?</h1>

@@ -1,6 +1,30 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { GoogleReCaptchaProvider, useGoogleReCaptcha } from 'react-google-recaptcha-v3';
+import { generateBreadcrumbSchema } from '../utils/structuredData';
 import './Contact.css';
+
+// Shared bio data — moved from Home.jsx
+const TEAM_BIOS = [
+  {
+    name: 'Dimis Michaelides',
+    role: 'Writer & Performer',
+    url: 'https://dimis.org',
+    description: 'Keynote speaker and author on innovation, creativity and leadership. He has extensive international experience as a business executive and as a speaker in corporate and public events. He also offers workshops and change management consulting for private businesses, NGOs and public organizations.'
+  },
+  {
+    name: 'Lia Haraki',
+    role: 'Director & Lighting Designer',
+    url: 'https://liaharaki.com',
+    description: 'Interdisciplinary artist in performance, devised theatre, voice, and movement. Her work explores transformation and creation through the body as a medium, with performances presented locally and internationally. She mentors creatives and artists in developing their unique creative practice.'
+  },
+  {
+    name: 'Elias Vasnic',
+    role: 'Producer, Composer & Technical Supervisor',
+    url: 'https://elias.densetheory.cc',
+    description: 'Creative technologist and composer building soundscapes and interactive systems for live performance. For Epic Economics, he blended original music with historical audio, industrial noise, and ai-generated voices to bring the economists to life.'
+  }
+];
 
 // Error Boundary Component for reCAPTCHA
 class RecaptchaErrorBoundary extends React.Component {
@@ -135,6 +159,35 @@ function ContactForm() {
   };
 
   return (
+    <>
+      <Helmet>
+        <title>Contact Us - Epic Economics</title>
+        <meta name="description" content="Get in touch with the Epic Economics team. Contact us for bookings, press inquiries, or general questions about our theatrical production." />
+        <link rel="canonical" href="https://epic-economics.dimis.org/contact" />
+        <meta property="og:title" content="Contact Us - Epic Economics" />
+        <meta property="og:description" content="Get in touch with the Epic Economics team." />
+        <meta property="og:image" content="https://epic-economics.dimis.org/og-image.png" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://epic-economics.dimis.org/contact" />
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:title" content="Contact Us - Epic Economics" />
+        <meta property="twitter:description" content="Get in touch with the Epic Economics team." />
+        <meta property="twitter:image" content="https://epic-economics.dimis.org/og-image.png" />
+        <script type="application/ld+json">
+          {JSON.stringify(generateBreadcrumbSchema([
+            { name: 'Home', url: 'https://epic-economics.dimis.org/' },
+            { name: 'Contact Us', url: 'https://epic-economics.dimis.org/contact' },
+          ]))}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'ContactPage',
+            name: 'Contact Epic Economics',
+            description: 'Contact page for Epic Economics. What would you protest about today? A play by Dimis Michaelides.',
+          })}
+        </script>
+      </Helmet>
     <div className="contact-page">
       {/* Hero Header */}
       <section ref={headerRef} className="contact-hero">
@@ -160,7 +213,7 @@ function ContactForm() {
                   </svg>
                 </div>
                 <div className="method-details">
-                  <h3>Email</h3>
+                  <h3>Email (Producer)</h3>
                   <p>elias@densetheory.cc</p>
                   <span className="method-label">Producer</span>
                 </div>
@@ -174,7 +227,7 @@ function ContactForm() {
                   </svg>
                 </div>
                 <div className="method-details">
-                  <h3>Email</h3>
+                  <h3>Email (Writer &amp; Performer)</h3>
                   <p>dimis@dimis.org</p>
                   <span className="method-label">Writer \& Performer</span>
                 </div>
@@ -335,8 +388,27 @@ function ContactForm() {
             )}
           </div>
         </section>
+
+        {/* Team Section — at bottom of Contact page */}
+        <section className="team-bios" aria-labelledby="team-heading">
+          <h2 id="team-heading">Meet the Creative Team</h2>
+          <div className="bio-grid">
+            {TEAM_BIOS.map((bio) => (
+              <article key={bio.name} className="bio-card">
+                <h3>
+                  <a href={bio.url} target="_blank" rel="noopener noreferrer">
+                    {bio.name}
+                  </a>
+                </h3>
+                <p className="bio-role">{bio.role}</p>
+                <p>{bio.description}</p>
+              </article>
+            ))}
+          </div>
+        </section>
       </div>
     </div>
+    </>
   );
 }
 
@@ -427,6 +499,35 @@ function ContactFormWithoutRecaptcha() {
   };
 
   return (
+    <>
+      <Helmet>
+        <title>Contact Us - Epic Economics</title>
+        <meta name="description" content="Get in touch with the Epic Economics team. Contact us for press inquirie, interviews etc." />
+        <link rel="canonical" href="https://epic-economics.dimis.org/contact" />
+        <meta property="og:title" content="Contact Us - Epic Economics" />
+        <meta property="og:description" content="Get in touch with the Epic Economics team." />
+        <meta property="og:image" content="https://epic-economics.dimis.org/og-image.png" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://epic-economics.dimis.org/contact" />
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:title" content="Contact Us - Epic Economics" />
+        <meta property="twitter:description" content="Get in touch with the Epic Economics team." />
+        <meta property="twitter:image" content="https://epic-economics.dimis.org/og-image.png" />
+        <script type="application/ld+json">
+          {JSON.stringify(generateBreadcrumbSchema([
+            { name: 'Home', url: 'https://epic-economics.dimis.org/' },
+            { name: 'Contact Us', url: 'https://epic-economics.dimis.org/contact' },
+          ]))}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'ContactPage',
+            name: 'Contact Epic Economics',
+            description: 'Contact page for Epic Economics. What would you protest about today? A play by Dimis Michaelides.',
+          })}
+        </script>
+      </Helmet>
     <div className="contact-page">
       {/* Hero Header */}
       <section ref={headerRef} className="contact-hero">
@@ -453,7 +554,7 @@ function ContactFormWithoutRecaptcha() {
                   </svg>
                 </div>
                 <div className="method-details">
-                  <h3>Email</h3>
+                  <h3>Email (Producer)</h3>
                   <p>elias@densetheory.cc</p>
                   <span className="method-label">Producer</span>
                 </div>
@@ -467,7 +568,7 @@ function ContactFormWithoutRecaptcha() {
                   </svg>
                 </div>
                 <div className="method-details">
-                  <h3>Email</h3>
+                  <h3>Email (Writer &amp; Performer)</h3>
                   <p>dimis@dimis.org</p>
                   <span className="method-label">Writer \& Performer</span>
                 </div>
@@ -614,8 +715,27 @@ function ContactFormWithoutRecaptcha() {
             </form>
           </div>
         </section>
+
+        {/* Team Section — at bottom of Contact page */}
+        <section className="team-bios" aria-labelledby="team-heading">
+          <h2 id="team-heading">Meet the Creative Team</h2>
+          <div className="bio-grid">
+            {TEAM_BIOS.map((bio) => (
+              <article key={bio.name} className="bio-card">
+                <h3>
+                  <a href={bio.url} target="_blank" rel="noopener noreferrer">
+                    {bio.name}
+                  </a>
+                </h3>
+                <p className="bio-role">{bio.role}</p>
+                <p>{bio.description}</p>
+              </article>
+            ))}
+          </div>
+        </section>
       </div>
     </div>
+    </>
   );
 }
 

@@ -7,7 +7,7 @@
   <!-- Home Page -->
   <url>
     <loc>https://epic-economics.dimis.org/</loc>
-    <lastmod>2024-12-19</lastmod>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -15,7 +15,7 @@
   <!-- Preview Page -->
   <url>
     <loc>https://epic-economics.dimis.org/preview</loc>
-    <lastmod>2024-12-19</lastmod>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -23,7 +23,7 @@
   <!-- Press Page -->
   <url>
     <loc>https://epic-economics.dimis.org/press</loc>
-    <lastmod>2024-12-19</lastmod>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -31,7 +31,7 @@
   <!-- Contact Page -->
   <url>
     <loc>https://epic-economics.dimis.org/contact</loc>
-    <lastmod>2024-12-19</lastmod>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>

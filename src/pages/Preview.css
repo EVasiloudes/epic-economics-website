@@ -1,4 +1,7 @@
-/* Preview-specific styles - layout handled by page-container */
+/* ==========================================================================
+   Preview Page Styles — v2.0
+   Brand Guardian → Frontend Developer | June 2026
+   ========================================================================== */
 
 .preview-header {
   text-align: center;
@@ -7,15 +10,15 @@
 
 .preview-header h1 {
   font-family: var(--font-heading);
-  font-size: 2.5rem;
+  font-size: var(--text-h1);
   margin-bottom: 1rem;
-  color: #2c3e50;
+  color: var(--color-ink);
 }
 
 .preview-description {
   font-family: var(--font-body);
-  font-size: 1.2rem;
-  color: #7f8c8d;
+  font-size: var(--text-lead);
+  color: var(--color-ink-light);
 }
 
 .video-container {
@@ -25,18 +28,16 @@
 }
 
 .video-placeholder {
-  background: linear-gradient(135deg, var(--glass-bg-secondary), var(--glass-bg-tertiary));
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--glass-border);
-  border-radius: 16px;
-  box-shadow: 0 8px 32px var(--glass-shadow);
+  background-color: var(--color-bg-alt);
+  border: var(--border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
   height: 500px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: var(--color-ink-light);
   text-align: center;
 }
 
@@ -48,33 +49,31 @@
 .protection-note {
   font-style: italic;
   margin-top: 1rem;
-  color: #bdc3c7;
+  color: var(--color-ink-muted);
 }
 
 .preview-info {
   margin-bottom: 3rem;
-  background: var(--glass-bg-primary);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--glass-border);
-  border-radius: 16px;
+  background-color: var(--color-surface);
+  border: var(--border-light);
+  border-radius: var(--radius-lg);
   padding: 2rem;
-  box-shadow: 0 8px 32px var(--glass-shadow);
+  box-shadow: var(--shadow-md);
 }
 
 .preview-info h2 {
   font-family: var(--font-heading);
-  font-size: 2rem;
+  font-size: var(--text-h2);
   margin-bottom: 1rem;
-  color: #2c3e50;
+  color: var(--color-ink);
 }
 
 .preview-info p {
   font-family: var(--font-body);
-  font-size: 1.1rem;
-  line-height: 1.6;
+  font-size: var(--text-body);
+  line-height: var(--leading-normal);
   margin-bottom: 1rem;
-  color: #34495e;
+  color: var(--color-ink-light);
 }
 
 .preview-navigation {
@@ -84,26 +83,25 @@
 .back-link {
   font-family: var(--font-heading);
   text-decoration: none;
-  color: var(--accent-blue);
-  font-size: 1.2rem;
-  font-weight: bold;
+  color: var(--color-primary);
+  font-size: var(--text-body);
+  font-weight: 700;
   padding: 0.5rem 1rem;
-  background: var(--glass-bg-primary);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 2px solid var(--glass-border);
-  border-radius: 16px;
-  box-shadow: 0 4px 16px var(--glass-shadow);
-  transition: all 0.3s;
+  background-color: var(--color-surface);
+  border: var(--border-heavy);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: background-color var(--transition-fast),
+              color var(--transition-fast),
+              transform var(--transition-fast);
   display: inline-block;
 }
 
 .back-link:hover {
-  background: var(--glass-bg-secondary);
-  border-color: var(--accent-blue);
-  box-shadow: 0 8px 24px var(--glass-shadow-hover);
+  background-color: var(--color-ink);
+  color: var(--color-bg);
   transform: translateY(-2px);
-  color: var(--accent-blue);
+  text-decoration: none;
 }
 
 @media (max-width: 768px) {

@@ -11,6 +11,7 @@ import LoadingSpinner from './components/LoadingSpinner';
 
 // Lazy load page components for code splitting
 const Home = lazy(() => import('./pages/Home'));
+const Home2 = lazy(() => import('./pages/Home2'));
 const Preview = lazy(() => import('./pages/Preview'));
 const Press = lazy(() => import('./pages/Press'));
 const Contact = lazy(() => import('./pages/Contact'));
@@ -60,6 +61,7 @@ function RouteHandler() {
     // Update page title based on route
     const titles = {
       '/': 'Epic Economics: What would you protest about today?',
+      '/home2': 'Epic Economics: What would you protest about today?',
       '/preview': 'Preview - Epic Economics',
       '/press': 'Press & Media - Epic Economics',
       '/contact': 'Contact Us - Epic Economics',
@@ -95,12 +97,14 @@ function App() {
       >
         <ScrollRestoration />
         <RouteHandler />
+        <a href="#main-content" className="skip-link">Skip to main content</a>
         <LiquidGlassNavbar />
 
         <main id="main-content">
           <Suspense fallback={<LoadingSpinner />}>
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/home2" element={<Home2 />} />
               <Route path="/preview" element={<Preview />} />
               <Route path="/press" element={<Press />} />
               <Route path="/contact" element={<Contact />} />

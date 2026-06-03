@@ -1,9 +1,32 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
+import { generateBreadcrumbSchema } from '../utils/structuredData';
 import './Preview.css';
 
 function Preview() {
   return (
+    <>
+      <Helmet>
+        <title>Preview - Epic Economics</title>
+        <meta name="description" content="Get a preview of Epic Economics - experience excerpts from our theatrical production exploring economic themes and social change." />
+        <link rel="canonical" href="https://epic-economics.dimis.org/preview" />
+        <meta property="og:title" content="Preview - Epic Economics" />
+        <meta property="og:description" content="Get a preview of Epic Economics theatrical production." />
+        <meta property="og:image" content="https://epic-economics.dimis.org/og-image.png" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://epic-economics.dimis.org/preview" />
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:title" content="Preview - Epic Economics" />
+        <meta property="twitter:description" content="Get a preview of Epic Economics theatrical production." />
+        <meta property="twitter:image" content="https://epic-economics.dimis.org/og-image.png" />
+        <script type="application/ld+json">
+          {JSON.stringify(generateBreadcrumbSchema([
+            { name: 'Home', url: 'https://epic-economics.dimis.org/' },
+            { name: 'Preview', url: 'https://epic-economics.dimis.org/preview' },
+          ]))}
+        </script>
+      </Helmet>
     <div className="page-container">
       <header className="preview-header">
         <h1>Epic Economics - Full Preview</h1>
@@ -31,6 +54,7 @@ function Preview() {
         <Link to="/" className="back-link">← Back to Home</Link>
       </nav>
     </div>
+    </>
   );
 }
 

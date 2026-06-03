@@ -82,19 +82,18 @@ function LiquidGlassNavbar() {
   }, [location.pathname, isHomePage, scrollDirection, isTitleHeroVisible]);
 
   return (
-    <nav ref={navRef} className="liquid-glass-navbar" role="navigation" aria-label="Main navigation">
+    <nav ref={navRef} className="navbar" role="navigation" aria-label="Main navigation">
       <div className="navbar-container">
-        <div className="navbar-content">
-          <div className="navbar-brand">
-            <Link to="/" aria-label="Epic Economics - Home">
-              <img src="/favicon-32x32.png" alt="Epic Economics" className="navbar-logo" />
-            </Link>
-          </div>
-          
-          <div className="navbar-menu" role="menubar">
+        <div className="navbar-brand">
+          <Link to="/" aria-label="Epic Economics - Home">
+            <img src="/favicon-32x32.png" alt="Epic Economics" className="navbar-logo" />
+          </Link>
+        </div>
+        
+        <div className="navbar-menu" role="menubar">
           <Link
             to="/"
-            className={`menu-link ${location.pathname === '/' ? 'menu-link-active' : ''}`}
+            className={`navbar-link ${location.pathname === '/' ? 'navbar-link--active' : ''}`}
             role="menuitem"
             aria-current={location.pathname === '/' ? 'page' : undefined}
           >
@@ -102,7 +101,7 @@ function LiquidGlassNavbar() {
           </Link>
           <Link
             to="/press"
-            className={`menu-link ${location.pathname === '/press' ? 'menu-link-active' : ''}`}
+            className={`navbar-link ${location.pathname === '/press' ? 'navbar-link--active' : ''}`}
             role="menuitem"
             aria-current={location.pathname === '/press' ? 'page' : undefined}
           >
@@ -110,20 +109,12 @@ function LiquidGlassNavbar() {
           </Link>
           <Link
             to="/contact"
-            className={`menu-link ${location.pathname === '/contact' ? 'menu-link-active' : ''}`}
+            className={`navbar-link ${location.pathname === '/contact' ? 'navbar-link--active' : ''}`}
             role="menuitem"
             aria-current={location.pathname === '/contact' ? 'page' : undefined}
           >
             Contact
           </Link>
-          </div>
-        </div>
-
-        {/* Liquid effect background elements */}
-        <div className="liquid-bg" aria-hidden="true">
-          <div className="liquid-blob blob-1"></div>
-          <div className="liquid-blob blob-2"></div>
-          <div className="liquid-blob blob-3"></div>
         </div>
       </div>
     </nav>

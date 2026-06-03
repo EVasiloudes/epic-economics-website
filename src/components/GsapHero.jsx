@@ -116,9 +116,23 @@ function GsapHero() {
   }, [setupScrollAnimation, setupSmoothScroll]);
 
   return (
-    <div className="screen" id="fold-effect" ref={foldEffectRef}>
-      <div className="wrapper-3d">
-        <div className="fold fold-top">
+    <>
+      {/* Ticket CTA — outside .screen stacking context so it floats above everything */}
+      <div className="hero-cta">
+        <a
+          href="https://www.edfringe.com/tickets/whats-on/epic-economics-what-would-you-protest-about-today"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hero-cta-btn"
+          aria-label="Get tickets for Epic Economics at Edinburgh Fringe (opens in new tab)"
+        >
+          🎫 Edinburgh Fringe 2026 — Tickets on sale now
+        </a>
+      </div>
+
+      <div className="screen" id="fold-effect" ref={foldEffectRef}>
+        <div className="wrapper-3d">
+          <div className="fold fold-top">
           <div className="fold-align">
             <div className="fold-content">
               <div className="marquee">
@@ -135,19 +149,19 @@ function GsapHero() {
 
               <div className="marquee">
                 <div className="track">
-                  Value.Value.<span className="-focus">Value.</span>Value.Value.Value.Value.Value.
+                  Value.Value.<span className="-focus">Value.</span>Value.Value.Value.Value.Value.Value.Value.Value.Value.Value.Value.Value.Value.ValueValue.Value.Value.Value.Value.
                 </div>
               </div>
 
               <div className="marquee">
                 <div className="track">
-                  Capital.Capital.Capital.Capital.Capital.<span className="-focus">Capital.</span>Capital.Capital.
+                  Capital.Capital.Capital.Capital.Capital.<span className="-focus">Capital.</span>Capital.Capital.Capital.Capital.Capital.Capital.Capital.Capital.Capital.
                 </div>
               </div>
 
               <div className="marquee">
                 <div className="track">
-                  Labour.Labour.Labour.<span className="-focus">Labour.</span>Labour.Labour.Labour.Labour.
+                  Labour.Labour.Labour.<span className="-focus">Labour.</span>Labour.Labour.Labour.Labour.Labour.Labour.Labour.Labour.
                 </div>
               </div>
 
@@ -261,6 +275,7 @@ function GsapHero() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 

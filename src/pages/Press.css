@@ -1,31 +1,32 @@
-/* Removed smooth scrolling behavior to prevent autoscroll issues */
+/* ==========================================================================
+   Press Page Styles — v2.0
+   Brand Guardian → Frontend Developer | June 2026
+   ========================================================================== */
 
 .press {
   max-width: 1200px;
   margin: 0 auto;
   padding: 1rem;
   font-family: var(--font-body);
-  line-height: 1.5;
-  color: #333;
+  line-height: var(--leading-normal);
+  color: var(--color-ink);
 }
 
 /* Reviews Section */
 .press-reviews {
   margin: 2rem 0;
   padding: 2rem;
-  background: var(--glass-bg-primary);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--glass-border);
-  border-radius: 20px;
-  box-shadow: 0 8px 32px var(--glass-shadow);
+  background-color: var(--color-surface);
+  border: var(--border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
 }
 
 .press-reviews h2 {
   font-family: var(--font-heading);
-  font-size: 2rem;
+  font-size: var(--text-h2);
   margin-bottom: 1.5rem;
-  color: #2c3e50;
+  color: var(--color-ink);
   text-align: center;
 }
 
@@ -40,20 +41,18 @@
 }
 
 .review-item {
-  background: var(--glass-bg-secondary);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background-color: var(--color-bg-alt);
   padding: 1.5rem;
-  border-radius: 20px;
-  box-shadow: 0 8px 32px var(--glass-shadow);
-  border: 1px solid var(--glass-border);
-  border-left: 4px solid var(--accent-blue);
-  transition: all 0.3s ease;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  border: var(--border-light);
+  border-left: 4px solid var(--color-primary);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 .review-item:hover {
   transform: translateY(-1px);
-  box-shadow: 0 8px 24px var(--glass-shadow-hover);
+  box-shadow: var(--shadow-md);
 }
 
 .review-text {
@@ -128,11 +127,11 @@
 
 .press-description {
   font-family: var(--font-body);
-  font-size: 1rem;
-  color: #7f8c8d;
-  font-style: italic;
-  max-width: 600px;
+  font-size: var(--text-lead);
+  color: var(--color-ink-light);
+  max-width: 800px;
   margin: 0 auto;
+  line-height: var(--leading-normal);
 }
 
 .press-kit {
@@ -220,15 +219,11 @@
 }
 
 .press-materials {
-  background: var(--glass-bg-primary);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background-color: var(--color-surface);
   padding: 2rem;
-  border-radius: 16px;
-  border: 1px solid var(--glass-border);
-  border-left: 4px solid var(--accent-pink);
-  margin-bottom: 2rem;
-  box-shadow: 0 8px 32px var(--glass-shadow);
+  border-radius: var(--radius-lg);
+  border: var(--border-light);
+  box-shadow: var(--shadow-md);
 }
 
 .press-materials h3 {
@@ -863,7 +858,7 @@
 .press-navigation {
   text-align: center;
   padding-top: 2rem;
-  border-top: 2px solid #ecf0f1;
+  border-top: var(--border-light);
   margin-top: 1.5rem;
 }
 
@@ -871,20 +866,20 @@
   display: inline-block;
   font-family: var(--font-heading);
   text-decoration: none;
-  color: var(--accent-blue);
-  font-size: 1.1rem;
-  font-weight: bold;
+  color: var(--color-primary);
+  font-size: var(--text-body);
+  font-weight: 700;
   padding: 0.8rem 1.75rem;
-  border: 2px solid var(--accent-blue);
-  border-radius: 12px;
-  transition: all 0.3s ease;
+  border: var(--border-heavy);
+  border-radius: var(--radius-md);
+  transition: background-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
 }
 
 .back-link:hover {
-  background: var(--accent-blue);
-  color: white;
+  background-color: var(--color-primary);
+  color: #FFFFFF;
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px var(--glass-shadow-hover);
+  text-decoration: none;
 }
 
 /* Tablet Design */
@@ -1633,31 +1628,29 @@
 .magic-link-section {
   margin: 3rem 0;
   padding: 2rem;
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--glass-border);
-  border-radius: 20px;
+  background-color: var(--color-primary);
+  border: var(--border-light);
+  border-radius: var(--radius-lg);
   text-align: center;
-  box-shadow: 0 8px 32px var(--glass-shadow);
+  box-shadow: var(--shadow-md);
 }
 
 .magic-link-section h2 {
   font-family: var(--font-heading);
-  font-size: 2rem;
+  font-size: var(--text-h2);
   margin-bottom: 1.25rem;
-  color: #ffffff;
+  color: #FFFFFF;
 }
 
 .magic-description {
   font-family: var(--font-body);
-  font-size: 1.1rem;
-  color: #f0f0f0;
+  font-size: var(--text-lead);
+  color: rgba(255, 255, 255, 0.9);
   margin-bottom: 2rem;
   max-width: 700px;
   margin-left: auto;
   margin-right: auto;
-  line-height: 1.6;
+  line-height: var(--leading-normal);
 }
 
 .magic-reviews {
@@ -1671,17 +1664,17 @@
 }
 
 .magic-review-item {
-  background: rgba(255, 255, 255, 0.95);
+  background-color: var(--color-surface);
   padding: 1.75rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
   text-align: left;
-  transition: all 0.3s ease;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 .magic-review-item:hover {
   transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  box-shadow: var(--shadow-lg);
 }
 
 .magic-review-stars {
@@ -1691,65 +1684,64 @@
 
 .magic-review-text {
   font-family: var(--font-body);
-  font-size: 1rem;
-  line-height: 1.65;
-  color: #34495e;
+  font-size: var(--text-body);
+  line-height: var(--leading-normal);
+  color: var(--color-ink-light);
   font-style: italic;
   margin-bottom: 0.8rem;
 }
 
 .magic-review-author {
   font-family: var(--font-heading);
-  font-size: 0.9rem;
-  color: #7f8c8d;
-  font-weight: bold;
+  font-size: var(--text-small);
+  color: var(--color-ink-muted);
+  font-weight: 700;
   margin-bottom: 0.6rem;
 }
 
 .magic-review-link {
   display: inline-block;
-  color: var(--accent-purple);
+  color: var(--color-primary);
   text-decoration: none;
   font-family: var(--font-heading);
-  font-weight: bold;
-  font-size: 0.85rem;
-  transition: all 0.3s ease;
+  font-weight: 700;
+  font-size: var(--text-small);
+  transition: color var(--transition-fast);
 }
 
 .magic-review-link:hover {
-  color: var(--accent-pink);
+  color: var(--color-primary-hover);
   text-decoration: underline;
 }
 
 .magic-link-btn {
   display: inline-block;
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-  color: white;
+  background-color: #FFFFFF;
+  color: var(--color-primary);
   text-decoration: none;
   padding: 1rem 2rem;
-  font-size: 1.1rem;
+  font-size: var(--text-body);
   font-family: var(--font-heading);
-  font-weight: bold;
-  border-radius: 12px;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(245, 87, 108, 0.3);
+  font-weight: 700;
+  border-radius: var(--radius-md);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: var(--tracking-wide);
   margin-top: 0.75rem;
 }
 
 .magic-link-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(245, 87, 108, 0.4);
+  box-shadow: var(--shadow-lg);
 }
 
 .magic-link-btn:active {
   transform: translateY(-1px);
 }
 
-/* Smooth focus states for accessibility */
+/* Focus states */
 *:focus {
-  outline: 2px solid var(--accent-blue);
+  outline: 2px solid var(--color-primary);
   outline-offset: 2px;
 }
 

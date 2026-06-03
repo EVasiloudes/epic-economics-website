@@ -17,7 +17,7 @@ function Technical() {
 
   return (
     <div className="technical">
-      <header className="technical-header">
+      <header className="header">
         <h1>Epic Economics - Technical Information</h1>
         <p className="technical-description">Stage plan, equipment requirements, and technical specifications</p>
       </header>
@@ -125,37 +125,37 @@ function Technical() {
         <h2>Venue Requirements</h2>
         <div className="requirements-grid">
           <div className="requirement-item">
-            <h4>Stage Size</h4>
+            <h3>Stage Size</h3>
             <p>Minimum 6m x 6m performance area</p>
           </div>
           <div className="requirement-item">
-            <h4>Power</h4>
+            <h3>Power</h3>
             <p>Standard AC power for audio and lighting equipment</p>
           </div>
           <div className="requirement-item">
-            <h4>Lighting</h4>
+            <h3>Lighting</h3>
             <p>Multi-zone controllable lighting system with specials, house lights controllable, projector capability</p>
           </div>
           {/* <div className="requirement-item">
-            <h4>Load-in</h4>
+            <h3>Load-in</h3>
             <p>4-5 hours setup time recommended (including lighting focus)</p>
           </div>*/}
           <div className="requirement-item">
-            <h4>Control</h4>
+            <h3>Control</h3>
             <p>Lighting board capable of 41 cues with timed fades and instant changes</p>
           </div>
           <div className="requirement-item">
-            <h4>Special Equipment</h4>
-            <p>Floor-mounted lights, red gel/LED capability, projector for finale and sur/subtitles</p>
+            <h3>Special Equipment</h3>
+            <p>Red gobos in the lights, projector for finale and sur/subtitles</p>
           </div>
           <div className="requirement-item">
-            <h4>Special Equipment</h4>
+            <h3>Guitar Amp</h3>
             <p>guitar Amp, we'll source it</p>
           </div>
         </div>
       </section>
 
-      <section className="credits">
+      {/* <section className="credits">
         <h2>Credits</h2>
         <div className="credits-grid">
           <div className="credit-category">
@@ -193,14 +193,7 @@ function Technical() {
             </ul>
           </div>
 
-          <div className="credit-category">
-            <h3>Special Thanks</h3>
-            <ul>
-              <li>All economists quoted and referenced in the performance</li>
-              <li>Venues and audiences who have supported the development</li>
-              <li>The academic and theatre communities who provided feedback</li>
-            </ul>
-          </div>
+
         </div>
 
         <div className="credits-note">
@@ -210,7 +203,7 @@ function Technical() {
             please contact the production team.</em>
           </p>
         </div>
-      </section>
+      </section>*/}
 
       <nav className="technical-navigation">
         <Link to="/" className="back-link">← Back to Home</Link>
