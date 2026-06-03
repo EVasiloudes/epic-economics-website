@@ -230,8 +230,8 @@ const LazyVideo = ({
             </div>
           )}
 
-          {/* Loading spinner */}
-          {isIntersecting && isLoading && (
+          {/* Loading spinner — only for autoplay videos that need to buffer */}
+          {isIntersecting && autoplay && isLoading && (
             <div className="lazy-video-loading">
               <div className="loading-spinner"></div>
               <p>
@@ -264,9 +264,7 @@ const LazyVideo = ({
               onLoadedData={handleLoadedData}
               onCanPlay={handleCanPlay}
               onError={handleVideoError}
-              style={{
-                opacity: isLoading ? 0 : 1
-              }}
+              style={autoplay ? { opacity: isLoading ? 0 : 1 } : undefined}
               aria-label={title || 'Video player'}
             >
               <source src={src} type={getVideoType(src)} />

@@ -363,7 +363,7 @@ function Press() {
           <div className="video-card">
             <div className="video-thumbnail">
               <LazyVideo
-                src="https://pz3w5exosjyrfo44.public.blob.vercel-storage.com/epic-economics-teaser-optimized.mp4"
+                src="/videos/epic-economics-teaser.mp4"
                 poster="/videos/epic-economics-teaser-poster.jpg"
                 title="Epic Economics Teaser"
                 controls={true}
@@ -385,7 +385,7 @@ function Press() {
             <div className="video-card">
               <div className="video-thumbnail">
                 <LazyVideo
-                  src="https://pz3w5exosjyrfo44.public.blob.vercel-storage.com/ee-slogans-photomix-1-optimized.mp4"
+                  src="/videos/ee-slogans-photomix-1.mp4"
                   poster="/videos/ee-slogans-photomix-1-poster.jpg"
                   title="EE Slogans Photomix 1"
                   controls={true}
@@ -400,7 +400,7 @@ function Press() {
             <div className="video-card">
               <div className="video-thumbnail">
                 <LazyVideo
-                  src="https://pz3w5exosjyrfo44.public.blob.vercel-storage.com/ee-slogans-photomix-2-optimized.mp4"
+                  src="/videos/ee-slogans-photomix-2.mp4"
                   poster="/videos/ee-slogans-photomix-2-poster.jpg"
                   title="EE Slogans Photomix 2"
                   controls={true}
