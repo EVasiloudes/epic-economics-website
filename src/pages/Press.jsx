@@ -28,10 +28,6 @@ import img18 from '../assets/images/press/_BOO9981.jpg';
 function Press() {
   const [selectedImage, setSelectedImage] = useState(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [showPasswordDialog, setShowPasswordDialog] = useState(false);
-  const [password, setPassword] = useState('');
-  const [passwordError, setPasswordError] = useState('');
-  const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [selectedReview, setSelectedReview] = useState(null);
   const [showReviewModal, setShowReviewModal] = useState(false);
   const [showAllReviews, setShowAllReviews] = useState(false);
@@ -158,40 +154,11 @@ function Press() {
     };
   }, [selectedImage, currentImageIndex, showReviewModal, images.length]);
 
-  const handlePasswordDialogOpen = () => {
-    setShowPasswordDialog(true);
-    setPassword('');
-    setPasswordError('');
-  };
-
-  const handlePasswordSubmit = (e) => {
-    e.preventDefault();
-    const correctPassword = 'epiceconomics-performance2025';
-
-    if (password === correctPassword) {
-      setShowPasswordDialog(false);
-      setShowSuccessModal(true);
-      setPassword('');
-      setPasswordError('');
-      // Open YouTube video in new tab
-      window.open('https://youtu.be/lsncXEr3iUE', '_blank', 'noopener,noreferrer');
-    } else {
-      setPasswordError('Incorrect password. Please try again.');
-      setPassword('');
-    }
-  };
-
-  const handlePasswordDialogClose = () => {
-    setShowPasswordDialog(false);
-    setPassword('');
-    setPasswordError('');
-  };
-
-  const handleSuccessModalClose = () => {
-    setShowSuccessModal(false);
-  };
-
-  const reviews = [
+    const reviews = [
+    {
+      text: "Brilliant wit, music and performance. Yes, economics can be funny!",
+      author: "Micael Sarris, Former World Banker & Finance Minister of Cyprus"
+    },
     {
       text: "A powerful play with a soulful performance that engaged all the senses — shifting from the cold, calculated logic of a humanoid to the raw emotions and fragility of a human being.",
       author: "Argyro Christodoulides, Composer"
@@ -221,7 +188,7 @@ function Press() {
       author: "George Lambrianou, Former Administrative Director, University of Cyprus"
     },
     {
-      text: "Hugely entertaining with its wit, music, and performance. It magically opens up the audience to take a fresh look at the profoundly disturbing issues of our times, inequality, loss of freedom and power. A top quality show that deserves to travel to many many audiences.",
+      text: "Hugely entertaining, humorous, well written and presented. It magically opens up the audience to take a fresh look at the profoundly disturbing issues of our times, inequality, loss of freedom ... and power. A top quality show that deserves to travel to many many audiences.",
       author: "Aleen Andreou, Corporate Trainer and Coach, PeopleAchieve"
     },
     {
@@ -468,7 +435,7 @@ function Press() {
       </section>
 
       <section className="press-kit" ref={galleryRef}>
-        <h2>Photography by Boyana Loizou</h2>
+        <h2>Photography</h2>
 
         <div className="image-gallery">
           {images.map((image, index) => (
@@ -489,18 +456,6 @@ function Press() {
           ))}
         </div>
       </section>
-      {/* <section className="live-performance-section">
-        <h2>Full Live Performance</h2>
-        <p className="performance-description">
-          Access the complete recording of Epic Economics live performance, Premiere July 2025 (Password required).
-        </p>
-        <button
-          className="watch-performance-btn"
-          onClick={handlePasswordDialogOpen}
-        >
-          🎭 Watch Full Live Performance
-        </button>
-      </section>*/}
 
       <section className="press-info" ref={infoRef}>
         {/* <h2>About the Photography</h2>
@@ -557,64 +512,6 @@ function Press() {
                 {selectedImage.filename}
               </span>
             </div>
-          </div>
-        </div>
-      )}
-
-      {/* Password Dialog Modal */}
-      {showPasswordDialog && (
-        <div className="password-modal" onClick={handlePasswordDialogClose}>
-          <div className="password-modal-content" onClick={(e) => e.stopPropagation()}>
-            <button className="close-button" onClick={handlePasswordDialogClose}>×</button>
-            <h3>Enter Password</h3>
-            <p>Please enter the password to access the full live performance:</p>
-            <form onSubmit={handlePasswordSubmit}>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Enter password..."
-                className={`password-input ${passwordError ? 'error' : ''}`}
-                autoFocus
-              />
-              {passwordError && (
-                <div className="password-error">
-                  {passwordError}
-                </div>
-              )}
-              <div className="password-modal-buttons">
-                <button type="button" className="cancel-btn" onClick={handlePasswordDialogClose}>
-                  Cancel
-                </button>
-                <button type="submit" className="submit-btn">
-                  Access Performance
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
-
-      {/* Success Modal */}
-      {showSuccessModal && (
-        <div className="success-modal" onClick={handleSuccessModalClose}>
-          <div className="success-modal-content" onClick={(e) => e.stopPropagation()}>
-            <button className="close-button" onClick={handleSuccessModalClose}>×</button>
-            <div className="success-icon">✅</div>
-            <h3>Access Granted!</h3>
-            <p>The full live performance should now be opening in a new tab.</p>
-            <p>If it didn't open automatically, you can access it directly:</p>
-            <a
-              href="https://youtu.be/DUPmu2zeHCI"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="direct-link"
-            >
-              Watch on YouTube
-            </a>
-            <button className="success-close-btn" onClick={handleSuccessModalClose}>
-              Close
-            </button>
           </div>
         </div>
       )}

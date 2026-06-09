@@ -1,6 +1,7 @@
 /* ==========================================================================
-   Preview Page Styles — v2.0
+   Preview Page Styles — v3.0
    Brand Guardian → Frontend Developer | June 2026
+   Password-protected performance preview page
    ========================================================================== */
 
 .preview-header {
@@ -21,61 +22,311 @@
   color: var(--color-ink-light);
 }
 
-.video-container {
-  margin-bottom: 3rem;
+/* Live Performance Section */
+.live-performance-section {
+  margin: 2.5rem 0;
+  padding: 2rem;
+  background: linear-gradient(135deg, rgba(44, 62, 80, 0.9), rgba(52, 73, 94, 0.9));
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 8px 32px var(--glass-shadow);
+}
+
+.live-performance-section h2 {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+  color: #ffffff;
+}
+
+.performance-description {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: #ecf0f1;
+  margin-bottom: 1.5rem;
+  max-width: 600px;
   margin-left: auto;
   margin-right: auto;
 }
 
-.video-placeholder {
-  background-color: var(--color-bg-alt);
-  border: var(--border-light);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
-  height: 500px;
+.watch-performance-btn {
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-family: var(--font-heading);
+  font-weight: bold;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.watch-performance-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+  background: linear-gradient(135deg, #c0392b, #a93226);
+}
+
+.watch-performance-btn:active {
+  transform: translateY(-1px);
+}
+
+/* Password Modal */
+.password-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: var(--color-ink-light);
+  z-index: 1100;
+  opacity: 0;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.password-modal-content {
+  background: #ffffff;
+  padding: 2.5rem;
+  border-radius: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.2);
+  max-width: 450px;
+  width: 90%;
+  position: relative;
   text-align: center;
 }
 
-.lock-icon {
-  font-size: 4rem;
-  margin-bottom: 1rem;
-}
-
-.protection-note {
-  font-style: italic;
-  margin-top: 1rem;
-  color: var(--color-ink-muted);
-}
-
-.preview-info {
-  margin-bottom: 3rem;
-  background-color: var(--color-surface);
-  border: var(--border-light);
-  border-radius: var(--radius-lg);
-  padding: 2rem;
-  box-shadow: var(--shadow-md);
-}
-
-.preview-info h2 {
+.password-modal-content h3 {
   font-family: var(--font-heading);
-  font-size: var(--text-h2);
+  font-size: 1.8rem;
+  color: #2c3e50;
   margin-bottom: 1rem;
-  color: var(--color-ink);
+  font-weight: bold;
 }
 
-.preview-info p {
+.password-modal-content p {
   font-family: var(--font-body);
-  font-size: var(--text-body);
-  line-height: var(--leading-normal);
-  margin-bottom: 1rem;
-  color: var(--color-ink-light);
+  color: #34495e;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+  font-size: 1rem;
 }
 
+.password-input {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.1rem;
+  font-family: var(--font-body);
+  border: 2px solid #bdc3c7;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  outline: none;
+  transition: border-color 0.3s ease;
+  background: #ffffff;
+  color: #2c3e50;
+}
+
+.password-input:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.password-input.error {
+  border-color: #e74c3c;
+  animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 20%, 40%, 60%, 80% {
+    transform: translateX(-2px);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(2px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+.password-error {
+  color: #e74c3c;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  background-color: #fdf2f2;
+  border-radius: 6px;
+  border-left: 3px solid #e74c3c;
+}
+
+.password-modal-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.cancel-btn,
+.submit-btn {
+  padding: 0.8rem 1.5rem;
+  font-family: var(--font-heading);
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.cancel-btn {
+  background-color: #95a5a6;
+  color: white;
+}
+
+.cancel-btn:hover {
+  background-color: #7f8c8d;
+  transform: translateY(-2px);
+}
+
+.submit-btn {
+  background: #3498db;
+  color: white;
+}
+
+.submit-btn:hover {
+  background: #2980b9;
+  transform: translateY(-2px);
+}
+
+/* Success Modal */
+.success-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1100;
+  opacity: 0;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.success-modal-content {
+  background: #ffffff;
+  padding: 2.5rem;
+  border-radius: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  width: 90%;
+  position: relative;
+  text-align: center;
+}
+
+.success-icon {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+}
+
+.success-modal-content h3 {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  color: #27ae60;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.success-modal-content p {
+  font-family: var(--font-body);
+  color: #34495e;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+.direct-link {
+  display: inline-block;
+  color: #3498db;
+  text-decoration: none;
+  font-weight: bold;
+  font-family: var(--font-heading);
+  padding: 0.5rem 1rem;
+  border: 2px solid #3498db;
+  border-radius: 12px;
+  margin: 1rem 0;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.direct-link:hover {
+  background: #3498db;
+  color: white;
+  transform: translateY(-2px);
+}
+
+.success-close-btn {
+  background-color: #27ae60;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  font-family: var(--font-heading);
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  margin-top: 1rem;
+}
+
+.success-close-btn:hover {
+  background-color: #229954;
+  transform: translateY(-2px);
+}
+
+/* Shared close button */
+.close-button {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #95a5a6;
+  transition: color 0.2s ease;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.close-button:hover {
+  color: #2c3e50;
+  background: rgba(0, 0, 0, 0.05);
+}
+
+/* Navigation */
 .preview-navigation {
   text-align: center;
 }
@@ -104,26 +355,130 @@
   text-decoration: none;
 }
 
+/* Tablet Design */
+@media (max-width: 1024px) {
+  .live-performance-section {
+    padding: 2rem;
+    margin: 2.5rem 0;
+  }
+
+  .live-performance-section h2 {
+    font-size: 1.8rem;
+  }
+
+  .watch-performance-btn {
+    padding: 0.9rem 1.75rem;
+    font-size: 1rem;
+  }
+
+  .password-modal-content,
+  .success-modal-content {
+    padding: 1.75rem;
+    max-width: 380px;
+  }
+}
+
 @media (max-width: 768px) {
-  .video-placeholder {
-    height: 350px;
+  .preview-header h1 {
+    font-size: 2rem;
+  }
+
+  .live-performance-section {
+    padding: 1.75rem;
+    margin: 1.75rem 0;
+  }
+
+  .live-performance-section h2 {
+    font-size: 1.8rem;
+  }
+
+  .performance-description {
+    font-size: 1rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .watch-performance-btn {
+    padding: 0.9rem 1.5rem;
+    font-size: 1rem;
+  }
+
+  .password-modal-content,
+  .success-modal-content {
+    padding: 1.25rem;
+    max-width: 340px;
+    width: 95%;
+  }
+
+  .password-modal-content h3,
+  .success-modal-content h3 {
+    font-size: 1.4rem;
+  }
+
+  .password-modal-buttons {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .cancel-btn,
+  .submit-btn,
+  .success-close-btn {
+    width: 100%;
   }
 }
 
 @media (max-width: 480px) {
   .preview-header h1 {
-    font-size: 2rem;
+    font-size: 1.6rem;
   }
 
-  .preview-info h2 {
-    font-size: 1.75rem;
+  .live-performance-section {
+    padding: 1.25rem;
+    margin: 1.25rem 0;
   }
 
-  .video-placeholder {
-    height: 300px;
+  .live-performance-section h2 {
+    font-size: 1.6rem;
   }
 
-  .lock-icon {
-    font-size: 3rem;
+  .performance-description {
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+  }
+
+  .watch-performance-btn {
+    padding: 0.7rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .password-modal-content,
+  .success-modal-content {
+    padding: 1rem;
+    max-width: 280px;
+    width: 95%;
+  }
+
+  .password-modal-content h3,
+  .success-modal-content h3 {
+    font-size: 1.3rem;
+  }
+
+  .password-modal-content p,
+  .success-modal-content p {
+    font-size: 0.9rem;
+  }
+
+  .back-link {
+    padding: 0.7rem 1.4rem;
+    font-size: 0.95rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
