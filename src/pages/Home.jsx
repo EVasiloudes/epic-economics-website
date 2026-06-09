@@ -11,6 +11,7 @@ import {
 import './Home.css';
 
 // Lazy load heavy components
+const IntroSequence = lazy(() => import('../components/IntroSequence'));
 const GsapHero = lazy(() => import('../components/GsapHero'));
 
 // Import images with explicit dimensions for CLS prevention
@@ -18,7 +19,6 @@ import audienceImg from '../assets/images/press/_BOO9866.jpg';
 
 function Home() {
   const [imagesLoaded, setImagesLoaded] = useState(false);
-  const [heroLoaded, setHeroLoaded] = useState(false);
   const imageContainerRef = useRef(null);
 
   // Apply home-with-gsap class for GSAP hero scroll animation
@@ -106,9 +106,14 @@ function Home() {
       </Helmet>
 
       <div className="home">
-        {/* Hero Section - Lazy loaded */}
+        {/* GSAP Hero — animates immediately in the background */}
         <Suspense fallback={<div className="hero-placeholder" />}>
-          <GsapHero onLoad={() => setHeroLoaded(true)} />
+          <GsapHero />
+        </Suspense>
+
+        {/* Intro Sequence — card overlay on top of the hero */}
+        <Suspense fallback={null}>
+          <IntroSequence />
         </Suspense>
 
         <div className="home-content" ref={imageContainerRef}>
