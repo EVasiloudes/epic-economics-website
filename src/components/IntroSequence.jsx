@@ -105,7 +105,7 @@ function IntroSequence() {
               <p>Brilliant wit, music and performance. Yes, economics can be funny!</p>
             </blockquote>
             <cite className="intro-card__cite">
-              — Michael Sarris, former Finance Minister of Cyprus
+              — Michael Sarris, former World Bank Director <br></br> & Finance Minister of Cyprus
             </cite>
           </div>
         </div>

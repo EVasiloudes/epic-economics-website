@@ -157,7 +157,7 @@ function Press() {
     const reviews = [
     {
       text: "Brilliant wit, music and performance. Yes, economics can be funny!",
-      author: "Micael Sarris, Former World Banker & Finance Minister of Cyprus"
+      author: "Michael Sarris, Former World Bank Director & Finance Minister of Cyprus"
     },
     {
       text: "A powerful play with a soulful performance that engaged all the senses — shifting from the cold, calculated logic of a humanoid to the raw emotions and fragility of a human being.",
