@@ -23,7 +23,7 @@ function Footer() {
             <h3 className="footer-section-title">Navigation</h3>
             <ul className="footer-list">
               <li><Link to="/" aria-label="Go to home page">Home</Link></li>
-              <li><Link to="/press" aria-label="Go to press and media page">Press & Media</Link></li>
+              <li><Link to="/reviews" aria-label="Go to reviews page">Reviews</Link></li>
               <li><Link to="/technical" aria-label="View technical details page">View Technical Details</Link></li>
               <li><Link to="/preview" aria-label="View performance preview">Preview</Link></li>
               <li><Link to="/contact" aria-label="Go to contact page">Contact</Link></li>

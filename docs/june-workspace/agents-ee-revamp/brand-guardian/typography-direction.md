@@ -16,19 +16,19 @@ Typography is the primary visual tool for Epic Economics. Before colour, before 
 
 ## 🔤 Font Pairing
 
-### Heading / Display: Avenir Next
+### Heading / Display: Montserrat
 ```
-font-family: 'Avenir Next', 'Century Gothic', system-ui, -apple-system, sans-serif;
+font-family: 'Montserrat', 'Century Gothic', system-ui, -apple-system, sans-serif;
 ```
 
-**Status:** ✅ Already in the codebase. Keep it.
+**Status:** ✅ New primary heading font. Replaces Avenir Next.
 
-**Why Avenir Next?**
-- **Adrian Frutiger's masterpiece.** A humanist sans-serif with genuine warmth — not cold or mechanical like Helvetica.
-- **Theatrical weight range.** From light (300) to heavy (800) — the bold weights at large sizes have genuine poster-level impact.
-- **Already loaded and cached.** Swapping would cost performance with zero benefit — Avenir Next is an excellent heading face for this brand.
-- **Distinctive 'a' and 't'.** The letterforms have personality without becoming decorative.
-- **Fringe-ready.** Clean, modern, legible at distance — exactly what you need on a flyer or a stage backdrop.
+**Why Montserrat?**
+- **Modern geometric sans-serif.** Clean, contemporary letterforms with excellent readability across all sizes.
+- **Strong theatrical weight range.** Bold weights (700, 800) have poster-level impact for headings and display text.
+- **Google Fonts availability.** Freely available with no licensing restrictions or system dependency concerns.
+- **Distinctive personality.** Strong letterforms that command attention without becoming decorative.
+- **Performance-optimized.** Variable font support ensures fast loading and minimal performance overhead.
 
 **Usage:**
 - All headings (h1–h6)
@@ -36,11 +36,11 @@ font-family: 'Avenir Next', 'Century Gothic', system-ui, -apple-system, sans-ser
 - Hero/display text
 - Buttons and CTAs
 - Weight 700 (bold) for impact, weight 600 (semibold) for subheadings
-- Letter-spacing: `-0.02em` for large display sizes, `0.02em` for smaller headings (compensates for the open apertures)
+- Letter-spacing: `-0.02em` for large display sizes, `0.02em` for smaller headings
 
 **Fallback stack:**
 ```
-Avenir Next → Century Gothic → system-ui → -apple-system → sans-serif
+Montserrat → Century Gothic → system-ui → -apple-system → sans-serif
 ```
 Century Gothic is geometrically similar and widely available. System fonts ensure zero layout shift on load.
 
@@ -65,7 +65,7 @@ Approximate size: ~45KB (variable), ~80KB (static individual weights). With `dis
 - **Excellent x-height.** Larger than most Garamonds — highly legible at body sizes (16–18px) on screens.
 - **Manifesto energy.** Serif body text against bold sans-serif headings creates the "pamphlet" aesthetic — revolutionary ideas printed on paper.
 - **Variable font.** Single file, all weights, minimal performance cost. Can fine-tune weight between 400–600 for optimal rendering.
-- **Replaces Nunito Sans.** Nunito is a friendly, rounded sans-serif — perfect for a children's app, wrong for a show about economic protest. The contrast between Avenir Next (heading) and Crimson Pro (body) creates the intellectual tension the brand needs.
+- **Replaces Avenir Next.** Montserrat provides a more modern, freely-available alternative with comparable weight and impact. The contrast between Montserrat (heading) and Crimson Pro (body) creates the intellectual tension the brand needs.
 
 **Usage:**
 - Body paragraphs (16–18px recommended)
@@ -160,7 +160,7 @@ Uppercase for urgency and theatrical presence. Generous letter-spacing for legib
 | Centered body text (ragged lines hurt readability) | Left-aligned body text with generous measure (60–75 chars per line) |
 | Text over blurred backgrounds (WCAG fail) | Text on solid, high-contrast backgrounds |
 | Font-weight: 300 (too thin on screens) | Minimum weight: 400 for body, 600 for headings |
-| Italic headings (Avenir Next oblique isn't great) | Roman headings, italic for body emphasis only |
+| Italic headings (Montserrat works best in regular weight) | Roman headings, italic for body emphasis only |
 | Narrow text columns on mobile | Full-width body on mobile with comfortable padding |
 
 ---
@@ -169,18 +169,18 @@ Uppercase for urgency and theatrical presence. Generous letter-spacing for legib
 
 ### Production Embed (add to `index.html` `<head>`)
 ```html
-<!-- Crimson Pro Variable Font (body) -->
+<!-- Montserrat & Crimson Pro Variable Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Crimson+Pro:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
 ```
 
 ### Performance Notes
 - `preconnect` to Google Fonts origins avoids DNS/TCP/SSL round-trips
 - `display=swap` ensures text is visible during font load (no FOIT)
 - Variable font serves all weights in one request (~45KB compressed)
-- Avenir Next is a system font on macOS/iOS — no download needed for those users
-- Total font payload: ~45KB (Crimson Pro only) vs. ~160KB (old Nunito Sans) — performance win
+- Montserrat is a freely-available web font — minimal performance cost
+- Total font payload: ~45KB (Crimson Pro) + ~30KB (Montserrat) vs. ~160KB (old Nunito Sans) — performance win
 
 ---
 

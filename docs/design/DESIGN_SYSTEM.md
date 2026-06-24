@@ -63,9 +63,9 @@ Brand title presentation with signature wobble animation.
 **Typography Treatment:**
 ```css
 .title-hero h1 {
-  font-family: "Avenir Next", "Century Gothic", "Helvetica Neue", Arial, sans-serif;
+  font-family: "Montserrat", "Century Gothic", system-ui, -apple-system, sans-serif;
   font-weight: 700;
-  font-style: italic;
+  font-style: normal;
   font-size: clamp(4.50rem, 3.64rem + 4.29vw, 9.00rem);
   line-height: 0.9;
   letter-spacing: -0.02em;

@@ -80,7 +80,7 @@
   /* --------------------------------------------------------------------
      Typography
      -------------------------------------------------------------------- */
-  --font-heading: 'Avenir Next', 'Century Gothic', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Montserrat', 'Century Gothic', system-ui, -apple-system, sans-serif;
   --font-body: 'Crimson Pro', 'Georgia', 'Times New Roman', serif;
 
   /* Type Scale (fluid via clamp) */

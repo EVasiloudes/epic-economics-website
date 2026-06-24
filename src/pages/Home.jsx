@@ -196,7 +196,7 @@ function Home() {
           {/* Navigation */}
           <nav className="home-navigation" aria-label="Page navigation">
             <ul>
-              <li><Link to="/press">Press & Media</Link></li>
+              <li><Link to="/reviews">Reviews</Link></li>
               <li><Link to="/contact">Contact</Link></li>
             </ul>
           </nav>

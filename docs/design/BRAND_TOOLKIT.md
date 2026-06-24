@@ -27,21 +27,21 @@ Epic Economics is a theatrical work that transforms economic theory into engagin
 
 ### Logo & Typography
 
-#### Primary Typeface: Avenir Next
+#### Primary Typeface: Montserrat
 - **Usage:** Headlines, titles, brand name
 - **Weight:** 700 (Bold) for main titles, 600 (Semibold) for subheadings
 - **Style:** Italic for brand name ("Epic Economics")
-- **Characteristics:** Clean, modern, geometric sans-serif
-- **Fallbacks:** "Century Gothic", "Helvetica Neue", Arial, sans-serif
+- **Characteristics:** Modern, geometric sans-serif with excellent readability
+- **Fallbacks:** "Century Gothic", system-ui, -apple-system, sans-serif
 
-#### Secondary Typeface: Nunito Sans
+#### Secondary Typeface: Crimson Pro
 - **Usage:** Body text, navigation, UI elements
-- **Weights:** 300 (Light), 400 (Regular), 500 (Medium), 600 (Semibold)
-- **Fallbacks:** "Source Sans Pro", "Helvetica Neue", Arial, sans-serif
+- **Weights:** 400 (Regular), 500 (Medium), 600 (Semibold), italic variants
+- **Fallbacks:** "Georgia", "Times New Roman", serif
 
 #### Brand Name Treatment
 ```css
-font-family: "Avenir Next", "Century Gothic", "Helvetica Neue", Arial, sans-serif;
+font-family: "Montserrat", "Century Gothic", system-ui, -apple-system, sans-serif;
 font-weight: 700;
 font-style: italic;
 ```
@@ -170,8 +170,8 @@ The brand's signature visual language uses glassmorphism effects:
 ```css
 :root {
   /* Typography */
-  --font-heading: 'Avenir Next', 'Century Gothic', 'Helvetica Neue', Arial, sans-serif;
-  --font-body: 'Nunito Sans', 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
+  --font-heading: 'Montserrat', 'Century Gothic', system-ui, -apple-system, sans-serif;
+  --font-body: 'Crimson Pro', 'Georgia', 'Times New Roman', serif;
 
   /* Glass Effects */
   --glass-bg-primary: rgba(255, 255, 255, 0.15);

@@ -258,7 +258,7 @@ function Home2() {
           {/* Navigation Strip — dark background per UI designer spec */}
           <nav className="home-navigation" aria-label="Page navigation">
             <ul>
-              <li><Link to="/press">Press & Media</Link></li>
+              <li><Link to="/reviews">Reviews</Link></li>
               <li><Link to="/contact">Contact</Link></li>
             </ul>
           </nav>

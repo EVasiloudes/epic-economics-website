@@ -1,9 +1,9 @@
 /* ==========================================================================
-   Press Page Styles — v2.0
+   Reviews Page Styles — v2.0
    Brand Guardian → Frontend Developer | June 2026
    ========================================================================== */
 
-.press {
+.reviews {
   max-width: 1200px;
   margin: 0 auto;
   padding: 1rem;
@@ -13,7 +13,7 @@
 }
 
 /* Reviews Section */
-.press-reviews {
+.reviews-section {
   margin: 2rem 0;
   padding: 2rem;
   background-color: var(--color-surface);
@@ -22,7 +22,7 @@
   box-shadow: var(--shadow-md);
 }
 
-.press-reviews h2 {
+.reviews-section h2 {
   font-family: var(--font-heading);
   font-size: var(--text-h2);
   margin-bottom: 1.5rem;
@@ -41,28 +41,24 @@
 }
 
 .review-item {
-  background-color: var(--color-bg-alt);
   padding: 1.5rem;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-  border: var(--border-light);
-  border-left: 4px solid var(--color-primary);
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--border-light);
+  transition: opacity var(--transition-fast);
 }
 
 .review-item:hover {
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-md);
+  opacity: 0.8;
 }
 
 .review-text {
   font-family: var(--font-body);
-  font-size: 1rem;
-  line-height: 1.6;
-  color: #34495e;
+  font-size: 1.7rem;
+  line-height: 1.8;
+  color: var(--color-ink);
   margin-bottom: 1rem;
   font-style: italic;
-  text-align: justify;
+  text-align: left;
 }
 
 .review-author {
@@ -110,14 +106,14 @@
   margin-right: auto;
 }
 
-.press-header {
+.reviews-header {
   text-align: center;
   margin-bottom: 2rem;
   padding-bottom: 1.5rem;
   border-bottom: 2px solid #2c3e50;
 }
 
-.press-header h1 {
+.reviews-header h1 {
   font-family: var(--font-heading);
   font-size: 2rem;
   margin-bottom: 0.5rem;
@@ -125,7 +121,7 @@
   font-weight: bold;
 }
 
-.press-description {
+.reviews-description {
   font-family: var(--font-body);
   font-size: var(--text-lead);
   color: var(--color-ink-light);
@@ -134,11 +130,11 @@
   line-height: var(--leading-normal);
 }
 
-.press-kit {
+.reviews-kit {
   margin-bottom: 3rem;
 }
 
-.press-kit h2 {
+.reviews-kit h2 {
   font-family: var(--font-heading);
   font-size: 1.75rem;
   margin-bottom: 0.75rem;
@@ -218,7 +214,7 @@
   letter-spacing: 1px;
 }
 
-.press-materials {
+.reviews-materials {
   background-color: var(--color-surface);
   padding: 2rem;
   border-radius: var(--radius-lg);
@@ -226,26 +222,26 @@
   box-shadow: var(--shadow-md);
 }
 
-.press-materials h3 {
+.reviews-materials h3 {
   font-family: var(--font-heading);
   font-size: 1.5rem;
   margin-bottom: 1rem;
   color: #2c3e50;
 }
 
-.press-materials p {
+.reviews-materials p {
   font-family: var(--font-body);
   color: #7f8c8d;
   margin-bottom: 1.5rem;
 }
 
-.press-downloads {
+.reviews-downloads {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.press-downloads li {
+.reviews-downloads li {
   margin-bottom: 0.75rem;
   padding: 0.75rem 1rem;
   background-color: #ecf0f1;
@@ -253,7 +249,7 @@
   border-left: 3px solid #3498db;
 }
 
-.press-downloads span {
+.reviews-downloads span {
   font-family: var(--font-body);
   color: #2c3e50;
   font-size: 1rem;
@@ -685,7 +681,7 @@
   transform: translateY(-2px);
 }
 
-.press-info {
+.reviews-info {
   margin-bottom: 3rem;
   background: var(--glass-bg-primary);
   backdrop-filter: blur(20px);
@@ -696,7 +692,7 @@
   box-shadow: 0 8px 32px var(--glass-shadow);
 }
 
-.press-info h2 {
+.reviews-info h2 {
   font-family: var(--font-heading);
   font-size: 1.75rem;
   margin-bottom: 1rem;
@@ -704,7 +700,7 @@
   text-align: center;
 }
 
-.press-info p {
+.reviews-info p {
   font-family: var(--font-body);
   font-size: 1rem;
   line-height: 1.6;
@@ -855,7 +851,7 @@
   opacity: 0.8;
 }
 
-.press-navigation {
+.reviews-navigation {
   text-align: center;
   padding-top: 2rem;
   border-top: var(--border-light);
@@ -884,7 +880,7 @@
 
 /* Tablet Design */
 @media (max-width: 1024px) {
-  .press {
+  .reviews {
     padding: 1rem;
   }
 
@@ -893,7 +889,7 @@
     gap: 1rem;
   }
 
-  .press-info {
+  .reviews-info {
     padding: 1.5rem;
   }
 
@@ -1010,12 +1006,12 @@
 
 /* Mobile Design */
 @media (max-width: 768px) {
-  .press-reviews {
+  .reviews-section {
     margin: 2.5rem 0;
     padding: 1.75rem;
   }
 
-  .press-reviews h2 {
+  .reviews-section h2 {
     font-size: 1.8rem;
   }
 
@@ -1028,8 +1024,8 @@
   }
 
   .review-text {
-    font-size: 0.95rem;
-    line-height: 1.55;
+    font-size: 1.4rem;
+    line-height: 1.75;
   }
 
   .show-all-btn {
@@ -1179,32 +1175,32 @@
     font-size: 0.85rem;
   }
 
-  .press {
+  .reviews {
     padding: 0.75rem;
     margin: 0;
     width: 100%;
   }
 
-  .press-header {
+  .reviews-header {
     margin-bottom: 1.75rem;
     padding-bottom: 1.25rem;
   }
 
-  .press-header h1 {
+  .reviews-header h1 {
     font-size: 1.8rem;
     margin-bottom: 0.4rem;
   }
 
-  .press-description {
+  .reviews-description {
     font-size: 0.95rem;
     padding: 0 0.75rem;
   }
 
-  .press-kit {
+  .reviews-kit {
     margin-bottom: 2.5rem;
   }
 
-  .press-kit h2 {
+  .reviews-kit h2 {
     font-size: 1.6rem;
     margin-bottom: 0.6rem;
   }
@@ -1224,25 +1220,25 @@
     height: 170px;
   }
 
-  .press-materials {
+  .reviews-materials {
     padding: 1.25rem;
   }
 
-  .press-materials h3 {
+  .reviews-materials h3 {
     font-size: 1.2rem;
   }
 
-  .press-info {
+  .reviews-info {
     padding: 1.25rem;
     margin-bottom: 2.5rem;
   }
 
-  .press-info h2 {
+  .reviews-info h2 {
     font-size: 1.6rem;
     margin-bottom: 0.8rem;
   }
 
-  .press-info p {
+  .reviews-info p {
     font-size: 0.95rem;
     margin-bottom: 1rem;
   }
@@ -1281,7 +1277,7 @@
     bottom: -35px;
   }
 
-  .press-navigation {
+  .reviews-navigation {
     padding-top: 1.75rem;
   }
 
@@ -1293,12 +1289,12 @@
 
 /* Small Mobile Design */
 @media (max-width: 480px) {
-  .press-reviews {
+  .reviews-section {
     margin: 1.75rem 0;
     padding: 1.25rem 0.75rem;
   }
 
-  .press-reviews h2 {
+  .reviews-section h2 {
     font-size: 1.6rem;
   }
 
@@ -1311,8 +1307,8 @@
   }
 
   .review-text {
-    font-size: 0.9rem;
-    line-height: 1.55;
+    font-size: 1.2rem;
+    line-height: 1.7;
     margin-bottom: 1.25rem;
   }
 
@@ -1472,25 +1468,25 @@
     font-size: 0.8rem;
   }
 
-  .press {
+  .reviews {
     padding: 0.25rem;
   }
 
-  .press-header h1 {
+  .reviews-header h1 {
     font-size: 1.6rem;
   }
 
-  .press-description {
+  .reviews-description {
     font-size: 0.9rem;
     padding: 0 0.25rem;
   }
 
-  .press-kit h2,
-  .press-info h2 {
+  .reviews-kit h2,
+  .reviews-info h2 {
     font-size: 1.4rem;
   }
 
-  .press-materials h3 {
+  .reviews-materials h3 {
     font-size: 1.1rem;
   }
 
@@ -1503,15 +1499,15 @@
     height: 150px;
   }
 
-  .press-materials {
+  .reviews-materials {
     padding: 0.75rem;
   }
 
-  .press-info {
+  .reviews-info {
     padding: 0.75rem;
   }
 
-  .press-info p {
+  .reviews-info p {
     font-size: 0.9rem;
   }
 

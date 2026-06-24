@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import LazyVideo from '../components/LazyVideo';
 import { generateBreadcrumbSchema } from '../utils/structuredData';
-import './Press.css';
+import './Reviews.css';
 
 // Import press images
 import img1 from '../assets/images/press/_BOO0036.jpg';
@@ -25,7 +25,7 @@ import img16 from '../assets/images/press/_BOO9955.jpg';
 import img17 from '../assets/images/press/_BOO9962.jpg';
 import img18 from '../assets/images/press/_BOO9981.jpg';
 
-function Press() {
+function Reviews() {
   const [selectedImage, setSelectedImage] = useState(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [selectedReview, setSelectedReview] = useState(null);
@@ -236,30 +236,30 @@ function Press() {
   return (
     <>
       <Helmet>
-        <title>Press &amp; Media - Epic Economics</title>
-        <meta name="description" content="Press coverage, media kit, and news about Epic Economics theatrical production. Download high-resolution images and press materials." />
-        <link rel="canonical" href="https://epic-economics.dimis.org/press" />
-        <meta property="og:title" content="Press &amp; Media - Epic Economics" />
-        <meta property="og:description" content="Press coverage and media materials for Epic Economics theatrical production." />
+        <title>Reviews - Epic Economics</title>
+        <meta name="description" content="Reviews, media coverage, and high-resolution images from Epic Economics theatrical production." />
+        <link rel="canonical" href="https://epic-economics.dimis.org/reviews" />
+        <meta property="og:title" content="Reviews - Epic Economics" />
+        <meta property="og:description" content="Reviews and media materials for Epic Economics theatrical production." />
         <meta property="og:image" content="https://epic-economics.dimis.org/og-image.png" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://epic-economics.dimis.org/press" />
+        <meta property="og:url" content="https://epic-economics.dimis.org/reviews" />
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:title" content="Press &amp; Media - Epic Economics" />
-        <meta property="twitter:description" content="Press coverage and media materials for Epic Economics theatrical production." />
+        <meta property="twitter:title" content="Reviews - Epic Economics" />
+        <meta property="twitter:description" content="Reviews and media materials for Epic Economics theatrical production." />
         <meta property="twitter:image" content="https://epic-economics.dimis.org/og-image.png" />
         <script type="application/ld+json">
           {JSON.stringify(generateBreadcrumbSchema([
             { name: 'Home', url: 'https://epic-economics.dimis.org/' },
-            { name: 'Press & Media', url: 'https://epic-economics.dimis.org/press' },
+            { name: 'Reviews', url: 'https://epic-economics.dimis.org/reviews' },
           ]))}
         </script>
         <script type="application/ld+json">
           {JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'MediaObject',
-            name: 'Epic Economics Press Kit',
-            description: 'Press materials and media kit for Epic Economics. What would you protest about today? A play by Dimis Michaelides.',
+            name: 'Epic Economics Reviews',
+            description: 'Reviews and media coverage for Epic Economics. What would you protest about today? A play by Dimis Michaelides.',
             publisher: {
               '@type': 'Organization',
               name: 'Epic Economics',
@@ -268,13 +268,13 @@ function Press() {
         </script>
       </Helmet>
 
-    <div className="press">
-      <header className="press-header" ref={headerRef}>
-        <h1>Epic Economics - Press Kit</h1>
-        <p className="press-description">High-resolution images and press materials</p>
+    <div className="reviews">
+      <header className="reviews-header" ref={headerRef}>
+        <h1>Epic Economics - Reviews</h1>
+        <p className="reviews-description">High-resolution images and media coverage</p>
       </header>
 
-      <section className="press-reviews" ref={reviewsRef}>
+      <section className="reviews-section" ref={reviewsRef}>
         <h2>Reviews & Commentary</h2>
         <div className="reviews-list">
           {(showAllReviews ? reviews : reviews.slice(0, 3)).map((review, index) => {
@@ -434,7 +434,7 @@ function Press() {
         </a>
       </section>
 
-      <section className="press-kit" ref={galleryRef}>
+      <section className="reviews-kit" ref={galleryRef}>
         <h2>Photography</h2>
 
         <div className="image-gallery">
@@ -457,7 +457,7 @@ function Press() {
         </div>
       </section>
 
-      <section className="press-info" ref={infoRef}>
+      <section className="reviews-info" ref={infoRef}>
         {/* <h2>About the Photography</h2>
         <p>
           These exclusive behind-the-scenes photographs were taken by renowned photographer Boyana,
@@ -531,7 +531,7 @@ function Press() {
         </div>
       )}
 
-      <nav className="press-navigation">
+      <nav className="reviews-navigation">
         <Link to="/" className="back-link">← Back to Home</Link>
       </nav>
     </div>
@@ -539,4 +539,4 @@ function Press() {
   );
 }
 
-export default Press;
+export default Reviews;

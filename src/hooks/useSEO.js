@@ -127,23 +127,23 @@ export const SEO_PRESETS = {
     }
   },
 
-  PRESS: {
-    title: 'Press & Media - Epic Economics',
-    description: 'Press coverage, media kit, and news about Epic Economics theatrical production. Download high-resolution images and press materials.',
-    keywords: ['epic economics press', 'media kit', 'theater press', 'press coverage', 'media materials'],
+  REVIEWS: {
+    title: 'Reviews - Epic Economics',
+    description: 'Reviews, media coverage, and high-resolution images from Epic Economics theatrical production.',
+    keywords: ['epic economics reviews', 'theater reviews', 'reviews', 'media coverage', 'media materials'],
     openGraph: {
-      title: 'Press & Media - Epic Economics',
-      description: 'Press coverage and media materials for Epic Economics'
+      title: 'Reviews - Epic Economics',
+      description: 'Reviews and media materials for Epic Economics'
     },
     twitter: {
-      title: 'Press & Media - Epic Economics',
-      description: 'Press coverage and media materials for Epic Economics'
+      title: 'Reviews - Epic Economics',
+      description: 'Reviews and media materials for Epic Economics'
     },
     structuredData: {
       '@context': 'https://schema.org',
       '@type': 'MediaObject',
-      'name': 'Epic Economics Press Kit',
-      'description': 'Press materials and media kit for Epic Economics. What would you protest about today? A play by Dimis Michaelides',
+      'name': 'Epic Economics Reviews',
+      'description': 'Reviews and media coverage for Epic Economics. What would you protest about today? A play by Dimis Michaelides',
       'publisher': {
         '@type': 'Organization',
         'name': 'Epic Economics'
@@ -198,8 +198,8 @@ export const useAutoSEO = () => {
         return SEO_PRESETS.HOME;
       case '/preview':
         return SEO_PRESETS.PREVIEW;
-      case '/press':
-        return SEO_PRESETS.PRESS;
+      case '/reviews':
+        return SEO_PRESETS.REVIEWS;
       case '/contact':
         return SEO_PRESETS.CONTACT;
       case '/technical':

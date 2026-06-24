@@ -100,12 +100,12 @@ function LiquidGlassNavbar() {
             Home
           </Link>
           <Link
-            to="/press"
-            className={`navbar-link ${location.pathname === '/press' ? 'navbar-link--active' : ''}`}
+            to="/reviews"
+            className={`navbar-link ${location.pathname === '/reviews' ? 'navbar-link--active' : ''}`}
             role="menuitem"
-            aria-current={location.pathname === '/press' ? 'page' : undefined}
+            aria-current={location.pathname === '/reviews' ? 'page' : undefined}
           >
-            Press
+            Reviews
           </Link>
           <Link
             to="/contact"

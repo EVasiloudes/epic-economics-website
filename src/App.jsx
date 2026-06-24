@@ -13,7 +13,7 @@ import LoadingSpinner from './components/LoadingSpinner';
 const Home = lazy(() => import('./pages/Home'));
 const Home2 = lazy(() => import('./pages/Home2'));
 const Preview = lazy(() => import('./pages/Preview'));
-const Press = lazy(() => import('./pages/Press'));
+const Reviews = lazy(() => import('./pages/Reviews'));
 const Contact = lazy(() => import('./pages/Contact'));
 const Technical = lazy(() => import('./pages/Technical'));
 
@@ -63,7 +63,7 @@ function RouteHandler() {
       '/': 'Epic Economics: What would you protest about today?',
       '/home2': 'Epic Economics: What would you protest about today?',
       '/preview': 'Preview - Epic Economics',
-      '/press': 'Press & Media - Epic Economics',
+      '/reviews': 'Reviews - Epic Economics',
       '/contact': 'Contact Us - Epic Economics',
       '/technical': 'Technical - Epic Economics'
     };
@@ -106,7 +106,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/home2" element={<Home2 />} />
               <Route path="/preview" element={<Preview />} />
-              <Route path="/press" element={<Press />} />
+              <Route path="/reviews" element={<Reviews />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/technical" element={<Technical />} />
             </Routes>
