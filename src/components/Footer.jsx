@@ -30,6 +30,34 @@ function Footer() {
             </ul>
           </nav>
 
+          <div className="footer-section footer-press">
+            <h3 className="footer-section-title">Press Materials</h3>
+            <ul className="footer-list">
+              <li>
+                <a
+                  href="https://drive.google.com/open?id=1sTMXXfinMDnUf8ghm3p2h1LgEba5BvOw&usp=drive_fs"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Press Release (opens in new tab)"
+                >
+                  Press Release
+                  <span className="footer-external-icon" aria-hidden="true">↗</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://drive.google.com/open?id=1ChOuWVAHrt0_ZFK_r9-ZdL4Ko3WHN3rM&usp=drive_fs"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Press Kit (opens in new tab)"
+                >
+                  Press Kit
+                  <span className="footer-external-icon" aria-hidden="true">↗</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
           <div className="footer-section footer-team">
             <h3 className="footer-section-title">Creative Team</h3>
             <ul className="footer-list">

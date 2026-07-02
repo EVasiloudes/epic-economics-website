@@ -115,6 +115,20 @@
   outline-offset: 2px;
 }
 
+/* External link indicator */
+.footer-external-icon {
+  display: inline-block;
+  margin-left: 0.35rem;
+  font-size: 0.85em;
+  opacity: 0.7;
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
+}
+
+.footer-list a:hover .footer-external-icon {
+  opacity: 1;
+  transform: translate(2px, -2px);
+}
+
 /* --------------------------------------------------------------------
    Team List in Footer
    -------------------------------------------------------------------- */

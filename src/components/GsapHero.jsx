@@ -20,14 +20,25 @@ function GsapHero() {
     scrollTriggerRefs.current.forEach(trigger => trigger.kill());
     scrollTriggerRefs.current = [];
 
-    // Optimize marquee animations with better performance settings
+    // Optimize marquee animations with better performance settings.
+    // All folds (top, center, bottom) use identical travel distances so the
+    // three folds stay visually equal in length across the whole screen.
+    // Even-indexed marquees scroll left, odd-indexed scroll right — this
+    // alternation creates the visual rhythm and must be preserved on all
+    // breakpoints.
     gsap.utils.toArray('.marquee', foldEffect).forEach((el, index) => {
       const track = el.querySelector('.track');
       if (!track) return;
 
-      // Use transform3d for hardware acceleration
-      const [x, xEnd] = (index % 2 === 0) ? [-500, -1500] : [-500, 0];
+      // Travel distances in vw units — scales with viewport width.
+      // Same values used on all breakpoints to keep folds equal in length.
+      const [startVw, endVw] = (index % 2 === 0) ? [-50, -150] : [-50, 0];
 
+      const vwToPx = (vw) => (vw * window.innerWidth) / 100;
+      const x = vwToPx(startVw);
+      const xEnd = vwToPx(endVw);
+
+      // Use transform3d for hardware acceleration
       const scrollTrigger = gsap.fromTo(track,
         {
           x,

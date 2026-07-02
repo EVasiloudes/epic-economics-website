@@ -16,10 +16,14 @@ const GsapHero = lazy(() => import('../components/GsapHero'));
 
 // Import images with explicit dimensions for CLS prevention
 import audienceImg from '../assets/images/press/_BOO9866.jpg';
+import performanceImg1 from '../assets/images/press/_BOO0058.jpg';
+import performanceImg2 from '../assets/images/press/_BOO9941.jpg';
+import performanceImg3 from '../assets/images/press/_BOO9809.jpg';
 
 function Home() {
   const [imagesLoaded, setImagesLoaded] = useState(false);
   const imageContainerRef = useRef(null);
+  const revealRefs = useRef([]);
 
   // Apply home-with-gsap class for GSAP hero scroll animation
   useEffect(() => {
@@ -29,25 +33,54 @@ function Home() {
     };
   }, []);
 
-  // Preload critical images
+  // Scroll-driven reveal for synopsis images using IntersectionObserver.
+  // Replaces the previous load-based `.loaded` fade, which fired once on
+  // preload and never reacted to scrolling.
   useEffect(() => {
-    let isMounted = true;
+    const targets = revealRefs.current.filter(Boolean);
+    if (targets.length === 0) return;
 
-    const preloadImages = () => {
-      const images = [audienceImg];
-      const promises = images.map(src => {
-        return new Promise((resolve) => {
-          const img = new Image();
-          img.onload = () => resolve(true);
-          img.onerror = () => resolve(false);
-          img.src = src;
+    if (!('IntersectionObserver' in window)) {
+      // Fallback: just reveal everything immediately.
+      targets.forEach((el) => el.classList.add('is-visible'));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
         });
-      });
+      },
+      { threshold: 0.15, rootMargin: '0px 0px -10% 0px' }
+    );
 
-      Promise.all(promises).then(() => {
-        if (isMounted) setImagesLoaded(true);
+    targets.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, [imagesLoaded]);
+
+  // Preload critical images
+useEffect(() => {
+  let isMounted = true;
+
+  const preloadImages = () => {
+    const images = [audienceImg, performanceImg1, performanceImg2, performanceImg3];
+    const promises = images.map(src => {
+      return new Promise((resolve) => {
+        const img = new Image();
+        img.onload = () => resolve(true);
+        img.onerror = () => resolve(false);
+        img.src = src;
       });
-    };
+    });
+
+    Promise.all(promises).then(() => {
+      if (isMounted) setImagesLoaded(true);
+    });
+  };
 
     // Use requestIdleCallback for non-critical image loading
     if ('requestIdleCallback' in window) {
@@ -128,12 +161,12 @@ function Home() {
                               </p>
 
                 <p className="lead">
-                    An LSE/World Bank veteran exposes the system. Discover why some of us are broke and others are rich, how we got here and what we should fight for.
+                    An LSE/World Bank veteran exposes the system.
                 </p>
                 <p>
-                              Epic Economics is a theatrical work based on the words of distinguished economists
+                    Epic Economics is a theatrical work based on the words of distinguished economists
                   from the 18th century to today, highlighting their contributions and contradictions.
-                  The theories are interwoven with stories from the his personal and
+                  The theories are interwoven with stories from his personal and
                   professional journey, and peppered with wicked humor and some songs. The show is
                   accompanied by an original soundscape.
                 </p>
@@ -153,7 +186,10 @@ function Home() {
               </div>
 
               <aside className="synopsis-images">
-                <figure className={`image-wrapper ${imagesLoaded ? 'loaded' : ''}`}>
+                <figure
+                  className="image-wrapper"
+                  ref={(el) => { revealRefs.current[0] = el; }}
+                >
                   <img
                     src={audienceImg}
                     alt="Audience participation during Epic Economics performance"
@@ -163,17 +199,50 @@ function Home() {
                     decoding="async"
                   />
                 </figure>
-                {/* <figure className={`image-wrapper ${imagesLoaded ? 'loaded' : ''}`}>
+                <figure
+                  className="image-wrapper"
+                  ref={(el) => { revealRefs.current[1] = el; }}
+                >
                   <img
-                    src={performanceImg}
+                    src={performanceImg1}
                     alt="Epic Economics theatrical performance"
                     width="800"
                     height="600"
                     loading="lazy"
                     decoding="async"
                   />
-                </figure>*/}
+                </figure>
               </aside>
+            </div>
+
+            {/* Tiled pair below synopsis text — full width of synopsis container */}
+            <div className="synopsis-images-below" aria-hidden="false">
+              <figure
+                className="image-wrapper image-wrapper--tile-left"
+                ref={(el) => { revealRefs.current[2] = el; }}
+              >
+                <img
+                  src={performanceImg2}
+                  alt="Dimis Michaelides performing Epic Economics"
+                  width="800"
+                  height="600"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </figure>
+              <figure
+                className="image-wrapper image-wrapper--tile-right"
+                ref={(el) => { revealRefs.current[3] = el; }}
+              >
+                <img
+                  src={performanceImg3}
+                  alt="Epic Economics on stage"
+                  width="800"
+                  height="600"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </figure>
             </div>
           </section>
 

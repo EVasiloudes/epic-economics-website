@@ -6,36 +6,33 @@ import './IntroSequence.css';
 gsap.registerPlugin(ScrollTrigger);
 
 /**
- * IntroSequence — Two full-screen fixed cards that fade in/out on scroll
+ * IntroSequence — Full-screen fixed cards that fade in/out on scroll
  * as the GSAP hero animates in the background.
  *
- * Card 1 is visible on load. Card 2 fades in, then fades out gradually
- * across 400vh of scroll. The container background fades to transparent
- * in parallel, allowing the hero to gradually emerge.
+ * Sequence: Tagline → Body A → Quote
+ *
+ * Card 1 is visible on load. Each subsequent card fades in as the previous
+ * fades out. The final card (Quote) holds, then fades out gradually over a
+ * long scroll window while the container fades to transparent, allowing the
+ * hero to gradually emerge.
  */
 function IntroSequence() {
   const triggerRef = useRef(null);
   const containerRef = useRef(null);
-  const card1Ref = useRef(null);
-  const card2Ref = useRef(null);
+  const cardRefs = useRef([]);
 
   useEffect(() => {
     const trigger = triggerRef.current;
     const container = containerRef.current;
-    const card1 = card1Ref.current;
-    const card2 = card2Ref.current;
+    const cards = cardRefs.current.filter(Boolean);
 
-    if (!trigger || !container || !card1 || !card2) return;
+    if (!trigger || !container || cards.length === 0) return;
 
-    // Card timeline proportions (stretched across 600vh of scroll):
-    //   Card 1 visible + hold:             0–60vh  (3 units)
-    //   Card 1 fade-out:                   60–100vh (2 units)
-    //   Card 2 fade-in:                    85–130vh (2.25 units, overlaps)
-    //   Card 2 hold:                       130–200vh (3.5 units)
-    //   Card 2 gradual fade-out:           200–600vh (20 units) = 400vh
-    //   Container fades to transparent:    200–600vh (20 units, parallel)
-    //
-    // Duration values are relative — scrub spreads them across the scroll range.
+    // Timeline proportions (relative — scrub spreads them across the scroll range):
+    //   Card 1 (Tagline):  hold 3 → fade out 2
+    //   Card 2 (Body A):   fade in 2.25 → hold 3 → fade out 2
+    //   Card 3 (Quote):    fade in 2.25 → hold 3.5 → long fade out 20
+    //   Container fades to transparent in parallel with the last card's fade-out.
 
     const tl = gsap.timeline({
       scrollTrigger: {
@@ -59,20 +56,32 @@ function IntroSequence() {
     });
 
     // Card 1 — visible on load, holds, fades out
-    tl.set(card1, { opacity: 1, scale: 1 })
-      .to(card1, { opacity: 1, duration: 3 })
-      .to(card1, { opacity: 0, scale: 0.98, duration: 2, ease: 'power1.in' });
+    tl.set(cards[0], { opacity: 1, scale: 1 })
+      .to(cards[0], { opacity: 1, duration: 3 })
+      .to(cards[0], { opacity: 0, scale: 0.98, duration: 2, ease: 'power1.in' });
 
-    // Card 2 — fades in, holds, then fades out over 400vh
-    // Container fades to transparent in parallel so the hero gradually emerges
+    // Middle cards — fade in, hold, fade out
+    for (let i = 1; i < cards.length - 1; i++) {
+      tl.fromTo(
+        cards[i],
+        { opacity: 0, scale: 0.98 },
+        { opacity: 1, scale: 1, duration: 2.25, ease: 'power1.out' },
+        '-=1'
+      )
+        .to(cards[i], { opacity: 1, duration: 3 })
+        .to(cards[i], { opacity: 0, scale: 0.97, duration: 2, ease: 'power1.in' });
+    }
+
+    // Last card — fade in, hold, long fade out + container fade
+    const lastIndex = cards.length - 1;
     tl.fromTo(
-      card2,
+      cards[lastIndex],
       { opacity: 0, scale: 0.98 },
       { opacity: 1, scale: 1, duration: 2.25, ease: 'power1.out' },
       '-=1'
     )
-      .to(card2, { opacity: 1, duration: 3.5 })
-      .to(card2, { opacity: 0, scale: 0.97, duration: 20, ease: 'power1.in' }, 'fadeContainer')
+      .to(cards[lastIndex], { opacity: 1, duration: 3.5 })
+      .to(cards[lastIndex], { opacity: 0, scale: 0.97, duration: 20, ease: 'power1.in' }, 'fadeContainer')
       .to(container, { opacity: 0, duration: 20, ease: 'power1.in' }, 'fadeContainer');
 
     return () => {
@@ -89,7 +98,7 @@ function IntroSequence() {
 
       <div ref={containerRef} className="intro-sequence" aria-label="Introduction">
         {/* Card 1 — Tagline */}
-        <div ref={card1Ref} className="intro-card intro-card--tagline">
+        <div ref={(el) => { cardRefs.current[0] = el; }} className="intro-card intro-card--tagline">
           <div className="intro-card__content">
             <p className="intro-card__text">
               The system's on stage,<br />
@@ -98,14 +107,23 @@ function IntroSequence() {
           </div>
         </div>
 
-        {/* Card 2 — Quote */}
-        <div ref={card2Ref} className="intro-card intro-card--quote">
+        {/* Card 2 — Body A */}
+        <div ref={(el) => { cardRefs.current[1] = el; }} className="intro-card intro-card--body">
+          <div className="intro-card__content">
+            <p className="intro-card__body-text">
+              Discover how the economy shapes everything — who gets rich, who struggles, and what we fight about. This irreverent play puts the economists who shaped our world on trial — with humour, mischief and a damn good time along the way.
+            </p>
+          </div>
+        </div>
+
+        {/* Card 3 — Quote */}
+        <div ref={(el) => { cardRefs.current[2] = el; }} className="intro-card intro-card--quote">
           <div className="intro-card__content">
             <blockquote className="intro-card__quote">
               <p>Brilliant wit, music and performance. Yes, economics can be funny!</p>
             </blockquote>
             <cite className="intro-card__cite">
-              — Michael Sarris, former World Bank Director <br></br> & Finance Minister of Cyprus
+              — Michael Sarris, former World Bank Director <br /> & Finance Minister of Cyprus
             </cite>
           </div>
         </div>
