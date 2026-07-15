@@ -186,35 +186,102 @@
    Teaser / Trailer Section
    ========================================================================== */
 
-.teaser {
+.teaser-card {
   padding: 4rem 1.5rem;
   background-color: var(--color-bg-alt);
 }
 
-.teaser h2 {
+.teaser-card h2 {
   text-align: center;
   font-size: var(--text-h2);
   margin-bottom: 2rem;
 }
 
-.video-container {
-  position: relative;
-  padding-bottom: 56.25%; /* 16:9 aspect ratio */
-  height: 0;
+.teaser-card .video-cards {
   max-width: 900px;
   margin: 0 auto;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  box-shadow: var(--shadow-lg);
 }
 
-.video-container iframe {
+.teaser-card .video-card {
+  background: var(--glass-bg-secondary);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px var(--glass-shadow);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.teaser-card .video-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px var(--glass-shadow-hover);
+}
+
+.teaser-card .video-thumbnail {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  height: 0;
+}
+
+.teaser-card .video-thumbnail .lazy-video-container {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  border: 0;
+}
+
+/* Ticket CTA */
+.ticket-cta {
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+  padding: var(--space-4xl) var(--space-xl);
+  text-align: center;
+}
+
+.ticket-cta-content {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.ticket-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 0.875em 2em;
+  font-family: var(--font-heading);
+  font-size: var(--text-lead);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  background-color: #FFFFFF;
+  color: var(--color-primary);
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background-color var(--transition-fast),
+              transform var(--transition-fast),
+              box-shadow var(--transition-fast);
+}
+
+.ticket-cta-btn:hover {
+  background-color: var(--color-bg);
+  color: var(--color-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  text-decoration: none;
+}
+
+.ticket-cta-btn:active {
+  transform: translateY(0);
+}
+
+.ticket-cta-btn:focus-visible {
+  outline: 2px solid #FFFFFF;
+  outline-offset: 2px;
 }
 
 /* ==========================================================================

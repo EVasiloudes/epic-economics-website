@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef, lazy, Suspense } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import LazyVideo from '../components/LazyVideo';
 import {
   generateOrganizationSchema,
   generateTeamPersonSchemas,
@@ -126,8 +127,8 @@ useEffect(() => {
           {JSON.stringify(generateVideoSchema({
             name: 'Epic Economics Trailer',
             description: 'Official trailer for Epic Economics: What would you protest about today? A play by Dimis Michaelides.',
-            embedUrl: 'https://www.youtube.com/embed/HaY26deh7nE',
-            thumbnailUrl: 'https://img.youtube.com/vi/HaY26deh7nE/maxresdefault.jpg',
+            embedUrl: 'https://epic-economics.dimis.org/videos/epic-economics-teaser.mp4',
+            thumbnailUrl: 'https://epic-economics.dimis.org/videos/epic-economics-teaser-poster.jpg',
             uploadDate: '2025-07-01',
           }))}
         </script>
@@ -246,21 +247,38 @@ useEffect(() => {
             </div>
           </section>
 
-          {/* Trailer Section */}
-          {/* <section className="teaser" aria-labelledby="trailer-heading">
-            <h2 id="trailer-heading">Watch the Trailer</h2>
-            <div className="video-container">
-              <iframe
-                src="https://www.youtube.com/embed/HaY26deh7nE?si=pv4RXJ4hGmY7GD99"
-                title="Epic Economics Trailer"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerPolicy="strict-origin-when-cross-origin"
-                allowFullScreen
-                loading="lazy"
-              />
+          {/* Trailer Card */}
+          <section className="teaser-card" aria-labelledby="trailer-heading">
+            <h2 id="trailer-heading">Watch the Teaser</h2>
+            <div className="video-cards">
+              <div className="video-card">
+                <div className="video-thumbnail">
+                  <LazyVideo
+                    src="/videos/epic-economics-teaser.mp4"
+                    poster="/videos/epic-economics-teaser-poster.jpg"
+                    title="Epic Economics Trailer"
+                    controls={true}
+                    muted={false}
+                  />
+                </div>
+              </div>
             </div>
-          </section>*/}
+          </section>
+
+          {/* Ticket CTA */}
+          <section className="ticket-cta" aria-label="Get tickets">
+            <div className="ticket-cta-content">
+              <a
+                href="https://www.edfringe.com/tickets/whats-on/epic-economics-what-would-you-protest-about-today"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ticket-cta-btn"
+                aria-label="Get tickets for Epic Economics at Edinburgh Fringe (opens in new tab)"
+              >
+                GET TICKETS NOW
+              </a>
+            </div>
+          </section>
 
           {/* Navigation */}
           <nav className="home-navigation" aria-label="Page navigation">

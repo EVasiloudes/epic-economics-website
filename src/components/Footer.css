@@ -222,9 +222,8 @@
 }
 
 .footer-social-icon {
-  width: 24px;
-  height: 24px;
-  object-fit: contain;
+  font-size: 20px;
+  line-height: 1;
 }
 
 /* --------------------------------------------------------------------
