@@ -254,7 +254,7 @@ useEffect(() => {
               <div className="video-card">
                 <div className="video-thumbnail">
                   <LazyVideo
-                    src="/videos/epic-economics-teaser.mp4"
+                    src="/videos/epic-economics-teaser1.mp4"
                     poster="/videos/epic-economics-teaser-poster.jpg"
                     title="Epic Economics Trailer"
                     controls={true}
