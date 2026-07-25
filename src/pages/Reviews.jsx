@@ -271,7 +271,7 @@ function Reviews() {
     <div className="reviews">
       <header className="reviews-header" ref={headerRef}>
         <h1>Epic Economics - Reviews</h1>
-        <p className="reviews-description">High-resolution images and media coverage</p>
+        <p className="reviews-description">Reviews, high-resolution images, and media coverage</p>
       </header>
 
       <section className="reviews-section" ref={reviewsRef}>
@@ -330,8 +330,8 @@ function Reviews() {
           <div className="video-card">
             <div className="video-thumbnail">
               <LazyVideo
-                src="/videos/epic-economics-teaser.mp4"
-                poster="/videos/epic-economics-teaser-poster.jpg"
+                src="/videos/epic-economics-stills.mp4"
+                poster="/videos/epic-economics-stills-poster.jpg"
                 title="Epic Economics Teaser"
                 controls={true}
                 muted={false}
