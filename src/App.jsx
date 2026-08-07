@@ -8,6 +8,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import LiquidGlassNavbar from './components/LiquidGlassNavbar';
 import Footer from './components/Footer';
 import LoadingSpinner from './components/LoadingSpinner';
+import CookieConsent from './components/CookieConsent';
 
 // Lazy load page components for code splitting
 const Home = lazy(() => import('./pages/Home'));
@@ -19,6 +20,7 @@ const Technical = lazy(() => import('./pages/Technical'));
 
 // Import utilities
 import { setRobotsMeta } from './utils/seo';
+import { initAnalytics, trackPageView } from './utils/analytics';
 import './App.css';
 
 // Register GSAP plugins once
@@ -69,6 +71,9 @@ function RouteHandler() {
     };
     document.title = titles[pathname] || 'Epic Economics';
 
+    // Track page view for analytics
+    trackPageView(pathname);
+
     // Refresh ScrollTrigger on route change
     ScrollTrigger.refresh();
   }, [pathname]);
@@ -80,6 +85,9 @@ function App() {
   useEffect(() => {
     // Ensure site is indexable
     setRobotsMeta(false);
+
+    // Initialize analytics (respecting stored consent)
+    initAnalytics();
 
     // Cleanup all ScrollTriggers on unmount
     return () => {
@@ -114,6 +122,7 @@ function App() {
         </main>
 
         <Footer />
+        <CookieConsent />
       </Router>
     </HelmetProvider>
   );

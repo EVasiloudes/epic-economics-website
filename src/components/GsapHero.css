@@ -113,7 +113,7 @@
 /* Hero CTA — overlaid ticket banner at bottom of hero viewport */
 .hero-cta {
   position: fixed;
-  bottom: 0;
+  bottom: var(--cookie-banner-height, 0px);
   left: 0;
   right: 0;
   z-index: 10000;
