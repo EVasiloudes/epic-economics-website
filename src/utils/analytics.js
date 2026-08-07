@@ -1,33 +1,12 @@
 const GA_MEASUREMENT_ID = 'G-6Y1JRSRMKN';
 const CONSENT_KEY = 'ee_cookie_consent';
 
-let analyticsLoaded = false;
+// The gtag.js snippet (with consent defaults set to "denied") lives statically
+// in index.html <head>, satisfying Google Search Console verification.
+// This module only applies the stored consent choice on top of those defaults.
 
-function loadGtagScript() {
-  return new Promise((resolve) => {
-    if (document.querySelector('script[data-gtag]')) {
-      resolve();
-      return;
-    }
-
-    const script = document.createElement('script');
-    script.async = true;
-    script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
-    script.dataset.gtag = 'true';
-    script.onload = () => resolve();
-    script.onerror = () => resolve();
-    document.head.appendChild(script);
-  });
-}
-
-function initGtag() {
-  window.dataLayer = window.dataLayer || [];
-  window.gtag = function gtag() {
-    window.dataLayer.push(arguments);
-  };
-  window.gtag('js', new Date());
-  window.gtag('config', GA_MEASUREMENT_ID);
-  analyticsLoaded = true;
+function hasGtag() {
+  return typeof window !== 'undefined' && typeof window.gtag === 'function';
 }
 
 export function getConsent() {
@@ -36,28 +15,33 @@ export function getConsent() {
   return value === 'accepted' || value === 'declined' ? value : null;
 }
 
+function applyConsent(consent) {
+  if (!hasGtag()) return;
+  window.gtag('consent', 'update', {
+    analytics_storage: consent === 'accepted' ? 'granted' : 'denied'
+  });
+}
+
 export function setConsent(consent) {
   if (typeof window === 'undefined') return;
   window.localStorage.setItem(CONSENT_KEY, consent);
-
-  if (consent === 'accepted' && !analyticsLoaded) {
-    loadGtagScript().then(initGtag);
-  }
+  applyConsent(consent);
 }
 
 export function initAnalytics() {
   if (typeof window === 'undefined') return;
-  if (getConsent() === 'accepted') {
-    loadGtagScript().then(initGtag);
+  const consent = getConsent();
+  if (consent !== null) {
+    applyConsent(consent);
   }
 }
 
 export function trackPageView(path) {
-  if (typeof window === 'undefined' || !window.gtag || !analyticsLoaded) return;
+  if (typeof window === 'undefined' || !hasGtag() || getConsent() !== 'accepted') return;
   window.gtag('config', GA_MEASUREMENT_ID, { page_path: path });
 }
 
 export function trackEvent(name, params = {}) {
-  if (typeof window === 'undefined' || !window.gtag || !analyticsLoaded) return;
+  if (typeof window === 'undefined' || !hasGtag() || getConsent() !== 'accepted') return;
   window.gtag('event', name, params);
 }
