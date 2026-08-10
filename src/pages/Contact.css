@@ -40,14 +40,21 @@
   margin: 0 auto;
 }
 
-/* Main Container — vertical stack */
+/* Main Container — two-column layout on desktop */
 .contact-container {
-  max-width: 700px;
+  max-width: 1080px;
   margin: 0 auto;
   padding: 4rem 2rem;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
   gap: 3rem;
+  align-items: start;
+}
+
+/* Sticky contact info sidebar */
+.contact-info-section {
+  position: sticky;
+  top: 7rem;
 }
 
 /* --------------------------------------------------------------------
@@ -208,10 +215,23 @@
 .contact-form {
   position: relative;
   z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
 }
 
 .form-group {
-  margin-bottom: 1.5rem;
+  margin-bottom: 0;
+}
+
+.form-group:nth-child(1),
+.form-group:nth-child(2) {
+  grid-column: span 1;
+}
+
+.form-group:nth-child(3),
+.form-group:nth-child(4) {
+  grid-column: 1 / -1;
 }
 
 .form-group label {
@@ -257,6 +277,8 @@
 
 /* Submit Button */
 .submit-btn {
+  grid-column: 1 / -1;
+  justify-self: start;
   width: auto;
   min-width: 200px;
   padding: 0.75rem 2rem;
@@ -354,8 +376,10 @@
    -------------------------------------------------------------------- */
 
 .team-bios {
+  grid-column: 1 / -1;
   padding: var(--space-4xl) var(--space-xl);
   background-color: var(--color-bg-alt);
+  border-radius: var(--radius-xl);
 }
 
 .team-bios h2 {
@@ -365,8 +389,8 @@
 }
 
 .team-bios .bio-grid {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: var(--space-xl);
   max-width: 1200px;
   margin: 0 auto;
@@ -414,6 +438,21 @@
    Responsive
    ========================================================================== */
 
+@media (max-width: 900px) {
+  .contact-container {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .contact-info-section {
+    position: static;
+  }
+
+  .team-bios .bio-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 768px) {
   .contact-page {
     padding-top: 80px;
@@ -449,6 +488,23 @@
 
   .team-bios {
     padding: var(--space-2xl) var(--space-lg);
+  }
+}
+
+@media (max-width: 560px) {
+  .contact-form {
+    grid-template-columns: 1fr;
+  }
+
+  .form-group:nth-child(1),
+  .form-group:nth-child(2),
+  .form-group:nth-child(3),
+  .form-group:nth-child(4) {
+    grid-column: 1;
+  }
+
+  .submit-btn {
+    justify-self: stretch;
   }
 }
 
