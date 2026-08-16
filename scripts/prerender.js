@@ -71,16 +71,16 @@ function generateStaticHTML(route) {
     </div>
   `;
 
-  // Update meta tags
+  // Update meta tags (tolerant of optional whitespace + self-closing slash)
   let html = indexHtml
-    .replace('<title>Epic Economics</title>', `<title>${route.title}</title>`)
+    .replace(/<title>[^<]*<\/title>/, `<title>${route.title}</title>`)
     .replace(
-      /<meta name="description" content="[^"]*">/,
-      `<meta name="description" content="${route.description}">`
+      /<meta\s+name="description"\s+content="[^"]*"\s*\/?>/,
+      `<meta name="description" content="${route.description}" />`
     )
     .replace(
-      /<link rel="canonical" href="[^"]*">/,
-      `<link rel="canonical" href="https://epic-economics.dimis.org${route.path}">`
+      /<link\s+rel="canonical"\s+href="[^"]*"\s*\/?>/,
+      `<link rel="canonical" href="https://epic-economics.dimis.org${route.path}" />`
     )
     .replace('<div id="root"></div>', content);
 
