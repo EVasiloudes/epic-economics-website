@@ -6,7 +6,8 @@
   },
   "rewrites": [
     { "source": "/preview", "destination": "/preview/index.html" },
-    { "source": "/press", "destination": "/press/index.html" },
+    { "source": "/reviews", "destination": "/reviews/index.html" },
+    { "source": "/technical", "destination": "/technical/index.html" },
     { "source": "/contact", "destination": "/contact/index.html" },
     { "source": "/(.*)", "destination": "/index.html" }
   ],

@@ -131,13 +131,13 @@ function GsapHero() {
       {/* Ticket CTA — outside .screen stacking context so it floats above everything */}
       <div className="hero-cta">
         <a
-          href="https://www.edfringe.com/tickets/whats-on/epic-economics-what-would-you-protest-about-today"
+          href="https://edfest.com/whats-on/epic-economics-what-would-you-protest-about-today"
           target="_blank"
           rel="noopener noreferrer"
           className="hero-cta-btn"
-          aria-label="Get tickets for Epic Economics at Edinburgh Fringe (opens in new tab)"
+          aria-label="Click here to Get tickets for Epic Economics at Edinburgh Fringe (opens in new tab)"
         >
-          🎫 Edinburgh Fringe 2026 — Tickets on sale now
+          🎫 Edinburgh Fringe 2026 — Click here for Tickets!
         </a>
       </div>
 

@@ -9,8 +9,9 @@ const __dirname = path.dirname(__filename);
 const routes = [
   { path: '/', title: 'Epic Economics: What would you protest about today?', description: "Confused by the economy? Blending great economists' ideas with wicked humour, an LSE/World Bank veteran exposes the system. Discover why you're broke, how we got here and what we should fight for." },
   { path: '/preview', title: 'Preview - Epic Economics', description: 'Get a preview of Epic Economics - experience excerpts from our theatrical production exploring economic themes and social change.' },
-  { path: '/press', title: 'Press & Media - Epic Economics', description: 'Press coverage, media kit, and news about Epic Economics theatrical production. Download high-resolution images and press materials.' },
-  { path: '/contact', title: 'Contact Us - Epic Economics', description: 'Get in touch with the Epic Economics team. Contact us for bookings, press inquiries, or general questions about our theatrical production.' }
+  { path: '/reviews', title: 'Reviews - Epic Economics', description: 'Reviews, media coverage, and high-resolution images from Epic Economics theatrical production.' },
+  { path: '/contact', title: 'Contact Us - Epic Economics', description: 'Get in touch with the Epic Economics team. Contact us for bookings, press inquiries, or general questions about our theatrical production.' },
+  { path: '/technical', title: 'Technical Information - Epic Economics', description: 'Stage plan, equipment requirements, and technical specifications for Epic Economics theatrical production.', noindex: true }
 ];
 
 // Read the built index.html
@@ -31,7 +32,7 @@ function generateStaticHTML(route) {
           <nav>
             <a href="/">Home</a>
             <a href="/preview">Preview</a>
-            <a href="/press">Press & Media</a>
+            <a href="/reviews">Reviews</a>
             <a href="/contact">Contact</a>
           </nav>
         </header>
@@ -54,16 +55,22 @@ function generateStaticHTML(route) {
               <p>Get a preview of Epic Economics - experience excerpts from our theatrical production exploring economic themes and social change.</p>
             </section>
           ` : ''}
-          ${route.path === '/press' ? `
+          ${route.path === '/reviews' ? `
             <section>
-              <h1>Press & Media</h1>
-              <p>Press coverage, media kit, and news about Epic Economics theatrical production. Download high-resolution images and press materials.</p>
+              <h1>Reviews</h1>
+              <p>Reviews, media coverage, and high-resolution images from Epic Economics theatrical production.</p>
             </section>
           ` : ''}
           ${route.path === '/contact' ? `
             <section>
               <h1>Contact Us</h1>
               <p>Get in touch with the Epic Economics team. Contact us for bookings, press inquiries, or general questions about our theatrical production.</p>
+            </section>
+          ` : ''}
+          ${route.path === '/technical' ? `
+            <section>
+              <h1>Epic Economics - Technical Information</h1>
+              <p>Stage plan, equipment requirements, and technical specifications</p>
             </section>
           ` : ''}
         </main>
@@ -79,13 +86,39 @@ function generateStaticHTML(route) {
       `<meta name="description" content="${route.description}" />`
     )
     .replace(
+      /<meta\s+name="robots"\s+content="[^"]*"\s*\/?>/,
+      route.noindex
+        ? `<meta name="robots" content="noindex, nofollow" />`
+        : `<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />`
+    )
+    .replace(
       /<link\s+rel="canonical"\s+href="[^"]*"\s*\/?>/,
       `<link rel="canonical" href="https://epic-economics.dimis.org${route.path}" />`
+    )
+    .replace(
+      /<meta\s+property="og:url"\s+content="[^"]*"\s*\/?>/,
+      `<meta property="og:url" content="https://epic-economics.dimis.org${route.path}" />`
+    )
+    .replace(
+      /<meta\s+property="twitter:url"\s+content="[^"]*"\s*\/?>/,
+      `<meta property="twitter:url" content="https://epic-economics.dimis.org${route.path}" />`
     )
     .replace('<div id="root"></div>', content);
 
   return html;
 }
+
+// Remove stale route directories that are no longer prerendered (e.g. /press)
+const validRouteDirs = new Set(routes.filter(r => r.path !== '/').map(r => r.path));
+fs.readdirSync(distPath, { withFileTypes: true })
+  .filter(d => d.isDirectory() && d.name !== 'assets' && d.name !== 'js' && d.name !== 'images' && d.name !== 'videos')
+  .forEach(d => {
+    const routePath = '/' + d.name;
+    if (!validRouteDirs.has(routePath)) {
+      fs.rmSync(path.join(distPath, d.name), { recursive: true, force: true });
+      console.log(`🧹 Removed stale route directory: ${routePath}`);
+    }
+  });
 
 // Generate HTML for each route
 routes.forEach((route) => {
