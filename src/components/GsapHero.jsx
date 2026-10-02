@@ -1,8 +1,10 @@
 import { useEffect, useRef, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { EnhancedPerformanceMonitor, detectBrowserCapabilities } from '../utils/performanceUtils';
 import { initWebVitals } from '../utils/webVitals';
+import { ATHENS, TICKETS_URL } from '../constants/show';
 import './GsapHero.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -130,15 +132,25 @@ function GsapHero() {
     <>
       {/* Ticket CTA — outside .screen stacking context so it floats above everything */}
       <div className="hero-cta">
-        <a
-          href="https://edfest.com/whats-on/epic-economics-what-would-you-protest-about-today"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hero-cta-btn"
-          aria-label="Click here to Get tickets for Epic Economics at Edinburgh Fringe (opens in new tab)"
-        >
-          🎫 Edinburgh Fringe 2026 — Click here for Tickets!
-        </a>
+        {TICKETS_URL ? (
+          <a
+            href={TICKETS_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hero-cta-btn"
+            aria-label={`Get tickets for Epic Economics in Athens on ${ATHENS.dateLabel} (opens in new tab)`}
+          >
+            Athens, 4 December 2026 — Get Tickets
+          </a>
+        ) : (
+          <Link
+            to="/contact"
+            className="hero-cta-btn"
+            aria-label={`Tickets for Epic Economics in Athens on ${ATHENS.dateLabel} are not on sale yet — contact us to ask about a seat`}
+          >
+            Athens, 4 December 2026 — Contact for Tickets
+          </Link>
+        )}
       </div>
 
       <div className="screen" id="fold-effect" ref={foldEffectRef}>

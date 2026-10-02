@@ -1,5 +1,5 @@
 import { useEffect, lazy, Suspense } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -12,7 +12,6 @@ import CookieConsent from './components/CookieConsent';
 
 // Lazy load page components for code splitting
 const Home = lazy(() => import('./pages/Home'));
-const Home2 = lazy(() => import('./pages/Home2'));
 const Preview = lazy(() => import('./pages/Preview'));
 const Reviews = lazy(() => import('./pages/Reviews'));
 const Contact = lazy(() => import('./pages/Contact'));
@@ -62,8 +61,7 @@ function RouteHandler() {
   useEffect(() => {
     // Update page title based on route
     const titles = {
-      '/': 'Epic Economics: What would you protest about today?',
-      '/home2': 'Epic Economics: What would you protest about today?',
+      '/': 'Epic Economics: What would you protest about today? — Athens, 4 December 2026',
       '/preview': 'Preview - Epic Economics',
       '/reviews': 'Reviews - Epic Economics',
       '/contact': 'Contact Us - Epic Economics',
@@ -112,7 +110,10 @@ function App() {
           <Suspense fallback={<LoadingSpinner />}>
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/home2" element={<Home2 />} />
+              {/* Home2 is a superseded alternate layout. It is not linked from
+                  anywhere and was still selling Edinburgh tickets, so it now
+                  forwards to the real homepage instead of contradicting it. */}
+              <Route path="/home2" element={<Navigate to="/" replace />} />
               <Route path="/preview" element={<Preview />} />
               <Route path="/reviews" element={<Reviews />} />
               <Route path="/contact" element={<Contact />} />

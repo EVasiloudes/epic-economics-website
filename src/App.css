@@ -74,10 +74,13 @@
   z-index: 10;
 }
 
-/* Add top padding for fixed navbar on all non-home pages */
+/* Add top padding for fixed navbar on all non-home pages.
+   `.press` was the old class for what is now the Reviews page — the page was
+   renamed in 736b93e but this selector was never updated, so /reviews rendered
+   its <h1> underneath the fixed navbar. */
 .contact,
 .technical,
-.press,
+.reviews,
 .preview {
   padding-top: 5rem;
 }
@@ -85,7 +88,7 @@
 @media (max-width: 480px) {
   .contact,
   .technical,
-  .press,
+  .reviews,
   .preview {
     padding-top: 7rem;
   }

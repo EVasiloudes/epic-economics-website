@@ -168,6 +168,16 @@ const LazyVideo = ({
     e.target.style.display = 'none';
   }, [poster]);
 
+  // Fades the poster in over the placeholder's highlight. Doubles as a ref
+  // callback because a cached poster can finish loading before React attaches
+  // onLoad, which would leave it stuck at zero opacity.
+  const handlePosterLoad = useCallback((node) => {
+    const image = node instanceof HTMLImageElement ? node : node?.currentTarget;
+    if (image?.complete) {
+      image.classList.add('is-decoded');
+    }
+  }, []);
+
   // Determine video MIME type
   const getVideoType = (url) => {
     if (url.endsWith('.webm')) return 'video/webm';
@@ -217,6 +227,8 @@ const LazyVideo = ({
                   alt={title || 'Video thumbnail'}
                   className="video-poster"
                   onError={handlePosterError}
+                  onLoad={handlePosterLoad}
+                  ref={handlePosterLoad}
                   loading="lazy"
                 />
               )}

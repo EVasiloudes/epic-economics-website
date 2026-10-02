@@ -336,6 +336,14 @@ label {
   border: 0;
 }
 
+/* Highlight that travels across a pending media frame while it decodes.
+   Shared by the page-level `.media` shimmer and the video placeholder, so it
+   lives here rather than in either stylesheet. */
+@keyframes ee-shimmer {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+
 /* Skip to main content link */
 .skip-link {
   position: absolute;

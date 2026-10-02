@@ -4,6 +4,9 @@
       "maxDuration": 30
     }
   },
+  "redirects": [
+    { "source": "/press", "destination": "/reviews", "permanent": true }
+  ],
   "rewrites": [
     { "source": "/preview", "destination": "/preview/index.html" },
     { "source": "/reviews", "destination": "/reviews/index.html" },

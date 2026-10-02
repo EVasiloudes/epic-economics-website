@@ -21,6 +21,9 @@
   transition: opacity 0.3s ease-in-out;
 }
 
+/* Placeholder holds the frame's shape while the poster decodes. It carries a
+   slow highlight instead of the old purple gradient, which the 2026 palette
+   retired along with the rest of the glassmorphism. */
 .lazy-video-placeholder {
   position: absolute;
   top: 0;
@@ -30,10 +33,28 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  overflow: hidden;
+  background-color: var(--color-ink);
   border-radius: 12px;
   cursor: pointer;
   transition: transform 0.2s ease;
+}
+
+.lazy-video-placeholder::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(
+    100deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.12) 50%,
+    transparent 80%
+  );
+  background-size: 200% 100%;
+  animation: ee-shimmer 1.8s linear infinite;
+  /* Behind the poster, so the highlight only shows while the poster is still
+     transparent. */
+  z-index: 0;
 }
 
 .lazy-video-placeholder:hover {
@@ -48,6 +69,15 @@
   height: 100%;
   object-fit: cover;
   border-radius: 12px;
+  opacity: 0;
+  transform: scale(1.04);
+  transition: opacity 0.7s ease, transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 1;
+}
+
+.video-poster.is-decoded {
+  opacity: 1;
+  transform: scale(1);
 }
 
 .play-button-overlay {
@@ -62,6 +92,7 @@
   background: rgba(0, 0, 0, 0.3);
   border-radius: 12px;
   transition: background-color 0.2s ease;
+  z-index: 2;
 }
 
 .lazy-video-placeholder:hover .play-button-overlay {
@@ -294,18 +325,26 @@
   .lazy-video-placeholder {
     transition: none;
   }
-  
+
+  .lazy-video-placeholder::after {
+    animation: none;
+  }
+
+  .video-poster {
+    transition: none;
+  }
+
   .play-button {
     transition: none;
   }
-  
+
   .lazy-video {
     transition: none;
   }
-  
+
   .loading-spinner {
     animation: none;
-    border: 3px solid #667eea;
+    border: 3px solid var(--color-accent);
   }
 }
 

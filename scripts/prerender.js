@@ -7,11 +7,48 @@ const __dirname = path.dirname(__filename);
 
 // Routes to prerender
 const routes = [
-  { path: '/', title: 'Epic Economics: What would you protest about today?', description: "Confused by the economy? Blending great economists' ideas with wicked humour, an LSE/World Bank veteran exposes the system. Discover why you're broke, how we got here and what we should fight for." },
+  { path: '/', title: 'Epic Economics: What would you protest about today? — Athens, 4 December 2026', description: "Confused by the economy? An LSE/World Bank veteran puts the system on stage. Discover why you're broke, how we got here. Athens, 4 December 2026." },
   { path: '/preview', title: 'Preview - Epic Economics', description: 'Get a preview of Epic Economics - experience excerpts from our theatrical production exploring economic themes and social change.' },
-  { path: '/reviews', title: 'Reviews - Epic Economics', description: 'Reviews, media coverage, and high-resolution images from Epic Economics theatrical production.' },
+  { path: '/reviews', title: 'Reviews - Epic Economics', description: 'Fringe 2026 reviews of Epic Economics from British Theatre Guide, The Scotsman and Edinburgh Guide, plus audience reactions and high-resolution press photography.' },
   { path: '/contact', title: 'Contact Us - Epic Economics', description: 'Get in touch with the Epic Economics team. Contact us for bookings, press inquiries, or general questions about our theatrical production.' },
   { path: '/technical', title: 'Technical Information - Epic Economics', description: 'Stage plan, equipment requirements, and technical specifications for Epic Economics theatrical production.', noindex: true }
+];
+
+// The next performance. Crawlers read this static HTML, not the React app, so
+// the date and venue have to live here as text — not only in Home.jsx.
+const nextPerformance = `
+  <section>
+    <h2>Next performance: Athens</h2>
+    <p><strong>Friday, 4 December 2026, 20:30</strong></p>
+    <p>Michael Cacoyannis Foundation — Cinema Hall, 206 Piraeus Street, Tavros, Athens 177 78, Greece.</p>
+    <p>One night only. 60 minutes, no interval. English with a touch of Greek.</p>
+    <p>Tickets €15, or €12 for students, senior citizens and persons with disabilities, via TicketPlus. Tickets go on sale shortly — until then, email the box office at <a href="https://www.mcf.gr/">mcf.gr</a> or <a href="/contact">write to us</a>.</p>
+  </section>
+`;
+
+// Fringe 2026 press reviews. The publication names are the searchable part, so
+// they have to survive into the prerendered markup.
+const pressReviews = [
+  {
+    quote: 'This is a powerful, humorous and charismatic production. Do go!',
+    source: 'British Theatre Guide',
+  },
+  {
+    quote: 'Making economics and political engagement not only interesting, but also funny, is no mean feat. Michaelides manages it with charm.',
+    source: 'Edinburgh Guide',
+  },
+  {
+    quote: 'A highly entertaining and important whistlestop tour through centuries of economic thought.',
+    source: 'Everything Theatre',
+  },
+  {
+    quote: 'Michaelides certainly proves economics doesn’t have to be dull.',
+    source: 'The Scotsman',
+  },
+  {
+    quote: 'Perhaps economists do have some use, after all.',
+    source: 'Fringe Review',
+  },
 ];
 
 // Read the built index.html
@@ -41,6 +78,7 @@ function generateStaticHTML(route) {
             <section>
               <h1>Epic Economics: What would you protest about today?</h1>
               <p>A play by Dimis Michaelides</p>
+              ${nextPerformance}
               <h2>About the Production</h2>
               <p>Epic Economics is a theatrical work based on the words of distinguished economists from the 18th century to today, highlighting their contributions and contradictions. The theories are interwoven with stories from the performer's own personal and professional journey, and peppered with wicked humor and some songs. The show is accompanied by an original soundscape.</p>
               <p>How does your breakfast make its way to your table? Why might you own an imported car? Who creates value? Why do we have recessions? What's more important, growth or equality?</p>
@@ -58,7 +96,18 @@ function generateStaticHTML(route) {
           ${route.path === '/reviews' ? `
             <section>
               <h1>Reviews</h1>
-              <p>Reviews, media coverage, and high-resolution images from Epic Economics theatrical production.</p>
+              <p>Fringe 2026 reviews of Epic Economics from British Theatre Guide, The Scotsman and Edinburgh Guide, plus audience reactions and high-resolution press photography.</p>
+              <h2>Edinburgh Festival Fringe 2026 press reviews</h2>
+              <blockquote>
+                <ul>
+                  ${pressReviews.map((review) => `
+                    <li>
+                      <p>"${review.quote}"</p>
+                      <p>— ${review.source}</p>
+                    </li>
+                  `).join('')}
+                </ul>
+              </blockquote>
             </section>
           ` : ''}
           ${route.path === '/contact' ? `

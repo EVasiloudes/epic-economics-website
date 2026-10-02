@@ -4,10 +4,11 @@ import { Helmet } from 'react-helmet-async';
 import {
   generateOrganizationSchema,
   generateTeamPersonSchemas,
-  generateEventSchema,
+  generateEventSchemas,
   generateVideoSchema,
   generateBreadcrumbSchema,
 } from '../utils/structuredData';
+import { ATHENS, TICKETS_URL, SHOW_SUMMARY, SHOW_SOCIAL_DESCRIPTION, SHOW_TITLE } from '../constants/show';
 import './Home2.css';
 
 // Lazy load heavy components
@@ -83,28 +84,30 @@ function Home2() {
   return (
     <>
       <Helmet>
-        <title>Epic Economics: What would you protest about today?</title>
-        <meta name="description" content="Confused by the economy? Blending great economists' ideas with wicked humour, an LSE/World Bank veteran exposes the system. Discover why you're broke, how we got here and what we should fight for." />
+        <title>{SHOW_TITLE} — Athens, 4 December 2026</title>
+        <meta name="description" content={SHOW_SUMMARY} />
         <link rel="canonical" href="https://epic-economics.dimis.org/" />
-        <meta property="og:title" content="Epic Economics: What would you protest about today?" />
-        <meta property="og:description" content="Confused by the economy? Blending great economists' ideas with wicked humour, an LSE/World Bank veteran exposes the system. Discover why you're broke, how we got here and what we should fight for." />
+        <meta property="og:title" content={SHOW_TITLE} />
+        <meta property="og:description" content={SHOW_SOCIAL_DESCRIPTION} />
         <meta property="og:image" content="https://epic-economics.dimis.org/og-image.png" />
         <meta property="og:image:alt" content="Epic Economics promotional image" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://epic-economics.dimis.org/" />
         <meta property="og:site_name" content="Epic Economics" />
-        <meta property="og:locale" content="en_US" />
+        <meta property="og:locale" content="en_GB" />
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:title" content="Epic Economics: What would you protest about today?" />
-        <meta property="twitter:description" content="Confused by the economy? Blending great economists' ideas with wicked humour, an LSE/World Bank veteran exposes the system. Discover why you're broke, how we got here and what we should fight for." />
+        <meta property="twitter:title" content={SHOW_TITLE} />
+        <meta property="twitter:description" content={SHOW_SOCIAL_DESCRIPTION} />
         <meta property="twitter:image" content="https://epic-economics.dimis.org/og-image.png" />
         <meta property="twitter:image:alt" content="Epic Economics promotional image" />
         <script type="application/ld+json">
           {JSON.stringify(generateOrganizationSchema())}
         </script>
-        <script type="application/ld+json">
-          {JSON.stringify(generateEventSchema())}
-        </script>
+        {generateEventSchemas().map((event, index) => (
+          <script key={index} type="application/ld+json">
+            {JSON.stringify(event)}
+          </script>
+        ))}
         <script type="application/ld+json">
           {JSON.stringify(generateBreadcrumbSchema([
             { name: 'Home', url: 'https://epic-economics.dimis.org/' },
@@ -132,26 +135,41 @@ function Home2() {
           <GsapHero />
         </Suspense>
 
-        {/* Ticket CTA — Edinburgh Fringe (after hero, before synopsis) */}
+        {/* Ticket CTA — next performance, Athens */}
         <section className="ticket-cta" aria-label="Get tickets">
           <div className="ticket-cta-content">
             <p className="ticket-cta-quote">
               "The system's on stage. Are you in the audience?"
             </p>
-            <a
-              href="https://www.edfringe.com/tickets/whats-on/epic-economics-what-would-you-protest-about-today"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="ticket-cta-btn"
-              aria-label="Get tickets for Epic Economics at Edinburgh Fringe (opens in new tab)"
-            >
-              🎫 GET TICKETS NOW
-            </a>
-            <p className="ticket-cta-sub">
-              Edinburgh Fringe 2026 •{' '}
-              <a href="https://www.edfringe.com/tickets/whats-on/epic-economics-what-would-you-protest-about-today" target="_blank" rel="noopener noreferrer">
-                Tickets at edfringe.com
+            <p className="athens-date">
+              {ATHENS.dateLabel} · {ATHENS.timeLabel}
+            </p>
+            <p className="athens-venue">
+              <a href={ATHENS.venueUrl} target="_blank" rel="noopener noreferrer">
+                {ATHENS.venueName}
               </a>
+              <br />
+              {ATHENS.venueAddressLine}
+            </p>
+            {TICKETS_URL ? (
+              <a
+                href={TICKETS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ticket-cta-btn"
+                aria-label={`Get tickets for Epic Economics in Athens on ${ATHENS.dateLabel} (opens in new tab)`}
+              >
+                GET TICKETS NOW
+              </a>
+            ) : (
+              <p className="athens-tickets-pending">
+                Tickets via {ATHENS.ticketProvider} go on sale shortly —{' '}
+                <a href={ATHENS.venueUrl} target="_blank" rel="noopener noreferrer">mcf.gr</a>{' '}
+                or <Link to="/contact">write to us</Link>.
+              </p>
+            )}
+            <p className="ticket-cta-sub">
+              {ATHENS.price} · {ATHENS.concessionPrice} for {ATHENS.concessionNote}
             </p>
           </div>
         </section>

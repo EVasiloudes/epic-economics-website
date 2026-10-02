@@ -1,18 +1,27 @@
-import { useEffect, useState, useRef, lazy, Suspense } from 'react';
+import { useCallback, useEffect, useRef, lazy, Suspense } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import LazyVideo from '../components/LazyVideo';
+import IntroSequence from '../components/IntroSequence';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 import {
   generateOrganizationSchema,
   generateTeamPersonSchemas,
-  generateEventSchema,
+  generateEventSchemas,
   generateVideoSchema,
   generateBreadcrumbSchema,
 } from '../utils/structuredData';
+import {
+  ATHENS,
+  PHOTO_CREDIT,
+  TICKETS_URL,
+  SHOW_SUMMARY,
+  SHOW_SOCIAL_DESCRIPTION,
+  SHOW_TITLE,
+} from '../constants/show';
 import './Home.css';
 
 // Lazy load heavy components
-const IntroSequence = lazy(() => import('../components/IntroSequence'));
 const GsapHero = lazy(() => import('../components/GsapHero'));
 
 // Import images with explicit dimensions for CLS prevention
@@ -20,13 +29,16 @@ import audienceImg from '../assets/images/press/_BOO9866.jpg';
 import performanceImg1 from '../assets/images/press/_BOO0058.jpg';
 import performanceImg2 from '../assets/images/press/_BOO9941.jpg';
 import performanceImg3 from '../assets/images/press/_BOO9809.jpg';
+import athensStill from '../assets/images/press/epic-economics-press-24.jpg';
 
 function Home() {
-  const [imagesLoaded, setImagesLoaded] = useState(false);
   const imageContainerRef = useRef(null);
-  const revealRefs = useRef([]);
+  const reveal = useScrollReveal();
 
-  // Apply home-with-gsap class for GSAP hero scroll animation
+  // Apply home-with-gsap class for GSAP hero scroll animation. It also gates the
+  // footer's entrance in Footer.css, so it has to be set for as long as Home is
+  // mounted — the footer must never be gated by a class that Home already took
+  // down.
   useEffect(() => {
     document.body.classList.add('home-with-gsap');
     return () => {
@@ -34,90 +46,60 @@ function Home() {
     };
   }, []);
 
-  // Scroll-driven reveal for synopsis images using IntersectionObserver.
-  // Replaces the previous load-based `.loaded` fade, which fired once on
-  // preload and never reacted to scrolling.
-  useEffect(() => {
-    const targets = revealRefs.current.filter(Boolean);
-    if (targets.length === 0) return;
-
-    if (!('IntersectionObserver' in window)) {
-      // Fallback: just reveal everything immediately.
-      targets.forEach((el) => el.classList.add('is-visible'));
-      return;
+  // Marks the surrounding `.media` frame as decoded. Doubles as a ref callback
+  // because a cached image can finish loading before React attaches onLoad,
+  // which would otherwise leave the frame stuck behind its shimmer.
+  const markMediaLoaded = useCallback((node) => {
+    const image = node instanceof HTMLImageElement ? node : node?.currentTarget;
+    if (image?.complete) {
+      image.closest('.media')?.classList.add('is-loaded');
     }
+  }, []);
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.15, rootMargin: '0px 0px -10% 0px' }
-    );
-
-    targets.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, [imagesLoaded]);
-
-  // Preload critical images
-useEffect(() => {
-  let isMounted = true;
-
-  const preloadImages = () => {
-    const images = [audienceImg, performanceImg1, performanceImg2, performanceImg3];
-    const promises = images.map(src => {
-      return new Promise((resolve) => {
+  // Warm the cache for the frames further down the page while the browser is
+  // idle, so their lazy <img> lands instantly instead of showing a shimmer.
+  useEffect(() => {
+    const preloadImages = () => {
+      [audienceImg, performanceImg1, performanceImg2, performanceImg3].forEach((src) => {
         const img = new Image();
-        img.onload = () => resolve(true);
-        img.onerror = () => resolve(false);
         img.src = src;
       });
-    });
+    };
 
-    Promise.all(promises).then(() => {
-      if (isMounted) setImagesLoaded(true);
-    });
-  };
-
-    // Use requestIdleCallback for non-critical image loading
     if ('requestIdleCallback' in window) {
       requestIdleCallback(preloadImages, { timeout: 2000 });
     } else {
       setTimeout(preloadImages, 100);
     }
-
-    return () => { isMounted = false; };
   }, []);
 
   return (
     <>
       <Helmet>
-        <title>Epic Economics: What would you protest about today?</title>
-        <meta name="description" content="Confused by the economy? Come witness an LSE/World Bank veteran exposes the system. Discover why you're broke, how we got here and what we should fight for." />
+        <title>{SHOW_TITLE} — Athens, 4 December 2026</title>
+        <meta name="description" content={SHOW_SUMMARY} />
         <link rel="canonical" href="https://epic-economics.dimis.org/" />
-        <meta property="og:title" content="Epic Economics: What would you protest about today?" />
-        <meta property="og:description" content="The system's on stage. Are you in the audience? Edinburgh Fringe 2026  •  Tickets at edfringe.com" />
+        <meta property="og:title" content={SHOW_TITLE} />
+        <meta property="og:description" content={SHOW_SOCIAL_DESCRIPTION} />
         <meta property="og:image" content="https://epic-economics.dimis.org/og-image.png" />
         <meta property="og:image:alt" content="Epic Economics promotional image" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://epic-economics.dimis.org/" />
         <meta property="og:site_name" content="Epic Economics" />
-        <meta property="og:locale" content="en_US" />
+        <meta property="og:locale" content="en_GB" />
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:title" content="Epic Economics: What would you protest about today?" />
-        <meta property="twitter:description" content="Confused by the economy? Blending great economists' ideas with wicked humour, an LSE/World Bank veteran exposes the system. Discover why you're broke, how we got here and what we should fight for." />
+        <meta property="twitter:title" content={SHOW_TITLE} />
+        <meta property="twitter:description" content={SHOW_SOCIAL_DESCRIPTION} />
         <meta property="twitter:image" content="https://epic-economics.dimis.org/og-image.png" />
         <meta property="twitter:image:alt" content="Epic Economics promotional image" />
         <script type="application/ld+json">
           {JSON.stringify(generateOrganizationSchema())}
         </script>
-        <script type="application/ld+json">
-          {JSON.stringify(generateEventSchema())}
-        </script>
+        {generateEventSchemas().map((event, index) => (
+          <script key={index} type="application/ld+json">
+            {JSON.stringify(event)}
+          </script>
+        ))}
         <script type="application/ld+json">
           {JSON.stringify(generateBreadcrumbSchema([
             { name: 'Home', url: 'https://epic-economics.dimis.org/' },
@@ -145,12 +127,82 @@ useEffect(() => {
           <GsapHero />
         </Suspense>
 
-        {/* Intro Sequence — card overlay on top of the hero */}
-        <Suspense fallback={null}>
-          <IntroSequence />
-        </Suspense>
+        {/* Intro Sequence — card overlay on top of the hero. Not lazy: its
+            scroll trigger contributes four viewports of page height, and
+            landing that in a later chunk shoved the rest of the page down
+            while the reader was already looking at it. */}
+        <IntroSequence />
 
         <div className="home-content" ref={imageContainerRef}>
+          {/* Athens — the next night. Date, venue and price are real text, not
+              baked into the image, so they are readable, translatable and
+              crawlable. */}
+          <section className="ticket-cta" aria-labelledby="athens-heading">
+            <div className="ticket-cta-content">
+              <h2 id="athens-heading" className="athens-date">
+                {ATHENS.dateLabel} · {ATHENS.timeLabel}
+              </h2>
+              <p className="athens-venue">
+                <a
+                  href={ATHENS.venueUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {ATHENS.venueName}
+                </a>
+                <br />
+                {ATHENS.venueAddressLine}
+              </p>
+              <p className="athens-format">{ATHENS.format}</p>
+
+              {TICKETS_URL ? (
+                <a
+                  href={TICKETS_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="ticket-cta-btn"
+                  aria-label={`Get tickets for Epic Economics in Athens on ${ATHENS.dateLabel} (opens in new tab)`}
+                >
+                  GET TICKETS NOW
+                </a>
+              ) : (
+                <p className="athens-tickets-pending">
+                  Tickets via {ATHENS.ticketProvider} go on sale shortly. The
+                  box office is the fastest way in —{' '}
+                  <a
+                    href={ATHENS.venueUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    mcf.gr
+                  </a>{' '}
+                  or{' '}
+                  <Link to="/contact">write to us</Link>.
+                </p>
+              )}
+
+              <p className="ticket-cta-sub">
+                {ATHENS.price} · {ATHENS.concessionPrice} for {ATHENS.concessionNote}
+              </p>
+            </div>
+
+            <figure className="athens-still reveal" ref={reveal}>
+              <div className="athens-still__frame media">
+                <img
+                  src={athensStill}
+                  alt="Dimis Michaelides inviting the audience to write protest slogans during Epic Economics"
+                  width="1600"
+                  height="1065"
+                  loading="lazy"
+                  decoding="async"
+                  ref={markMediaLoaded}
+                  onLoad={markMediaLoaded}
+                />
+              </div>
+              <figcaption>{PHOTO_CREDIT}</figcaption>
+            </figure>
+          </section>
+
           {/* Synopsis Section */}
           <section className="synopsis" aria-labelledby="synopsis-heading">
             <h1 id="synopsis-heading" className="visually-hidden">About Epic Economics</h1>
@@ -187,10 +239,7 @@ useEffect(() => {
               </div>
 
               <aside className="synopsis-images">
-                <figure
-                  className="image-wrapper"
-                  ref={(el) => { revealRefs.current[0] = el; }}
-                >
+                <figure className="image-wrapper media reveal" ref={reveal}>
                   <img
                     src={audienceImg}
                     alt="Audience participation during Epic Economics performance"
@@ -198,12 +247,11 @@ useEffect(() => {
                     height="600"
                     loading="lazy"
                     decoding="async"
+                    ref={markMediaLoaded}
+                    onLoad={markMediaLoaded}
                   />
                 </figure>
-                <figure
-                  className="image-wrapper"
-                  ref={(el) => { revealRefs.current[1] = el; }}
-                >
+                <figure className="image-wrapper media reveal" ref={reveal}>
                   <img
                     src={performanceImg1}
                     alt="Epic Economics theatrical performance"
@@ -211,6 +259,8 @@ useEffect(() => {
                     height="600"
                     loading="lazy"
                     decoding="async"
+                    ref={markMediaLoaded}
+                    onLoad={markMediaLoaded}
                   />
                 </figure>
               </aside>
@@ -219,8 +269,8 @@ useEffect(() => {
             {/* Tiled pair below synopsis text — full width of synopsis container */}
             <div className="synopsis-images-below" aria-hidden="false">
               <figure
-                className="image-wrapper image-wrapper--tile-left"
-                ref={(el) => { revealRefs.current[2] = el; }}
+                className="image-wrapper image-wrapper--tile-left media reveal"
+                ref={reveal}
               >
                 <img
                   src={performanceImg2}
@@ -229,11 +279,13 @@ useEffect(() => {
                   height="600"
                   loading="lazy"
                   decoding="async"
+                  ref={markMediaLoaded}
+                  onLoad={markMediaLoaded}
                 />
               </figure>
               <figure
-                className="image-wrapper image-wrapper--tile-right"
-                ref={(el) => { revealRefs.current[3] = el; }}
+                className="image-wrapper image-wrapper--tile-right media reveal"
+                ref={reveal}
               >
                 <img
                   src={performanceImg3}
@@ -242,6 +294,8 @@ useEffect(() => {
                   height="600"
                   loading="lazy"
                   decoding="async"
+                  ref={markMediaLoaded}
+                  onLoad={markMediaLoaded}
                 />
               </figure>
             </div>
@@ -251,7 +305,7 @@ useEffect(() => {
           <section className="teaser-card" aria-labelledby="trailer-heading">
             <h2 id="trailer-heading">Watch the Teaser</h2>
             <div className="video-cards">
-              <div className="video-card">
+              <div className="video-card reveal" ref={reveal}>
                 <div className="video-thumbnail">
                   <LazyVideo
                     src="/videos/epic-economics-teaser.mp4"
@@ -262,21 +316,6 @@ useEffect(() => {
                   />
                 </div>
               </div>
-            </div>
-          </section>
-
-          {/* Ticket CTA */}
-          <section className="ticket-cta" aria-label="Get tickets">
-            <div className="ticket-cta-content">
-              <a
-                href="https://www.edfringe.com/tickets/whats-on/epic-economics-what-would-you-protest-about-today"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="ticket-cta-btn"
-                aria-label="Get tickets for Epic Economics at Edinburgh Fringe (opens in new tab)"
-              >
-                GET TICKETS NOW
-              </a>
             </div>
           </section>
 

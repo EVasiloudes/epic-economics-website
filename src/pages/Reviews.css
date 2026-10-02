@@ -6,7 +6,11 @@
 .reviews {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 1rem;
+  /* Longhand, not `padding: 1rem`: this block loads after App.css, so a
+     shorthand here would reset the padding-top that clears the fixed navbar. */
+  padding-right: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 1rem;
   font-family: var(--font-body);
   line-height: var(--leading-normal);
   color: var(--color-ink);
@@ -20,14 +24,6 @@
   border: var(--border-light);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
-}
-
-.reviews-section h2 {
-  font-family: var(--font-heading);
-  font-size: var(--text-h2);
-  margin-bottom: 1.5rem;
-  color: var(--color-ink);
-  text-align: center;
 }
 
 .reviews-list {
@@ -70,8 +66,221 @@
   display: block;
 }
 
-.show-all-btn {
+/* Publication that ran the review — the press equivalent of a byline. */
+.review-source {
+  display: inline-block;
+  margin-top: 0.5rem;
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  transition: color var(--transition-fast);
+}
+
+.review-source:hover {
+  color: var(--color-primary-hover);
+}
+
+.review-source:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Inside the dark review modal the link has to invert. */
+.review-modal .review-source {
+  color: var(--color-accent);
+}
+
+.review-modal .review-source:hover {
+  color: var(--color-surface);
+}
+
+/* ==========================================================================
+   Press vs reactions — two kinds of word, so two kinds of card
+   ========================================================================== */
+
+.reviews-group + .reviews-group {
+  margin-top: 2.75rem;
+  padding-top: 2.25rem;
+  border-top: 1px solid var(--border-light);
+}
+
+.reviews-group__title {
+  font-family: var(--font-heading);
+  font-size: var(--text-h3);
+  font-weight: 700;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-ink);
+  margin: 0 0 0.35rem;
+}
+
+.reviews-group__note {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--color-ink-muted);
+  margin: 0 0 1.5rem;
+}
+
+/* --------------------------------------------------------------------------
+   Press cards — an editor's verdict, so it gets a masthead, a mark out of
+   five and a link out. Nothing like a reaction from the audience.
+   -------------------------------------------------------------------------- */
+.press-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.press-card {
+  display: flex;
+  flex-direction: column;
+  padding: 1.35rem 1.4rem 1.4rem;
+  background-color: var(--color-bg-alt);
+  border: var(--border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-base),
+              box-shadow var(--transition-base),
+              border-color var(--transition-base);
+}
+
+.press-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--border-medium);
+  box-shadow: var(--shadow-md);
+}
+
+.press-card__head {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 0.85rem;
+}
+
+.press-card__stars {
   display: block;
+  color: var(--color-accent);
+  font-size: 1.05rem;
+  line-height: 1;
+  letter-spacing: 0.1rem;
+}
+
+.press-card__stars-empty {
+  /* Not --border-medium: that token is a border shorthand ("1px solid …"), so
+     using it here made the declaration invalid and let the empty stars inherit
+     the gold above — every card read as a full five. */
+  color: rgba(26, 26, 36, 0.18);
+}
+
+.press-card__outlet {
+  font-family: var(--font-heading);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+  line-height: 1.3;
+}
+
+.press-card__quote {
+  margin: 0 0 1.1rem;
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  font-style: italic;
+  line-height: 1.65;
+  color: var(--color-ink);
+  text-wrap: pretty;
+}
+
+.press-card__quote::before {
+  content: '\201C';
+}
+
+.press-card__quote::after {
+  content: '\201D';
+}
+
+.press-card__link {
+  margin-top: auto;
+  align-self: flex-start;
+  font-family: var(--font-heading);
+  font-size: var(--text-small);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.press-card__link-icon {
+  display: inline-block;
+  margin-left: 0.3rem;
+  transition: transform var(--transition-fast);
+}
+
+.press-card__link:hover {
+  color: var(--color-primary-hover);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.press-card__link:hover .press-card__link-icon {
+  transform: translate(2px, -2px);
+}
+
+.press-card__link:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+/* --------------------------------------------------------------------------
+   Reactions — quotes without a byline, opened a few at a time. Each new item
+   gets its own `--i`, so "show all" cascades instead of snapping the page
+   taller in one frame.
+   -------------------------------------------------------------------------- */
+@keyframes review-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* `backwards`, not `both`: a filled forwards state would sit above the
+   :hover rule in the cascade and pin the item at full opacity for good. */
+.press-card,
+.review-item {
+  animation: review-in 480ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
+  animation-delay: calc(var(--i, 0) * 55ms);
+}
+
+.review-item {
+  margin: 0;
+}
+
+.review-stamp {
+  display: block;
+  width: auto;
+  height: 3rem;
+  margin-bottom: 0.6rem;
+}
+
+.show-all-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  width: fit-content;
   margin: 1.5rem auto 0;
   padding: 0.75rem 1.5rem;
   background: var(--glass-bg-secondary);
@@ -86,6 +295,26 @@
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 4px 16px var(--glass-shadow);
+}
+
+/* Drawn from borders so it inherits the button's colour in both states. */
+.show-all-btn__chevron {
+  flex: none;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg) translate(-0.1rem, -0.1rem);
+  transition: transform var(--transition-base);
+}
+
+.show-all-btn[aria-expanded='true'] .show-all-btn__chevron {
+  transform: rotate(225deg) translate(-0.1rem, -0.1rem);
+}
+
+.show-all-btn:focus-visible {
+  outline: 2px solid var(--accent-blue);
+  outline-offset: 3px;
 }
 
 .show-all-btn:hover {
@@ -119,15 +348,6 @@
   margin-bottom: 0.5rem;
   color: #2c3e50;
   font-weight: bold;
-}
-
-.reviews-description {
-  font-family: var(--font-body);
-  font-size: var(--text-lead);
-  color: var(--color-ink-light);
-  max-width: 800px;
-  margin: 0 auto;
-  line-height: var(--leading-normal);
 }
 
 .reviews-kit {
@@ -274,6 +494,12 @@
   margin-bottom: 1.5rem;
   color: #2c3e50;
   text-align: center;
+}
+
+/* The heading on the stills section is for assistive tech only, so reclaim the
+   gap it used to leave above the video. */
+.video-section > .visually-hidden + .video-cards {
+  margin-top: 0;
 }
 
 .video-cards {
@@ -681,61 +907,117 @@
   transform: translateY(-2px);
 }
 
-.reviews-info {
+/* ==========================================================================
+   Photography credit card — sits under the gallery, not inside a section box.
+   A hairline rule with an aperture glyph ties it to the frames above.
+   ========================================================================== */
+
+.photo-credit-block {
   margin-bottom: 3rem;
-  background: var(--glass-bg-primary);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  padding: 1.5rem;
-  border-radius: 16px;
-  border: 1px solid var(--glass-border);
-  box-shadow: 0 8px 32px var(--glass-shadow);
-}
-
-.reviews-info h2 {
-  font-family: var(--font-heading);
-  font-size: 1.75rem;
-  margin-bottom: 1rem;
-  color: #2c3e50;
-  text-align: center;
-}
-
-.reviews-info p {
-  font-family: var(--font-body);
-  font-size: 1rem;
-  line-height: 1.6;
-  margin-bottom: 1rem;
-  color: #34495e;
-  text-align: center;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .photo-credit {
-  background-color: #ecf0f1;
-  padding: 0.75rem;
-  border-radius: 6px;
+  max-width: 32rem;
+  margin: 0 auto;
+  padding: 1.5rem 1.75rem 1.65rem;
   text-align: center;
-  margin-top: 1rem;
-  border-left: 3px solid #e74c3c;
+  background-color: var(--color-surface);
+  border: var(--border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-base),
+              border-color var(--transition-base),
+              box-shadow var(--transition-base);
 }
 
-.photo-credit strong {
-  color: #2c3e50;
+.photo-credit:hover {
+  transform: translateY(-3px);
+  border-color: var(--border-medium);
+  box-shadow: var(--shadow-lg);
+}
+
+.photo-credit__rule {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 1.25rem;
+  color: var(--color-accent);
+}
+
+.photo-credit__rule::before,
+.photo-credit__rule::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background-color: var(--border-medium);
+}
+
+.photo-credit__aperture {
+  flex: none;
+  width: 22px;
+  height: 22px;
+}
+
+.photo-credit__label {
   font-family: var(--font-heading);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+  margin-bottom: 0.35rem;
 }
 
-.photo-credit a {
-  color: #e74c3c;
+.photo-credit__name {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: var(--leading-tight);
+  color: var(--color-ink);
+  margin-bottom: 1rem;
+}
+
+.photo-credit__handle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.15rem;
+  border: var(--border-medium);
+  border-radius: var(--radius-full);
+  font-family: var(--font-heading);
+  font-size: var(--text-small);
+  font-weight: 600;
+  color: var(--color-ink);
   text-decoration: none;
-  font-weight: bold;
-  transition: color 0.3s ease;
+  transition: background-color var(--transition-fast),
+              border-color var(--transition-fast),
+              color var(--transition-fast),
+              transform var(--transition-fast);
 }
 
-.photo-credit a:hover {
-  color: #c0392b;
-  text-decoration: underline;
+.photo-credit__handle svg {
+  width: 14px;
+  height: 14px;
+  transition: transform var(--transition-fast);
+}
+
+.photo-credit__handle:hover {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #FFFFFF;
+  transform: translateY(-1px);
+  text-decoration: none;
+}
+
+.photo-credit__handle:hover svg {
+  transform: translateX(3px);
+}
+
+.photo-credit__legal {
+  font-family: var(--font-heading);
+  font-size: var(--text-xs);
+  color: var(--color-ink-muted);
+  margin: 1rem 0 0;
 }
 
 /* Image Modal Styles */
@@ -881,7 +1163,9 @@
 /* Tablet Design */
 @media (max-width: 1024px) {
   .reviews {
-    padding: 1rem;
+    padding-right: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 1rem;
   }
 
   .image-gallery {
@@ -889,7 +1173,7 @@
     gap: 1rem;
   }
 
-  .reviews-info {
+  .photo-credit {
     padding: 1.5rem;
   }
 
@@ -1011,12 +1295,14 @@
     padding: 1.75rem;
   }
 
-  .reviews-section h2 {
-    font-size: 1.8rem;
+    .reviews-list {
+    gap: 1.25rem;
   }
 
-  .reviews-list {
-    gap: 1.25rem;
+  /* Two press cards side by side stop being readable well before the review
+     text itself does. */
+  .press-grid {
+    grid-template-columns: 1fr;
   }
 
   .review-item {
@@ -1176,7 +1462,9 @@
   }
 
   .reviews {
-    padding: 0.75rem;
+    padding-right: 0.75rem;
+    padding-bottom: 0.75rem;
+    padding-left: 0.75rem;
     margin: 0;
     width: 100%;
   }
@@ -1191,12 +1479,7 @@
     margin-bottom: 0.4rem;
   }
 
-  .reviews-description {
-    font-size: 0.95rem;
-    padding: 0 0.75rem;
-  }
-
-  .reviews-kit {
+    .reviews-kit {
     margin-bottom: 2.5rem;
   }
 
@@ -1228,19 +1511,16 @@
     font-size: 1.2rem;
   }
 
-  .reviews-info {
-    padding: 1.25rem;
+  .photo-credit-block {
     margin-bottom: 2.5rem;
   }
 
-  .reviews-info h2 {
-    font-size: 1.6rem;
-    margin-bottom: 0.8rem;
+  .photo-credit {
+    padding: 1.25rem;
   }
 
-  .reviews-info p {
-    font-size: 0.95rem;
-    margin-bottom: 1rem;
+  .photo-credit__name {
+    font-size: 1.15rem;
   }
 
   .modal-content {
@@ -1294,11 +1574,7 @@
     padding: 1.25rem 0.75rem;
   }
 
-  .reviews-section h2 {
-    font-size: 1.6rem;
-  }
-
-  .reviews-list {
+    .reviews-list {
     gap: 0.8rem;
   }
 
@@ -1469,20 +1745,16 @@
   }
 
   .reviews {
-    padding: 0.25rem;
+    padding-right: 0.25rem;
+    padding-bottom: 0.25rem;
+    padding-left: 0.25rem;
   }
 
   .reviews-header h1 {
     font-size: 1.6rem;
   }
 
-  .reviews-description {
-    font-size: 0.9rem;
-    padding: 0 0.25rem;
-  }
-
-  .reviews-kit h2,
-  .reviews-info h2 {
+    .reviews-kit h2 {
     font-size: 1.4rem;
   }
 
@@ -1503,12 +1775,16 @@
     padding: 0.75rem;
   }
 
-  .reviews-info {
-    padding: 0.75rem;
+  .photo-credit {
+    padding: 1.1rem 1rem 1.2rem;
   }
 
-  .reviews-info p {
-    font-size: 0.9rem;
+  .photo-credit__name {
+    font-size: 1.05rem;
+  }
+
+  .photo-credit__legal {
+    margin-top: 0.8rem;
   }
 
   .modal-content {
@@ -1754,6 +2030,14 @@
   }
 
   .image-modal {
+    animation: none;
+  }
+
+  /* The global rule above collapses the duration but leaves `animation-delay`
+     alone, so a staggered item would still sit invisible for its whole offset.
+     Drop the entrance outright. */
+  .press-card,
+  .review-item {
     animation: none;
   }
 }

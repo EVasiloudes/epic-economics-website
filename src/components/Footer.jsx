@@ -30,30 +30,62 @@ function Footer() {
             </ul>
           </nav>
 
-          <div className="footer-section footer-press">
+<div className="footer-section footer-press">
             <h3 className="footer-section-title">Press Materials</h3>
             <ul className="footer-list">
-              <li>
-                <a
-                  href="https://drive.google.com/open?id=1sTMXXfinMDnUf8ghm3p2h1LgEba5BvOw&usp=drive_fs"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Press Release (opens in new tab)"
-                >
-                  Press Release
-                  <span className="footer-external-icon" aria-hidden="true">↗</span>
-                </a>
+              <li className="footer-press-group">
+                <span className="footer-press-label">Press Release</span>
+                <ul className="footer-press-langs">
+                  <li>
+                    <a
+                      href="https://drive.google.com/open?id=1ynHsCdLa0dcJmT9gg31xxG7Yc-v86mt5&usp=drive_fs"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Press Release in English (opens in new tab)"
+                    >
+                      English
+                      <span className="footer-external-icon" aria-hidden="true">↗</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="https://drive.google.com/open?id=1-MHFJtyR22GwU71uAk0N0Df00uNT4wKy&usp=drive_fs"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Press Release in Greek (opens in new tab)"
+                    >
+                      Greek
+                      <span className="footer-external-icon" aria-hidden="true">↗</span>
+                    </a>
+                  </li>
+                </ul>
               </li>
-              <li>
-                <a
-                  href="https://drive.google.com/open?id=1ChOuWVAHrt0_ZFK_r9-ZdL4Ko3WHN3rM&usp=drive_fs"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Press Kit (opens in new tab)"
-                >
-                  Press Kit
-                  <span className="footer-external-icon" aria-hidden="true">↗</span>
-                </a>
+              <li className="footer-press-group">
+                <span className="footer-press-label">Press Kit</span>
+                <ul className="footer-press-langs">
+                  <li>
+                    <a
+                      href="https://drive.google.com/open?id=1DMT_1PAv5jVxA3pAxRCDMyParATlJNZ5&usp=drive_fs"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Press Kit in English (opens in new tab)"
+                    >
+                      English
+                      <span className="footer-external-icon" aria-hidden="true">↗</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="https://drive.google.com/open?id=1R6DNZ4CzJkVXZPxybdVgXB6L-k3mVSdc&usp=drive_fs"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Press Kit in Greek (opens in new tab)"
+                    >
+                      Greek
+                      <span className="footer-external-icon" aria-hidden="true">↗</span>
+                    </a>
+                  </li>
+                </ul>
               </li>
             </ul>
           </div>

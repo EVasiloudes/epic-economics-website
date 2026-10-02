@@ -2,7 +2,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import LazyVideo from '../components/LazyVideo';
-import { generateBreadcrumbSchema } from '../utils/structuredData';
+import {
+  PHOTOGRAPHER,
+  PHOTOGRAPHER_HANDLE,
+  PHOTOGRAPHER_URL,
+} from '../constants/show';
+import { generateBreadcrumbSchema, generateReviewSchemas } from '../utils/structuredData';
 import './Reviews.css';
 
 // Import press images
@@ -24,6 +29,7 @@ import img15 from '../assets/images/press/_BOO9951.jpg';
 import img16 from '../assets/images/press/_BOO9955.jpg';
 import img17 from '../assets/images/press/_BOO9962.jpg';
 import img18 from '../assets/images/press/_BOO9981.jpg';
+import fringeReviewStamp from '../assets/images/press/fringe-review-very-good-show.png';
 
 function Reviews() {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -154,7 +160,53 @@ function Reviews() {
     };
   }, [selectedImage, currentImageIndex, showReviewModal, images.length]);
 
+    // Array order is manual, not date-sorted. The Fringe press run leads because
+    // it is the most recent independent word on the show.
+    //
+    // `press: true` separates the major outlets — the ones whose reviews carry
+    // an editorial judgement and a link out — from audience reactions, which are
+    // quotes without a byline. Fringe Review is a small blog rather than a
+    // review outlet, so it stays with the reactions despite having a stamp.
     const reviews = [
+    {
+      text: "This is a powerful, humorous and charismatic production. Do go!",
+      author: "",
+      source: "British Theatre Guide",
+      url: "https://www.britishtheatreguide.info/reviews/epic-economics-paradise-green-25867",
+      press: true,
+      stars: 4
+    },
+    {
+      text: "Making economics and political engagement not only interesting, but also funny, is no mean feat. Michaelides manages it with charm.",
+      author: "",
+      source: "Edinburgh Guide",
+      url: "https://edinburghguide.com/festival/2026/epic-economics-what-would-you-protest-about-today-paradise-in-the-vault-review-22054",
+      press: true,
+      stars: 4
+    },
+    {
+      text: "A highly entertaining and important whistlestop tour through centuries of economic thought.",
+      author: "",
+      source: "Everything Theatre",
+      url: "https://everything-theatre.co.uk/2026/08/review-epic-economics-what-would-you-protest-about-today-paradise-in-the-vault/",
+      press: true,
+      stars: 4
+    },
+    {
+      text: "Michaelides certainly proves economics doesn’t have to be dull.",
+      author: "",
+      source: "The Scotsman",
+      url: "https://www.scotsman.com/arts-and-culture/edinburgh-festivals/theatre-and-stage/fringe-theatre-reviews-adam-riches-the-captain-a-dark-line-upstairs-epic-economics-what-would-you-protest-about-today-around-the-world-in-80-toys-krystyna-hutchinson-congrats-on-not-8930695",
+      press: true,
+      stars: 3
+    },
+    {
+      text: "Perhaps economists do have some use, after all.",
+      author: "",
+      source: "Fringe Review",
+      url: "https://fringereview.co.uk/review/edinburgh-fringe/2026/epic-economics-what-would-you-protest-about-today/",
+      stamp: fringeReviewStamp
+    },
     {
       text: "Brilliant wit, music and performance. Yes, economics can be funny!",
       author: "Michael Sarris, Former World Bank Director & Finance Minister of Cyprus"
@@ -213,10 +265,15 @@ function Reviews() {
     }
   ];
 
+  // The two kinds of word on the show are not interchangeable: one is an
+  // editor's verdict with a byline and a link out, the other is somebody in the
+  // audience afterwards. They get separate furniture rather than one long list.
+  const pressReviews = reviews.filter((review) => review.press);
+  const reactions = reviews.filter((review) => !review.press);
+
   const countWords = (text) => {
     return text.trim().split(/\s+/).length;
   };
-
   const truncateToWords = (text, maxWords) => {
     const words = text.trim().split(/\s+/);
     if (words.length <= maxWords) return text;
@@ -237,16 +294,16 @@ function Reviews() {
     <>
       <Helmet>
         <title>Reviews - Epic Economics</title>
-        <meta name="description" content="Reviews, media coverage, and high-resolution images from Epic Economics theatrical production." />
+        <meta name="description" content="Fringe 2026 reviews of Epic Economics from British Theatre Guide, The Scotsman and Edinburgh Guide, plus audience reactions and high-resolution press photography." />
         <link rel="canonical" href="https://epic-economics.dimis.org/reviews" />
         <meta property="og:title" content="Reviews - Epic Economics" />
-        <meta property="og:description" content="Reviews and media materials for Epic Economics theatrical production." />
+        <meta property="og:description" content="Fringe 2026 reviews of Epic Economics from British Theatre Guide, The Scotsman and Edinburgh Guide, plus audience reactions and high-resolution press photography." />
         <meta property="og:image" content="https://epic-economics.dimis.org/og-image.png" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://epic-economics.dimis.org/reviews" />
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:title" content="Reviews - Epic Economics" />
-        <meta property="twitter:description" content="Reviews and media materials for Epic Economics theatrical production." />
+        <meta property="twitter:description" content="Fringe 2026 reviews of Epic Economics from British Theatre Guide, The Scotsman and Edinburgh Guide, plus audience reactions and high-resolution press photography." />
         <meta property="twitter:image" content="https://epic-economics.dimis.org/og-image.png" />
         <script type="application/ld+json">
           {JSON.stringify(generateBreadcrumbSchema([
@@ -266,73 +323,161 @@ function Reviews() {
             },
           })}
         </script>
+        {generateReviewSchemas(reviews).map((review, index) => (
+          <script key={index} type="application/ld+json">
+            {JSON.stringify(review)}
+          </script>
+        ))}
       </Helmet>
 
     <div className="reviews">
       <header className="reviews-header" ref={headerRef}>
         <h1>Epic Economics - Reviews</h1>
-        <p className="reviews-description">Reviews, high-resolution images, and media coverage</p>
       </header>
 
       <section className="reviews-section" ref={reviewsRef}>
-        <h2>Reviews & Commentary</h2>
-        <div className="reviews-list">
-          {(showAllReviews ? reviews : reviews.slice(0, 3)).map((review, index) => {
-            const wordCount = countWords(review.text);
-            const isLongReview = wordCount > 200;
-            const displayText = isLongReview ? truncateToWords(review.text, 200) : review.text;
+        {/* The Fringe run, as the press saw it. Always visible — it is four
+            cards, and burying it behind a button would bury the only verdicts
+            on the show. */}
+        <div className="reviews-group">
+          <h2 className="reviews-group__title">Fringe 2026 press</h2>
+          <p className="reviews-group__note">
+            Independent reviews from the Edinburgh Fringe run.
+          </p>
 
-            return (
-              <div key={index} className="review-item">
-                <div className="review-text">
-                  "{displayText}"
-                  {isLongReview && (
-                    <button
-                      className="read-more-link"
-                      onClick={() => openReviewModal(review)}
-                    >
-                      Read More
-                    </button>
-                  )}
+          <div className="press-grid">
+            {pressReviews.map((review, index) => (
+              <article
+                key={review.source}
+                className="press-card"
+                style={{ '--i': index }}
+              >
+                <div className="press-card__head">
+                  <span
+                    className="press-card__stars"
+                    role="img"
+                    aria-label={`Rated ${review.stars} out of 5`}
+                  >
+                    <span aria-hidden="true">
+                      {'★'.repeat(review.stars)}
+                      <span className="press-card__stars-empty">
+                        {'★'.repeat(5 - review.stars)}
+                      </span>
+                    </span>
+                  </span>
+                  <span className="press-card__outlet">{review.source}</span>
                 </div>
-                <cite className="review-author">— {review.author}</cite>
-              </div>
-            );
-          })}
+
+                <blockquote className="press-card__quote">{review.text}</blockquote>
+
+                <a
+                  className="press-card__link"
+                  href={review.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Read the full review on ${review.source} (opens in new tab)`}
+                >
+                  Read the review
+                  <span className="press-card__link-icon" aria-hidden="true">↗</span>
+                </a>
+              </article>
+            ))}
+          </div>
         </div>
 
-        {!showAllReviews && reviews.length > 3 && (
-          <button
-            className="show-all-btn"
-            onClick={() => setShowAllReviews(true)}
-          >
-            Show All Reviews ({reviews.length})
-          </button>
-        )}
+        {/* Audience reactions. Long, and unranked, so it opens a few at a time
+            and cascades in rather than arriving all at once. */}
+        <div className="reviews-group">
+          <h2 className="reviews-group__title">What people said</h2>
 
-        {showAllReviews && (
-          <button
-            className="show-all-btn"
-            onClick={() => setShowAllReviews(false)}
-          >
-            Show Less
-          </button>
-        )}
+          <div className="reviews-list">
+            {(showAllReviews ? reactions : reactions.slice(0, 4)).map(
+              (review, index) => {
+                const wordCount = countWords(review.text);
+                const isLongReview = wordCount > 200;
+                const displayText = isLongReview
+                  ? truncateToWords(review.text, 200)
+                  : review.text;
 
-        <p className="reviews-note">
-          <em>Reviews and quotes will be updated as press coverage becomes available. For press inquiries, please contact us directly.</em>
-        </p>
-      </section>
+                return (
+                  <figure
+                    key={review.author || review.source}
+                    className="review-item"
+                    style={{ '--i': index }}
+                  >
+                    <div className="review-text">
+                      "{displayText}"
+                      {isLongReview && (
+                        <button
+                          className="read-more-link"
+                          onClick={() => openReviewModal(review)}
+                        >
+                          Read More
+                        </button>
+                      )}
+                    </div>
+                    <figcaption>
+                      {review.stamp && (
+                        <img
+                          className="review-stamp"
+                          src={review.stamp}
+                          alt="Fringe Review badge: A Very Good Show"
+                          width="701"
+                          height="283"
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      )}
+                      {review.author && (
+                        <cite className="review-author">— {review.author}</cite>
+                      )}
+                      {review.source && (
+                        <a
+                          className="review-source"
+                          href={review.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`Read the full review on ${review.source} (opens in new tab)`}
+                        >
+                          {review.source}
+                        </a>
+                      )}
+                    </figcaption>
+                  </figure>
+                );
+              }
+            )}
+          </div>
+
+          {reactions.length > 4 && (
+            <button
+              className="show-all-btn"
+              onClick={() => setShowAllReviews((open) => !open)}
+              aria-expanded={showAllReviews}
+            >
+              <span className="show-all-btn__label">
+                {showAllReviews
+                  ? 'Show fewer reactions'
+                  : `Show all ${reactions.length} reactions`}
+              </span>
+              <span className="show-all-btn__chevron" aria-hidden="true" />
+            </button>
+          )}
+        </div>
+
+        </section>
 
       <section className="video-section" ref={videoRef}>
-        <h2>Stills from our July '25 Show</h2>
+        {/* No visible heading — the poster introduces the video. Kept for
+            assistive tech and the document outline. */}
+        <h2 className="visually-hidden">Stills from our premiere in Cyprus</h2>
         <div className="video-cards">
           <div className="video-card">
             <div className="video-thumbnail">
               <LazyVideo
                 src="/videos/epic-economics-stills.mp4"
                 poster="/videos/epic-economics-stills-poster.jpg"
-                title="Epic Economics Teaser"
+                title="Silent montage of stills from our premiere in Cyprus"
                 controls={true}
                 muted={false}
               />
@@ -457,24 +602,50 @@ function Reviews() {
         </div>
       </section>
 
-      <section className="reviews-info" ref={infoRef}>
-        {/* <h2>About the Photography</h2>
-        <p>
-          These exclusive behind-the-scenes photographs were taken by renowned photographer Boyana,
-          capturing the essence of the Epic Economics production. Her work beautifully documents
-          the creative process, from rehearsals to final performances.
-        </p>
-        <p>
-          All images are available for press use with proper attribution to "Photography by Boyana".
-          For commercial use, additional photography requests, or high-resolution downloads,
-          please contact our team.
-        </p>*/}
-        <div className="photo-credit">
-          <strong>Photo Credit:</strong> All images © Boyana Loizou
-          <br />
-          <strong>Follow her work:</strong> <a href="https://www.instagram.com/blessthismess_photography/" target="_blank" rel="noopener noreferrer">@blessthismess_photography</a>
-        </div>
-      </section>
+      <div className="photo-credit-block" ref={infoRef}>
+        <aside className="photo-credit" aria-label="Photography credit">
+          <span className="photo-credit__rule" aria-hidden="true">
+            <svg
+              className="photo-credit__aperture"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M3 8.5A2.5 2.5 0 0 1 5.5 6h1.2a1.5 1.5 0 0 0 1.28-.72l.54-.86A1.5 1.5 0 0 1 9.8 3.7h4.4a1.5 1.5 0 0 1 1.28.72l.54.86A1.5 1.5 0 0 0 17.3 6h1.2A2.5 2.5 0 0 1 21 8.5v9A2.5 2.5 0 0 1 18.5 20h-13A2.5 2.5 0 0 1 3 17.5z" />
+              <circle cx="12" cy="13" r="3.75" />
+            </svg>
+          </span>
+
+          <p className="photo-credit__label">Photography</p>
+          <p className="photo-credit__name">{PHOTOGRAPHER}</p>
+
+          <a
+            className="photo-credit__handle"
+            href={PHOTOGRAPHER_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Follow ${PHOTOGRAPHER} on Instagram (opens in new tab)`}
+          >
+            {PHOTOGRAPHER_HANDLE}
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
+          </a>
+
+          <p className="photo-credit__legal">All images © {PHOTOGRAPHER}</p>
+        </aside>
+      </div>
 
       {/* Image Modal */}
       {selectedImage && (
@@ -524,9 +695,24 @@ function Reviews() {
             <div className="review-modal-text">
               "{selectedReview.text}"
             </div>
-            <div className="review-modal-author">
-              — {selectedReview.author}
-            </div>
+            {selectedReview.author && (
+              <div className="review-modal-author">
+                — {selectedReview.author}
+              </div>
+            )}
+            {selectedReview.source && (
+              <div className="review-modal-author">
+                <a
+                  className="review-source"
+                  href={selectedReview.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Read the full review on ${selectedReview.source} (opens in new tab)`}
+                >
+                  {selectedReview.source}
+                </a>
+              </div>
+            )}
           </div>
         </div>
       )}
