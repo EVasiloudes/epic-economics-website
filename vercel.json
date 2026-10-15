@@ -5,14 +5,16 @@
     }
   },
   "redirects": [
-    { "source": "/press", "destination": "/reviews", "permanent": true }
+    { "source": "/press", "destination": "/reviews", "permanent": true },
+    { "source": "/home2", "destination": "/", "permanent": true },
+    { "source": "/index.html", "destination": "/", "permanent": true },
+    { "source": "/:path*/index.html", "destination": "/:path*", "permanent": true }
   ],
   "rewrites": [
     { "source": "/preview", "destination": "/preview/index.html" },
     { "source": "/reviews", "destination": "/reviews/index.html" },
     { "source": "/technical", "destination": "/technical/index.html" },
-    { "source": "/contact", "destination": "/contact/index.html" },
-    { "source": "/(.*)", "destination": "/index.html" }
+    { "source": "/contact", "destination": "/contact/index.html" }
   ],
   "buildCommand": "npm run build",
   "framework": "vite",

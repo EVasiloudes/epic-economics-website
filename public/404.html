@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#C41E3A" />
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <title>Page not found — Epic Economics</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Crimson+Pro:ital,wght@0,400;0,500;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --color-primary: #c41e3a;
+        --color-primary-hover: #a01830;
+        --color-accent: #c9a84c;
+        --color-bg: #f5f0e8;
+        --color-surface: #ffffff;
+        --color-ink: #1a1a24;
+        --color-ink-muted: #6e6878;
+        --font-heading: 'Montserrat', 'Century Gothic', system-ui, -apple-system, sans-serif;
+        --font-body: 'Crimson Pro', 'Georgia', 'Times New Roman', serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem;
+        background-color: var(--color-bg);
+        color: var(--color-ink);
+        font-family: var(--font-body);
+        font-size: 1.125rem;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      main {
+        width: 100%;
+        max-width: 40rem;
+        padding: clamp(2rem, 6vw, 4rem);
+        background-color: var(--color-surface);
+        border-top: 4px solid var(--color-primary);
+        box-shadow: 0 12px 40px rgba(26, 26, 36, 0.12);
+        text-align: center;
+      }
+
+      .code {
+        margin: 0;
+        font-family: var(--font-heading);
+        font-size: clamp(4rem, 16vw, 7rem);
+        font-weight: 800;
+        line-height: 1;
+        letter-spacing: -0.04em;
+        color: var(--color-primary);
+      }
+
+      .rule {
+        width: 3rem;
+        height: 3px;
+        margin: 1.5rem auto;
+        background-color: var(--color-accent);
+      }
+
+      h1 {
+        margin: 0 0 1rem;
+        font-family: var(--font-heading);
+        font-size: clamp(1.5rem, 4vw, 2rem);
+        font-weight: 700;
+        line-height: 1.15;
+        letter-spacing: -0.01em;
+      }
+
+      p {
+        margin: 0 auto 2rem;
+        max-width: 30rem;
+        color: var(--color-ink-muted);
+      }
+
+      nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        justify-content: center;
+      }
+
+      a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.75em 1.5em;
+        font-family: var(--font-heading);
+        font-size: 0.95rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        text-decoration: none;
+        border-radius: 8px;
+        border: 2px solid transparent;
+        transition: background-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
+      }
+
+      a.primary {
+        background-color: var(--color-primary);
+        color: #ffffff;
+      }
+
+      a.primary:hover {
+        background-color: var(--color-primary-hover);
+        transform: translateY(-1px);
+      }
+
+      a.secondary {
+        color: var(--color-ink);
+        border-color: var(--color-ink);
+      }
+
+      a.secondary:hover {
+        background-color: var(--color-ink);
+        color: var(--color-bg);
+        transform: translateY(-1px);
+      }
+
+      a:focus-visible {
+        outline: 2px solid var(--color-primary);
+        outline-offset: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p class="code" aria-hidden="true">404</p>
+      <div class="rule" aria-hidden="true"></div>
+      <h1>This page isn&rsquo;t on the programme</h1>
+      <p>
+        The page you were looking for has moved, been renamed, or never existed. What would you
+        protest about today &mdash; not a broken link, we hope.
+      </p>
+      <nav aria-label="Site">
+        <a class="primary" href="/">Back to home</a>
+        <a class="secondary" href="/preview">Preview</a>
+        <a class="secondary" href="/reviews">Reviews</a>
+        <a class="secondary" href="/contact">Contact</a>
+      </nav>
+    </main>
+  </body>
+</html>
