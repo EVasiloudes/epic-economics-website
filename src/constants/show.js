@@ -70,7 +70,7 @@ export const PRESS_STAR_RATINGS = [
  * ship a dead link or a stale Edinburgh URL. Set it to the TicketPlus URL and
  * every CTA turns itself back into a link.
  */
-export const TICKETS_URL = null;
+export const TICKETS_URL = 'https://www.ticketplus.gr/event/epic-economics/';
 
 /** Next performance: one night, Athens. */
 export const ATHENS = {

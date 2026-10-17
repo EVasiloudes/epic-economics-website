@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { useTitleHeroVisibility } from '../hooks/useTitleHeroVisibility';
+import { TICKETS_URL } from '../constants/show';
 import './LiquidGlassNavbar.css';
 
 function LiquidGlassNavbar() {
@@ -115,6 +116,18 @@ function LiquidGlassNavbar() {
           >
             Contact
           </Link>
+          {TICKETS_URL && (
+            <a
+              href={TICKETS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="navbar-link navbar-link--cta"
+              role="menuitem"
+              aria-label="Get tickets for Epic Economics (opens in new tab)"
+            >
+              Tickets
+            </a>
+          )}
         </div>
       </div>
     </nav>

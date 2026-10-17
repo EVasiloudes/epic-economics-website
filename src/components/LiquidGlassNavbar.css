@@ -110,6 +110,18 @@
   color: var(--color-bg);
 }
 
+.navbar-link--cta {
+  background-color: var(--color-primary);
+  color: var(--color-bg);
+  margin-left: 0.25rem;
+}
+
+.navbar-link--cta:hover {
+  background-color: var(--color-primary);
+  color: var(--color-bg);
+  opacity: 0.9;
+}
+
 /* --------------------------------------------------------------------
    Responsive
    -------------------------------------------------------------------- */
