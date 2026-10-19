@@ -34,14 +34,13 @@ const ORGANIZER = {
 const postalAddress = (address) => ({ '@type': 'PostalAddress', ...address });
 
 /**
- * Event schemas, one per dated performance.
+ * Event schemas, one per upcoming dated performance.
  *
- * The Edinburgh run is finished, so its eventStatus is left off: schema.org's
- * EventStatusType has no "completed" value (only EventScheduled, EventCancelled,
- * EventPostponed, EventRescheduled and EventMovedOnline), and inventing one
- * would be invalid markup. Omitting it also keeps a past run out of Google's
- * event rich results, which it is not eligible for anyway. Athens is the live
- * performance and carries the bookable offer.
+ * Only future performances belong here. The finished Edinburgh run used to sit
+ * alongside Athens, but schema.org's EventStatusType has no "completed" value,
+ * so a past event can only ship with a missing or false eventStatus — which
+ * Google reports as a structured data issue. Past runs stay on the page as
+ * content and tie into the /reviews press quotes; they are not marked up.
  *
  * Each event becomes its own <script type="application/ld+json">: a single
  * script holding an array would not be a valid TheaterEvent to Google.
@@ -49,31 +48,6 @@ const postalAddress = (address) => ({ '@type': 'PostalAddress', ...address });
  * @returns {Array<Object>} schema.org/TheaterEvent, oldest first
  */
 export const generateEventSchemas = () => [
-  {
-    '@context': 'https://schema.org',
-    '@type': 'TheaterEvent',
-    name: `${SHOW_TITLE} — Edinburgh Festival Fringe`,
-    description: SHOW_DESCRIPTION,
-    image: `${SITE_URL}/og-image.png`,
-    url: `${SITE_URL}/`,
-    eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
-    startDate: EDINBURGH.startDate,
-    endDate: EDINBURGH.endDate,
-    location: {
-      '@type': 'Place',
-      name: EDINBURGH.venueName,
-      address: postalAddress(EDINBURGH.postalAddress),
-    },
-    offers: {
-      '@type': 'Offer',
-      url: EDINBURGH.ticketsUrl,
-      priceCurrency: 'GBP',
-      validFrom: '2026-06-01',
-    },
-    performer: [PERFORMER],
-    organizer: ORGANIZER,
-    inLanguage: 'en',
-  },
   {
     '@context': 'https://schema.org',
     '@type': 'TheaterEvent',
@@ -94,13 +68,12 @@ export const generateEventSchemas = () => [
     },
     offers: {
       '@type': 'Offer',
-      // TicketPlus URL is still outstanding — fall back to the venue page so the
-      // offer never advertises a link that does not exist.
       url: TICKETS_URL || ATHENS.venueUrl,
       price: 15,
       priceCurrency: 'EUR',
-      // PreOrder: announced, not yet on sale. Flip to InStock with the link.
-      availability: 'https://schema.org/PreOrder',
+      // On sale via TicketPlus. If sales pause or the link goes away, flip back
+      // to PreOrder so the offer never advertises tickets that can't be bought.
+      availability: 'https://schema.org/InStock',
       validFrom: ATHENS.onSaleFrom,
     },
     performer: [PERFORMER],

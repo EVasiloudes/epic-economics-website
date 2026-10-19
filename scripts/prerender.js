@@ -22,7 +22,7 @@ const nextPerformance = `
     <p><strong>Friday, 4 December 2026, 20:30</strong></p>
     <p>Michael Cacoyannis Foundation — Cinema Hall, 206 Piraeus Street, Tavros, Athens 177 78, Greece.</p>
     <p>One night only. 60 minutes, no interval. English with a touch of Greek.</p>
-    <p>Tickets €15, or €12 for students, senior citizens and persons with disabilities, via TicketPlus. Tickets go on sale shortly — until then, email the box office at <a href="https://www.mcf.gr/">mcf.gr</a> or <a href="/contact">write to us</a>.</p>
+    <p>Tickets €15, or €12 for students, senior citizens and persons with disabilities, via <a href="https://www.ticketplus.gr/event/epic-economics/">TicketPlus</a>.</p>
   </section>
 `;
 

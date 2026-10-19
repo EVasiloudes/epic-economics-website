@@ -64,11 +64,10 @@ export const PRESS_STAR_RATINGS = [
 ];
 
 /**
- * BLOCKER — the TicketPlus link for the Athens performance has not been supplied
- * yet. While this is `null`, every ticket CTA on the site renders a "not on sale
- * yet" message that routes people to the venue or the contact form, so we never
- * ship a dead link or a stale Edinburgh URL. Set it to the TicketPlus URL and
- * every CTA turns itself back into a link.
+ * Ticket link. While this is `null`, every ticket CTA on the site renders a
+ * "not on sale yet" message that routes people to the venue or the contact
+ * form, so we never ship a dead link. Set to the TicketPlus URL and every CTA
+ * turns itself back into a link.
  */
 export const TICKETS_URL = 'https://www.ticketplus.gr/event/epic-economics/';
 
