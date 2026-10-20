@@ -157,10 +157,16 @@ function generateStaticHTML(route) {
   return html;
 }
 
-// Remove stale route directories that are no longer prerendered (e.g. /press)
+// Remove stale route directories that are no longer prerendered.
+// Never touch Vite output dirs or anything copied from public/ (static
+// assets like /press and /videos must survive this cleanup).
 const validRouteDirs = new Set(routes.filter(r => r.path !== '/').map(r => r.path));
+const publicDirPath = path.resolve(__dirname, '../public');
+const publicDirNames = fs.existsSync(publicDirPath)
+  ? new Set(fs.readdirSync(publicDirPath, { withFileTypes: true }).filter(d => d.isDirectory()).map(d => d.name))
+  : new Set();
 fs.readdirSync(distPath, { withFileTypes: true })
-  .filter(d => d.isDirectory() && d.name !== 'assets' && d.name !== 'js' && d.name !== 'images' && d.name !== 'videos')
+  .filter(d => d.isDirectory() && d.name !== 'assets' && d.name !== 'js' && d.name !== 'images' && !publicDirNames.has(d.name))
   .forEach(d => {
     const routePath = '/' + d.name;
     if (!validRouteDirs.has(routePath)) {
